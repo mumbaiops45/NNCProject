@@ -1,1021 +1,5 @@
-// // // // // // import {
-// // // // // //   Facebook,
-// // // // // //   Linkedin,
-// // // // // //   Mail,
-// // // // // //   Phone,
-// // // // // //   MapPin,
-// // // // // //   ArrowRight,
-// // // // // // } from "lucide-react";
-
-// // // // // // export default function Footer() {
-// // // // // //   return (
-// // // // // //     <footer className="relative text-white ">
-// // // // // //       {/* Blue gradient background */}
-// // // // // //       <div
-// // // // // //         className="absolute inset-0 bg-cover bg-center"
-// // // // // //         style={{
-// // // // // //           backgroundImage:
-// // // // // //             "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2070&auto=format&fit=crop')",
-// // // // // //         }}
-// // // // // //       />
-// // // // // //       <div className="absolute inset-0 bg-blue-950/90" />
-
-// // // // // //       {/* Content */}
-// // // // // //       <div className="relative max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
-// // // // // //         {/* Company */}
-// // // // // //         <div>
-// // // // // //           <h2 className="text-2xl font-bold mb-4 text-blue-300">
-// // // // // //             NNCDigitalSolutions
-// // // // // //           </h2>
-// // // // // //           <p className="text-blue-100 leading-relaxed">
-// // // // // //             We build modern digital solutions and scalable platforms that help
-// // // // // //             businesses grow faster in the digital world.
-// // // // // //           </p>
-
-// // // // // //           <div className="flex gap-4 mt-5">
-// // // // // //             <a className="p-2 rounded-full bg-blue-800 hover:bg-blue-600 transition">
-// // // // // //               <Facebook size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-blue-800 hover:bg-blue-600 transition">
-// // // // // //               <Linkedin size={18} />
-// // // // // //             </a>
-// // // // // //           </div>
-// // // // // //         </div>
-
-// // // // // //         {/* Navigation */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-blue-300">Company</h3>
-// // // // // //           <ul className="space-y-2 text-blue-100">
-// // // // // //             <li className="hover:text-white cursor-pointer">About Us</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Services</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Projects</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Contact</li>
-// // // // // //           </ul>
-// // // // // //         </div>
-
-// // // // // //         {/* Connect */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-blue-300">
-// // // // // //             Connect with us
-// // // // // //           </h3>
-// // // // // //           <ul className="space-y-3 text-blue-100">
-// // // // // //             <li className="flex items-center gap-2 hover:text-white">
-// // // // // //               <Mail size={18} /> info@nncdigital.com
-// // // // // //             </li>
-// // // // // //             <li className="flex items-center gap-2 hover:text-white">
-// // // // // //               <Phone size={18} /> +xx xxxx xxxx
-// // // // // //             </li>
-// // // // // //             <li className="flex items-center gap-2 hover:text-white">
-// // // // // //               <MapPin size={18} /> Mumbai, India
-// // // // // //             </li>
-// // // // // //           </ul>
-// // // // // //         </div>
-
-// // // // // //         {/* CTA */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-blue-300">
-// // // // // //             Opportunities
-// // // // // //           </h3>
-// // // // // //           <p className="text-blue-100 mb-5">
-// // // // // //             Build an application on our platform in just a day.
-// // // // // //           </p>
-
-// // // // // //           <button className="group inline-flex items-center gap-2 bg-blue-600 px-6 py-3 rounded-full hover:bg-blue-500 transition shadow-lg shadow-blue-900/40">
-// // // // // //             Get Started
-// // // // // //             <ArrowRight
-// // // // // //               size={18}
-// // // // // //               className="group-hover:translate-x-1 transition-transform"
-// // // // // //             />
-// // // // // //           </button>
-// // // // // //         </div>
-// // // // // //       </div>
-
-// // // // // //       {/* Bottom */}
-// // // // // //       <div className="relative border-t border-blue-800 text-center py-6 text-blue-200">
-// // // // // //         © 2026 NNCDigitalSolutions. All rights reserved.
-// // // // // //       </div>
-// // // // // //     </footer>
-// // // // // //   );
-// // // // // // }
-
-
-
-// // // // // // import {
-// // // // // //   Facebook,
-// // // // // //   Linkedin,
-// // // // // //   Mail,
-// // // // // //   Phone,
-// // // // // //   MapPin,
-// // // // // //   ArrowRight,
-// // // // // //   Instagram,
-// // // // // //   Twitter,
-// // // // // // } from "lucide-react";
-
-// // // // // // export default function Footer() {
-// // // // // //   return (
-// // // // // //     <footer className="relative text-white overflow-hidden">
-
-// // // // // //       {/* Background Image */}
-// // // // // //       <div
-// // // // // //         className="absolute inset-0 bg-cover bg-center"
-// // // // // //         style={{
-// // // // // //           backgroundImage:
-// // // // // //             "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2070&auto=format&fit=crop')",
-// // // // // //         }}
-// // // // // //       />
-// // // // // //       <div className="absolute inset-0 bg-gradient-to-br from-blue-950/95 via-blue-900/95 to-indigo-950/95" />
-
-// // // // // //       {/* Glow Effects */}
-// // // // // //       <div className="absolute -top-32 -right-32 w-[350px] h-[350px] bg-blue-500/20 blur-[120px] rounded-full" />
-// // // // // //       <div className="absolute -bottom-32 -left-32 w-[300px] h-[300px] bg-indigo-500/20 blur-[120px] rounded-full" />
-
-// // // // // //       {/* Main Content */}
-// // // // // //       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
-
-// // // // // //         {/* Company Info */}
-// // // // // //         <div>
-// // // // // //           <h2 className="text-2xl font-bold mb-4 text-blue-300">
-// // // // // //             NNC Digital Solutions
-// // // // // //           </h2>
-
-// // // // // //           <p className="text-blue-100 leading-relaxed mb-6">
-// // // // // //             We design and engineer scalable digital ecosystems —
-// // // // // //             from CRM & ERP systems to mobile apps and automation platforms —
-// // // // // //             helping businesses achieve predictable growth.
-// // // // // //           </p>
-
-// // // // // //           <div className="flex gap-4">
-// // // // // //             <a className="p-2 rounded-full bg-blue-800 hover:bg-blue-600 transition">
-// // // // // //               <Facebook size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-blue-800 hover:bg-blue-600 transition">
-// // // // // //               <Linkedin size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-blue-800 hover:bg-blue-600 transition">
-// // // // // //               <Instagram size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-blue-800 hover:bg-blue-600 transition">
-// // // // // //               <Twitter size={18} />
-// // // // // //             </a>
-// // // // // //           </div>
-// // // // // //         </div>
-
-// // // // // //         {/* Services */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-blue-300">
-// // // // // //             Our Services
-// // // // // //           </h3>
-
-// // // // // //           <ul className="space-y-3 text-blue-100">
-// // // // // //             <li className="hover:text-white cursor-pointer">CRM Development</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">ERP Systems</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Mobile App Development</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Website Development</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Business Automation</li>
-// // // // // //           </ul>
-// // // // // //         </div>
-
-// // // // // //         {/* Contact */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-blue-300">
-// // // // // //             Contact Us
-// // // // // //           </h3>
-
-// // // // // //           <ul className="space-y-4 text-blue-100">
-// // // // // //             <li className="flex items-center gap-3 hover:text-white">
-// // // // // //               <Mail size={18} /> info@nncdigital.com
-// // // // // //             </li>
-
-// // // // // //             <li className="flex items-center gap-3 hover:text-white">
-// // // // // //               <Phone size={18} /> +91 90000 00000
-// // // // // //             </li>
-
-// // // // // //             <li className="flex items-center gap-3 hover:text-white">
-// // // // // //               <MapPin size={18} /> Mumbai, India
-// // // // // //             </li>
-// // // // // //           </ul>
-
-// // // // // //           <p className="mt-6 text-blue-200 text-sm">
-// // // // // //             Serving clients across India, USA, UK, Canada & Middle East.
-// // // // // //           </p>
-// // // // // //         </div>
-
-// // // // // //         {/* Newsletter + CTA */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-blue-300">
-// // // // // //             Stay Updated
-// // // // // //           </h3>
-
-// // // // // //           <p className="text-blue-100 mb-6">
-// // // // // //             Get insights on automation, CRM systems, and digital growth
-// // // // // //             strategies delivered to your inbox.
-// // // // // //           </p>
-
-// // // // // //           {/* Newsletter Input */}
-// // // // // //           <div className="flex items-center bg-blue-900/60 backdrop-blur-md rounded-full overflow-hidden border border-blue-700">
-// // // // // //             <input
-// // // // // //               type="email"
-// // // // // //               placeholder="Enter your email"
-// // // // // //               className="bg-transparent px-4 py-3 text-sm outline-none flex-1 text-white placeholder-blue-300"
-// // // // // //             />
-// // // // // //             <button className="bg-blue-600 px-5 py-3 hover:bg-blue-500 transition">
-// // // // // //               <ArrowRight size={18} />
-// // // // // //             </button>
-// // // // // //           </div>
-
-// // // // // //           {/* CTA */}
-// // // // // //           <button className="mt-6 group inline-flex items-center gap-2 bg-blue-600 px-6 py-3 rounded-full hover:bg-blue-500 transition shadow-lg shadow-blue-900/40">
-// // // // // //             Schedule Consultation
-// // // // // //             <ArrowRight
-// // // // // //               size={18}
-// // // // // //               className="group-hover:translate-x-1 transition-transform"
-// // // // // //             />
-// // // // // //           </button>
-// // // // // //         </div>
-// // // // // //       </div>
-
-// // // // // //       {/* Bottom Bar */}
-// // // // // //       <div className="relative border-t border-blue-800 text-center py-6 text-blue-200 text-sm">
-// // // // // //         © 2026 NNC Digital Solutions. All rights reserved. |
-// // // // // //         Designed for scalable growth 🚀
-// // // // // //       </div>
-// // // // // //     </footer>
-// // // // // //   );
-// // // // // // }
-
-
-// // // // // // import {
-// // // // // //   Facebook,
-// // // // // //   Linkedin,
-// // // // // //   Mail,
-// // // // // //   Phone,
-// // // // // //   MapPin,
-// // // // // //   ArrowRight,
-// // // // // //   Instagram,
-// // // // // //   Twitter,
-// // // // // // } from "lucide-react";
-
-// // // // // // export default function Footer() {
-// // // // // //   return (
-// // // // // //     <footer className="relative text-white overflow-hidden">
-
-// // // // // //       {/* Background Image */}
-// // // // // //       <div
-// // // // // //         className="absolute inset-0 bg-cover bg-center"
-// // // // // //         style={{
-// // // // // //           backgroundImage:
-// // // // // //             "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2070&auto=format&fit=crop')",
-// // // // // //         }}
-// // // // // //       />
-// // // // // //       <div className="absolute inset-0" style={{
-// // // // // //         background: "linear-gradient(135deg, var(--primery)/0.95, var(--primery)/0.95, var(--primery)/0.95)"
-// // // // // //       }} />
-
-// // // // // //       {/* Glow Effects */}
-// // // // // //       <div className="absolute -top-32 -right-32 w-[350px] h-[350px] rounded-full blur-[120px]" style={{ backgroundColor: "var(--primery)/20" }} />
-// // // // // //       <div className="absolute -bottom-32 -left-32 w-[300px] h-[300px] rounded-full blur-[120px]" style={{ backgroundColor: "var(--primery)/20" }} />
-
-// // // // // //       {/* Main Content */}
-// // // // // //       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
-
-// // // // // //         {/* Company Info */}
-// // // // // //         <div>
-// // // // // //           <h2 className="text-2xl font-bold mb-4 text-white">
-// // // // // //             NNC Digital Solutions
-// // // // // //           </h2>
-
-// // // // // //           <p className="text-white/80 leading-relaxed mb-6">
-// // // // // //             We design and engineer scalable digital ecosystems —
-// // // // // //             from CRM & ERP systems to mobile apps and automation platforms —
-// // // // // //             helping businesses achieve predictable growth.
-// // // // // //           </p>
-
-// // // // // //           <div className="flex gap-4">
-// // // // // //             <a className="p-2 rounded-full bg-[var(--primery)] hover:bg-[var(--primery)]/80 transition">
-// // // // // //               <Facebook size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-[var(--primery)] hover:bg-[var(--primery)]/80 transition">
-// // // // // //               <Linkedin size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-[var(--primery)] hover:bg-[var(--primery)]/80 transition">
-// // // // // //               <Instagram size={18} />
-// // // // // //             </a>
-// // // // // //             <a className="p-2 rounded-full bg-[var(--primery)] hover:bg-[var(--primery)]/80 transition">
-// // // // // //               <Twitter size={18} />
-// // // // // //             </a>
-// // // // // //           </div>
-// // // // // //         </div>
-
-// // // // // //         {/* Services */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-white">
-// // // // // //             Our Services
-// // // // // //           </h3>
-
-// // // // // //           <ul className="space-y-3 text-white/80">
-// // // // // //             <li className="hover:text-white cursor-pointer">CRM Development</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">ERP Systems</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Mobile App Development</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Website Development</li>
-// // // // // //             <li className="hover:text-white cursor-pointer">Business Automation</li>
-// // // // // //           </ul>
-// // // // // //         </div>
-
-// // // // // //         {/* Contact */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-white">
-// // // // // //             Contact Us
-// // // // // //           </h3>
-
-// // // // // //           <ul className="space-y-4 text-white/80">
-// // // // // //             <li className="flex items-center gap-3 hover:text-white">
-// // // // // //               <Mail size={18} /> info@nncdigital.com
-// // // // // //             </li>
-
-// // // // // //             <li className="flex items-center gap-3 hover:text-white">
-// // // // // //               <Phone size={18} /> +91 90000 00000
-// // // // // //             </li>
-
-// // // // // //             <li className="flex items-center gap-3 hover:text-white">
-// // // // // //               <MapPin size={18} /> Mumbai, India
-// // // // // //             </li>
-// // // // // //           </ul>
-
-// // // // // //           <p className="mt-6 text-white/70 text-sm">
-// // // // // //             Serving clients across India, USA, UK, Canada & Middle East.
-// // // // // //           </p>
-// // // // // //         </div>
-
-// // // // // //         {/* Newsletter + CTA */}
-// // // // // //         <div>
-// // // // // //           <h3 className="text-lg font-semibold mb-4 text-white">
-// // // // // //             Stay Updated
-// // // // // //           </h3>
-
-// // // // // //           <p className="text-white/80 mb-6">
-// // // // // //             Get insights on automation, CRM systems, and digital growth
-// // // // // //             strategies delivered to your inbox.
-// // // // // //           </p>
-
-// // // // // //           {/* Newsletter Input */}
-// // // // // //           <div className="flex items-center bg-[var(--primery)]/30 backdrop-blur-md rounded-full overflow-hidden border border-[var(--primery)]/50">
-// // // // // //             <input
-// // // // // //               type="email"
-// // // // // //               placeholder="Enter your email"
-// // // // // //               className="bg-transparent px-4 py-3 text-sm outline-none flex-1 text-white placeholder-white/70"
-// // // // // //             />
-// // // // // //             <button className="bg-[var(--primery)] px-5 py-3 hover:bg-[var(--primery)]/80 transition">
-// // // // // //               <ArrowRight size={18} />
-// // // // // //             </button>
-// // // // // //           </div>
-
-// // // // // //           {/* CTA */}
-// // // // // //           <button className="mt-6 group inline-flex items-center gap-2 bg-[var(--primery)] px-6 py-3 rounded-full hover:bg-[var(--primery)]/80 transition shadow-lg shadow-[var(--primery)]/40">
-// // // // // //             Schedule Consultation
-// // // // // //             <ArrowRight
-// // // // // //               size={18}
-// // // // // //               className="group-hover:translate-x-1 transition-transform"
-// // // // // //             />
-// // // // // //           </button>
-// // // // // //         </div>
-// // // // // //       </div>
-
-// // // // // //       {/* Bottom Bar */}
-// // // // // //       <div className="relative border-t border-[var(--primery)] text-center py-6 text-white/70 text-sm">
-// // // // // //         © 2026 NNC Digital Solutions. All rights reserved. |
-// // // // // //         Designed for scalable growth 🚀
-// // // // // //       </div>
-// // // // // //     </footer>
-// // // // // //   );
-// // // // // // }
-
-
-// // // // // "use client";
-
-// // // // // import Image from "next/image";
-// // // // // import Logo from "../../public/NNCLOGO.jpg";
-
-// // // // // import {
-// // // // //   Facebook,
-// // // // //   Linkedin,
-// // // // //   Mail,
-// // // // //   Phone,
-// // // // //   MapPin,
-// // // // //   ArrowRight,
-// // // // //   Instagram,
-// // // // //   Twitter,
-// // // // // } from "lucide-react";
-
-// // // // // export default function Footer() {
-// // // // //   return (
-// // // // //     <footer className="relative text-white overflow-hidden">
-
-// // // // //       {/* Background Image */}
-// // // // //       <div
-// // // // //         className="absolute inset-0 bg-cover bg-center"
-// // // // //         style={{
-// // // // //           backgroundImage:
-// // // // //             "url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2070&auto=format&fit=crop')",
-// // // // //         }}
-// // // // //       />
-
-// // // // //       {/* Dark Gradient Overlay */}
-// // // // //       <div
-// // // // //         className="absolute inset-0"
-// // // // //         style={{
-// // // // //           background:
-// // // // //             "linear-gradient(135deg, var(--primery)/0.95, var(--primery)/0.95, var(--primery)/0.95)",
-// // // // //         }}
-// // // // //       />
-
-// // // // //       {/* Glow Effects */}
-// // // // //       <div className="absolute -top-32 -right-32 w-[350px] h-[350px] rounded-full blur-[120px] bg-[var(--primery)]/20" />
-// // // // //       <div className="absolute -bottom-32 -left-32 w-[300px] h-[300px] rounded-full blur-[120px] bg-[var(--primery)]/20" />
-
-// // // // //       {/* Main Content */}
-// // // // //       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
-
-// // // // //         {/* Company Info */}
-// // // // //         <div>
-
-// // // // //           {/* Logo with Background */}
-// // // // //           <div className="mb-6 inline-block bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl hover:scale-105 transition duration-300">
-// // // // //             <Image
-// // // // //               src={Logo}
-// // // // //               alt="NNC Digital Logo"
-// // // // //               width={180}
-// // // // //               height={60}
-// // // // //               className="object-contain"
-// // // // //             />
-// // // // //           </div>
-
-// // // // //           <p className="text-white/80 leading-relaxed mb-6">
-// // // // //             We design and engineer scalable digital ecosystems —
-// // // // //             from CRM & ERP systems to mobile apps and automation platforms —
-// // // // //             helping businesses achieve predictable growth.
-// // // // //           </p>
-
-// // // // //           <div className="flex gap-4">
-// // // // //             {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
-// // // // //               <a
-// // // // //                 key={i}
-// // // // //                 className="p-2 rounded-full bg-[var(--primery)] hover:bg-[var(--primery)]/80 transition cursor-pointer"
-// // // // //               >
-// // // // //                 <Icon size={18} />
-// // // // //               </a>
-// // // // //             ))}
-// // // // //           </div>
-// // // // //         </div>
-
-// // // // //         {/* Services */}
-// // // // //         <div>
-// // // // //           <h3 className="text-lg font-semibold mb-4 text-white">
-// // // // //             Our Services
-// // // // //           </h3>
-
-// // // // //           <ul className="space-y-3 text-white/80">
-// // // // //             {[
-// // // // //               "CRM Development",
-// // // // //               "ERP Systems",
-// // // // //               "Mobile App Development",
-// // // // //               "Website Development",
-// // // // //               "Business Automation",
-// // // // //             ].map((service, i) => (
-// // // // //               <li
-// // // // //                 key={i}
-// // // // //                 className="hover:text-white hover:translate-x-1 transition cursor-pointer"
-// // // // //               >
-// // // // //                 {service}
-// // // // //               </li>
-// // // // //             ))}
-// // // // //           </ul>
-// // // // //         </div>
-
-// // // // //         {/* Contact */}
-// // // // //         <div>
-// // // // //           <h3 className="text-lg font-semibold mb-4 text-white">
-// // // // //             Contact Us
-// // // // //           </h3>
-
-// // // // //           <ul className="space-y-4 text-white/80">
-// // // // //             <li className="flex items-center gap-3 hover:text-white transition">
-// // // // //               <Mail size={18} /> info@nncdigital.com
-// // // // //             </li>
-
-// // // // //             <li className="flex items-center gap-3 hover:text-white transition">
-// // // // //               <Phone size={18} /> +91 90000 00000
-// // // // //             </li>
-
-// // // // //             <li className="flex items-center gap-3 hover:text-white transition">
-// // // // //               <MapPin size={18} /> Mumbai, India
-// // // // //             </li>
-// // // // //           </ul>
-
-// // // // //           <p className="mt-6 text-white/70 text-sm">
-// // // // //             Serving clients across India, USA, UK, Canada & Middle East.
-// // // // //           </p>
-// // // // //         </div>
-
-// // // // //         {/* Newsletter + CTA */}
-// // // // //         <div>
-// // // // //           <h3 className="text-lg font-semibold mb-4 text-white">
-// // // // //             Stay Updated
-// // // // //           </h3>
-
-// // // // //           <p className="text-white/80 mb-6">
-// // // // //             Get insights on automation, CRM systems, and digital growth
-// // // // //             strategies delivered to your inbox.
-// // // // //           </p>
-
-// // // // //           {/* Newsletter Input */}
-// // // // //           <div className="flex items-center bg-[var(--primery)]/30 backdrop-blur-md rounded-full overflow-hidden border border-[var(--primery)]/50">
-// // // // //             <input
-// // // // //               type="email"
-// // // // //               placeholder="Enter your email"
-// // // // //               className="bg-transparent px-4 py-3 text-sm outline-none flex-1 text-white placeholder-white/70"
-// // // // //             />
-// // // // //             <button className="bg-[var(--primery)] px-5 py-3 hover:bg-[var(--primery)]/80 transition">
-// // // // //               <ArrowRight size={18} />
-// // // // //             </button>
-// // // // //           </div>
-
-// // // // //           {/* CTA */}
-// // // // //           <button className="mt-6 group inline-flex items-center gap-2 bg-[var(--primery)] px-6 py-3 rounded-full hover:bg-[var(--primery)]/80 transition shadow-lg shadow-[var(--primery)]/40">
-// // // // //             Schedule Consultation
-// // // // //             <ArrowRight
-// // // // //               size={18}
-// // // // //               className="group-hover:translate-x-1 transition-transform"
-// // // // //             />
-// // // // //           </button>
-// // // // //         </div>
-// // // // //       </div>
-
-// // // // //       {/* Bottom Bar */}
-// // // // //       <div className="relative border-t border-[var(--primery)] text-center py-6 text-white/70 text-sm">
-// // // // //         © 2026 NNC Digital Solutions. All rights reserved. |
-// // // // //         Designed for scalable growth 🚀
-// // // // //       </div>
-// // // // //     </footer>
-// // // // //   );
-// // // // // }
-
-
-// // // // "use client";
-
-// // // // import Image from "next/image";
-// // // // import Logo from "../../public/NNCLOGO.jpg";
-
-// // // // import {
-// // // //   Facebook,
-// // // //   Linkedin,
-// // // //   Mail,
-// // // //   Phone,
-// // // //   MapPin,
-// // // //   ArrowRight,
-// // // //   Instagram,
-// // // //   Twitter,
-// // // // } from "lucide-react";
-
-// // // // export default function Footer() {
-// // // //   return (
-// // // //     <footer className="relative text-white overflow-hidden bg-[#0B1C2D]">
-
-// // // //       {/* Brand Gradient Background */}
-// // // //       <div className="absolute inset-0 
-// // // //                       bg-gradient-to-br 
-// // // //                       from-[#0B1C2D] 
-// // // //                       via-[#0f2a3f] 
-// // // //                       to-[#0EA5A4]" />
-
-// // // //       {/* Glow Effects */}
-// // // //       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#14B8A6]/20 rounded-full blur-[150px]" />
-// // // //       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-[#0EA5A4]/20 rounded-full blur-[150px]" />
-
-// // // //       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
-
-// // // //         {/* Company Info */}
-// // // //         <div>
-// // // //           <div className="mb-6 inline-block p-4 rounded-2xl 
-// // // //                           bg-gradient-to-r from-[#0B1C2D] to-[#0EA5A4] 
-// // // //                           shadow-xl">
-// // // //             <Image
-// // // //               src={Logo}
-// // // //               alt="NNC Digital Logo"
-// // // //               width={180}
-// // // //               height={60}
-// // // //               className="object-contain"
-// // // //             />
-// // // //           </div>
-
-// // // //           <p className="text-white/80 leading-relaxed mb-6">
-// // // //             We design and engineer scalable digital ecosystems —
-// // // //             from CRM & ERP systems to mobile apps and automation platforms —
-// // // //             helping businesses achieve predictable growth.
-// // // //           </p>
-
-// // // //           <div className="flex gap-4">
-// // // //             {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
-// // // //               <a
-// // // //                 key={i}
-// // // //                 className="p-2 rounded-full bg-[#0EA5A4] hover:bg-[#14B8A6] transition"
-// // // //               >
-// // // //                 <Icon size={18} />
-// // // //               </a>
-// // // //             ))}
-// // // //           </div>
-// // // //         </div>
-
-// // // //         {/* Rest of your footer sections remain same */}
-
-// // // //       </div>
-
-// // // //       <div className="relative border-t border-[#14B8A6]/40 text-center py-6 text-white/70 text-sm">
-// // // //         © 2026 NNC Digital Solutions. All rights reserved. |
-// // // //         Designed for scalable growth 🚀
-// // // //       </div>
-// // // //     </footer>
-// // // //   );
-// // // // }
-
-
-
-// // // "use client";
-
-// // // import Image from "next/image";
-// // // import Logo from "../../public/NNCLOGO.jpg";
-
-// // // import {
-// // //   Facebook,
-// // //   Linkedin,
-// // //   Mail,
-// // //   Phone,
-// // //   MapPin,
-// // //   ArrowRight,
-// // //   Instagram,
-// // //   Twitter,
-// // // } from "lucide-react";
-
-// // // export default function Footer() {
-// // //   return (
-// // //     <footer className="relative text-white overflow-hidden bg-[#0B1C2D]">
-
-// // //       {/* Brand Gradient Background */}
-// // //       <div className="absolute inset-0 
-// // //         bg-gradient-to-br 
-// // //         from-[#0B1C2D] 
-// // //         via-[#0f2a3f] 
-// // //         to-[#0EA5A4]" 
-// // //       />
-
-// // //       {/* Glow Effects */}
-// // //       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#14B8A6]/20 rounded-full blur-[150px]" />
-// // //       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-[#0EA5A4]/20 rounded-full blur-[150px]" />
-
-// // //       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
-
-// // //         {/* Company Info */}
-// // //         <div>
-// // //           <div className="mb-6 inline-block p-4 rounded-2xl 
-// // //             bg-gradient-to-r from-[#0B1C2D] to-[#0EA5A4] 
-// // //             shadow-xl hover:scale-105 transition duration-300"
-// // //           >
-// // //             <Image
-// // //               src={Logo}
-// // //               alt="NNC Digital Logo"
-// // //               width={180}
-// // //               height={60}
-// // //               className="object-contain"
-// // //             />
-// // //           </div>
-
-// // //           <p className="text-white/80 leading-relaxed mb-6">
-// // //             We design and engineer scalable digital ecosystems —
-// // //             from CRM & ERP systems to mobile apps and automation platforms —
-// // //             helping businesses achieve predictable growth.
-// // //           </p>
-
-// // //           <div className="flex gap-4">
-// // //             {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
-// // //               <a
-// // //                 key={i}
-// // //                 href="#"
-// // //                 className="p-2 rounded-full bg-[#0EA5A4] hover:bg-[#14B8A6] transition"
-// // //               >
-// // //                 <Icon size={18} />
-// // //               </a>
-// // //             ))}
-// // //           </div>
-// // //         </div>
-
-// // //         {/* Services */}
-// // //         <div>
-// // //           <h3 className="text-lg font-semibold mb-4">Our Services</h3>
-
-// // //           <ul className="space-y-3 text-white/80">
-// // //             {[
-// // //               "CRM Development",
-// // //               "ERP Systems",
-// // //               "Mobile App Development",
-// // //               "Website Development",
-// // //               "Business Automation",
-// // //             ].map((service, i) => (
-// // //               <li
-// // //                 key={i}
-// // //                 className="hover:text-white hover:translate-x-1 transition cursor-pointer"
-// // //               >
-// // //                 {service}
-// // //               </li>
-// // //             ))}
-// // //           </ul>
-// // //         </div>
-
-// // //         {/* Contact */}
-// // //         <div>
-// // //           <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-
-// // //           <ul className="space-y-4 text-white/80">
-// // //             <li className="flex items-center gap-3 hover:text-white transition">
-// // //               <Mail size={18} /> info@nncdigital.com
-// // //             </li>
-
-// // //             <li className="flex items-center gap-3 hover:text-white transition">
-// // //               <Phone size={18} /> +91 90000 00000
-// // //             </li>
-
-// // //             <li className="flex items-center gap-3 hover:text-white transition">
-// // //               <MapPin size={18} /> Mumbai, India
-// // //             </li>
-// // //           </ul>
-
-// // //           <p className="mt-6 text-white/70 text-sm">
-// // //             Serving clients across India, USA, UK, Canada & Middle East.
-// // //           </p>
-// // //         </div>
-
-// // //         {/* Newsletter + CTA */}
-// // //         <div>
-// // //           <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
-
-// // //           <p className="text-white/80 mb-6">
-// // //             Get insights on automation, CRM systems, and digital growth
-// // //             strategies delivered to your inbox.
-// // //           </p>
-
-// // //           {/* Newsletter Input */}
-// // //           <div className="flex items-center bg-white/10 backdrop-blur-md rounded-full overflow-hidden border border-white/20">
-// // //             <input
-// // //               type="email"
-// // //               placeholder="Enter your email"
-// // //               className="bg-transparent px-4 py-3 text-sm outline-none flex-1 text-white placeholder-white/60"
-// // //             />
-// // //             <button className="bg-[#0EA5A4] px-5 py-3 hover:bg-[#14B8A6] transition">
-// // //               <ArrowRight size={18} />
-// // //             </button>
-// // //           </div>
-
-// // //           {/* CTA */}
-// // //           <button className="mt-6 group inline-flex items-center gap-2 
-// // //             bg-[#0EA5A4] px-6 py-3 rounded-full 
-// // //             hover:bg-[#14B8A6] transition 
-// // //             shadow-lg shadow-[#0EA5A4]/40"
-// // //           >
-// // //             Schedule Consultation
-// // //             <ArrowRight
-// // //               size={18}
-// // //               className="group-hover:translate-x-1 transition-transform"
-// // //             />
-// // //           </button>
-// // //         </div>
-// // //       </div>
-
-// // //       {/* Bottom Bar */}
-// // //       <div className="relative border-t border-[#14B8A6]/40 text-center py-6 text-white/70 text-sm">
-// // //         © 2026 NNC Digital Solutions. All rights reserved. |
-// // //         Designed for scalable growth 🚀
-// // //       </div>
-// // //     </footer>
-// // //   );
-// // // }
-
-
-// // "use client";
-
-// // import Image from "next/image";
-// // import Logo from "../../public/NNCLOGO.jpg";
-
-// // import {
-// //   Facebook,
-// //   Linkedin,
-// //   Mail,
-// //   Phone,
-// //   MapPin,
-// //   ArrowRight,
-// //   Instagram,
-// //   Twitter,
-// // } from "lucide-react";
-
-// // export default function Footer() {
-// //   return (
-// //     <footer className="relative bg-[#0B1C2D] text-white overflow-hidden">
-
-// //       {/* Animated Background Glow */}
-// //       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-[#0EA5A4]/20 rounded-full blur-[140px] animate-float"></div>
-// //       <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-[#14B8A6]/20 rounded-full blur-[140px] animate-float-reverse"></div>
-
-// //       <div className="relative max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-4 gap-12">
-
-// //         {/* Company Info */}
-// //         <div className="animate-slideUp">
-// //           <div className="mb-6 p-4 rounded-2xl bg-gradient-to-r from-[#0B1C2D] to-[#0EA5A4] shadow-lg hover:scale-105 transition duration-300">
-// //             <Image
-// //               src={Logo}
-// //               alt="NNC Digital Logo"
-// //               width={180}
-// //               height={60}
-// //               className="object-contain"
-// //             />
-// //           </div>
-
-// //           <p className="text-white/80 leading-relaxed mb-6">
-// //             We design and engineer scalable digital ecosystems from CRM and ERP
-// //             systems to mobile apps and automation platforms helping businesses grow.
-// //           </p>
-
-// //           <div className="flex gap-4">
-// //             {[Facebook, Linkedin, Instagram, Twitter].map((Icon, i) => (
-// //               <a
-// //                 key={i}
-// //                 href="#"
-// //                 className="p-2 rounded-full bg-[#0EA5A4] hover:bg-[#14B8A6] hover:scale-110 transition duration-300"
-// //               >
-// //                 <Icon size={18} />
-// //               </a>
-// //             ))}
-// //           </div>
-// //         </div>
-
-// //         {/* Services */}
-// //         <div className="animate-slideUp delay-100">
-// //           <h3 className="text-lg font-semibold mb-4">Our Services</h3>
-// //           <ul className="space-y-3 text-white/80">
-// //             {[
-// //               "CRM Development",
-// //               "ERP Systems",
-// //               "Mobile App Development",
-// //               "Website Development",
-// //               "Business Automation",
-// //             ].map((service, i) => (
-// //               <li
-// //                 key={i}
-// //                 className="hover:text-white hover:translate-x-2 transition duration-300 cursor-pointer"
-// //               >
-// //                 {service}
-// //               </li>
-// //             ))}
-// //           </ul>
-// //         </div>
-
-// //         {/* Contact */}
-// //         <div className="animate-slideUp delay-200">
-// //           <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-// //           <ul className="space-y-4 text-white/80">
-// //             <li className="flex items-center gap-3 hover:text-white transition">
-// //               <Mail size={18} /> info@nncdigital.com
-// //             </li>
-// //             <li className="flex items-center gap-3 hover:text-white transition">
-// //               <Phone size={18} /> +91 90000 00000
-// //             </li>
-// //             <li className="flex items-center gap-3 hover:text-white transition">
-// //               <MapPin size={18} /> Mumbai, India
-// //             </li>
-// //           </ul>
-// //         </div>
-
-// //         {/* CTA */}
-// //         <div className="animate-slideUp delay-300">
-// //           <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
-// //           <p className="text-white/80 mb-6">
-// //             We are ready to talk opportunities and build your application in just a day.
-// //           </p>
-
-// //           <button className="group inline-flex items-center gap-2 bg-[#0EA5A4] px-6 py-3 rounded-full hover:bg-[#14B8A6] transition shadow-lg shadow-[#0EA5A4]/40 animate-pulse-slow">
-// //             Get Started
-// //             <ArrowRight
-// //               size={18}
-// //               className="group-hover:translate-x-1 transition"
-// //             />
-// //           </button>
-// //         </div>
-// //       </div>
-
-// //       {/* Bottom */}
-// //       <div className="relative border-t border-[#0EA5A4]/40 text-center py-6 text-white/70 text-sm">
-// //         © 2026 NNC Digital Solutions. All rights reserved.
-// //       </div>
-// //     </footer>
-// //   );
-// // }
-
-
-// // "use client";
-
-// // const TEAL = "#00C9A7";
-
-// // function LogoMark({ size = 32 }: { size?: number }) {
-// //   return (
-// //     <svg width={size} height={size} viewBox="0 0 40 40" fill="none">
-// //       <defs>
-// //         <linearGradient id="lg-footer" x1="0" y1="0" x2="1" y2="1">
-// //           <stop offset="0%" stopColor="#00C9A7" />
-// //           <stop offset="100%" stopColor="#1B8F6E" />
-// //         </linearGradient>
-// //       </defs>
-// //       {[0, 40, 80, 120, 160, 200, 240, 280, 320].map((deg, i) => (
-// //         <ellipse key={i} cx="20" cy="20" rx="8" ry="3.5"
-// //           fill="url(#lg-footer)" opacity={0.75 + i * 0.02}
-// //           transform={`rotate(${deg} 20 20) translate(4,0)`}
-// //         />
-// //       ))}
-// //       <circle cx="20" cy="20" r="4" fill="url(#lg-footer)" />
-// //     </svg>
-// //   );
-// // }
-
-// // const COLS = [
-// //   {
-// //     title: "Solutions",
-// //     links: ["CRM Development", "ERP Systems", "Web Applications", "Mobile Apps", "Automation"],
-// //   },
-// //   {
-// //     title: "Industries",
-// //     links: ["Healthcare", "Real Estate", "E-commerce", "Manufacturing", "Education"],
-// //   },
-// //   {
-// //     title: "Company",
-// //     links: ["About Us", "Case Studies", "Process", "Blog", "Careers"],
-// //   },
-// //   {
-// //     title: "Connect",
-// //     links: ["Book a Call", "hello@nncdigital.com", "LinkedIn", "Mumbai · India", "USA · UK · UAE"],
-// //   },
-// // ];
-
-// // export default function Footer() {
-// //   return (
-// //     <footer style={{ background: "#070E1A", padding: "64px 48px 36px" }}>
-// //       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-
-// //         {/* Top grid */}
-// //         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
-
-// //           {/* Brand */}
-// //           <div>
-// //             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
-// //               <LogoMark size={32} />
-// //               <div>
-// //                 <span className="syne" style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>NNC</span>
-// //                 <span className="syne" style={{ fontSize: 20, fontWeight: 400, color: TEAL }}> digital</span>
-// //               </div>
-// //             </div>
-// //             <p style={{ fontSize: 14, lineHeight: 1.75, color: "rgba(255,255,255,0.38)", maxWidth: 240 }}>
-// //               Full-stack technology and automation partner. Building digital ecosystems that drive measurable growth.
-// //             </p>
-// //             <p style={{ fontSize: 12, color: "rgba(255,255,255,0.22)", marginTop: 14 }}>
-// //               Backed by Nakshatra Namaha Creations
-// //             </p>
-// //           </div>
-
-// //           {/* Link columns */}
-// //           {COLS.map((col) => (
-// //             <div key={col.title}>
-// //               <p className="mono" style={{ fontSize: 10, letterSpacing: "0.12em", color: TEAL, textTransform: "uppercase", marginBottom: 18 }}>
-// //                 {col.title}
-// //               </p>
-// //               {col.links.map((l) => (
-// //                 <a key={l} href="#" className="fl">{l}</a>
-// //               ))}
-// //             </div>
-// //           ))}
-// //         </div>
-
-// //         {/* Bottom bar */}
-// //         <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-// //           <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.24)", letterSpacing: "0.06em" }}>
-// //             © 2025 NNC Digital Solutions. All rights reserved.
-// //           </p>
-// //           <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.24)", letterSpacing: "0.06em" }}>
-// //             Engineered for growth.
-// //           </p>
-// //         </div>
-
-// //       </div>
-// //     </footer>
-// //   );
-// // }
-
-// "use client";
-
-// import Image from "next/image";
+// import { useState, useEffect, useRef } from "react";
+// import { motion, useInView, useAnimation } from "framer-motion";
 
 // const TEAL = "#00C9A7";
 
@@ -1035,213 +19,408 @@
 //   {
 //     title: "Connect",
 //     links: ["Book a Call", "hello@nncdigital.com", "LinkedIn", "Mumbai · India", "USA · UK · UAE"],
+//     special: [false, true, true, false, false],
 //   },
 // ];
 
-// export default function Footer() {
+// const SOCIALS = [
+//   {
+//     label: "in",
+//     href: "#",
+//     title: "LinkedIn",
+//     svg: (
+//       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+//         <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+//         <circle cx="4" cy="4" r="2" />
+//       </svg>
+//     ),
+//   },
+//   {
+//     label: "tw",
+//     href: "#",
+//     title: "Twitter / X",
+//     svg: (
+//       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+//         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
+//       </svg>
+//     ),
+//   },
+//   {
+//     label: "ig",
+//     href: "#",
+//     title: "Instagram",
+//     svg: (
+//       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+//         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+//         <circle cx="12" cy="12" r="4" />
+//         <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+//       </svg>
+//     ),
+//   },
+// ];
+
+// function FooterLink({ children, isEmail, isLinkedIn }: { children: React.ReactNode; isEmail?: boolean; isLinkedIn?: boolean }) {
+//   const [hovered, setHovered] = useState(false);
 //   return (
-//     <footer style={{ background: "#070E1A", padding: "64px 48px 36px" }}>
-//       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+//     <a
+//       href="#"
+//       onMouseEnter={() => setHovered(true)}
+//       onMouseLeave={() => setHovered(false)}
+//       style={{
+//         display: "block",
+//         marginBottom: 11,
+//         fontSize: 13.5,
+//         fontFamily: "'DM Sans', sans-serif",
+//         fontWeight: 400,
+//         color: hovered ? TEAL : "rgba(255,255,255,0.42)",
+//         textDecoration: "none",
+//         transition: "color 0.22s ease",
+//         letterSpacing: isEmail ? "-0.01em" : "0em",
+//       }}
+//     >
+//       {children}
+//     </a>
+//   );
+// }
 
-//         {/* Top grid */}
-//         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
+// function SocialBtn({ s }) {
+//   const [hovered, setHovered] = useState(false);
+//   return (
+//     <motion.a
+//       href={s.href}
+//       title={s.title}
+//       whileTap={{ scale: 0.9 }}
+//       onMouseEnter={() => setHovered(true)}
+//       onMouseLeave={() => setHovered(false)}
+//       style={{
+//         width: 40,
+//         height: 40,
+//         borderRadius: "50%",
+//         border: `1px solid ${hovered ? "rgba(0,201,167,0.6)" : "rgba(255,255,255,0.12)"}`,
+//         display: "grid",
+//         placeItems: "center",
+//         color: hovered ? TEAL : "rgba(255,255,255,0.38)",
+//         textDecoration: "none",
+//         cursor: "pointer",
+//         transition: "border-color 0.25s, color 0.25s, background 0.25s",
+//         background: hovered ? "rgba(0,201,167,0.07)" : "transparent",
+//       }}
+//     >
+//       {s.svg}
+//     </motion.a>
+//   );
+// }
 
-//           {/* Brand */}
-//           <div>
-//             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 18 }}>
-//               {/* Use Image from public folder */}
-//               <Image
-//                 src="/NNCLOGO.jpg" // replace with your actual logo file name in public folder
-//                 alt="NNC Digital Logo"
-//                 width={95}
-//                 height={80}
-//               />
-//               <div>
-//                 <span className="syne" style={{ fontSize: 20, fontWeight: 800, color: "#fff" }}>NNC</span>
-//                 <span className="syne" style={{ fontSize: 20, fontWeight: 400, color: TEAL }}> digital</span>
+// function AnimatedCounter({ value, suffix = "" }) {
+//   const [count, setCount] = useState(0);
+//   const ref = useRef(null);
+//   const inView = useInView(ref, { once: true, margin: "-40px" });
+
+//   useEffect(() => {
+//     if (!inView) return;
+//     let start = 0;
+//     const duration = 1400;
+//     const step = duration / value;
+//     const timer = setInterval(() => {
+//       start += 1;
+//       setCount(start);
+//       if (start >= value) clearInterval(timer);
+//     }, step);
+//     return () => clearInterval(timer);
+//   }, [inView, value]);
+
+//   return (
+//     <span ref={ref} style={{ color: TEAL, fontVariantNumeric: "tabular-nums" }}>
+//       {count}
+//       {suffix}
+//     </span>
+//   );
+// }
+
+// const staggerParent = {
+//   hidden: {},
+//   show: { transition: { staggerChildren: 0.07 } },
+// };
+// const fadeUp = {
+//   hidden: { opacity: 0, y: 18 },
+//   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
+// };
+
+// export default function Footer() {
+//   const footerRef = useRef(null);
+//   const inView = useInView(footerRef, { once: true, margin: "-60px" });
+//   const controls = useAnimation();
+
+//   useEffect(() => {
+//     if (inView) controls.start("show");
+//   }, [inView, controls]);
+
+//   return (
+//     <>
+//       <style>{`
+//         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+//         * { box-sizing: border-box; margin: 0; padding: 0; }
+//         html, body { background: #020810; }
+
+//         .footer-divider-line {
+//           width: 100%;
+//           height: 1px;
+//           background: linear-gradient(90deg, transparent, rgba(0,201,167,0.18) 30%, rgba(0,201,167,0.18) 70%, transparent);
+//           margin-bottom: 64px;
+//         }
+
+//         .stat-card {
+//           background: rgba(255,255,255,0.025);
+//           border: 1px solid rgba(255,255,255,0.06);
+//           border-radius: 12px;
+//           padding: 22px 28px;
+//           flex: 1;
+//         }
+
+//         .footer-bottom-link:hover { color: ${TEAL} !important; }
+
+//         @media (max-width: 900px) {
+//           .footer-grid { grid-template-columns: 1fr 1fr !important; }
+//           .footer-stats { flex-direction: column !important; gap: 12px !important; }
+//         }
+//         @media (max-width: 560px) {
+//           .footer-grid { grid-template-columns: 1fr !important; }
+//           .footer-root { padding: 56px 24px 32px !important; }
+//           .footer-bottom { flex-direction: column !important; text-align: center; gap: 16px !important; }
+//         }
+//       `}</style>
+
+//       <footer
+//         ref={footerRef}
+//         className="footer-root"
+//         style={{
+//           background: "#020810",
+//           borderTop: "1px solid rgba(255,255,255,0.04)",
+//           padding: "80px 56px 40px",
+//           fontFamily: "'DM Sans', sans-serif",
+//         }}
+//       >
+//         <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+
+//           {/* Stats strip */}
+//           <motion.div
+//             variants={staggerParent}
+//             initial="hidden"
+//             animate={controls}
+//             style={{ display: "flex", gap: 16, marginBottom: 64 }}
+//             className="footer-stats"
+//           >
+//             {[
+//               { num: 120, suffix: "+", label: "Projects Delivered" },
+//               { num: 98, suffix: "%", label: "Client Satisfaction" },
+//               { num: 6, suffix: "+", label: "Years of Expertise" },
+//               { num: 3, suffix: " continents", label: "Global Presence" },
+//             ].map((s) => (
+//               <motion.div key={s.label} variants={fadeUp} className="stat-card">
+//                 <p style={{ fontSize: 28, fontWeight: 600, fontFamily: "'DM Mono', monospace", letterSpacing: "-0.03em", marginBottom: 4 }}>
+//                   <AnimatedCounter value={s.num} suffix={s.suffix} />
+//                 </p>
+//                 <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", fontFamily: "'DM Mono', monospace", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+//                   {s.label}
+//                 </p>
+//               </motion.div>
+//             ))}
+//           </motion.div>
+
+//           <div className="footer-divider-line" />
+
+//           {/* Main grid */}
+//           <motion.div
+//             variants={staggerParent}
+//             initial="hidden"
+//             animate={controls}
+//             className="footer-grid"
+//             style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", gap: "48px 40px", marginBottom: 64 }}
+//           >
+//             {/* Brand column */}
+//             <motion.div variants={fadeUp}>
+//               {/* Logo */}
+//               <div style={{ marginBottom: 20 }}>
+//                 <img
+//                   src="/NNCLOGO.jpg"
+//                   alt="NNC Digital"
+//                   style={{
+//                     width: 180,
+//                     height: "auto",
+//                     objectFit: "contain",
+//                     objectPosition: "left center",
+//                     borderRadius: 8,
+//                     display: "block",
+//                   }}
+//                 />
 //               </div>
-//             </div>
-//             <p style={{ fontSize: 14, lineHeight: 1.75, color: "rgba(255,255,255,0.38)", maxWidth: 240 }}>
-//               Full-stack technology and automation partner. Building digital ecosystems that drive measurable growth.
-//             </p>
-//             <p style={{ fontSize: 12, color: "rgba(255,255,255,0.22)", marginTop: 14 }}>
-//               Backed by Nakshatra Namaha Creations
-//             </p>
-//           </div>
 
-//           {/* Link columns */}
-//           {COLS.map((col) => (
-//             <div key={col.title}>
-//               <p className="mono" style={{ fontSize: 10, letterSpacing: "0.12em", color: TEAL, textTransform: "uppercase", marginBottom: 18 }}>
-//                 {col.title}
+//               <p style={{ fontSize: 13.5, lineHeight: 1.78, color: "rgba(255,255,255,0.36)", maxWidth: 230, marginBottom: 10 }}>
+//                 Full-stack technology and automation partner. Building digital ecosystems that drive measurable growth.
 //               </p>
-//               {col.links.map((l) => (
-//                 <a key={l} href="#" className="fl">{l}</a>
+//               <p style={{ fontSize: 11.5, color: "rgba(255,255,255,0.18)", marginBottom: 28, fontFamily: "'DM Mono', monospace", letterSpacing: "0.03em" }}>
+//                 Backed by Nakshatra Namaha Creations
+//               </p>
+
+//               {/* Social row */}
+//               <div style={{ display: "flex", gap: 10 }}>
+//                 {SOCIALS.map((s) => (
+//                   <SocialBtn key={s.label} s={s} />
+//                 ))}
+//               </div>
+
+//               {/* Status badge */}
+//               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 28, padding: "7px 14px", borderRadius: 999, background: "rgba(0,201,167,0.07)", border: "1px solid rgba(0,201,167,0.18)" }}>
+//                 <span style={{ width: 7, height: 7, borderRadius: "50%", background: TEAL, display: "block", boxShadow: `0 0 8px ${TEAL}` }} />
+//                 <span style={{ fontSize: 11, fontFamily: "'DM Mono', monospace", color: "rgba(0,201,167,0.85)", letterSpacing: "0.08em" }}>
+//                   ACCEPTING NEW PROJECTS
+//                 </span>
+//               </div>
+//             </motion.div>
+
+//             {/* Link columns */}
+//             {COLS.map((col, ci) => (
+//               <motion.div key={col.title} variants={fadeUp}>
+//                 <p style={{
+//                   fontSize: 9.5,
+//                   letterSpacing: "0.16em",
+//                   color: TEAL,
+//                   textTransform: "uppercase",
+//                   marginBottom: 22,
+//                   fontWeight: 600,
+//                   fontFamily: "'DM Mono', monospace",
+//                 }}>
+//                   {col.title}
+//                 </p>
+//                 {col.links.map((l, i) => (
+//                   <FooterLink
+//                     key={l}
+//                     isEmail={col.special?.[i] && l.includes("@")}
+//                     isLinkedIn={col.special?.[i] && l === "LinkedIn"}
+//                   >
+//                     {l}
+//                   </FooterLink>
+//                 ))}
+//               </motion.div>
+//             ))}
+//           </motion.div>
+
+//           {/* CTA banner */}
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={inView ? { opacity: 1, y: 0 } : {}}
+//             transition={{ delay: 0.4, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+//             style={{
+//               background: "linear-gradient(135deg, rgba(0,201,167,0.09) 0%, rgba(27,143,110,0.05) 100%)",
+//               border: "1px solid rgba(0,201,167,0.14)",
+//               borderRadius: 16,
+//               padding: "32px 40px",
+//               marginBottom: 48,
+//               display: "flex",
+//               alignItems: "center",
+//               justifyContent: "space-between",
+//               flexWrap: "wrap",
+//               gap: 20,
+//             }}
+//           >
+//             <div>
+//               <p style={{ fontSize: 18, fontWeight: 600, color: "rgba(255,255,255,0.9)", marginBottom: 6, letterSpacing: "-0.02em" }}>
+//                 Ready to build something remarkable?
+//               </p>
+//               <p style={{ fontSize: 13, color: "rgba(255,255,255,0.38)", fontFamily: "'DM Mono', monospace" }}>
+//                 Let's talk about your next project.
+//               </p>
+//             </div>
+//             <CTAButton />
+//           </motion.div>
+
+//           {/* Bottom bar */}
+//           <div
+//             className="footer-bottom"
+//             style={{
+//               borderTop: "1px solid rgba(255,255,255,0.05)",
+//               paddingTop: 28,
+//               display: "flex",
+//               justifyContent: "space-between",
+//               alignItems: "center",
+//               flexWrap: "wrap",
+//               gap: 12,
+//             }}
+//           >
+//             <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.06em", fontFamily: "'DM Mono', monospace" }}>
+//               © 2026 NNC Digital Solutions. All rights reserved.
+//             </p>
+//             <div style={{ display: "flex", gap: 28, flexWrap: "wrap" }}>
+//               {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((l) => (
+//                 <a
+//                   key={l}
+//                   href="#"
+//                   className="footer-bottom-link"
+//                   style={{
+//                     fontSize: 12,
+//                     color: "rgba(255,255,255,0.26)",
+//                     textDecoration: "none",
+//                     fontFamily: "'DM Sans', sans-serif",
+//                     transition: "color 0.2s",
+//                   }}
+//                 >
+//                   {l}
+//                 </a>
 //               ))}
 //             </div>
-//           ))}
-//         </div>
-
-//         {/* Bottom bar */}
-//         <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-//           <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.24)", letterSpacing: "0.06em" }}>
-//             © 2025 NNC Digital Solutions. All rights reserved.
-//           </p>
-//           <p className="mono" style={{ fontSize: 11, color: "rgba(255,255,255,0.24)", letterSpacing: "0.06em" }}>
-//             Engineered for growth.
-//           </p>
-//         </div>
-
-//       </div>
-//     </footer>
-//   );
-// }
-
-// "use client";
-
-// import Image from "next/image";
-
-// const COLS = [
-//   {
-//     title: "Solutions",
-//     links: ["CRM Development", "ERP Systems", "Web Applications", "Mobile Apps", "Automation"],
-//   },
-//   {
-//     title: "Industries",
-//     links: ["Healthcare", "Real Estate", "E-commerce", "Manufacturing", "Education"],
-//   },
-//   {
-//     title: "Company",
-//     links: ["About Us", "Case Studies", "Process", "Blog", "Careers"],
-//   },
-//   {
-//     title: "Connect",
-//     links: ["Book a Call", "hello@nncdigital.com", "LinkedIn", "Mumbai · India", "USA · UK · UAE"],
-//   },
-// ];
-
-// export default function Footer() {
-//   return (
-//     <footer style={{ background: "#070E1A", padding: "64px 48px 36px" }}>
-//       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-
-//         {/* Top grid */}
-//         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
-
-//           {/* Brand */}
-//           <div>
-//             <div className="eye">
-//               <Image src="/NCCLOGO.jpg" alt="NNC Digital Logo" width={95} height={80} />
-//               <div>
-//                 <span className="syne gtxt">NNC</span>
-//                 <span className="syne" style={{ color: "var(--teal)" }}> digital</span>
-//               </div>
-//             </div>
-//             <p className="fl" style={{ marginBottom: 6, opacity: 0.6 }}>
-//               Full-stack technology and automation partner. Building digital ecosystems that drive measurable growth.
-//             </p>
-//             <p className="fl" style={{ opacity: 0.35, fontSize: "12px" }}>
-//               Backed by Nakshatra Namaha Creations
+//             <p style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", letterSpacing: "0.06em", fontFamily: "'DM Mono', monospace" }}>
+//               Engineered for growth.
 //             </p>
 //           </div>
 
-//           {/* Link columns */}
-//           {COLS.map((col) => (
-//             <div key={col.title}>
-//               <p className="eye-txt">{col.title}</p>
-//               {col.links.map((l) => (
-//                 <a key={l} href="#" className="fl">{l}</a>
-//               ))}
-//             </div>
-//           ))}
 //         </div>
-
-//         {/* Bottom bar */}
-//         <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-//           <p className="mono" style={{ opacity: 0.35, fontSize: "11px" }}>
-//             © 2025 NNC Digital Solutions. All rights reserved.
-//           </p>
-//           <p className="mono" style={{ opacity: 0.35, fontSize: "11px" }}>
-//             Engineered for growth.
-//           </p>
-//         </div>
-
-//       </div>
-//     </footer>
+//       </footer>
+//     </>
 //   );
 // }
 
+// function CTAButton() {
+//   const [hovered, setHovered] = useState(false);
+//   return (
+//     <motion.a
+//       href="#"
+//       whileTap={{ scale: 0.97 }}
+//       onMouseEnter={() => setHovered(true)}
+//       onMouseLeave={() => setHovered(false)}
+//       style={{
+//         display: "inline-flex",
+//         alignItems: "center",
+//         gap: 10,
+//         padding: "13px 28px",
+//         borderRadius: 10,
+//         background: hovered
+//           ? "linear-gradient(135deg, #00D9B4 0%, #1B9F7E 100%)"
+//           : "linear-gradient(135deg, #00C9A7 0%, #1B8F6E 100%)",
+//         color: "#020810",
+//         fontWeight: 600,
+//         fontSize: 13.5,
+//         fontFamily: "'DM Sans', sans-serif",
+//         textDecoration: "none",
+//         letterSpacing: "-0.01em",
+//         transition: "background 0.25s, box-shadow 0.25s",
+//         boxShadow: hovered ? "0 8px 28px rgba(0,201,167,0.32)" : "0 4px 14px rgba(0,201,167,0.16)",
+//         cursor: "pointer",
+//         whiteSpace: "nowrap",
+//       }}
+//     >
+//       Book a Call
+//       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+//         <path d="M5 12h14M12 5l7 7-7 7" />
+//       </svg>
+//     </motion.a>
+//   );
+// }
+import React from 'react'
 
-"use client";
-
-import Image from "next/image";
-
-const COLS = [
-  {
-    title: "Solutions",
-    links: ["CRM Development", "ERP Systems", "Web Applications", "Mobile Apps", "Automation"],
-  },
-  {
-    title: "Industries",
-    links: ["Healthcare", "Real Estate", "E-commerce", "Manufacturing", "Education"],
-  },
-  {
-    title: "Company",
-    links: ["About Us", "Case Studies", "Process", "Blog", "Careers"],
-  },
-  {
-    title: "Connect",
-    links: ["Book a Call", "hello@nncdigital.com", "LinkedIn", "Mumbai · India", "USA · UK · UAE"],
-  },
-];
-
-export default function Footer() {
+const Footer = () => {
   return (
-    <footer style={{ background: "#070E1A", padding: "64px 48px 36px" }}>
-      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-
-        {/* Top grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr 1fr", gap: 48, marginBottom: 60 }}>
-
-          {/* Brand */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-              <Image src="/NNCLOGO.jpg" alt="NNC Digital Logo" width={94} height={64} />
-              <div style={{ display: "flex", alignItems: "baseline", gap: "4px" }}>
-                <span className="syne gtxt" style={{ fontSize: "24px", fontWeight: 800 }}>NNC</span>
-                <span className="syne" style={{ fontSize: "24px", color: "var(--teal)", fontWeight: 400 }}>digital</span>
-              </div>
-            </div>
-            <p className="fl" style={{ opacity: 0.6 }}>
-              Full-stack technology and automation partner. Building digital ecosystems that drive measurable growth.
-            </p>
-            <p className="fl" style={{ opacity: 0.35, fontSize: "12px" }}>
-              Backed by Nakshatra Namaha Creations
-            </p>
-          </div>
-
-          {/* Link columns */}
-          {COLS.map((col) => (
-            <div key={col.title}>
-              <p className="eye-txt" style={{ marginBottom: "12px" }}>{col.title}</p>
-              {col.links.map((l) => (
-                <a key={l} href="#" className="fl">{l}</a>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom bar */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 28, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p className="mono" style={{ opacity: 0.35, fontSize: "11px" }}>
-            © 2025 NNC Digital Solutions. All rights reserved.
-          </p>
-          <p className="mono" style={{ opacity: 0.35, fontSize: "11px" }}>
-            Engineered for growth.
-          </p>
-        </div>
-
-      </div>
-    </footer>
-  );
+    <div>Footer</div>
+  )
 }
+
+export default Footer

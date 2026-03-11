@@ -960,7 +960,23 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-
+import Navbar from "@/components/Navbar";
+import Cursor from "@/components/Cursor";
+import StatsBar from "@/components/StatsBar";
+import ClientLogos from "@/components/ClientLogos";
+import CRMServices from "@/components/CRMServices";
+import BestCRMCompany from "@/components/BestCRMCompany";
+import CRMDoMore from "@/components/CRMDoMore";
+import AIPoweredCRM from "@/components/AIPoweredCRM";
+import CRMPlatformTools from "@/components/CRMPlatformTools";
+import HireCRMDevelopers from "@/components/HireCRMDevelopers";
+import KeyBenefits from "@/components/KeyBenefits";
+import HappyClients from "@/components/HappyClients";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import GlobalPresence from "@/components/GlobalPresence";
+import IndustriesFAQ from "@/components/IndustriesFAQ";
+import ReadyToBuild from "@/components/ReadyToBuild";
+import Footer from "@/components/Footer";
 const SERVICES = [
   "CRM Development","ERP Solutions","Web Development","Mobile Apps",
   "API Integration","Cloud Automation","Digital Transformation","Custom Software",
@@ -996,6 +1012,9 @@ export default function Hero() {
   };
 
   return (
+    <>
+    <Cursor/>
+     <Navbar />
     <section style={{
       position:"relative", minHeight:"100vh", display:"flex", alignItems:"center",
       overflow:"hidden", paddingTop:90,
@@ -1189,6 +1208,25 @@ export default function Hero() {
         }
       `}</style>
     </section>
+
+      <StatsBar/>
+      <ClientLogos/>
+      <CRMServices/>
+      <BestCRMCompany/>
+      <CRMDoMore/>
+      <AIPoweredCRM/>
+      <CRMPlatformTools/>
+      <HireCRMDevelopers/>
+      {/* <CRMCTABanner/>  */}
+      <KeyBenefits/>
+        <HappyClients/>
+        <WhyChooseUs/>
+        <GlobalPresence/>
+        <IndustriesFAQ/>
+       
+        <ReadyToBuild/>
+        <Footer/>
+      
+       </>
   );
 }
-
