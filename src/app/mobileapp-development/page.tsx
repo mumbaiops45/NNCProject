@@ -246,106 +246,8 @@ export default function MobileAppDevelopmentPage() {
   return (
     <>
     <Navbar/>
-    <div style={{fontFamily:"'Poppins',sans-serif"}}>
 
-<style>{`
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
-  @keyframes heroFadeUp  {from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}}
-  @keyframes heroBlink   {0%,100%{opacity:1} 50%{opacity:0}}
-  @keyframes heroGlow    {0%,100%{box-shadow:0 0 16px rgba(0,201,167,.18)} 50%{box-shadow:0 0 40px rgba(0,201,167,.45)}}
-  @keyframes heroPulse   {0%,100%{opacity:.1;transform:scale(1)} 50%{opacity:.22;transform:scale(1.08)}}
-  @keyframes heroSpin    {from{transform:rotate(0)} to{transform:rotate(360deg)}}
-  @keyframes heroScan    {0%{top:-2px} 100%{top:100%}}
-  @keyframes marquee     {from{transform:translateX(0)} to{transform:translateX(-50%)}}
-  @keyframes sbFadeUp    {from{opacity:0;transform:translateY(32px)} to{opacity:1;transform:translateY(0)}}
-  @keyframes sbLineGrow  {from{transform:scaleX(0)} to{transform:scaleX(1)}}
-  @keyframes ctaBgShift  {0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}}
-  @keyframes aiScan      {0%{top:10%} 100%{top:90%}}
-  @keyframes aiPulse     {0%,100%{opacity:.5;transform:scale(1)} 50%{opacity:1;transform:scale(1.08)}}
-  @keyframes wcuPulse    {0%,100%{box-shadow:0 0 0 12px rgba(0,201,167,.15),0 0 0 24px rgba(0,201,167,.07)} 50%{box-shadow:0 0 0 18px rgba(0,201,167,.2),0 0 0 36px rgba(0,201,167,.06)}}
-  @keyframes kbFadeUp    {from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)}}
-  @keyframes phoneBounce {0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(2deg)}}
-  @keyframes screenGlow  {0%,100%{box-shadow:0 0 20px rgba(0,201,167,0.3)} 50%{box-shadow:0 0 50px rgba(0,201,167,0.6)}}
-
-  .h-teal:hover{color:${T}!important;}
-  .card-hover:hover{transform:translateY(-6px)!important;border-color:rgba(0,201,167,0.3)!important;background:rgba(0,201,167,0.04)!important;box-shadow:0 20px 56px rgba(0,0,0,0.35)!important;}
-  .btn-teal:hover{transform:translateY(-2px)!important;box-shadow:0 12px 32px rgba(0,201,167,0.4)!important;}
-  .fi:focus{border-color:rgba(0,201,167,0.5)!important;background:rgba(0,201,167,0.06)!important;}
-  .fi::placeholder{color:rgba(255,255,255,0.28);}
-  .fi option{background:#0a1f38;color:#fff;}
-  .mob-badge:hover{background:rgba(0,201,167,0.12)!important;border-color:rgba(0,201,167,0.35)!important;color:#fff!important;}
-  .cl-track{display:flex;gap:64px;width:max-content;animation:marquee 32s linear infinite;}
-  .cl-track:hover{animation-play-state:paused;}
-  .ss-tab{padding:10px 20px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.5);font-size:13.5px;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer;transition:all .22s ease;display:flex;align-items:center;gap:8px;}
-  .ss-tab.act{border-color:rgba(0,201,167,0.45);background:rgba(0,201,167,0.1);color:${T};}
-  .ss-tab:hover:not(.act){border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);}
-  .svc-card{position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s,border-color .3s,background .3s;cursor:default;overflow:hidden;}
-  .svc-card:hover{transform:translateY(-6px);border-color:rgba(0,201,167,0.35);background:rgba(0,201,167,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
-  .svc-card::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${T},transparent);border-radius:18px 18px 0 0;opacity:0;transition:opacity .3s;}
-  .svc-card:hover::after{opacity:1;}
-  .svc-card:hover .svc-icon{background:rgba(0,201,167,0.18)!important;transform:scale(1.08);}
-  .pt-card{border-radius:18px;padding:26px 22px;position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;cursor:default;}
-  .pt-card:hover{transform:translateY(-7px);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
-  .pt-card::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${T},transparent);opacity:0;transition:opacity .28s;}
-  .pt-card:hover::after{opacity:1;}
-  .pt-card:hover .pt-icon{transform:scale(1.1) rotate(-5deg)!important;}
-  .kb-card{position:relative;display:flex;gap:28px;align-items:flex-start;padding:32px 28px;border-radius:20px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);transition:transform .3s,border-color .3s,background .3s,box-shadow .3s;cursor:default;animation:kbFadeUp .6s ease both;}
-  .kb-card:hover{transform:translateY(-6px);border-color:rgba(0,201,167,0.3);background:rgba(0,201,167,0.04);box-shadow:0 20px 56px rgba(0,0,0,0.35);}
-  .kb-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;border-radius:20px 20px 0 0;background:linear-gradient(90deg,transparent,${T},transparent);opacity:0;transition:opacity .3s;}
-  .kb-card:hover::before{opacity:1;}
-  .ai-feat-card:hover{transform:translateX(6px)!important;box-shadow:0 8px 32px rgba(0,0,0,0.3)!important;}
-  .ai-feat-card:hover .ai-icon-w{transform:scale(1.1) rotate(-4deg)!important;}
-  .wcu-point:hover{border-color:rgba(0,201,167,0.25)!important;background:rgba(0,201,167,0.04)!important;transform:translateX(6px)!important;}
-  .wcu-stat:hover{transform:translateY(-4px)!important;background:rgba(0,201,167,0.1)!important;}
-  .faq-item{border-radius:14px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);overflow:hidden;transition:border-color .25s,background .25s;cursor:pointer;}
-  .faq-item.fopen{border-color:rgba(0,201,167,0.35);background:rgba(0,201,167,0.04);}
-  .faq-item:hover{border-color:rgba(0,201,167,0.22);}
-  .gp-tab:hover{border-color:rgba(0,201,167,0.35)!important;}
-  .gp-card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 48px rgba(0,0,0,0.4)!important;border-color:rgba(0,201,167,0.3)!important;}
-  .gp-ind:hover{background:rgba(0,201,167,0.06)!important;border-color:rgba(0,201,167,0.2)!important;}
-  .platform-pill{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.65);font-size:12.5px;font-weight:600;transition:all .2s;}
-  .platform-pill:hover{border-color:rgba(0,201,167,0.4);background:rgba(0,201,167,0.08);color:#fff;}
-
-  .hero-layout{display:grid;grid-template-columns:1fr 460px;gap:56px;align-items:center;max-width:1280px;margin:0 auto;position:relative;z-index:2;width:100%;}
-  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  .pt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .kb-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
-  .two-col-wide{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
-  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1200px;margin:0 auto;}
-  .wcu-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-  .gp-offices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-  .gp-ind-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  .gp-india-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
-  .cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
-  .cf-name{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-
-  @media(max-width:1060px){.hero-layout{grid-template-columns:1fr!important;gap:40px!important;}}
-  @media(max-width:1024px){.pt-grid{grid-template-columns:repeat(3,1fr)!important;}}
-  @media(max-width:960px){
-    .svc-grid{grid-template-columns:repeat(2,1fr)!important;}
-    .two-col-wide{grid-template-columns:1fr!important;gap:44px!important;}
-    .wcu-stats{grid-template-columns:1fr 1fr!important;}
-    .gp-offices{grid-template-columns:1fr!important;}
-    .gp-india-stats{grid-template-columns:repeat(2,1fr)!important;}
-  }
-  @media(max-width:768px){
-    .two-col{grid-template-columns:1fr!important;}
-    .kb-grid{grid-template-columns:1fr!important;}
-    .cf-grid{grid-template-columns:1fr!important;gap:40px!important;}
-    .gp-ind-grid{grid-template-columns:1fr!important;}
-  }
-  @media(max-width:720px){.pt-grid{grid-template-columns:repeat(2,1fr)!important;}}
-  @media(max-width:640px){.stats-row{grid-template-columns:repeat(2,1fr)!important;}}
-  @media(max-width:580px){.svc-grid{grid-template-columns:1fr!important;}}
-  @media(max-width:480px){
-    .hero-layout{padding:80px 20px 60px!important;}
-    .cf-name{grid-template-columns:1fr!important;}
-    .pt-grid{grid-template-columns:1fr!important;}
-    .gp-india-stats{grid-template-columns:1fr 1fr!important;}
-  }
-`}</style>
 
 {/* ══════════════════════════════════════════════════
     M1 — HERO
@@ -1015,7 +917,7 @@ export default function MobileAppDevelopmentPage() {
   </div>
 </section>
 
-    </div>
+   
     </>
   );
 }
