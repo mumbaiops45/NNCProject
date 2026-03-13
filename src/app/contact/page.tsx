@@ -1,213 +1,239 @@
-// "use client";
-
-// import { ArrowRight } from "lucide-react";
-
-// export default function ConnectCTASection() {
-//   return (
-//     <section className="relative py-36 overflow-hidden bg-gradient-to-br from-[#0f1226] via-[#141833] to-[#1b1f46] flex items-center justify-center">
-      
-//       {/* animated glow blobs */}
-//       <div className="absolute -top-32 -left-32 w-[420px] h-[420px] bg-indigo-500/20 rounded-full blur-3xl animate-pulse" />
-//       <div className="absolute -bottom-32 -right-32 w-[420px] h-[420px] bg-blue-500/20 rounded-full blur-3xl animate-pulse [animation-delay:1.5s]" />
-
-//       {/* content */}
-//       <div className="relative text-center text-white max-w-3xl px-6">
-        
-//         {/* small label */}
-//         <p className="text-[11px] tracking-[0.35em] uppercase text-white/70 mb-6 animate-fadeUp">
-//           CONNECT WITH US
-//         </p>
-
-//         {/* headline */}
-//         <h2 className="text-[44px] md:text-[56px] leading-[1.1] font-semibold mb-6 animate-fadeUp [animation-delay:0.1s]">
-//           We’re ready to talk <br />
-//           opportunities
-//         </h2>
-
-//         {/* desc */}
-//         <p className="text-white/70 text-[17px] mb-10 leading-relaxed animate-fadeUp [animation-delay:0.2s]">
-//           Build an application on our platform in just a day. Our team is ready
-//           to help you accelerate development and scale your digital products.
-//         </p>
-
-//         {/* button */}
-//         <button className="group relative inline-flex items-center gap-2 bg-[#5668ff] px-8 py-4 rounded-xl font-medium text-[15px] shadow-xl transition-all duration-300 hover:scale-105 hover:bg-[#4457ff] animate-fadeUp [animation-delay:0.3s]">
-//           <span className="relative z-10 flex items-center gap-2">
-//             Get started
-//             <ArrowRight
-//               size={18}
-//               className="transition-transform duration-300 group-hover:translate-x-1"
-//             />
-//           </span>
-
-//           {/* shine effect */}
-//           <span className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition">
-//             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-//           </span>
-//         </button>
-//       </div>
-
-//       {/* custom fade animation */}
-//       <style jsx>{`
-//         .animate-fadeUp {
-//           opacity: 0;
-//           transform: translateY(30px);
-//           animation: fadeUp 0.8s ease forwards;
-//         }
-//         @keyframes fadeUp {
-//           to {
-//             opacity: 1;
-//             transform: translateY(0);
-//           }
-//         }
-//       `}</style>
-//     </section>
-//   );
-// }
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
 
 export default function ContactPage() {
-  return (
-    <div className="bg-white text-gray-800">
 
-      {/* ================= HERO ================= */}
-      <section className="py-28 bg-gray-50 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-5xl font-bold mb-6"
-        >
-          Let’s Build Your <span className="text-[#14B8A6]">Growth System</span>
-        </motion.h1>
+const [openIndex,setOpenIndex] = useState<number | null>(null);
 
-        <p className="max-w-3xl mx-auto text-lg text-gray-600">
-          Ready to transform your sales and operations with intelligent automation?
-          Let’s design a structured digital ecosystem tailored to your business.
-        </p>
-      </section>
+const toggleFAQ=(i:number)=>{
+setOpenIndex(openIndex === i ? null : i);
+};
 
-      {/* ================= CONTACT SECTION ================= */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16">
+const faqs=[
+{
+q:"Do you work with businesses outside of India?",
+a:"Yes. NNC Digital Solutions works with Canada, USA and UK companies."
+},
+{
+q:"What happens after I submit the contact form?",
+a:"Our consultant reviews your submission and responds within 24 business hours."
+},
+{
+q:"Is the initial consultation free?",
+a:"Yes. Our first consultation is completely free with no commitment."
+},
+{
+q:"Who is behind NNC Digital Solutions?",
+a:"NNC Digital is the international arm of Nakshatra Namaha Creations Pvt Ltd."
+}
+];
 
-          {/* LEFT - FORM */}
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-white p-10 rounded-3xl shadow-xl border border-gray-100"
-          >
-            <h2 className="text-3xl font-semibold mb-8">
-              Schedule a Strategy Consultation
-            </h2>
+return(
 
-            <form className="space-y-6">
+<>
+<Navbar/>
 
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
-              />
+{/* HERO */}
 
-              <input
-                type="email"
-                placeholder="Business Email"
-                className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
-              />
+<section className="sec-hero text-center">
 
-              <input
-                type="text"
-                placeholder="Company Name"
-                className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
-              />
+<div className="sec-content-sm">
 
-              <textarea
-                rows={5}
-                placeholder="Tell us about your current challenges..."
-                className="w-full border border-gray-200 rounded-lg px-5 py-4 focus:outline-none focus:ring-2 focus:ring-[#14B8A6]"
-              ></textarea>
+<div className="section-badge">
+<span className="section-badge__dot"/>
+<span className="section-badge__text">Contact</span>
+</div>
 
-              <button
-                type="submit"
-                className="w-full bg-[#14B8A6] text-white py-4 rounded-full font-semibold hover:opacity-90 transition"
-              >
-                Book Strategy Call
-              </button>
+<h1 className="section-h2">
+Let's Build Something <span className="grad-text">Exceptional Together</span>
+</h1>
 
-            </form>
-          </motion.div>
+<p className="text-muted">
+Whether you have a defined project or just a problem to solve —
+we respond within 24 hours with honest advice.
+</p>
 
-          {/* RIGHT - INFO */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="flex flex-col justify-center"
-          >
-            <h2 className="text-3xl font-semibold mb-8">
-              Contact Information
-            </h2>
+</div>
 
-            <div className="space-y-6 text-gray-600 text-lg">
+</section>
 
-              <div>
-                <strong className="text-gray-800">Email:</strong>
-                <p>info@nncdigitalsolutions.com</p>
-              </div>
 
-              <div>
-                <strong className="text-gray-800">Phone:</strong>
-                <p>+91 xxxx xxxx</p>
-              </div>
+{/* CONTACT + FORM */}
 
-              <div>
-                <strong className="text-gray-800">Head Office:</strong>
-                <p>Mumbai, India</p>
-              </div>
+<section className="sec-mid">
 
-              <div>
-                <strong className="text-gray-800">Global Reach:</strong>
-                <p>India | USA | UK | Canada | Middle East | Australia</p>
-              </div>
+<div className="sec-content cf-grid">
 
-            </div>
+{/* CONTACT DETAILS */}
 
-            {/* WhatsApp Button */}
-            <a
-              href="#"
-              className="mt-10 inline-block bg-[#14B8A6]/10 text-[#14B8A6] px-8 py-4 rounded-full font-semibold hover:bg-[#14B8A6] hover:text-white transition"
-            >
-              Chat on WhatsApp
-            </a>
+<div className="card p-8">
 
-          </motion.div>
+<h2 className="section-h2">Get in Touch</h2>
 
-        </div>
-      </section>
+<div className="space-y-6 text-muted">
 
-      {/* ================= FINAL CTA ================= */}
-      <section className="py-24 bg-[#14B8A6] text-white text-center">
+<div>
+<p className="teal">Canada</p>
+<p>+1 647-XXX-XXXX</p>
+</div>
 
-        <h2 className="text-4xl font-semibold mb-6">
-          Ready to Transform Your Operations?
-        </h2>
+<div>
+<p className="teal">USA</p>
+<p>+1 631-XXX-XXXX</p>
+</div>
 
-        <p className="max-w-2xl mx-auto mb-8 text-white/90 text-lg">
-          Let’s architect a CRM and automation system that gives you clarity,
-          control, and predictable revenue growth.
-        </p>
+<div>
+<p className="teal">UK</p>
+<p>+44 20-XXXX-XXXX</p>
+</div>
 
-        <button className="bg-white text-[#14B8A6] px-10 py-4 rounded-full font-semibold hover:opacity-90 transition">
-          Schedule Consultation
-        </button>
+<div>
+<p className="teal">India HQ</p>
+<p>+91 9900566466</p>
+</div>
 
-      </section>
+<div>
+<p className="teal">Email</p>
+<p>hello@nncdigital.com</p>
+<p>info@nakshatranamahacreations.com</p>
+</div>
 
-    </div>
-  );
+</div>
+
+</div>
+
+
+{/* FORM */}
+
+<div className="card p-8">
+
+<h3 className="text-xl font-semibold mb-6">Share Your Project Idea</h3>
+
+<form className="space-y-4">
+
+<div className="cf-name">
+
+<input className="fi" placeholder="First Name"/>
+<input className="fi" placeholder="Last Name"/>
+
+</div>
+
+
+<div className="phone-row">
+
+<select className="fi fi-dial">
+<option>+1</option>
+<option>+44</option>
+<option>+91</option>
+</select>
+
+<input className="fi" placeholder="Phone"/>
+
+</div>
+
+
+<input className="fi" placeholder="Business Email"/>
+
+<input className="fi" placeholder="Company Name"/>
+
+
+<select className="fi fi-select">
+
+<option>Service of Interest</option>
+<option>CRM Development</option>
+<option>ERP Development</option>
+<option>Web Development</option>
+<option>Mobile App Development</option>
+
+</select>
+
+
+<textarea
+className="fi fi-textarea"
+placeholder="Project Description"
+/>
+
+
+<select className="fi fi-select">
+
+<option>Preferred Timeline</option>
+<option>Immediately</option>
+<option>1-3 Months</option>
+<option>3-6 Months</option>
+
+</select>
+
+
+<button className="btn-teal w-full">
+Submit
+</button>
+
+<p className="text-dim text-sm text-center">
+Response within 24 hours • No commitment required
+</p>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+
+{/* FAQ */}
+
+<section className="sec-grad-n1n2-n1">
+
+<div className="sec-content-sm">
+
+<div className="sec-header">
+
+<h2 className="section-h2">
+Before You Reach Out — Common Questions
+</h2>
+
+</div>
+
+<div className="space-y-4">
+
+{faqs.map((faq,i)=>(
+<div key={i} className="faq-item">
+
+<button
+onClick={()=>toggleFAQ(i)}
+className="faq-item__q w-full text-left">
+
+<span className="faq-item__text">
+{faq.q}
+</span>
+
+<span className="faq-item__icon">
+{openIndex===i?"−":"+"}
+</span>
+
+</button>
+
+{openIndex===i &&(
+<div className="faq-item__a">
+<p>{faq.a}</p>
+</div>
+)}
+
+</div>
+))}
+
+</div>
+
+</div>
+
+</section>
+
+
+</>
+
+);
 }
