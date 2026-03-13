@@ -1,59 +1,70 @@
 "use client";
+import Link from "next/link";
 import Image from "next/image";
-import { T } from "./tokens";
-import Reveal from "./Reveal";
 
-const NAV_LINKS = [
-  { label: "Home",            href: "#" },
-  { label: "Services",        href: "#services" },
-  { label: "Why Us",          href: "#why-us" },
-  { label: "Industries",      href: "#industries" },
-  { label: "Process",         href: "#process" },
-  { label: "Pricing",         href: "#pricing" },
-  { label: "Blog",            href: "#blog" },
-  { label: "Contact",         href: "#contact" },
+// ─── Design tokens ────────────────────────────────────────────────────────────
+const T = {
+  teal: "#00C9A7",
+  tealDark: "#00a07a",
+  navy0: "#010812",
+  navy1: "#030B18",
+  navy2: "#061425",
+};
+
+// ─── Data ─────────────────────────────────────────────────────────────────────
+const SERVICES = [
+  { label: "CRM Development", href: "/crm-development" },
+  { label: "ERP Development", href: "/erp-development" },
+  { label: "Web Development", href: "/web-development" },
+  { label: "Mobile App Development", href: "/mobile-app-development" },
+  { label: "Salesforce CRM", href: "/salesforce-crm" },
+  { label: "Marketing Automation", href: "/marketing-automation" },
+  { label: "SEO & Digital Marketing", href: "/seo-digital-marketing" },
+  { label: "Digital Transformation", href: "/digital-transformation" },
+  { label: "Hire CRM Developers", href: "/hire-crm-developers" },
 ];
 
-const SERVICES = [
-  "Custom CRM Development",
-  "ERP Integration",
-  "Workflow Automation",
-  "AI & Forecasting Layers",
-  "Mobile App Development",
-  "GDPR / PIPEDA / CCPA Compliance",
-  "Post-Launch Support & Retainers",
+const INDUSTRIES = [
+  { label: "Healthcare", href: "/industries/healthcare" },
+  { label: "Real Estate", href: "/industries/real-estate" },
+  { label: "E-Commerce", href: "/industries/ecommerce" },
+  { label: "Manufacturing", href: "/industries/manufacturing" },
+  { label: "Professional Services", href: "/industries/professional-services" },
+  { label: "Education", href: "/industries/education" },
+  { label: "Logistics", href: "/industries/logistics" },
+  { label: "Finance", href: "/industries/finance" },
+  { label: "Hospitality", href: "/industries/hospitality" },
+];
+
+const COMPANY = [
+  { label: "About NNC Digital", href: "/about-us" },
+  { label: "About Nakshatra Namaha Creations", href: "https://www.nakshatranamahacreations.com", external: true },
+  { label: "Case Studies", href: "/case-studies" },
+  { label: "Blog", href: "/blog" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Careers", href: "/careers" },
+  { label: "Partner With Us", href: "/partner" },
 ];
 
 const SOCIALS = [
-  { label: "LinkedIn",  href: "#", icon: (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
-    </svg>
-  )},
-  { label: "Twitter/X", href: "#", icon: (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-    </svg>
-  )},
-  { label: "Instagram", href: "#", icon: (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <circle cx="12" cy="12" r="4"/>
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-    </svg>
-  )},
-  { label: "Facebook",  href: "#", icon: (
-    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-    </svg>
-  )},
+  { label: "LinkedIn", href: "https://linkedin.com/company/nncdigital", icon: "in" },
+  { label: "Twitter", href: "https://twitter.com/nncdigital", icon: "𝕏" },
+  { label: "Instagram", href: "https://instagram.com/nncdigital", icon: "📷" },
+  { label: "YouTube", href: "https://youtube.com/@nncdigital", icon: "▶" },
 ];
 
-const REGIONS = [
-  { flag: "🇺🇸", label: "USA",    value: "+1 631-XXX-XXXX" },
-  { flag: "🇨🇦", label: "Canada", value: "+1 647-XXX-XXXX" },
-  { flag: "🇬🇧", label: "UK",     value: "+44 20-XXX-XXXX" },
+const CONTACTS = [
+  { flag: "🇨🇦", country: "Canada", phone: "+1 647-XXX-XXXX" },
+  { flag: "🇺🇸", country: "USA", phone: "+1 631-XXX-XXXX" },
+  { flag: "🇬🇧", country: "UK", phone: "+44 20-XXXX-XXXX" },
+  { flag: "🇮🇳", country: "India", phone: "+91 9900566466" },
+];
+
+const TRUST_BADGES = [
+  "GDPR Compliant",
+  "PIPEDA Compliant",
+  "CCPA Ready",
+  "ISO Certified"
 ];
 
 export default function Footer() {
@@ -62,48 +73,114 @@ export default function Footer() {
   return (
     <footer style={{
       background: `linear-gradient(180deg, ${T.navy0} 0%, #020810 100%)`,
-      fontFamily: "'Outfit', sans-serif",
+      fontFamily: "'Poppins', sans-serif",
       borderTop: "1px solid rgba(255,255,255,.06)",
       position: "relative",
       overflow: "hidden",
     }}>
       <style>{`
         .footer-link {
-          color: rgba(255,255,255,.45);
+          color: rgba(255,255,255,.6);
           text-decoration: none;
-          font-size: 13.5px;
-          font-weight: 500;
-          transition: color .2s ease;
-          line-height: 1;
+          font-size: 14px;
+          font-weight: 400;
+          transition: color .2s ease, transform .2s ease;
+          line-height: 1.8;
+          display: inline-block;
         }
-        .footer-link:hover { color: #00C9A7; }
+        .footer-link:hover { 
+          color: ${T.teal}; 
+          transform: translateX(4px);
+        }
+        .footer-heading {
+          color: ${T.teal};
+          font-size: 14px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
         .social-btn {
-          width: 40px; height: 40px; border-radius: 10px;
+          width: 38px; height: 38px; border-radius: 10px;
           display: flex; align-items: center; justify-content: center;
           background: rgba(255,255,255,.05);
           border: 1px solid rgba(255,255,255,.09);
-          color: rgba(255,255,255,.5);
+          color: rgba(255,255,255,.7);
           cursor: pointer;
-          transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+          transition: all 0.2s ease;
           text-decoration: none;
+          font-size: 18px;
         }
         .social-btn:hover {
-          background: rgba(0,201,167,.12);
-          border-color: rgba(0,201,167,.4);
-          color: #00C9A7;
-          transform: translateY(-2px);
+          background: ${T.teal}20;
+          border-color: ${T.teal}60;
+          color: ${T.teal};
+          transform: translateY(-3px);
         }
         .footer-bottom-link {
-          color: rgba(255,255,255,.3);
-          font-size: 12.5px;
+          color: rgba(255,255,255,.4);
+          font-size: 13px;
           text-decoration: none;
           transition: color .2s ease;
         }
-        .footer-bottom-link:hover { color: rgba(255,255,255,.7); }
-        .newsletter-inp:focus { border-color: rgba(0,201,167,.6) !important; outline: none; }
+        .footer-bottom-link:hover { color: ${T.teal}; }
+        .badge {
+          font-size: 11px;
+          font-weight: 600;
+          padding: 5px 12px;
+          border-radius: 100px;
+          background: rgba(0,201,167,0.08);
+          border: 1px solid rgba(0,201,167,0.2);
+          color: ${T.teal};
+          display: inline-flex;
+          align-items: center;
+          white-space: nowrap;
+        }
+        .newsletter-input {
+          width: 100%;
+          padding: 12px 16px;
+          border-radius: 10px;
+          background: rgba(255,255,255,0.05);
+          border: 1px solid rgba(255,255,255,0.1);
+          color: #fff;
+          font-size: 14px;
+          font-family: 'Poppins', sans-serif;
+          outline: none;
+          transition: all 0.2s ease;
+        }
+        .newsletter-input:focus {
+          border-color: ${T.teal};
+          box-shadow: 0 0 0 2px ${T.teal}30;
+        }
+        .book-btn {
+          width: 100%;
+          padding: 12px;
+          border-radius: 10px;
+          border: none;
+          background: linear-gradient(135deg, ${T.teal}, ${T.tealDark});
+          color: #000;
+          font-weight: 700;
+          font-size: 14px;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          margin-top: 12px;
+        }
+        .book-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px ${T.teal}40;
+        }
         @keyframes footerGlow {
           0%,100% { opacity: .03; }
           50%      { opacity: .07; }
+        }
+        @media (max-width: 1024px) {
+          .footer-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+          .footer-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 480px) {
+          .footer-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -122,224 +199,262 @@ export default function Footer() {
         animationDelay: "2s",
       }} />
 
-      {/* Main body */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 48px 56px", position: "relative", zIndex: 1 }}>
-        <div style={{
+      {/* Main Footer - 5 Columns */}
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "70px 32px 50px", position: "relative", zIndex: 1 }}>
+        <div className="footer-grid" style={{
           display: "grid",
-          gridTemplateColumns: "1.8fr 1fr 1fr 1.2fr",
-          gap: 52,
+          gridTemplateColumns: "1.2fr 1.5fr 1.2fr 1fr 1.5fr",
+          gap: 30,
         }}>
+          
+          {/* COLUMN 1: Brand */}
+          <div>
+            <Link href="/" style={{ textDecoration: "none" }}>
+              <Image
+                src="/NNCLOGO.jpg"
+                alt="NNC Digital Solutions"
+                width={160}
+                height={60}
+                style={{ 
+                  objectFit: "contain",
+                  borderRadius: "10px",
+                  marginBottom: "16px"
+                }}
+                priority={false}
+              />
+            </Link>
+            <p style={{
+              color: "rgba(255,255,255,0.5)",
+              fontSize: "13px",
+              lineHeight: 1.7,
+              marginBottom: "16px"
+            }}>
+              A subsidiary of <strong style={{ color: T.teal }}>Nakshatra Namaha Creations Pvt. Ltd.</strong>
+            </p>
+            
+            {/* Trust Badges */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "20px" }}>
+              {TRUST_BADGES.map(badge => (
+                <span key={badge} className="badge">{badge}</span>
+              ))}
+            </div>
 
-          {/* Col 1 — Brand */}
-          <Reveal>
-            <div>
+            {/* Social Links */}
+            <div style={{ display: "flex", gap: "8px" }}>
+              {SOCIALS.map(s => (
+                <a 
+                  key={s.label} 
+                  href={s.href} 
+                  className="social-btn" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+          </div>
 
-              {/* Parent company label */}
-              <p style={{
-                fontSize: 10, fontWeight: 700, letterSpacing: "0.14em",
-                textTransform: "uppercase", color: "rgba(255,255,255,.3)",
-                marginBottom: 10, margin: 0,
-              }}> Nakshatra Namaha Creations Company</p>
+          {/* COLUMN 2: Services */}
+          <div>
+            <h3 className="footer-heading">Services</h3>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {SERVICES.map(s => (
+                <Link key={s.href} href={s.href} className="footer-link" style={{ marginBottom: "10px" }}>
+                  {s.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-              {/* Logo image — prominent, below the name */}
-              <div style={{
-                width: 250,
-                height: 100,
-                borderRadius: 20,
-                overflow: "hidden",
-                border: `1px solid rgba(0,201,167,.25)`,
-                boxShadow: `0 0 32px rgba(0,201,167,.15), 0 8px 32px rgba(0,0,0,.5)`,
-                position: "relative",
-                marginTop: 16,
-                marginBottom: 24,
-              }}>
-                <Image
-                  src="/NNCLOGO.jpg"
-                  alt="NNC Digital Solutions"
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
+          {/* COLUMN 3: Industries */}
+          <div>
+            <h3 className="footer-heading">Industries</h3>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {INDUSTRIES.map(i => (
+                <Link key={i.href} href={i.href} className="footer-link" style={{ marginBottom: "10px" }}>
+                  {i.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-              <p style={{
-                color: "rgba(255,255,255,.38)", fontSize: 13.5, lineHeight: 1.85,
-                marginBottom: 28, maxWidth: 300,
-              }}>
-                We build custom CRM, ERP, and automation software that fits your business — not the other way around. Serving clients across Canada, USA, and UK.
-              </p>
+          {/* COLUMN 4: Company */}
+          <div>
+            <h3 className="footer-heading">Company</h3>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {COMPANY.map(c => (
+                c.external ? (
+                  <a 
+                    key={c.label} 
+                    href={c.href} 
+                    className="footer-link" 
+                    style={{ marginBottom: "10px" }}
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                  >
+                    {c.label} <span style={{ fontSize: "12px", opacity: 0.6 }}>↗</span>
+                  </a>
+                ) : (
+                  <Link key={c.href} href={c.href} className="footer-link" style={{ marginBottom: "10px" }}>
+                    {c.label}
+                  </Link>
+                )
+              ))}
+            </div>
+          </div>
 
-              {/* Region contacts */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 28 }}>
-                {REGIONS.map(r => (
-                  <div key={r.label} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span style={{ fontSize: 15 }}>{r.flag}</span>
-                    <span style={{
-                      fontSize: 10.5, fontWeight: 700, color: "rgba(255,255,255,.28)",
-                      textTransform: "uppercase", letterSpacing: "0.08em", width: 48,
-                    }}>{r.label}</span>
-                    <span style={{ fontSize: 13, fontWeight: 600, color: T.teal }}>{r.value}</span>
-                  </div>
-                ))}
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                  <span style={{ fontSize: 15 }}>✉️</span>
-                  <span style={{
-                    fontSize: 10.5, fontWeight: 700, color: "rgba(255,255,255,.28)",
-                    textTransform: "uppercase", letterSpacing: "0.08em", width: 48,
-                  }}>Email</span>
-                  <a href="mailto:hello@nncdigital.com" className="footer-link"
-                    style={{ fontSize: 13, fontWeight: 600, color: T.teal }}>
-                    hello@nncdigital.com
+          {/* COLUMN 5: Contact */}
+          <div>
+            <h3 className="footer-heading">Contact</h3>
+            
+            {/* Phone numbers */}
+            <div style={{ marginBottom: "16px" }}>
+              {CONTACTS.map(c => (
+                <div key={c.country} style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: "8px",
+                  marginBottom: "10px"
+                }}>
+                  <span style={{ fontSize: "16px" }}>{c.flag}</span>
+                  <span style={{ 
+                    fontSize: "11px", 
+                    fontWeight: 600,
+                    color: "rgba(255,255,255,0.4)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    width: "45px"
+                  }}>
+                    {c.country}:
+                  </span>
+                  <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} style={{
+                    color: T.teal,
+                    fontSize: "13px",
+                    fontWeight: 600,
+                    textDecoration: "none"
+                  }}>
+                    {c.phone}
                   </a>
                 </div>
-              </div>
-
-              {/* Socials */}
-              <div style={{ display: "flex", gap: 10 }}>
-                {SOCIALS.map(s => (
-                  <a key={s.label} href={s.href} className="social-btn" aria-label={s.label}>
-                    {s.icon}
-                  </a>
-                ))}
-              </div>
+              ))}
             </div>
-          </Reveal>
 
-          {/* Col 2 — Navigation */}
-          <Reveal delay={0.08}>
-            <div>
-              <p style={{
-                fontSize: 11, fontWeight: 700, letterSpacing: "0.12em",
-                textTransform: "uppercase", color: T.teal, marginBottom: 22,
-              }}>Navigation</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
-                {NAV_LINKS.map(l => (
-                  <a key={l.label} href={l.href} className="footer-link">{l.label}</a>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Col 3 — Services */}
-          <Reveal delay={0.14}>
-            <div>
-              <p style={{
-                fontSize: 11, fontWeight: 700, letterSpacing: "0.12em",
-                textTransform: "uppercase", color: T.teal, marginBottom: 22,
-              }}>Services</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 15 }}>
-                {SERVICES.map(s => (
-                  <a key={s} href="#services" className="footer-link">{s}</a>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Col 4 — Newsletter */}
-          <Reveal delay={0.2}>
-            <div>
-              <p style={{
-                fontSize: 11, fontWeight: 700, letterSpacing: "0.12em",
-                textTransform: "uppercase", color: T.teal, marginBottom: 22,
-              }}>Stay in the Loop</p>
-              <p style={{
-                color: "rgba(255,255,255,.38)", fontSize: 13.5, lineHeight: 1.8, marginBottom: 20,
+            {/* Email */}
+            <div style={{ 
+              display: "flex", 
+              alignItems: "center", 
+              gap: "8px",
+              marginBottom: "20px"
+            }}>
+              <span style={{ fontSize: "16px" }}>✉️</span>
+              <a href="mailto:hello@nncdigital.com" style={{
+                color: T.teal,
+                fontSize: "13px",
+                fontWeight: 600,
+                textDecoration: "none"
               }}>
-                Get monthly insights on CRM trends, automation, and digital growth straight to your inbox.
-              </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                hello@nncdigital.com
+              </a>
+            </div>
+
+            {/* Book a Free Call Button */}
+            <Link href="/contact">
+              <button className="book-btn">
+                Book a Free Call →
+              </button>
+            </Link>
+
+            {/* Newsletter */}
+            <div style={{ marginTop: "20px" }}>
+              <h4 style={{
+                color: "#fff",
+                fontSize: "13px",
+                fontWeight: 600,
+                marginBottom: "10px"
+              }}>
+                Newsletter
+              </h4>
+              <div style={{ display: "flex", gap: "8px" }}>
                 <input
                   type="email"
-                  placeholder="Your business email"
-                  className="newsletter-inp"
-                  style={{
-                    width: "100%", borderRadius: 8, padding: "12px 14px",
-                    fontSize: 13, fontFamily: "'Outfit',sans-serif",
-                    background: "rgba(255,255,255,.05)",
-                    border: "1px solid rgba(255,255,255,.1)",
-                    color: "#fff", outline: "none",
-                    boxSizing: "border-box" as const,
-                    transition: "border-color .2s ease",
-                  }}
+                  placeholder="Your email"
+                  className="newsletter-input"
                 />
-                <button
-                  style={{
-                    width: "100%", padding: "12px 0", borderRadius: 8, border: "none",
-                    background: `linear-gradient(135deg,${T.teal},${T.tealDark})`,
-                    color: "#000", fontWeight: 700, fontSize: 13.5,
-                    fontFamily: "'Outfit',sans-serif", cursor: "pointer",
-                    transition: "opacity .2s ease, transform .2s ease",
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.opacity = "0.88";
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.opacity = "1";
-                    e.currentTarget.style.transform = "translateY(0)";
-                  }}
-                >
-                  Subscribe →
+                <button style={{
+                  padding: "0 16px",
+                  borderRadius: "10px",
+                  border: "none",
+                  background: T.teal,
+                  color: "#000",
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap"
+                }}>
+                  Subscribe
                 </button>
               </div>
-
-              {/* Compliance badges */}
-              <div style={{ marginTop: 28, display: "flex", flexWrap: "wrap" as const, gap: 8 }}>
-                {["GDPR Ready", "PIPEDA Compliant", "CCPA Compliant"].map(badge => (
-                  <span key={badge} style={{
-                    fontSize: 10.5, fontWeight: 700, color: T.teal,
-                    background: "rgba(0,201,167,.07)",
-                    border: "1px solid rgba(0,201,167,.2)",
-                    padding: "5px 11px", borderRadius: 20,
-                    letterSpacing: "0.06em",
-                  }}>{badge}</span>
-                ))}
-              </div>
-
-              {/* Trust block */}
-              <div style={{
-                marginTop: 24, padding: "14px 16px", borderRadius: 12,
-                background: "rgba(255,255,255,.03)",
-                border: "1px solid rgba(255,255,255,.07)",
-                display: "flex", alignItems: "center", gap: 10,
-              }}>
-                <span style={{ fontSize: 22 }}>🏆</span>
-                <p style={{
-                  fontSize: 12, color: "rgba(255,255,255,.4)",
-                  lineHeight: 1.5, margin: 0,
-                }}>
-                  <span style={{ color: "rgba(255,255,255,.75)", fontWeight: 700 }}>Fixed-price delivery.</span>{" "}
-                  No hourly billing surprises. Ever.
-                </p>
-              </div>
             </div>
-          </Reveal>
-
+          </div>
         </div>
       </div>
 
       {/* Divider */}
-      <div style={{ height: 1, background: "rgba(255,255,255,.06)", margin: "0 48px" }} />
+      <div style={{ height: "1px", background: "rgba(255,255,255,.06)", margin: "0 32px" }} />
 
-      {/* Bottom bar */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "22px 48px", position: "relative", zIndex: 1 }}>
+      {/* Footer Bottom Bar */}
+      <div style={{ 
+        maxWidth: 1280, 
+        margin: "0 auto", 
+        padding: "24px 32px",
+        position: "relative",
+        zIndex: 1
+      }}>
         <div style={{
-          display: "flex", alignItems: "center",
-          justifyContent: "space-between", flexWrap: "wrap" as const, gap: 12,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          gap: "16px"
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            
-            <p style={{ fontSize: 12.5, color: "rgba(255,255,255,.22)", margin: 0 }}>
-              © {year} NNC Digital Solutions · A Nakshatra Namaha Creations Company · All rights reserved.
-            </p>
+          {/* Copyright */}
+          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
+            © {year} NNC Digital Solutions. All rights reserved. | A{" "}
+            <a 
+              href="https://www.nakshatranamahacreations.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: T.teal, textDecoration: "none" }}
+            >
+              Nakshatra Namaha Creations Pvt. Ltd.
+            </a> Company
           </div>
-          <div style={{ display: "flex", gap: 24 }}>
-            <a href="#" className="footer-bottom-link">Privacy Policy</a>
-            <a href="#" className="footer-bottom-link">Terms of Service</a>
-            <a href="#" className="footer-bottom-link">Cookie Policy</a>
+
+          {/* Legal Links */}
+          <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
+            <Link href="/privacy" className="footer-bottom-link">Privacy Policy</Link>
+            <Link href="/terms" className="footer-bottom-link">Terms of Service</Link>
+            <Link href="/cookies" className="footer-bottom-link">Cookie Policy</Link>
+            <Link href="/sitemap" className="footer-bottom-link">Sitemap</Link>
           </div>
         </div>
-      </div>
 
+        {/* Serving regions */}
+        <div style={{
+          marginTop: "16px",
+          fontSize: "12px",
+          color: "rgba(255,255,255,0.3)",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          flexWrap: "wrap"
+        }}>
+          <span>🌍</span>
+          <span>Serving businesses in Canada, United States, United Kingdom, UAE & Australia.</span>
+        </div>
+      </div>
     </footer>
   );
-}
+} 
