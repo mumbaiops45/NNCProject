@@ -353,10 +353,43 @@ export default function SalesforcePage() {
           <div style={{ overflow: "hidden" }}>
             <div className="cl-track">
               {[...LOGOS, ...LOGOS].map((f, i) => (
-                <div key={i} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: 60, padding: "0 8px", opacity: .85, transition: "opacity .3s,transform .3s", filter: "grayscale(100%)" }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.opacity = "1"; el.style.transform = "scale(1.08)"; el.style.filter = "grayscale(0%)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.opacity = ".85"; el.style.transform = ""; el.style.filter = "grayscale(100%)"; }}>
-                  <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: 48, width: "auto", maxWidth: 140, objectFit: "contain" }} onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+                <div
+                  key={i}
+                  style={{
+                    flexShrink: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 70,
+                    padding: "10px 18px",
+                    background: "#fff",
+                    borderRadius: 10,
+                    margin: "0 10px",
+                    boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                    opacity: .9,
+                    transition: "transform .3s, box-shadow .3s"
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.transform = "scale(1.08)"
+                    el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.transform = ""
+                    el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"
+                  }}
+                >
+                  <img
+                    src={`/${f}`}
+                    alt={`Client ${i + 1}`}
+                    style={{
+                      height: 40,
+                      width: "auto",
+                      maxWidth: 120,
+                      objectFit: "contain"
+                    }}
+                  />
                 </div>
               ))}
             </div>
@@ -488,10 +521,11 @@ export default function SalesforcePage() {
         <section className="sec sec-grad-up">
           <div className="sec-content">
             <SectionHeader badge="AI-Powered" title={<>Leverage <GradText>AI-Powered Salesforce</GradText> Solutions</>} sub="Einstein AI and machine learning capabilities built into your Salesforce implementation." narrow />
-            <div className="ai-feat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, marginTop: 40 }}>
+            <div className="ai-feat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20, marginTop: 40, justifyContent: "center" }}>
               {AI_FEATS.map((f, i) => (
                 <div key={i} style={{ background: "rgba(0,161,224,.05)", border: "1px solid rgba(0,161,224,.15)", borderRadius: 16, padding: "28px 20px", textAlign: "center" }}>
-                  <div style={{ fontSize: 36, marginBottom: 16 }}>{f.icon}</div>
+                  <div style={{ fontSize: 36, marginBottom: 16 }}>
+                    {f.icon}</div>
                   <h3 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 10 }}>{f.title}</h3>
                   <p style={{ color: "rgba(255,255,255,.52)", fontSize: 13, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
                 </div>
@@ -502,7 +536,9 @@ export default function SalesforcePage() {
 
         {/* ══ M9 — FULL-WIDTH CTA BANNER ════════════════════════════════════════════ */}
         <section style={{ position: "relative", overflow: "hidden" }}>
-          <div style={{ background: "linear-gradient(135deg,#0066b3 0%,#0088cc 35%,#00A1E0 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: "88px 48px", textAlign: "center", position: "relative" }}>
+          <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: "88px 48px", textAlign: "center", position: "relative" }}>
+
+            {/* <div style={{ background: "linear-gradient(135deg,#0066b3 0%,#0088cc 35%,#00A1E0 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: "88px 48px", textAlign: "center", position: "relative" }}> */}
             <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 65%)", pointerEvents: "none" }} />
             <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 65%)", pointerEvents: "none" }} />
             <div style={{ position: "relative", zIndex: 2, maxWidth: 760, margin: "0 auto" }}>

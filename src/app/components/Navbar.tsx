@@ -1178,14 +1178,14 @@ const COL_BUILD = [
 const COL_AUTOMATE = [
   { label: "Marketing Automation",   href: "/marketing-automation",   icon: "🤖" },
   { label: "SEO & Digital Marketing",href: "/seo-digital-marketing",  icon: "📈" },
-  { label: "Funnel Engineering",     href: "/funnel-engineering",     icon: "🔻" },
-  { label: "WhatsApp Automation",    href: "/whatsapp-automation",    icon: "💬" },
-  { label: "Analytics & Reporting",  href: "/analytics-reporting",    icon: "📊" },
+  // { label: "Funnel Engineering",     href: "/funnel-engineering",     icon: "🔻" },
+  // { label: "WhatsApp Automation",    href: "/whatsapp-automation",    icon: "💬" },
+  // { label: "Analytics & Reporting",  href: "/analytics-reporting",    icon: "📊" },
 ];
 
 const COL_SCALE = [
   { label: "Digital Transformation", href: "/digital-transformation", icon: "🔄" },
-  { label: "IT Consulting",          href: "/it-consulting",          icon: "💡" },
+  // { label: "IT Consulting",          href: "/it-consulting",          icon: "💡" },
   { label: "Hire CRM Developers",    href: "/hire-crm-developers",    icon: "👥" },
   { label: "Pricing",                href: "/pricing",                icon: "💎" },
 ];
@@ -1193,15 +1193,15 @@ const COL_SCALE = [
 const ALL_SOL_HREFS = [...COL_BUILD, ...COL_AUTOMATE, ...COL_SCALE].map(x => x.href);
 
 const INDUSTRIES = [
-  { label: "Healthcare",            href: "/industries/healthcare",            icon: "🏥" },
-  { label: "Real Estate",           href: "/industries/real-estate",           icon: "🏠" },
-  { label: "E-Commerce",            href: "/industries/ecommerce",             icon: "🛒" },
-  { label: "Manufacturing",         href: "/industries/manufacturing",         icon: "🏭" },
-  { label: "Professional Services", href: "/industries/professional-services", icon: "💼" },
-  { label: "Education",             href: "/industries/education",             icon: "🎓" },
-  { label: "Logistics",             href: "/industries/logistics",             icon: "🚚" },
-  { label: "Finance",               href: "/industries/finance",               icon: "🏦" },
-  { label: "Hospitality",           href: "/industries/hospitality",           icon: "🏨" },
+  { label: "Healthcare",            href: "/healthcare",            icon: "🏥" },
+  { label: "Real Estate",           href: "/real-estate",           icon: "🏠" },
+  { label: "E-Commerce",            href: "/ecommerce",             icon: "🛒" },
+  { label: "Manufacturing",         href: "/manufacturing",         icon: "🏭" },
+  { label: "Professional Services", href: "/professional-services", icon: "💼" },
+  // { label: "Education",             href: "/industries/education",             icon: "🎓" },
+  // { label: "Logistics",             href: "/industries/logistics",             icon: "🚚" },
+  // { label: "Finance",               href: "/industries/finance",               icon: "🏦" },
+  // { label: "Hospitality",           href: "/industries/hospitality",           icon: "🏨" },
 ];
 
 const NAV_LINKS = [

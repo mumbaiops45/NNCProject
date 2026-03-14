@@ -347,9 +347,9 @@ export default function HireCRMDevelopersPage() {
       {/* ══════════════════════════════════════════════════
     M2 — CLIENT LOGOS
 ══════════════════════════════════════════════════ */}
-      <section style={{ padding: "60px 0", background: N0, overflow: "hidden", borderTop: `1px solid rgba(0,201,167,.1)`, borderBottom: `1px solid rgba(0,201,167,.1)` }}>
+      <section className="sec-dark" style={{ padding: "60px 0", overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
         <div style={{ textAlign: "center", marginBottom: 40, padding: "0 24px" }}>
-          <p style={{ fontWeight: 600, fontSize: 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase" as const, marginBottom: 12 }}>Our Happy Clients</p>
+          <p style={{ fontWeight: 600, fontSize: 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
           <h2 style={{ fontSize: "clamp(20px,2.6vw,32px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
             Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
           </h2>
@@ -357,11 +357,43 @@ export default function HireCRMDevelopersPage() {
         <div style={{ overflow: "hidden" }}>
           <div className="cl-track">
             {[...LOGOS, ...LOGOS].map((f, i) => (
-              <div key={i} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: 60, padding: "0 8px", opacity: .85, transition: "opacity .3s,transform .3s", filter: "grayscale(100%)" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.opacity = "1"; (e.currentTarget as HTMLElement).style.transform = "scale(1.08)"; (e.currentTarget as HTMLElement).style.filter = "grayscale(0%)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.opacity = ".85"; (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.filter = "grayscale(100%)"; }}
+              <div
+                key={i}
+                style={{
+                  flexShrink: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: 70,
+                  padding: "10px 18px",
+                  background: "#fff",
+                  borderRadius: 10,
+                  margin: "0 10px",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                  opacity: .9,
+                  transition: "transform .3s, box-shadow .3s"
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.transform = "scale(1.08)"
+                  el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.transform = ""
+                  el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"
+                }}
               >
-                <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: 48, width: "auto", maxWidth: 140, objectFit: "contain" as const }} onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+                <img
+                  src={`/${f}`}
+                  alt={`Client ${i + 1}`}
+                  style={{
+                    height: 40,
+                    width: "auto",
+                    maxWidth: 120,
+                    objectFit: "contain"
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -541,7 +573,16 @@ export default function HireCRMDevelopersPage() {
       <section style={{ padding: "80px 48px", background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", top: "0%", left: "50%", transform: "translateX(-50%)", width: 700, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ marginBottom: 52, maxWidth: 620 }}>
+          {/* <div style={{ marginBottom: 52, maxWidth: 620 }}> */}
+          <div
+            style={{
+              marginBottom: 52,
+              maxWidth: 620,
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center"
+            }}
+          >
             <SectionBadge label="AI-Powered" />
             <SectionH2>Leverage <GradText>AI-Powered CRM</GradText> Development</SectionH2>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8 }}>Our developers build AI capabilities directly into your CRM — predictive analytics, automation, and intelligent insights.</p>

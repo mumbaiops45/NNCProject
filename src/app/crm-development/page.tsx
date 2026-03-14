@@ -378,10 +378,43 @@ export default function CRMHero() {
           <div style={{ overflow: "hidden" }}>
             <div className="cl-track">
               {[...LOGOS, ...LOGOS].map((f, i) => (
-                <div key={i} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: 60, padding: "0 8px", opacity: .85, transition: "opacity .3s,transform .3s" }}
-                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.opacity = "1"; el.style.transform = "scale(1.08)"; }}
-                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.opacity = ".85"; el.style.transform = ""; }}>
-                  <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: 48, width: "auto", maxWidth: 140, objectFit: "contain" }} onError={e => { (e.currentTarget as HTMLImageElement).style.display = "none"; }} />
+                <div
+                  key={i}
+                  style={{
+                    flexShrink: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 70,
+                    padding: "10px 18px",
+                    background: "#fff",
+                    borderRadius: 10,
+                    margin: "0 10px",
+                    boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                    opacity: .9,
+                    transition: "transform .3s, box-shadow .3s"
+                  }}
+                  onMouseEnter={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.transform = "scale(1.08)"
+                    el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"
+                  }}
+                  onMouseLeave={e => {
+                    const el = e.currentTarget as HTMLElement
+                    el.style.transform = ""
+                    el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"
+                  }}
+                >
+                  <img
+                    src={`/${f}`}
+                    alt={`Client ${i + 1}`}
+                    style={{
+                      height: 40,
+                      width: "auto",
+                      maxWidth: 120,
+                      objectFit: "contain"
+                    }}
+                  />
                 </div>
               ))}
             </div>

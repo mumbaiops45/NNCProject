@@ -3,15 +3,15 @@ import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
-const T  = "#00C9A7";
+const T = "#00C9A7";
 const TD = "#00a07a";
 const N0 = "#010812";
 const N1 = "#030B18";
 const N2 = "#061425";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const LOGOS = ["clients1.png","clients2.png","clients3.png","clients4.png","clients5.png",
-  "clients6.png","clients7.png","clients8.png","clients9.png","clients10.png","clients11.png"];
+const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png"];
 
 const SUCCESS_STORIES = [
   {
@@ -137,73 +137,81 @@ const DIAL_CODES = [{ code: "+1", flag: "🇨🇦" }, { code: "+1", flag: "🇺�
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Particles() {
   const ref = useRef<HTMLCanvasElement>(null);
-  useEffect(()=>{
-    const c=ref.current; if(!c)return;
-    const ctx=c.getContext("2d")!;
-    let W=c.width=c.offsetWidth, H=c.height=c.offsetHeight;
-    const pts=Array.from({length:50},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,r:Math.random()*1.4+.3,a:Math.random()*.38+.07}));
-    let raf:number;
-    const draw=()=>{
-      ctx.clearRect(0,0,W,H);
-      pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(0,201,167,${p.a})`;ctx.fill();});
-      for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++){
-        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
-        if(d<90){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle=`rgba(0,201,167,${.06*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke();}}
-      raf=requestAnimationFrame(draw);};
+  useEffect(() => {
+    const c = ref.current; if (!c) return;
+    const ctx = c.getContext("2d")!;
+    let W = c.width = c.offsetWidth, H = c.height = c.offsetHeight;
+    const pts = Array.from({ length: 50 }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22, r: Math.random() * 1.4 + .3, a: Math.random() * .38 + .07 }));
+    let raf: number;
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy; if (p.x < 0) p.x = W; if (p.x > W) p.x = 0; if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(0,201,167,${p.a})`; ctx.fill();
+      });
+      for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 90) {
+          ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.strokeStyle = `rgba(0,201,167,${.06 * (1 - d / 90)})`; ctx.lineWidth = .5; ctx.stroke();
+        }
+      }
+      raf = requestAnimationFrame(draw);
+    };
     draw();
-    const rz=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;};
-    window.addEventListener("resize",rz);
-    return()=>{cancelAnimationFrame(raf);window.removeEventListener("resize",rz);};
-  },[]);
-  return <canvas ref={ref} style={{position:"absolute",inset:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:0}}/>;
+    const rz = () => { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; };
+    window.addEventListener("resize", rz);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("resize", rz); };
+  }, []);
+  return <canvas ref={ref} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 0 }} />;
 }
 
-function Counter({to,sfx=""}:{to:number;sfx?:string}){
-  const ref=useRef<HTMLSpanElement>(null);
-  const [v,setV]=useState(0);
-  const started=useRef(false);
-  useEffect(()=>{
-    const el=ref.current; if(!el)return;
-    const obs=new IntersectionObserver(([e])=>{
-      if(e.isIntersecting&&!started.current){started.current=true;
-        let step=0;const t=setInterval(()=>{step++;const ease=1-Math.pow(1-step/70,3);setV(Math.round(ease*to));if(step>=70){setV(to);clearInterval(t);}},1800/70);}
-    },{threshold:.25});
-    obs.observe(el);return()=>obs.disconnect();
-  },[to]);
+function Counter({ to, sfx = "" }: { to: number; sfx?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [v, setV] = useState(0);
+  const started = useRef(false);
+  useEffect(() => {
+    const el = ref.current; if (!el) return;
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started.current) {
+        started.current = true;
+        let step = 0; const t = setInterval(() => { step++; const ease = 1 - Math.pow(1 - step / 70, 3); setV(Math.round(ease * to)); if (step >= 70) { setV(to); clearInterval(t); } }, 1800 / 70);
+      }
+    }, { threshold: .25 });
+    obs.observe(el); return () => obs.disconnect();
+  }, [to]);
   return <span ref={ref}>{v}{sfx}</span>;
 }
 
-function SectionBadge({label}:{label:string}){
-  return(
-    <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.22)",borderRadius:100,padding:"6px 18px",marginBottom:16}}>
-      <span style={{width:6,height:6,borderRadius:"50%",background:T,display:"block",boxShadow:`0 0 8px ${T}`}}/>
-      <span style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>{label}</span>
+function SectionBadge({ label }: { label: string }) {
+  return (
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.22)", borderRadius: 100, padding: "6px 18px", marginBottom: 16 }}>
+      <span style={{ width: 6, height: 6, borderRadius: "50%", background: T, display: "block", boxShadow: `0 0 8px ${T}` }} />
+      <span style={{ color: T, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>{label}</span>
     </div>
   );
 }
 
-function SectionH2({children}:{children:React.ReactNode}){
-  return <h2 style={{fontSize:"clamp(24px,3vw,40px)",fontWeight:900,color:"#fff",letterSpacing:"-0.02em",lineHeight:1.15,marginBottom:14}}>{children}</h2>;
+function SectionH2({ children }: { children: React.ReactNode }) {
+  return <h2 style={{ fontSize: "clamp(24px,3vw,40px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: 14 }}>{children}</h2>;
 }
 
-function GradText({children}:{children:React.ReactNode}){
-  return <span style={{background:`linear-gradient(135deg,${T},#1fd1b5)`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>{children}</span>;
+function GradText({ children }: { children: React.ReactNode }) {
+  return <span style={{ background: `linear-gradient(135deg,${T},#1fd1b5)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{children}</span>;
 }
 
-function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string};open:boolean;toggle:()=>void}){
-  return(
-    <div onClick={toggle} style={{borderRadius:14,border:`1px solid ${open?"rgba(0,201,167,0.4)":"rgba(255,255,255,0.08)"}`,background:open?"rgba(0,201,167,0.06)":"rgba(255,255,255,0.02)",overflow:"hidden",cursor:"pointer",transition:"border-color .25s,background .25s"}}>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"18px 22px",gap:14}}>
-        <div style={{display:"flex",alignItems:"center",gap:14}}>
-          <div style={{width:44,height:44,borderRadius:12,flexShrink:0,background:open?"rgba(0,201,167,0.15)":"rgba(255,255,255,0.05)",border:`1px solid ${open?"rgba(0,201,167,0.3)":"rgba(255,255,255,0.1)"}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,transition:"background .25s"}}>{item.icon}</div>
-          <span style={{fontSize:15,fontWeight:700,color:open?"#fff":"rgba(255,255,255,0.72)",fontFamily:"'Poppins',sans-serif",transition:"color .2s"}}>{item.title}</span>
+function AccItem({ item, open, toggle }: { item: { icon: string; title: string; desc: string }; open: boolean; toggle: () => void }) {
+  return (
+    <div onClick={toggle} style={{ borderRadius: 14, border: `1px solid ${open ? "rgba(0,201,167,0.4)" : "rgba(255,255,255,0.08)"}`, background: open ? "rgba(0,201,167,0.06)" : "rgba(255,255,255,0.02)", overflow: "hidden", cursor: "pointer", transition: "border-color .25s,background .25s" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "18px 22px", gap: 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{ width: 44, height: 44, borderRadius: 12, flexShrink: 0, background: open ? "rgba(0,201,167,0.15)" : "rgba(255,255,255,0.05)", border: `1px solid ${open ? "rgba(0,201,167,0.3)" : "rgba(255,255,255,0.1)"}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 20, transition: "background .25s" }}>{item.icon}</div>
+          <span style={{ fontSize: 15, fontWeight: 700, color: open ? "#fff" : "rgba(255,255,255,0.72)", fontFamily: "'Poppins',sans-serif", transition: "color .2s" }}>{item.title}</span>
         </div>
-        <div style={{width:28,height:28,borderRadius:"50%",flexShrink:0,background:open?T:"rgba(255,255,255,0.07)",border:`1px solid ${open?T:"rgba(255,255,255,0.14)"}`,display:"flex",alignItems:"center",justifyContent:"center",color:open?"#000":"rgba(255,255,255,0.55)",fontSize:18,fontWeight:700,lineHeight:1,transform:open?"rotate(45deg)":"rotate(0deg)",transition:"all .25s ease"}}>+</div>
+        <div style={{ width: 28, height: 28, borderRadius: "50%", flexShrink: 0, background: open ? T : "rgba(255,255,255,0.07)", border: `1px solid ${open ? T : "rgba(255,255,255,0.14)"}`, display: "flex", alignItems: "center", justifyContent: "center", color: open ? "#000" : "rgba(255,255,255,0.55)", fontSize: 18, fontWeight: 700, lineHeight: 1, transform: open ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
       </div>
-      <div style={{maxHeight:open?220:0,overflow:"hidden",transition:"max-height .35s ease"}}>
-        <p style={{padding:"0 22px 20px 80px",color:"rgba(255,255,255,0.5)",fontSize:14,lineHeight:1.75,fontFamily:"'Poppins',sans-serif",fontWeight:400,margin:0}}>{item.desc}</p>
+      <div style={{ maxHeight: open ? 220 : 0, overflow: "hidden", transition: "max-height .35s ease" }}>
+        <p style={{ padding: "0 22px 20px 80px", color: "rgba(255,255,255,0.5)", fontSize: 14, lineHeight: 1.75, fontFamily: "'Poppins',sans-serif", fontWeight: 400, margin: 0 }}>{item.desc}</p>
       </div>
     </div>
   );
@@ -212,376 +220,418 @@ function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string}
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function SEOandDigitalMarketingPage() {
 
-  const [form,setForm]=useState({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});
-  const [submitted,setSubmitted]=useState(false);
-  const [loading,setLoading]=useState(false);
-  const setF=(k:string,v:string)=>setForm(f=>({...f,[k]:v}));
-  const handleSubmit=(e:React.FormEvent)=>{e.preventDefault();setLoading(true);setTimeout(()=>{setLoading(false);setSubmitted(true);},1200);};
+  const [form, setForm] = useState({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const setF = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
+  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setLoading(true); setTimeout(() => { setLoading(false); setSubmitted(true); }, 1200); };
 
-  const [story,setStory]=useState(0);
-  const [hireL,setHireL]=useState<number|null>(0);
-  const [hireR,setHireR]=useState<number|null>(0);
-  const [faq,setFaq]=useState<number|null>(0);
-  const [gTab,setGTab]=useState<"int"|"india">("int");
-  const [vidPlay,setVidPlay]=useState(false);
+  const [story, setStory] = useState(0);
+  const [hireL, setHireL] = useState<number | null>(0);
+  const [hireR, setHireR] = useState<number | null>(0);
+  const [faq, setFaq] = useState<number | null>(0);
+  const [gTab, setGTab] = useState<"int" | "india">("int");
+  const [vidPlay, setVidPlay] = useState(false);
 
-  const [cForm,setCForm]=useState({name:"",phone:"",dialCode:"+1",email:"",service:"",project:""});
-  const [cSubmitted,setCSubmitted]=useState(false);
-  const [cLoading,setCLoading]=useState(false);
-  const setCF=(k:string,v:string)=>setCForm(f=>({...f,[k]:v}));
-  const handleCSubmit=(e:React.FormEvent)=>{e.preventDefault();setCLoading(true);setTimeout(()=>{setCLoading(false);setCSubmitted(true);},1200);};
+  const [cForm, setCForm] = useState({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "" });
+  const [cSubmitted, setCSubmitted] = useState(false);
+  const [cLoading, setCLoading] = useState(false);
+  const setCF = (k: string, v: string) => setCForm(f => ({ ...f, [k]: v }));
+  const handleCSubmit = (e: React.FormEvent) => { e.preventDefault(); setCLoading(true); setTimeout(() => { setCLoading(false); setCSubmitted(true); }, 1200); };
 
-  const iS:React.CSSProperties={width:"100%",padding:"11px 14px",borderRadius:9,background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.14)",color:"#fff",fontSize:13.5,fontFamily:"'Poppins',sans-serif",outline:"none",boxSizing:"border-box",transition:"border-color .2s,background .2s"};
-  const iSLg:React.CSSProperties={...iS,padding:"13px 16px",fontSize:14.5};
+  const iS: React.CSSProperties = { width: "100%", padding: "11px 14px", borderRadius: 9, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.14)", color: "#fff", fontSize: 13.5, fontFamily: "'Poppins',sans-serif", outline: "none", boxSizing: "border-box", transition: "border-color .2s,background .2s" };
+  const iSLg: React.CSSProperties = { ...iS, padding: "13px 16px", fontSize: 14.5 };
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
 
-{/* ══════════════════════════════════════════════════
+      {/* ══════════════════════════════════════════════════
     M1 — HERO + INLINE LEAD FORM
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"96px 48px 80px",background:`linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`,position:"relative",overflow:"hidden",minHeight:"90vh",display:"flex",alignItems:"center"}}>
-  <Particles/>
-  <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:1,backgroundImage:`linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`,backgroundSize:"60px 60px"}}/>
-  <div style={{position:"absolute",width:650,height:650,borderRadius:"50%",background:`radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`,top:"40%",left:"-10%",transform:"translateY(-50%)",animation:"heroPulse 8s ease-in-out infinite",pointerEvents:"none",zIndex:1}}/>
-  <div style={{position:"absolute",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)",top:"10%",right:"5%",animation:"heroPulse 10s ease-in-out infinite .5s",pointerEvents:"none",zIndex:1}}/>
-  <div style={{position:"absolute",width:520,height:520,borderRadius:"50%",border:"1px dashed rgba(0,201,167,.08)",top:"50%",left:"-12%",transform:"translateY(-50%)",animation:"heroSpin 55s linear infinite",pointerEvents:"none",zIndex:1}}/>
-  <div style={{position:"absolute",left:0,right:0,height:1,background:"linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)",animation:"heroScan 7s linear infinite",pointerEvents:"none",zIndex:2}}/>
+      <section style={{ padding: "96px 48px 80px", background: `linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`, position: "relative", overflow: "hidden", minHeight: "90vh", display: "flex", alignItems: "center" }}>
+        <Particles />
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, backgroundImage: `linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`, backgroundSize: "60px 60px" }} />
+        <div style={{ position: "absolute", width: 650, height: 650, borderRadius: "50%", background: `radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`, top: "40%", left: "-10%", transform: "translateY(-50%)", animation: "heroPulse 8s ease-in-out infinite", pointerEvents: "none", zIndex: 1 }} />
+        <div style={{ position: "absolute", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)", top: "10%", right: "5%", animation: "heroPulse 10s ease-in-out infinite .5s", pointerEvents: "none", zIndex: 1 }} />
+        <div style={{ position: "absolute", width: 520, height: 520, borderRadius: "50%", border: "1px dashed rgba(0,201,167,.08)", top: "50%", left: "-12%", transform: "translateY(-50%)", animation: "heroSpin 55s linear infinite", pointerEvents: "none", zIndex: 1 }} />
+        <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)", animation: "heroScan 7s linear infinite", pointerEvents: "none", zIndex: 2 }} />
 
-  <div className="hero-layout">
-    {/* Left */}
-    <div style={{animation:"heroFadeUp .7s ease both"}}>
-      <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.25)",borderRadius:100,padding:"7px 18px",marginBottom:28,animation:"heroGlow 3s ease-in-out infinite,heroFadeUp .7s ease both"}}>
-        <span style={{width:7,height:7,borderRadius:"50%",background:T,boxShadow:`0 0 10px ${T}`,animation:"heroBlink 1.4s ease-in-out infinite"}}/>
-        <span style={{color:T,fontSize:11.5,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const}}>SEO & Digital Marketing — Canada, USA &amp; UK</span>
-      </div>
-      <h1 style={{fontSize:"clamp(28px,3.8vw,54px)",fontWeight:900,lineHeight:1.12,marginBottom:22,letterSpacing:"-0.025em",color:"#fff",animation:"heroFadeUp .7s ease .12s both"}}>
-        SEO & Digital Marketing That Drives <GradText>Qualified Traffic</GradText> and Measurable Revenue
-      </h1>
-      <p style={{color:"rgba(255,255,255,0.52)",fontSize:"clamp(14px,1.3vw,16.5px)",lineHeight:1.85,marginBottom:28,maxWidth:600,animation:"heroFadeUp .7s ease .22s both"}}>
-        Most businesses in Canada, the USA, and the UK are invisible online — not because their services aren't great, but because their digital presence hasn't been built to be found. We fix that.
-      </p>
+        <div className="hero-layout">
+          {/* Left */}
+          <div style={{ animation: "heroFadeUp .7s ease both" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.25)", borderRadius: 100, padding: "7px 18px", marginBottom: 28, animation: "heroGlow 3s ease-in-out infinite,heroFadeUp .7s ease both" }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: T, boxShadow: `0 0 10px ${T}`, animation: "heroBlink 1.4s ease-in-out infinite" }} />
+              <span style={{ color: T, fontSize: 11.5, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const }}>SEO & Digital Marketing — Canada, USA &amp; UK</span>
+            </div>
+            <h1 style={{ fontSize: "clamp(28px,3.8vw,54px)", fontWeight: 900, lineHeight: 1.12, marginBottom: 22, letterSpacing: "-0.025em", color: "#fff", animation: "heroFadeUp .7s ease .12s both" }}>
+              SEO & Digital Marketing That Drives <GradText>Qualified Traffic</GradText> and Measurable Revenue
+            </h1>
+            <p style={{ color: "rgba(255,255,255,0.52)", fontSize: "clamp(14px,1.3vw,16.5px)", lineHeight: 1.85, marginBottom: 28, maxWidth: 600, animation: "heroFadeUp .7s ease .22s both" }}>
+              Most businesses in Canada, the USA, and the UK are invisible online — not because their services aren't great, but because their digital presence hasn't been built to be found. We fix that.
+            </p>
 
-      {/* Channel pills */}
-      <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:28,animation:"heroFadeUp .7s ease .27s both"}}>
-        {[{i:"🔍",l:"SEO"},{i:"📍",l:"Local SEO"},{i:"🎯",l:"Google Ads"},{i:"📘",l:"Meta Ads"},{i:"💼",l:"LinkedIn"}].map(b=>(
-          <span key={b.l} className="platform-pill" style={{display:"inline-flex",alignItems:"center",gap:6,padding:"6px 14px",borderRadius:100,border:"1px solid rgba(0,201,167,0.25)",background:"rgba(0,201,167,0.06)",color:"rgba(255,255,255,0.8)",fontSize:12.5,fontWeight:600}}>{b.i} {b.l}</span>
-        ))}
-      </div>
+            {/* Channel pills */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 28, animation: "heroFadeUp .7s ease .27s both" }}>
+              {[{ i: "🔍", l: "SEO" }, { i: "📍", l: "Local SEO" }, { i: "🎯", l: "Google Ads" }, { i: "📘", l: "Meta Ads" }, { i: "💼", l: "LinkedIn" }].map(b => (
+                <span key={b.l} className="platform-pill" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 14px", borderRadius: 100, border: "1px solid rgba(0,201,167,0.25)", background: "rgba(0,201,167,0.06)", color: "rgba(255,255,255,0.8)", fontSize: 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
+              ))}
+            </div>
 
-      <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:36,animation:"heroFadeUp .7s ease .32s both"}}>
-        {[{i:"🔵",l:"Google Partner"},{i:"🏆",l:"ISO Certified"},{i:"🔒",l:"GDPR Compliant"},{i:"🍁",l:"PIPEDA Ready"},{i:"⭐",l:"Clutch Top Agency"}].map(b=>(
-          <span key={b.l} className="mob-badge" style={{display:"inline-flex",alignItems:"center",gap:6,padding:"6px 13px",borderRadius:100,border:"1px solid rgba(255,255,255,0.12)",background:"rgba(255,255,255,0.04)",color:"rgba(255,255,255,0.65)",fontSize:12.5,fontWeight:600,transition:"all .2s",cursor:"default"}}>{b.i} {b.l}</span>
-        ))}
-      </div>
-      <div style={{display:"flex",gap:20,flexWrap:"wrap",animation:"heroFadeUp .7s ease .36s both"}}>
-        {[{flag:"🇨🇦",label:"CA:",phone:"+1 647-XXX-XXXX"},{flag:"🇬🇧",label:"UK:",phone:"+44 20-XXXX-XXXX"}].map(p=>(
-          <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g,"")}`} className="h-teal" style={{display:"flex",alignItems:"center",gap:7,color:"rgba(255,255,255,0.5)",fontSize:13.5,fontWeight:600,textDecoration:"none",transition:"color .2s"}}>
-            <span>{p.flag}</span><span style={{color:"rgba(255,255,255,0.3)"}}>{p.label}</span><span style={{color:T}}>{p.phone}</span>
-          </a>
-        ))}
-      </div>
-    </div>
-
-    {/* Hero Form */}
-    <div style={{background:"rgba(8,20,40,0.85)",border:"1px solid rgba(0,201,167,0.22)",borderRadius:20,padding:"32px 28px",backdropFilter:"blur(16px)",boxShadow:"0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)",position:"relative",overflow:"hidden",animation:"heroFadeUp .7s ease .15s both"}}>
-      <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,transparent,${T},transparent)`}}/>
-      {submitted?(
-        <div style={{textAlign:"center",padding:"40px 0"}}>
-          <div style={{fontSize:52,marginBottom:16}}>✅</div>
-          <h3 style={{color:"#fff",fontSize:20,fontWeight:800,marginBottom:10}}>Request Received!</h3>
-          <p style={{color:"rgba(255,255,255,0.5)",fontSize:14,lineHeight:1.7,marginBottom:24}}>We'll contact you within 24 hours to discuss your marketing goals.</p>
-          <button onClick={()=>{setSubmitted(false);setForm({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});}} style={{padding:"11px 26px",borderRadius:9,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:14,fontFamily:"'Poppins',sans-serif",cursor:"pointer"}}>Send Another →</button>
-        </div>
-      ):(
-        <>
-          <div style={{marginBottom:22}}>
-            <p style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const,marginBottom:4}}>Free Consultation</p>
-            <h2 style={{color:"#fff",fontSize:18,fontWeight:800,margin:0,lineHeight:1.3}}>Get a Free SEO & Marketing Audit</h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 36, animation: "heroFadeUp .7s ease .32s both" }}>
+              {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
+                <span key={b.l} className="mob-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: 12.5, fontWeight: 600, transition: "all .2s", cursor: "default" }}>{b.i} {b.l}</span>
+              ))}
+            </div>
+            <div style={{ display: "flex", gap: 20, flexWrap: "wrap", animation: "heroFadeUp .7s ease .36s both" }}>
+              {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
+                <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.5)", fontSize: 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}>
+                  <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,0.3)" }}>{p.label}</span><span style={{ color: T }}>{p.phone}</span>
+                </a>
+              ))}
+            </div>
           </div>
-          <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:12}}>
-            <div className="cf-name">
-              <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>First Name *</label><input className="fi" required style={iS} placeholder="Jane" value={form.firstName} onChange={e=>setF("firstName",e.target.value)}/></div>
-              <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Last Name</label><input className="fi" style={iS} placeholder="Smith" value={form.lastName} onChange={e=>setF("lastName",e.target.value)}/></div>
-            </div>
-            <div>
-              <label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Phone</label>
-              <div style={{display:"flex",gap:8}}>
-                <select className="fi" style={{...iS,width:82,flexShrink:0,padding:"11px 6px",cursor:"pointer"}} value={form.dialCode} onChange={e=>setF("dialCode",e.target.value)}>
-                  {DIAL_CODES.map((d,i)=><option key={i} value={d.code}>{d.flag} {d.code}</option>)}
-                </select>
-                <input className="fi" style={iS} type="tel" placeholder="647 XXX XXXX" value={form.phone} onChange={e=>setF("phone",e.target.value)}/>
-              </div>
-            </div>
-            <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Business Email *</label><input className="fi" required type="email" style={iS} placeholder="jane@company.com" value={form.email} onChange={e=>setF("email",e.target.value)}/></div>
-            <div>
-              <label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Service</label>
-              <select className="fi" style={{...iS,cursor:"pointer"}} value={form.service} onChange={e=>setF("service",e.target.value)}>
-                <option value="">Select...</option>
-                {SERVICES_LIST.map(s=><option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
-            <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Message</label><textarea className="fi" style={{...iS,minHeight:76,resize:"vertical" as const}} placeholder="Tell us about your marketing goals and target audience..." value={form.message} onChange={e=>setF("message",e.target.value)}/></div>
-            <button className="btn-teal" type="submit" disabled={loading} style={{padding:"13px",borderRadius:10,border:"none",marginTop:4,background:loading?"rgba(0,201,167,0.5)":`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:800,fontSize:14.5,fontFamily:"'Poppins',sans-serif",cursor:loading?"wait":"pointer",transition:"transform .2s,box-shadow .2s"}}>
-              {loading?"Sending...":"📊 Get Free Marketing Audit →"}
-            </button>
-            <p style={{color:"rgba(255,255,255,0.28)",fontSize:11,textAlign:"center",margin:0}}>🔒 Secure &amp; confidential. No spam, ever.</p>
-          </form>
-        </>
-      )}
-    </div>
-  </div>
-</section>
 
-{/* ══════════════════════════════════════════════════
+          {/* Hero Form */}
+          <div style={{ background: "rgba(8,20,40,0.85)", border: "1px solid rgba(0,201,167,0.22)", borderRadius: 20, padding: "32px 28px", backdropFilter: "blur(16px)", boxShadow: "0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)", position: "relative", overflow: "hidden", animation: "heroFadeUp .7s ease .15s both" }}>
+            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,transparent,${T},transparent)` }} />
+            {submitted ? (
+              <div style={{ textAlign: "center", padding: "40px 0" }}>
+                <div style={{ fontSize: 52, marginBottom: 16 }}>✅</div>
+                <h3 style={{ color: "#fff", fontSize: 20, fontWeight: 800, marginBottom: 10 }}>Request Received!</h3>
+                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 14, lineHeight: 1.7, marginBottom: 24 }}>We'll contact you within 24 hours to discuss your marketing goals.</p>
+                <button onClick={() => { setSubmitted(false); setForm({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" }); }} style={{ padding: "11px 26px", borderRadius: 9, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: 14, fontFamily: "'Poppins',sans-serif", cursor: "pointer" }}>Send Another →</button>
+              </div>
+            ) : (
+              <>
+                <div style={{ marginBottom: 22 }}>
+                  <p style={{ color: T, fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 4 }}>Free Consultation</p>
+                  <h2 style={{ color: "#fff", fontSize: 18, fontWeight: 800, margin: 0, lineHeight: 1.3 }}>Get a Free SEO & Marketing Audit</h2>
+                </div>
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="cf-name">
+                    <div><label style={{ display: "block", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>First Name *</label><input className="fi" required style={iS} placeholder="Jane" value={form.firstName} onChange={e => setF("firstName", e.target.value)} /></div>
+                    <div><label style={{ display: "block", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Last Name</label><input className="fi" style={iS} placeholder="Smith" value={form.lastName} onChange={e => setF("lastName", e.target.value)} /></div>
+                  </div>
+                  <div>
+                    <label style={{ display: "block", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Phone</label>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <select className="fi" style={{ ...iS, width: 82, flexShrink: 0, padding: "11px 6px", cursor: "pointer" }} value={form.dialCode} onChange={e => setF("dialCode", e.target.value)}>
+                        {DIAL_CODES.map((d, i) => <option key={i} value={d.code}>{d.flag} {d.code}</option>)}
+                      </select>
+                      <input className="fi" style={iS} type="tel" placeholder="647 XXX XXXX" value={form.phone} onChange={e => setF("phone", e.target.value)} />
+                    </div>
+                  </div>
+                  <div><label style={{ display: "block", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Business Email *</label><input className="fi" required type="email" style={iS} placeholder="jane@company.com" value={form.email} onChange={e => setF("email", e.target.value)} /></div>
+                  <div>
+                    <label style={{ display: "block", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Service</label>
+                    <select className="fi" style={{ ...iS, cursor: "pointer" }} value={form.service} onChange={e => setF("service", e.target.value)}>
+                      <option value="">Select...</option>
+                      {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                  <div><label style={{ display: "block", fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Message</label><textarea className="fi" style={{ ...iS, minHeight: 76, resize: "vertical" as const }} placeholder="Tell us about your marketing goals and target audience..." value={form.message} onChange={e => setF("message", e.target.value)} /></div>
+                  <button className="btn-teal" type="submit" disabled={loading} style={{ padding: "13px", borderRadius: 10, border: "none", marginTop: 4, background: loading ? "rgba(0,201,167,0.5)" : `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 800, fontSize: 14.5, fontFamily: "'Poppins',sans-serif", cursor: loading ? "wait" : "pointer", transition: "transform .2s,box-shadow .2s" }}>
+                    {loading ? "Sending..." : "📊 Get Free Marketing Audit →"}
+                  </button>
+                  <p style={{ color: "rgba(255,255,255,0.28)", fontSize: 11, textAlign: "center", margin: 0 }}>🔒 Secure &amp; confidential. No spam, ever.</p>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
     M2 — CLIENT LOGOS
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"60px 0",background:N0,overflow:"hidden",borderTop:`1px solid rgba(0,201,167,.1)`,borderBottom:`1px solid rgba(0,201,167,.1)`}}>
-  <div style={{textAlign:"center",marginBottom:40,padding:"0 24px"}}>
-    <p style={{fontWeight:600,fontSize:11.5,color:"rgba(255,255,255,.28)",letterSpacing:"0.14em",textTransform:"uppercase" as const,marginBottom:12}}>Our Happy Clients</p>
-    <h2 style={{fontSize:"clamp(20px,2.6vw,32px)",fontWeight:800,color:"#fff",letterSpacing:"-0.02em",lineHeight:1.25,margin:0}}>
-      Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
-    </h2>
-  </div>
-  <div style={{overflow:"hidden"}}>
-    <div className="cl-track">
-      {[...LOGOS,...LOGOS].map((f,i)=>(
-        <div key={i} style={{flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",height:60,padding:"0 8px",opacity:.85,transition:"opacity .3s,transform .3s",filter:"grayscale(100%)"}}
-          onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.opacity="1";(e.currentTarget as HTMLElement).style.transform="scale(1.08)";(e.currentTarget as HTMLElement).style.filter="grayscale(0%)";}}
-          onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.opacity=".85";(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.filter="grayscale(100%)";}}
-        >
-          <img src={`/${f}`} alt={`Client ${i+1}`} style={{height:48,width:"auto",maxWidth:140,objectFit:"contain" as const}} onError={e=>{(e.currentTarget as HTMLImageElement).style.display="none";}}/>
+      <section style={{ padding: "60px 0", background: N0, overflow: "hidden", borderTop: `1px solid rgba(0,201,167,.1)`, borderBottom: `1px solid rgba(0,201,167,.1)` }}>
+        <div style={{ textAlign: "center", marginBottom: 40, padding: "0 24px" }}>
+          <p style={{ fontWeight: 600, fontSize: 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase" as const, marginBottom: 12 }}>Our Happy Clients</p>
+          <h2 style={{ fontSize: "clamp(20px,2.6vw,32px)", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
+            Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
+          </h2>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+        <div style={{ overflow: "hidden" }}>
+          <div className="cl-track">
+            {[...LOGOS, ...LOGOS].map((f, i) => (
+             <div
+                key={i}
+                style={{
+                  flexShrink: 0,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: 70,
+                  padding: "10px 18px",
+                  background: "#fff",
+                  borderRadius: 10,
+                  margin: "0 10px",
+                  boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
+                  opacity: .9,
+                  transition: "transform .3s, box-shadow .3s"
+                }}
+                onMouseEnter={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.transform = "scale(1.08)"
+                  el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"
+                }}
+                onMouseLeave={e => {
+                  const el = e.currentTarget as HTMLElement
+                  el.style.transform = ""
+                  el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"
+                }}
+              >
+                <img
+                  src={`/${f}`}
+                  alt={`Client ${i + 1}`}
+                  style={{
+                    height: 40,
+                    width: "auto",
+                    maxWidth: 120,
+                    objectFit: "contain"
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-{/* ══════════════════════════════════════════════════
+      {/* ══════════════════════════════════════════════════
     M3 — SUCCESS STORIES
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"88px 48px",background:`linear-gradient(180deg,${N2} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
-  <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:0,backgroundImage:"linear-gradient(rgba(0,201,167,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.02) 1px,transparent 1px)",backgroundSize:"56px 56px"}}/>
-  <div style={{maxWidth:1200,margin:"0 auto",position:"relative",zIndex:2}}>
-    <div style={{textAlign:"center",marginBottom:48}}>
-      <SectionBadge label="Proven Results"/>
-      <SectionH2>SEO & Digital Marketing <GradText>Success Stories</GradText></SectionH2>
-      <p style={{color:"rgba(255,255,255,0.45)",fontSize:16,lineHeight:1.7,maxWidth:500,margin:"0 auto"}}>Real results for businesses in Canada, USA &amp; UK.</p>
-    </div>
-    <div style={{display:"flex",gap:10,justifyContent:"center",marginBottom:40,flexWrap:"wrap"}}>
-      {SUCCESS_STORIES.map((c,i)=>(
-        <button key={i} className={`ss-tab${story===i?" act":""}`} onClick={()=>setStory(i)}><span>{c.icon}</span>{c.industry} — {c.result}</button>
-      ))}
-    </div>
-    <div key={story} style={{background:"rgba(255,255,255,0.02)",border:`1px solid rgba(0,201,167,.3)`,borderRadius:24,overflow:"hidden",animation:"sbFadeUp .45s ease both"}}>
-      <div style={{height:3,background:`linear-gradient(90deg,transparent,${T},transparent)`}}/>
-      <div style={{padding:"36px 36px 32px"}}>
-        <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20}}>
-          <div style={{width:52,height:52,borderRadius:14,fontSize:26,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,201,167,0.12)",border:`1px solid rgba(0,201,167,.3)`}}>{SUCCESS_STORIES[story].icon}</div>
-          <span style={{padding:"4px 14px",borderRadius:100,fontSize:12,fontWeight:700,background:"rgba(0,201,167,0.12)",border:`1px solid rgba(0,201,167,.3)`,color:T,textTransform:"uppercase" as const,letterSpacing:"0.08em"}}>{SUCCESS_STORIES[story].result}</span>
+      <section style={{ padding: "88px 48px", background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.02) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <SectionBadge label="Proven Results" />
+            <SectionH2>SEO & Digital Marketing <GradText>Success Stories</GradText></SectionH2>
+            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 16, lineHeight: 1.7, maxWidth: 500, margin: "0 auto" }}>Real results for businesses in Canada, USA &amp; UK.</p>
+          </div>
+          <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 40, flexWrap: "wrap" }}>
+            {SUCCESS_STORIES.map((c, i) => (
+              <button key={i} className={`ss-tab${story === i ? " act" : ""}`} onClick={() => setStory(i)}><span>{c.icon}</span>{c.industry} — {c.result}</button>
+            ))}
+          </div>
+          <div key={story} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid rgba(0,201,167,.3)`, borderRadius: 24, overflow: "hidden", animation: "sbFadeUp .45s ease both" }}>
+            <div style={{ height: 3, background: `linear-gradient(90deg,transparent,${T},transparent)` }} />
+            <div style={{ padding: "36px 36px 32px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+                <div style={{ width: 52, height: 52, borderRadius: 14, fontSize: 26, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,201,167,0.12)", border: `1px solid rgba(0,201,167,.3)` }}>{SUCCESS_STORIES[story].icon}</div>
+                <span style={{ padding: "4px 14px", borderRadius: 100, fontSize: 12, fontWeight: 700, background: "rgba(0,201,167,0.12)", border: `1px solid rgba(0,201,167,.3)`, color: T, textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>{SUCCESS_STORIES[story].result}</span>
+              </div>
+              <h3 style={{ color: "#fff", fontSize: "clamp(18px,2vw,24px)", fontWeight: 800, marginBottom: 16, lineHeight: 1.3 }}>{SUCCESS_STORIES[story].title}</h3>
+              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: 15, lineHeight: 1.7, marginBottom: 28 }}>{SUCCESS_STORIES[story].description}</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14 }}>
+                {SUCCESS_STORIES[story].metrics.map((m, i) => (
+                  <div key={i} style={{ textAlign: "center", padding: "18px 14px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)", transition: "transform .25s,background .25s", cursor: "default" }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)"; }}>
+                    <div style={{ fontSize: 22, marginBottom: 8 }}>{m.i}</div>
+                    <div style={{ fontSize: "clamp(22px,2.5vw,30px)", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{m.v}</div>
+                    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: 12, fontWeight: 500 }}>{m.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 28 }}>
+            {SUCCESS_STORIES.map((_, i) => (
+              <button key={i} onClick={() => setStory(i)} style={{ width: story === i ? 24 : 8, height: 8, borderRadius: 100, background: story === i ? T : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer", transition: "all .3s ease" }} />
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 44 }}>
+            <button className="btn-teal" style={{ padding: "14px 36px", borderRadius: 10, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: 15, fontFamily: "'Poppins',sans-serif", cursor: "pointer", transition: "transform .2s,box-shadow .2s" }}>View All Case Studies →</button>
+          </div>
         </div>
-        <h3 style={{color:"#fff",fontSize:"clamp(18px,2vw,24px)",fontWeight:800,marginBottom:16,lineHeight:1.3}}>{SUCCESS_STORIES[story].title}</h3>
-        <p style={{color:"rgba(255,255,255,0.6)",fontSize:15,lineHeight:1.7,marginBottom:28}}>{SUCCESS_STORIES[story].description}</p>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14}}>
-          {SUCCESS_STORIES[story].metrics.map((m,i)=>(
-            <div key={i} style={{textAlign:"center",padding:"18px 14px",borderRadius:14,border:"1px solid rgba(255,255,255,0.07)",background:"rgba(255,255,255,0.03)",transition:"transform .25s,background .25s",cursor:"default"}}
-              onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-4px)";(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.06)";}}
-              onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.background="rgba(255,255,255,0.03)";}}>
-              <div style={{fontSize:22,marginBottom:8}}>{m.i}</div>
-              <div style={{fontSize:"clamp(22px,2.5vw,30px)",fontWeight:900,marginBottom:4,background:`linear-gradient(135deg,#fff 30%,${T})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>{m.v}</div>
-              <div style={{color:"rgba(255,255,255,0.45)",fontSize:12,fontWeight:500}}>{m.l}</div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+    M4 — SERVICES WE OFFER
+══════════════════════════════════════════════════ */}
+      <section style={{ padding: "80px 48px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          <div style={{ textAlign: "center", marginBottom: 60 }}>
+            <SectionBadge label="What We Deliver" />
+            <SectionH2>SEO & Digital Marketing <GradText>Services We Offer</GradText></SectionH2>
+            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.75, maxWidth: 580, margin: "0 auto" }}>Data-driven marketing strategies for businesses across Canada, USA &amp; UK.</p>
+          </div>
+          <div className="svc-grid" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
+            {SERVICES.map((s, i) => (
+              <div key={s.title} className="svc-card" style={{ animationDelay: `${i * .06}s` }}>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+                  <div className="svc-icon" style={{ width: 52, height: 52, borderRadius: 14, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, flexShrink: 0, transition: "background .3s,transform .3s" }}>{s.icon}</div>
+                  <span style={{ padding: "3px 10px", borderRadius: 100, fontSize: 10.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{s.tag}</span>
+                </div>
+                <h3 style={{ fontSize: 17, fontWeight: 700, color: "#fff", lineHeight: 1.3, margin: 0 }}>{s.title}</h3>
+                <p style={{ fontSize: 13.5, color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.3)", fontSize: 13, fontWeight: 600, marginTop: "auto" }}>Learn More <span>→</span></span>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 56 }}>
+            <button className="btn-teal" style={{ padding: "14px 36px", borderRadius: 10, background: `linear-gradient(135deg,${T},${TD})`, border: "none", color: "#000", fontWeight: 700, fontSize: 15, fontFamily: "'Poppins',sans-serif", cursor: "pointer", transition: "transform .2s,box-shadow .2s" }}>View All Services →</button>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+    M5 — KEY BENEFITS (LINEAR NUMBERED)
+══════════════════════════════════════════════════ */}
+      <section style={{ padding: "88px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          <div style={{ textAlign: "center", marginBottom: 60 }}>
+            <SectionBadge label="Why Market With Us" />
+            <SectionH2>Key Benefits of <GradText>SEO & Digital Marketing</GradText></SectionH2>
+            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 16, lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Here's what you gain when you partner with a data-driven marketing team.</p>
+          </div>
+          <div className="kb-grid" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
+            {BENEFITS.map((b, i) => (
+              <div key={i} className="kb-card" style={{ animationDelay: `${i * .12}s` }}>
+                <div style={{ fontSize: "clamp(42px,5vw,64px)", fontWeight: 900, lineHeight: 1, background: "linear-gradient(135deg,rgba(0,201,167,0.15) 0%,rgba(0,201,167,0.05) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", flexShrink: 0, width: 72, textAlign: "center" }}>{b.num}</div>
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}><span style={{ fontSize: 22 }}>{b.icon}</span><h3 style={{ color: "#fff", fontSize: 19, fontWeight: 800, margin: 0 }}>{b.title}</h3></div>
+                  <p style={{ color: "rgba(255,255,255,0.52)", fontSize: 14.5, lineHeight: 1.75, margin: "0 0 14px" }}>{b.desc}</p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {b.tags.map(tag => <span key={tag} style={{ display: "inline-flex", alignItems: "center", padding: "3px 10px", borderRadius: 100, fontSize: 10.5, fontWeight: 600, letterSpacing: ".06em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{tag}</span>)}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div style={{ textAlign: "center", marginTop: 52 }}>
+            <button className="btn-teal" style={{ padding: "14px 36px", borderRadius: 10, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: 15, fontFamily: "'Poppins',sans-serif", cursor: "pointer", transition: "transform .2s,box-shadow .2s" }}>Get Your Free Audit →</button>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+    M6 — PLATFORM TOOLS (ICON GRID)
+══════════════════════════════════════════════════ */}
+      <section style={{ padding: "80px 48px", background: N1, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <SectionBadge label="Our Tech Stack" />
+            <SectionH2>Leading Platform Tools <GradText>That We Use</GradText></SectionH2>
+            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 16, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>We use enterprise-grade tools to plan, execute, and report on every campaign.</p>
+          </div>
+          <div className="pt-grid" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
+            {TOOLS.map((tool, i) => (
+              <div key={i} className="pt-card" style={{ background: tool.clr, border: `1px solid ${tool.bd}` }}>
+                <div className="pt-icon" style={{ width: 56, height: 56, borderRadius: 15, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26, marginBottom: 16, background: "rgba(255,255,255,0.05)", border: `1px solid ${tool.bd}`, transition: "transform .25s" }}>{tool.icon}</div>
+                <h3 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 8, lineHeight: 1.3 }}>{tool.name}</h3>
+                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13.5, lineHeight: 1.7, margin: 0 }}>{tool.purpose}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+    M7 — HIRE DEVELOPERS / WHY CHOOSE US (DARK ACCORDION)
+══════════════════════════════════════════════════ */}
+      <section style={{ padding: "80px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: "10%", left: "5%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <SectionBadge label="Tailored Approach" />
+            <SectionH2>Marketing <GradText>Tailored to Your Needs</GradText></SectionH2>
+            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 16, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>We adapt our marketing strategies to your business type and growth goals.</p>
+          </div>
+          <div className="two-col" style={{ marginBottom: 16 }}>
+            <p style={{ color: T, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>By Business Type</p>
+            <p style={{ color: T, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>By Marketing Type</p>
+          </div>
+          <div className="two-col">
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {HIRE_LEFT.map((item, i) => <AccItem key={item.title} item={item} open={hireL === i} toggle={() => setHireL(hireL === i ? null : i)} />)}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {HIRE_RIGHT.map((item, i) => <AccItem key={item.title} item={item} open={hireR === i} toggle={() => setHireR(hireR === i ? null : i)} />)}
+            </div>
+          </div>
+          <div style={{ display: "flex", gap: 16, marginTop: 48, justifyContent: "center", flexWrap: "wrap" }}>
+            <button className="btn-teal" style={{ padding: "14px 32px", borderRadius: 10, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: 15, fontFamily: "'Poppins',sans-serif", cursor: "pointer", transition: "transform .2s,box-shadow .2s" }}>📊 Get a Free Marketing Plan</button>
+            <button style={{ padding: "14px 32px", borderRadius: 10, border: "1.5px solid rgba(0,201,167,0.35)", background: "transparent", color: T, fontWeight: 600, fontSize: 15, fontFamily: "'Poppins',sans-serif", cursor: "pointer", transition: "border-color .2s,background .2s" }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = T; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.07)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(0,201,167,0.35)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}>
+              View Pricing →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════
+    M8 — AI-POWERED SOLUTIONS
+══════════════════════════════════════════════════ */}
+      <section style={{ padding: "80px 48px", background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: "0%", left: "50%", transform: "translateX(-50%)", width: 700, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+          {/* <div style={{marginBottom:52,maxWidth:620}}> */}
+          <div
+            style={{
+              marginBottom: 52,
+              maxWidth: 620,
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center"
+            }}
+          >
+          <SectionBadge label="AI-Powered" />
+          <SectionH2>Leverage <GradText>AI-Powered Marketing</GradText> Solutions</SectionH2>
+          <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 16, lineHeight: 1.8 }}>We use AI to analyse data, predict trends, automate campaigns, and deliver real-time insights for better ROI.</p>
+        </div>
+        <div className="ai-feat-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
+          {AI_FEATS.map((f, i) => (
+            <div key={i} style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 16, padding: "28px 20px", textAlign: "center" }}>
+              <div style={{ fontSize: 36, marginBottom: 16 }}>{f.icon}</div>
+              <h3 style={{ color: "#fff", fontSize: 16, fontWeight: 700, marginBottom: 10 }}>{f.title}</h3>
+              <p style={{ color: "rgba(255,255,255,0.52)", fontSize: 13, lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
             </div>
           ))}
         </div>
       </div>
-    </div>
-    <div style={{display:"flex",justifyContent:"center",gap:8,marginTop:28}}>
-      {SUCCESS_STORIES.map((_,i)=>(
-        <button key={i} onClick={()=>setStory(i)} style={{width:story===i?24:8,height:8,borderRadius:100,background:story===i?T:"rgba(255,255,255,0.2)",border:"none",cursor:"pointer",transition:"all .3s ease"}}/>
-      ))}
-    </div>
-    <div style={{textAlign:"center",marginTop:44}}>
-      <button className="btn-teal" style={{padding:"14px 36px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}>View All Case Studies →</button>
-    </div>
-  </div>
-</section>
+    </section >
 
-{/* ══════════════════════════════════════════════════
-    M4 — SERVICES WE OFFER
-══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
-  <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:0,backgroundImage:"linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)",backgroundSize:"56px 56px"}}/>
-  <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-    <div style={{textAlign:"center",marginBottom:60}}>
-      <SectionBadge label="What We Deliver"/>
-      <SectionH2>SEO & Digital Marketing <GradText>Services We Offer</GradText></SectionH2>
-      <p style={{color:"rgba(255,255,255,0.5)",fontSize:16,lineHeight:1.75,maxWidth:580,margin:"0 auto"}}>Data-driven marketing strategies for businesses across Canada, USA &amp; UK.</p>
-    </div>
-    <div className="svc-grid" style={{gridTemplateColumns:"repeat(3,1fr)"}}>
-      {SERVICES.map((s,i)=>(
-        <div key={s.title} className="svc-card" style={{animationDelay:`${i*.06}s`}}>
-          <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
-            <div className="svc-icon" style={{width:52,height:52,borderRadius:14,background:"rgba(0,201,167,0.1)",border:"1px solid rgba(0,201,167,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0,transition:"background .3s,transform .3s"}}>{s.icon}</div>
-            <span style={{padding:"3px 10px",borderRadius:100,fontSize:10.5,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase" as const,color:T,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.18)"}}>{s.tag}</span>
-          </div>
-          <h3 style={{fontSize:17,fontWeight:700,color:"#fff",lineHeight:1.3,margin:0}}>{s.title}</h3>
-          <p style={{fontSize:13.5,color:"rgba(255,255,255,0.5)",lineHeight:1.7,margin:0}}>{s.desc}</p>
-          <span style={{display:"inline-flex",alignItems:"center",gap:6,color:"rgba(255,255,255,0.3)",fontSize:13,fontWeight:600,marginTop:"auto"}}>Learn More <span>→</span></span>
-        </div>
-      ))}
-    </div>
-    <div style={{textAlign:"center",marginTop:56}}>
-      <button className="btn-teal" style={{padding:"14px 36px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,border:"none",color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}>View All Services →</button>
-    </div>
-  </div>
-</section>
-
-{/* ══════════════════════════════════════════════════
-    M5 — KEY BENEFITS (LINEAR NUMBERED)
-══════════════════════════════════════════════════ */}
-<section style={{padding:"88px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
-  <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:0,backgroundImage:"linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)",backgroundSize:"56px 56px"}}/>
-  <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-    <div style={{textAlign:"center",marginBottom:60}}>
-      <SectionBadge label="Why Market With Us"/>
-      <SectionH2>Key Benefits of <GradText>SEO & Digital Marketing</GradText></SectionH2>
-      <p style={{color:"rgba(255,255,255,0.45)",fontSize:16,lineHeight:1.75,maxWidth:520,margin:"0 auto"}}>Here's what you gain when you partner with a data-driven marketing team.</p>
-    </div>
-    <div className="kb-grid" style={{gridTemplateColumns:"repeat(4,1fr)"}}>
-      {BENEFITS.map((b,i)=>(
-        <div key={i} className="kb-card" style={{animationDelay:`${i*.12}s`}}>
-          <div style={{fontSize:"clamp(42px,5vw,64px)",fontWeight:900,lineHeight:1,background:"linear-gradient(135deg,rgba(0,201,167,0.15) 0%,rgba(0,201,167,0.05) 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",flexShrink:0,width:72,textAlign:"center"}}>{b.num}</div>
-          <div style={{flex:1}}>
-            <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}><span style={{fontSize:22}}>{b.icon}</span><h3 style={{color:"#fff",fontSize:19,fontWeight:800,margin:0}}>{b.title}</h3></div>
-            <p style={{color:"rgba(255,255,255,0.52)",fontSize:14.5,lineHeight:1.75,margin:"0 0 14px"}}>{b.desc}</p>
-            <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-              {b.tags.map(tag=><span key={tag} style={{display:"inline-flex",alignItems:"center",padding:"3px 10px",borderRadius:100,fontSize:10.5,fontWeight:600,letterSpacing:".06em",textTransform:"uppercase" as const,color:T,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.18)"}}>{tag}</span>)}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-    <div style={{textAlign:"center",marginTop:52}}>
-      <button className="btn-teal" style={{padding:"14px 36px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}>Get Your Free Audit →</button>
-    </div>
-  </div>
-</section>
-
-{/* ══════════════════════════════════════════════════
-    M6 — PLATFORM TOOLS (ICON GRID)
-══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px",background:N1,position:"relative",overflow:"hidden"}}>
-  <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:600,height:400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
-  <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-    <div style={{textAlign:"center",marginBottom:56}}>
-      <SectionBadge label="Our Tech Stack"/>
-      <SectionH2>Leading Platform Tools <GradText>That We Use</GradText></SectionH2>
-      <p style={{color:"rgba(255,255,255,0.45)",fontSize:16,lineHeight:1.75,maxWidth:560,margin:"0 auto"}}>We use enterprise-grade tools to plan, execute, and report on every campaign.</p>
-    </div>
-    <div className="pt-grid" style={{gridTemplateColumns:"repeat(4,1fr)"}}>
-      {TOOLS.map((tool,i)=>(
-        <div key={i} className="pt-card" style={{background:tool.clr,border:`1px solid ${tool.bd}`}}>
-          <div className="pt-icon" style={{width:56,height:56,borderRadius:15,display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,marginBottom:16,background:"rgba(255,255,255,0.05)",border:`1px solid ${tool.bd}`,transition:"transform .25s"}}>{tool.icon}</div>
-          <h3 style={{color:"#fff",fontSize:16,fontWeight:700,marginBottom:8,lineHeight:1.3}}>{tool.name}</h3>
-          <p style={{color:"rgba(255,255,255,0.5)",fontSize:13.5,lineHeight:1.7,margin:0}}>{tool.purpose}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-{/* ══════════════════════════════════════════════════
-    M7 — HIRE DEVELOPERS / WHY CHOOSE US (DARK ACCORDION)
-══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
-  <div style={{position:"absolute",top:"10%",left:"5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
-  <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-    <div style={{textAlign:"center",marginBottom:56}}>
-      <SectionBadge label="Tailored Approach"/>
-      <SectionH2>Marketing <GradText>Tailored to Your Needs</GradText></SectionH2>
-      <p style={{color:"rgba(255,255,255,0.45)",fontSize:16,lineHeight:1.75,maxWidth:560,margin:"0 auto"}}>We adapt our marketing strategies to your business type and growth goals.</p>
-    </div>
-    <div className="two-col" style={{marginBottom:16}}>
-      <p style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>By Business Type</p>
-      <p style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>By Marketing Type</p>
-    </div>
-    <div className="two-col">
-      <div style={{display:"flex",flexDirection:"column",gap:12}}>
-        {HIRE_LEFT.map((item,i)=><AccItem key={item.title} item={item} open={hireL===i} toggle={()=>setHireL(hireL===i?null:i)}/>)}
-      </div>
-      <div style={{display:"flex",flexDirection:"column",gap:12}}>
-        {HIRE_RIGHT.map((item,i)=><AccItem key={item.title} item={item} open={hireR===i} toggle={()=>setHireR(hireR===i?null:i)}/>)}
-      </div>
-    </div>
-    <div style={{display:"flex",gap:16,marginTop:48,justifyContent:"center",flexWrap:"wrap"}}>
-      <button className="btn-teal" style={{padding:"14px 32px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}>📊 Get a Free Marketing Plan</button>
-      <button style={{padding:"14px 32px",borderRadius:10,border:"1.5px solid rgba(0,201,167,0.35)",background:"transparent",color:T,fontWeight:600,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"border-color .2s,background .2s"}}
-        onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor=T;(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.07)";}}
-        onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(0,201,167,0.35)";(e.currentTarget as HTMLElement).style.background="transparent";}}>
-        View Pricing →
-      </button>
-    </div>
-  </div>
-</section>
-
-{/* ══════════════════════════════════════════════════
-    M8 — AI-POWERED SOLUTIONS
-══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px",background:`linear-gradient(180deg,${N2} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
-  <div style={{position:"absolute",top:"0%",left:"50%",transform:"translateX(-50%)",width:700,height:400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
-  <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-    <div style={{marginBottom:52,maxWidth:620}}>
-      <SectionBadge label="AI-Powered"/>
-      <SectionH2>Leverage <GradText>AI-Powered Marketing</GradText> Solutions</SectionH2>
-      <p style={{color:"rgba(255,255,255,0.5)",fontSize:16,lineHeight:1.8}}>We use AI to analyse data, predict trends, automate campaigns, and deliver real-time insights for better ROI.</p>
-    </div>
-    <div className="ai-feat-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:20}}>
-      {AI_FEATS.map((f,i)=>(
-        <div key={i} style={{background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.15)",borderRadius:16,padding:"28px 20px",textAlign:"center"}}>
-          <div style={{fontSize:36,marginBottom:16}}>{f.icon}</div>
-          <h3 style={{color:"#fff",fontSize:16,fontWeight:700,marginBottom:10}}>{f.title}</h3>
-          <p style={{color:"rgba(255,255,255,0.52)",fontSize:13,lineHeight:1.6,margin:0}}>{f.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-{/* ══════════════════════════════════════════════════
+    {/* ══════════════════════════════════════════════════
     M9 — FULL-WIDTH CTA BANNER
 ══════════════════════════════════════════════════ */}
-<section style={{position:"relative",overflow:"hidden"}}>
-  <div style={{background:"linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)",backgroundSize:"300% 300%",animation:"ctaBgShift 8s ease infinite",padding:"88px 48px",textAlign:"center",position:"relative"}}>
-    <div style={{position:"absolute",top:"-20%",left:"-5%",width:350,height:350,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)",pointerEvents:"none"}}/>
-    <div style={{position:"absolute",bottom:"-20%",right:"-5%",width:300,height:300,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)",pointerEvents:"none"}}/>
-    <div style={{position:"absolute",inset:0,pointerEvents:"none",backgroundImage:"linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)",backgroundSize:"48px 48px"}}/>
-    <div style={{position:"relative",zIndex:2,maxWidth:760,margin:"0 auto"}}>
-      <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.15)",border:"1px solid rgba(255,255,255,0.3)",borderRadius:100,padding:"6px 18px",marginBottom:24}}>
-        <span style={{width:6,height:6,borderRadius:"50%",background:"#fff",display:"block"}}/>
-        <span style={{color:"#fff",fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>Start Today</span>
+      < section style = {{ position: "relative", overflow: "hidden" }
+}>
+  <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: "88px 48px", textAlign: "center", position: "relative" }}>
+    <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
+    <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
+    <div style={{ position: "relative", zIndex: 2, maxWidth: 760, margin: "0 auto" }}>
+      <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 100, padding: "6px 18px", marginBottom: 24 }}>
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "block" }} />
+        <span style={{ color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>Start Today</span>
       </div>
-      <h2 style={{fontSize:"clamp(26px,3.5vw,48px)",fontWeight:900,color:"#fff",lineHeight:1.15,letterSpacing:"-0.02em",marginBottom:20}}>
-        Want SEO & Digital Marketing That Takes Your<br/>Business to the <span style={{textDecoration:"underline",textDecorationColor:"rgba(255,255,255,0.4)"}}>Next Level?</span>
+      <h2 style={{ fontSize: "clamp(26px,3.5vw,48px)", fontWeight: 900, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 20 }}>
+        Want SEO & Digital Marketing That Takes Your<br />Business to the <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>Next Level?</span>
       </h2>
-      <p style={{color:"rgba(255,255,255,0.82)",fontSize:17,lineHeight:1.75,marginBottom:40}}>Connect with NNC Digital today and let's build your data-driven marketing strategy together.</p>
-      <div style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
-        <button style={{display:"inline-flex",alignItems:"center",gap:10,padding:"16px 40px",borderRadius:12,background:"#fff",color:"#0055b3",fontWeight:800,fontSize:16,fontFamily:"'Poppins',sans-serif",border:"none",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}
-          onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-3px)";(e.currentTarget as HTMLElement).style.boxShadow="0 16px 40px rgba(0,0,0,0.25)";}}
-          onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.boxShadow="";}}>✦ Connect Now</button>
-        <button style={{display:"inline-flex",alignItems:"center",gap:10,padding:"16px 36px",borderRadius:12,background:"transparent",color:"#fff",fontWeight:700,fontSize:16,fontFamily:"'Poppins',sans-serif",border:"2px solid rgba(255,255,255,0.5)",cursor:"pointer",transition:"border-color .2s,background .2s"}}
-          onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor="#fff";(e.currentTarget as HTMLElement).style.background="rgba(255,255,255,0.1)";}}
-          onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(255,255,255,0.5)";(e.currentTarget as HTMLElement).style.background="transparent";}}>📅 Book a Free Audit →</button>
+      <p style={{ color: "rgba(255,255,255,0.82)", fontSize: 17, lineHeight: 1.75, marginBottom: 40 }}>Connect with NNC Digital today and let's build your data-driven marketing strategy together.</p>
+      <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+        <button style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 40px", borderRadius: 12, background: "#fff", color: "#0055b3", fontWeight: 800, fontSize: 16, fontFamily: "'Poppins',sans-serif", border: "none", cursor: "pointer", transition: "transform .2s,box-shadow .2s" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 16px 40px rgba(0,0,0,0.25)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = ""; }}>✦ Connect Now</button>
+        <button style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "16px 36px", borderRadius: 12, background: "transparent", color: "#fff", fontWeight: 700, fontSize: 16, fontFamily: "'Poppins',sans-serif", border: "2px solid rgba(255,255,255,0.5)", cursor: "pointer", transition: "border-color .2s,background .2s" }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#fff"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.1)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.5)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}>📅 Book a Free Audit →</button>
       </div>
-      <p style={{color:"rgba(255,255,255,0.5)",fontSize:13,marginTop:28}}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
+      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 13, marginTop: 28 }}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
     </div>
   </div>
-</section>
+</section >
 
 {/* ══════════════════════════════════════════════════
     M10 — WHY CHOOSE US (SPLIT: TEXT + VIDEO)
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"88px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
+  < section style = {{ padding: "88px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
   <div style={{position:"absolute",top:"20%",right:"-5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
   <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
     <div className="two-col-wide">
@@ -639,12 +689,12 @@ export default function SEOandDigitalMarketingPage() {
       </div>
     </div>
   </div>
-</section>
+</section >
 
 {/* ══════════════════════════════════════════════════
     M11 — GLOBAL PRESENCE (DARK BLUE TABS)
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px",background:`linear-gradient(180deg,${N0} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
+  < section style = {{ padding: "80px 48px", background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
   <div style={{position:"absolute",bottom:0,left:"50%",transform:"translateX(-50%)",width:600,height:300,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
   <div style={{maxWidth:1180,margin:"0 auto",position:"relative",zIndex:2}}>
     <div style={{textAlign:"center",marginBottom:48}}>
@@ -706,12 +756,12 @@ export default function SEOandDigitalMarketingPage() {
       </div>
     )}
   </div>
-</section>
+</section >
 
 {/* ══════════════════════════════════════════════════
     M12 — FAQS (ACCORDION)
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
+  < section style = {{ padding: "80px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
   <div style={{position:"absolute",top:"30%",right:"-5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
   <div style={{maxWidth:860,margin:"0 auto",position:"relative",zIndex:2}}>
     <div style={{textAlign:"center",marginBottom:52}}>
@@ -740,12 +790,12 @@ export default function SEOandDigitalMarketingPage() {
       <button className="btn-teal" style={{padding:"13px 32px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}>Ask Us Anything →</button>
     </div>
   </div>
-</section>
+</section >
 
 {/* ══════════════════════════════════════════════════
     M13 — READY TO BUILD + CONTACT FORM
 ══════════════════════════════════════════════════ */}
-<section style={{padding:"80px 48px",background:`linear-gradient(180deg,${N2} 0%,${N0} 100%)`,position:"relative",overflow:"hidden"}}>
+  < section style = {{ padding: "80px 48px", background: `linear-gradient(180deg,${N2} 0%,${N0} 100%)`, position: "relative", overflow: "hidden" }}>
   <div style={{position:"absolute",top:"20%",left:"50%",transform:"translateX(-50%)",width:700,height:400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
   <div style={{maxWidth:1180,margin:"0 auto",position:"relative",zIndex:2}}>
     <div style={{textAlign:"center",marginBottom:56}}>
@@ -825,7 +875,7 @@ export default function SEOandDigitalMarketingPage() {
       </div>
     </div>
   </div>
-</section>
+</section >
 
     </>
   );
