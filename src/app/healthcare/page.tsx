@@ -384,9 +384,9 @@ export default function HealthcareIndustryPage() {
   const isDesktop = windowWidth > 1024;
 
   const getSectionPadding = () => {
-    if (isMobile) return "60px 20px";
+    if (isMobile) return "30px 20px";
     if (isTablet) return "80px 32px";
-    return "100px 48px";
+    return "50px 48px";
   };
 
   const getGridColumns = (mobile: number, tablet: number, desktop: number) => {
@@ -416,17 +416,17 @@ export default function HealthcareIndustryPage() {
 
       {/* MODULE 1 — HERO + INLINE FORM */}
       <section style={{
-        padding: isMobile ? "80px 20px 60px" : isTablet ? "100px 32px 70px" : "120px 48px 80px",
+        padding: isMobile ? "40px 20px 60px" : isTablet ? "100px 32px 70px" : "60px 48px 80px",
         background: `linear-gradient(135deg, ${N0} 0%, #041628 50%, ${N0} 100%)`,
         position: "relative", overflow: "hidden", minHeight: isMobile ? "auto" : "90vh",
         display: "flex", alignItems: "center"
       }}>
         <Particles />
-        <div style={{
+        {/* <div style={{
           position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
           backgroundImage: `linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`,
           backgroundSize: "60px 60px"
-        }} />
+        }} /> */}
         {!isMobile && (
           <>
             <div style={{

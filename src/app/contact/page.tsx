@@ -1138,7 +1138,7 @@ export default function ContactPage() {
 
       {/* HERO SECTION - Responsive */}
       <section style={{
-        padding: isMobile ? "80px 16px 40px" : isTablet ? "100px 32px 60px" : "120px 48px 80px",
+        padding: isMobile ? "40px 16px 40px" : isTablet ? "100px 32px 60px" : "90px 48px 80px",
         background: `linear-gradient(135deg, ${N0} 0%, #041628 50%, ${N0} 100%)`,
         position: "relative",
         overflow: "hidden",

@@ -1278,11 +1278,16 @@ export default function Navbar() {
           max-width: 1320px; margin: 0 auto; padding: 5px 40px;
           display: flex; align-items: center; justify-content: flex-end; gap: 28px;
         }
-        .nnc-topbar-phone {
-          display: inline-flex; align-items: center; gap: 6px;
-          color: rgba(255,255,255,0.48); font-size: 11.5px; font-weight: 500;
-          text-decoration: none; transition: color 0.2s;
-        }
+       .nnc-topbar-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.8); /* lighter now */
+  font-size: 11.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
         .nnc-topbar-phone:hover { color: #00C9A7; }
         .nnc-topbar-sep { color: rgba(255,255,255,0.1); font-size: 11px; }
 
