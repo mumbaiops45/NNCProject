@@ -1,6 +1,4 @@
 // app/components/SchemaMarkup.tsx
-import Script from "next/script";
-
 interface SchemaMarkupProps {
   schema: any;
   id: string;
@@ -12,12 +10,11 @@ export default function SchemaMarkup({ schema, id }: SchemaMarkupProps) {
     return (
       <>
         {schema.map((s, index) => (
-          <Script
+          <script
             key={`${id}-${index}`}
             id={`${id}-${index}`}
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
-            strategy="beforeInteractive"
           />
         ))}
       </>
@@ -26,11 +23,10 @@ export default function SchemaMarkup({ schema, id }: SchemaMarkupProps) {
 
   // Single schema
   return (
-    <Script
+    <script
       id={id}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      strategy="beforeInteractive"
     />
   );
 }
