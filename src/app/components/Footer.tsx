@@ -1,469 +1,7 @@
-// "use client";
-// import Link from "next/link";
-// import Image from "next/image";
-
-// // ─── Design tokens ────────────────────────────────────────────────────────────
-// const T = {
-//   teal: "#00C9A7",
-//   tealDark: "#00a07a",
-//   navy0: "#010812",
-//   navy1: "#030B18",
-//   navy2: "#061425",
-// };
-
-// // ─── Data ─────────────────────────────────────────────────────────────────────
-// const SERVICES = [
-//   { label: "CRM Development", href: "/crm-development" },
-//   { label: "ERP Development", href: "/erp-development" },
-//   { label: "Web Development", href: "/web-development" },
-//   { label: "Mobile App Development", href: "/mobile-app-development" },
-//   { label: "Salesforce CRM", href: "/salesforce-crm" },
-//   { label: "Marketing Automation", href: "/marketing-automation" },
-//   { label: "SEO & Digital Marketing", href: "/seo-digital-marketing" },
-//   { label: "Digital Transformation", href: "/digital-transformation" },
-//   { label: "Hire CRM Developers", href: "/hire-crm-developers" },
-// ];
-
-// const INDUSTRIES = [
-//   { label: "Healthcare", href: "/industries/healthcare" },
-//   { label: "Real Estate", href: "/industries/real-estate" },
-//   { label: "E-Commerce", href: "/industries/ecommerce" },
-//   { label: "Manufacturing", href: "/industries/manufacturing" },
-//   { label: "Professional Services", href: "/industries/professional-services" },
-//   { label: "Education", href: "/industries/education" },
-//   { label: "Logistics", href: "/industries/logistics" },
-//   { label: "Finance", href: "/industries/finance" },
-//   { label: "Hospitality", href: "/industries/hospitality" },
-// ];
-
-// const COMPANY = [
-//   { label: "About NNC Digital", href: "/about-us" },
-//   { label: "About Nakshatra Namaha Creations", href: "https://www.nakshatranamahacreations.com", external: true },
-//   { label: "Case Studies", href: "/case-studies" },
-//   { label: "Blog", href: "/blog" },
-//   { label: "Pricing", href: "/pricing" },
-//   { label: "Careers", href: "/careers" },
-//   { label: "Partner With Us", href: "/partner" },
-// ];
-
-// const SOCIALS = [
-//   { label: "LinkedIn", href: "https://linkedin.com/company/nncdigital", icon: "in" },
-//   { label: "Twitter", href: "https://twitter.com/nncdigital", icon: "𝕏" },
-//   { label: "Instagram", href: "https://instagram.com/nncdigital", icon: "📷" },
-//   { label: "YouTube", href: "https://youtube.com/@nncdigital", icon: "▶" },
-// ];
-
-// const CONTACTS = [
-//   { flag: "🇨🇦", country: "Canada", phone: "+1 647-XXX-XXXX" },
-//   { flag: "🇺🇸", country: "USA", phone: "+1 631-XXX-XXXX" },
-//   { flag: "🇬🇧", country: "UK", phone: "+44 20-XXXX-XXXX" },
-//   { flag: "🇮🇳", country: "India", phone: "+91 9900566466" },
-// ];
-
-// const TRUST_BADGES = [
-//   "GDPR Compliant",
-//   "PIPEDA Compliant",
-//   "CCPA Ready",
-//   "ISO Certified"
-// ];
-
-// export default function Footer() {
-//   const year = new Date().getFullYear();
-
-//   return (
-//     <footer style={{
-//       background: `linear-gradient(180deg, ${T.navy0} 0%, #020810 100%)`,
-//       fontFamily: "'Poppins', sans-serif",
-//       borderTop: "1px solid rgba(255,255,255,.06)",
-//       position: "relative",
-//       overflow: "hidden",
-//     }}>
-//       <style>{`
-//         .footer-link {
-//           color: rgba(255,255,255,.6);
-//           text-decoration: none;
-//           font-size: 14px;
-//           font-weight: 400;
-//           transition: color .2s ease, transform .2s ease;
-//           line-height: 1.8;
-//           display: inline-block;
-//         }
-//         .footer-link:hover { 
-//           color: ${T.teal}; 
-//           transform: translateX(4px);
-//         }
-//         .footer-heading {
-//           color: ${T.teal};
-//           font-size: 14px;
-//           font-weight: 700;
-//           letter-spacing: 0.08em;
-//           text-transform: uppercase;
-//           margin-bottom: 20px;
-//         }
-//         .social-btn {
-//           width: 38px; height: 38px; border-radius: 10px;
-//           display: flex; align-items: center; justify-content: center;
-//           background: rgba(255,255,255,.05);
-//           border: 1px solid rgba(255,255,255,.09);
-//           color: rgba(255,255,255,.7);
-//           cursor: pointer;
-//           transition: all 0.2s ease;
-//           text-decoration: none;
-//           font-size: 18px;
-//         }
-//         .social-btn:hover {
-//           background: ${T.teal}20;
-//           border-color: ${T.teal}60;
-//           color: ${T.teal};
-//           transform: translateY(-3px);
-//         }
-//         .footer-bottom-link {
-//           color: rgba(255,255,255,.4);
-//           font-size: 13px;
-//           text-decoration: none;
-//           transition: color .2s ease;
-//         }
-//         .footer-bottom-link:hover { color: ${T.teal}; }
-//         .badge {
-//           font-size: 11px;
-//           font-weight: 600;
-//           padding: 5px 12px;
-//           border-radius: 100px;
-//           background: rgba(0,201,167,0.08);
-//           border: 1px solid rgba(0,201,167,0.2);
-//           color: ${T.teal};
-//           display: inline-flex;
-//           align-items: center;
-//           white-space: nowrap;
-//         }
-//         .newsletter-input {
-//           width: 100%;
-//           padding: 12px 16px;
-//           border-radius: 10px;
-//           background: rgba(255,255,255,0.05);
-//           border: 1px solid rgba(255,255,255,0.1);
-//           color: #fff;
-//           font-size: 14px;
-//           font-family: 'Poppins', sans-serif;
-//           outline: none;
-//           transition: all 0.2s ease;
-//         }
-//         .newsletter-input:focus {
-//           border-color: ${T.teal};
-//           box-shadow: 0 0 0 2px ${T.teal}30;
-//         }
-//         .book-btn {
-//           width: 100%;
-//           padding: 12px;
-//           border-radius: 10px;
-//           border: none;
-//           background: linear-gradient(135deg, ${T.teal}, ${T.tealDark});
-//           color: #000;
-//           font-weight: 700;
-//           font-size: 14px;
-//           cursor: pointer;
-//           transition: all 0.2s ease;
-//           margin-top: 12px;
-//         }
-//         .book-btn:hover {
-//           transform: translateY(-2px);
-//           box-shadow: 0 8px 20px ${T.teal}40;
-//         }
-//         @keyframes footerGlow {
-//           0%,100% { opacity: .03; }
-//           50%      { opacity: .07; }
-//         }
-//         @media (max-width: 1024px) {
-//           .footer-grid { grid-template-columns: repeat(3, 1fr) !important; }
-//         }
-//         @media (max-width: 768px) {
-//           .footer-grid { grid-template-columns: repeat(2, 1fr) !important; }
-//         }
-//         @media (max-width: 480px) {
-//           .footer-grid { grid-template-columns: 1fr !important; }
-//         }
-//       `}</style>
-
-//       {/* Background glow orbs */}
-//       <div style={{
-//         position: "absolute", width: 600, height: 600, borderRadius: "50%",
-//         background: `radial-gradient(circle, ${T.teal}18 0%, transparent 70%)`,
-//         top: -200, left: -150, pointerEvents: "none",
-//         animation: "footerGlow 6s ease-in-out infinite",
-//       }} />
-//       <div style={{
-//         position: "absolute", width: 400, height: 400, borderRadius: "50%",
-//         background: `radial-gradient(circle, ${T.tealDark}14 0%, transparent 70%)`,
-//         bottom: -100, right: -80, pointerEvents: "none",
-//         animation: "footerGlow 8s ease-in-out infinite",
-//         animationDelay: "2s",
-//       }} />
-
-//       {/* Main Footer - 5 Columns */}
-//       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "70px 32px 50px", position: "relative", zIndex: 1 }}>
-//         <div className="footer-grid" style={{
-//           display: "grid",
-//           gridTemplateColumns: "1.2fr 1.5fr 1.2fr 1fr 1.5fr",
-//           gap: 30,
-//         }}>
-          
-//           {/* COLUMN 1: Brand */}
-//           <div>
-//             <Link href="/" style={{ textDecoration: "none" }}>
-//               <Image
-//                 src="/NNCLOGO.jpg"
-//                 alt="NNC Digital Solutions"
-//                 width={160}
-//                 height={60}
-//                 style={{ 
-//                   objectFit: "contain",
-//                   borderRadius: "10px",
-//                   marginBottom: "16px"
-//                 }}
-//                 priority={false}
-//               />
-//             </Link>
-//             <p style={{
-//               color: "rgba(255,255,255,0.5)",
-//               fontSize: "13px",
-//               lineHeight: 1.7,
-//               marginBottom: "16px"
-//             }}>
-//               A subsidiary of <strong style={{ color: T.teal }}>Nakshatra Namaha Creations Pvt. Ltd.</strong>
-//             </p>
-            
-//             {/* Trust Badges */}
-//             <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "20px" }}>
-//               {TRUST_BADGES.map(badge => (
-//                 <span key={badge} className="badge">{badge}</span>
-//               ))}
-//             </div>
-
-//             {/* Social Links */}
-//             <div style={{ display: "flex", gap: "8px" }}>
-//               {SOCIALS.map(s => (
-//                 <a 
-//                   key={s.label} 
-//                   href={s.href} 
-//                   className="social-btn" 
-//                   target="_blank" 
-//                   rel="noopener noreferrer"
-//                   aria-label={s.label}
-//                 >
-//                   {s.icon}
-//                 </a>
-//               ))}
-//             </div>
-//           </div>
-
-//           {/* COLUMN 2: Services */}
-//           <div>
-//             <h3 className="footer-heading">Services</h3>
-//             <div style={{ display: "flex", flexDirection: "column" }}>
-//               {SERVICES.map(s => (
-//                 <Link key={s.href} href={s.href} className="footer-link" style={{ marginBottom: "10px" }}>
-//                   {s.label}
-//                 </Link>
-//               ))}
-//             </div>
-//           </div>
-
-//           {/* COLUMN 3: Industries */}
-//           <div>
-//             <h3 className="footer-heading">Industries</h3>
-//             <div style={{ display: "flex", flexDirection: "column" }}>
-//               {INDUSTRIES.map(i => (
-//                 <Link key={i.href} href={i.href} className="footer-link" style={{ marginBottom: "10px" }}>
-//                   {i.label}
-//                 </Link>
-//               ))}
-//             </div>
-//           </div>
-
-//           {/* COLUMN 4: Company */}
-//           <div>
-//             <h3 className="footer-heading">Company</h3>
-//             <div style={{ display: "flex", flexDirection: "column" }}>
-//               {COMPANY.map(c => (
-//                 c.external ? (
-//                   <a 
-//                     key={c.label} 
-//                     href={c.href} 
-//                     className="footer-link" 
-//                     style={{ marginBottom: "10px" }}
-//                     target="_blank" 
-//                     rel="noopener noreferrer"
-//                   >
-//                     {c.label} <span style={{ fontSize: "12px", opacity: 0.6 }}>↗</span>
-//                   </a>
-//                 ) : (
-//                   <Link key={c.href} href={c.href} className="footer-link" style={{ marginBottom: "10px" }}>
-//                     {c.label}
-//                   </Link>
-//                 )
-//               ))}
-//             </div>
-//           </div>
-
-//           {/* COLUMN 5: Contact */}
-//           <div>
-//             <h3 className="footer-heading">Contact</h3>
-            
-//             {/* Phone numbers */}
-//             <div style={{ marginBottom: "16px" }}>
-//               {CONTACTS.map(c => (
-//                 <div key={c.country} style={{ 
-//                   display: "flex", 
-//                   alignItems: "center", 
-//                   gap: "8px",
-//                   marginBottom: "10px"
-//                 }}>
-//                   <span style={{ fontSize: "16px" }}>{c.flag}</span>
-//                   <span style={{ 
-//                     fontSize: "11px", 
-//                     fontWeight: 600,
-//                     color: "rgba(255,255,255,0.4)",
-//                     textTransform: "uppercase",
-//                     letterSpacing: "0.06em",
-//                     width: "45px"
-//                   }}>
-//                     {c.country}:
-//                   </span>
-//                   <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} style={{
-//                     color: T.teal,
-//                     fontSize: "13px",
-//                     fontWeight: 600,
-//                     textDecoration: "none"
-//                   }}>
-//                     {c.phone}
-//                   </a>
-//                 </div>
-//               ))}
-//             </div>
-
-//             {/* Email */}
-//             <div style={{ 
-//               display: "flex", 
-//               alignItems: "center", 
-//               gap: "8px",
-//               marginBottom: "20px"
-//             }}>
-//               <span style={{ fontSize: "16px" }}>✉️</span>
-//               <a href="mailto:hello@nncdigital.com" style={{
-//                 color: T.teal,
-//                 fontSize: "13px",
-//                 fontWeight: 600,
-//                 textDecoration: "none"
-//               }}>
-//                 hello@nncdigital.com
-//               </a>
-//             </div>
-
-//             {/* Book a Free Call Button */}
-//             <Link href="/contact">
-//               <button className="book-btn">
-//                 Book a Free Call →
-//               </button>
-//             </Link>
-
-//             {/* Newsletter */}
-//             <div style={{ marginTop: "20px" }}>
-//               <h4 style={{
-//                 color: "#fff",
-//                 fontSize: "13px",
-//                 fontWeight: 600,
-//                 marginBottom: "10px"
-//               }}>
-//                 Newsletter
-//               </h4>
-//               <div style={{ display: "flex", gap: "8px" }}>
-//                 <input
-//                   type="email"
-//                   placeholder="Your email"
-//                   className="newsletter-input"
-//                 />
-//                 <button style={{
-//                   padding: "0 16px",
-//                   borderRadius: "10px",
-//                   border: "none",
-//                   background: T.teal,
-//                   color: "#000",
-//                   fontWeight: 700,
-//                   fontSize: "14px",
-//                   cursor: "pointer",
-//                   whiteSpace: "nowrap"
-//                 }}>
-//                   Subscribe
-//                 </button>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Divider */}
-//       <div style={{ height: "1px", background: "rgba(255,255,255,.06)", margin: "0 32px" }} />
-
-//       {/* Footer Bottom Bar */}
-//       <div style={{ 
-//         maxWidth: 1280, 
-//         margin: "0 auto", 
-//         padding: "24px 32px",
-//         position: "relative",
-//         zIndex: 1
-//       }}>
-//         <div style={{
-//           display: "flex",
-//           alignItems: "center",
-//           justifyContent: "space-between",
-//           flexWrap: "wrap",
-//           gap: "16px"
-//         }}>
-//           {/* Copyright */}
-//           <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)" }}>
-//             © {year} NNC Digital Solutions. All rights reserved. | A{" "}
-//             <a 
-//               href="https://www.nakshatranamahacreations.com" 
-//               target="_blank" 
-//               rel="noopener noreferrer"
-//               style={{ color: T.teal, textDecoration: "none" }}
-//             >
-//               Nakshatra Namaha Creations Pvt. Ltd.
-//             </a> Company
-//           </div>
-
-//           {/* Legal Links */}
-//           <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
-//             <Link href="/privacy" className="footer-bottom-link">Privacy Policy</Link>
-//             <Link href="/terms" className="footer-bottom-link">Terms of Service</Link>
-//             <Link href="/cookies" className="footer-bottom-link">Cookie Policy</Link>
-//             <Link href="/sitemap" className="footer-bottom-link">Sitemap</Link>
-//           </div>
-//         </div>
-
-//         {/* Serving regions */}
-//         <div style={{
-//           marginTop: "16px",
-//           fontSize: "12px",
-//           color: "rgba(255,255,255,0.3)",
-//           display: "flex",
-//           alignItems: "center",
-//           gap: "8px",
-//           flexWrap: "wrap"
-//         }}>
-//           <span>🌍</span>
-//           <span>Serving businesses in Canada, United States, United Kingdom, UAE & Australia.</span>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// } 
-
-
-
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const T = {
@@ -493,10 +31,6 @@ const INDUSTRIES = [
   { label: "E-Commerce", href: "/industries/ecommerce" },
   { label: "Manufacturing", href: "/industries/manufacturing" },
   { label: "Professional Services", href: "/industries/professional-services" },
-  { label: "Education", href: "/industries/education" },
-  { label: "Logistics", href: "/industries/logistics" },
-  { label: "Finance", href: "/industries/finance" },
-  { label: "Hospitality", href: "/industries/hospitality" },
 ];
 
 const COMPANY = [
@@ -505,15 +39,47 @@ const COMPANY = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Careers", href: "/careers" },
-  { label: "Partner With Us", href: "/partner" },
+  { label: "Careers", href: "/hire-crm-developers" },
 ];
 
+// Social Media Icons with PNG images from public folder
 const SOCIALS = [
-  { label: "LinkedIn", href: "https://linkedin.com/company/nncdigital", icon: "in" },
-  { label: "Twitter", href: "https://twitter.com/nncdigital", icon: "𝕏" },
-  { label: "Instagram", href: "https://instagram.com/nncdigital", icon: "📷" },
-  { label: "YouTube", href: "https://youtube.com/@nncdigital", icon: "▶" },
+  { 
+    label: "LinkedIn", 
+    href: "https://linkedin.com/company/nncdigital", 
+    icon: "/linkdine.png",
+    isImage: true,
+    color: "#0077b5",
+    bgColor: "rgba(0,119,181,0.15)",
+    borderColor: "rgba(0,119,181,0.3)"
+  },
+  { 
+    label: "Twitter", 
+    href: "https://twitter.com/nncdigital", 
+    icon: "/twitter.png",
+    isImage: true,
+    color: "#1DA1F2",
+    bgColor: "rgba(29,161,242,0.15)",
+    borderColor: "rgba(29,161,242,0.3)"
+  },
+  { 
+    label: "Instagram", 
+    href: "https://instagram.com/nncdigital", 
+    icon: "/instagram.png",
+    isImage: true,
+    color: "#E4405F",
+    bgColor: "rgba(228,64,95,0.15)",
+    borderColor: "rgba(228,64,95,0.3)"
+  },
+  { 
+    label: "Facebook", 
+    href: "https://facebook.com/nncdigital", 
+    icon: "/facebook.png",
+    isImage: true,
+    color: "#1877F2",
+    bgColor: "rgba(24,119,242,0.15)",
+    borderColor: "rgba(24,119,242,0.3)"
+  },
 ];
 
 const CONTACTS = [
@@ -527,6 +93,18 @@ const TRUST_BADGES = ["GDPR Compliant", "PIPEDA Compliant", "CCPA Ready", "ISO C
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 480;
+  const isTablet = windowWidth > 480 && windowWidth <= 768;
+  const isLaptop = windowWidth > 768 && windowWidth <= 1024;
 
   return (
     <footer style={{
@@ -542,53 +120,72 @@ export default function Footer() {
         .footer-link {
           color: rgba(255,255,255,.6);
           text-decoration: none;
-          font-size: 14px;
+          font-size: ${isMobile ? '13px' : '14px'};
           font-weight: 400;
           transition: color .2s ease, transform .2s ease;
           line-height: 1.8;
           display: inline-block;
         }
         .footer-link:hover {
-          color: ${T.teal};
+          color: ${T.teal} !important;
           transform: translateX(4px);
         }
         .footer-heading {
           color: ${T.teal};
-          font-size: 13px;
+          font-size: ${isMobile ? '14px' : '15px'};
           font-weight: 700;
           letter-spacing: 0.08em;
           text-transform: uppercase;
-          margin-bottom: 18px;
+          margin-bottom: ${isMobile ? '12px' : '16px'};
+        }
+        .social-container {
+          display: flex;
+          flex-wrap: nowrap;
+          gap: ${isMobile ? '10px' : '12px'};
+          margin-top: ${isMobile ? '10px' : '15px'};
+          justify-content: flex-start;
+          width: 100%;
         }
         .social-btn {
-          width: 38px; height: 38px; border-radius: 10px;
-          display: flex; align-items: center; justify-content: center;
-          background: rgba(255,255,255,.05);
-          border: 1px solid rgba(255,255,255,.09);
-          color: rgba(255,255,255,.7);
-          cursor: pointer;
-          transition: all 0.2s ease;
+          width: ${isMobile ? '48px' : '52px'}; 
+          height: ${isMobile ? '48px' : '52px'}; 
+          border-radius: 50%;
+          display: flex; 
+          align-items: center; 
+          justify-content: center;
+          transition: all 0.3s ease;
           text-decoration: none;
-          font-size: 18px;
+          box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+          backdrop-filter: blur(5px);
+          border: 1px solid;
+          overflow: hidden;
+          flex-shrink: 0;
         }
         .social-btn:hover {
-          background: ${T.teal}20;
-          border-color: ${T.teal}60;
-          color: ${T.teal};
-          transform: translateY(-3px);
+          transform: translateY(-5px) scale(1.05);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.3) !important;
+        }
+        .social-icon-img {
+          width: ${isMobile ? '26px' : '30px'};
+          height: ${isMobile ? '26px' : '30px'};
+          object-fit: contain;
+          transition: all 0.3s ease;
+        }
+        .social-btn:hover .social-icon-img {
+          transform: scale(1.1);
         }
         .footer-bottom-link {
           color: rgba(255,255,255,.4);
-          font-size: 13px;
+          font-size: ${isMobile ? '11px' : '12px'};
           text-decoration: none;
           transition: color .2s ease;
         }
-        .footer-bottom-link:hover { color: ${T.teal}; }
+        .footer-bottom-link:hover { color: ${T.teal} !important; }
 
         .badge {
-          font-size: 11px;
+          font-size: ${isMobile ? '9px' : '11px'};
           font-weight: 600;
-          padding: 4px 10px;
+          padding: ${isMobile ? '3px 8px' : '4px 12px'};
           border-radius: 100px;
           background: rgba(0,201,167,0.08);
           border: 1px solid rgba(0,201,167,0.2);
@@ -601,35 +198,35 @@ export default function Footer() {
         .newsletter-input {
           flex: 1;
           min-width: 0;
-          padding: 11px 14px;
+          padding: ${isMobile ? '10px 12px' : '12px 16px'};
           border-radius: 10px;
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(255,255,255,0.1);
           color: #fff;
-          font-size: 13px;
+          font-size: ${isMobile ? '12px' : '14px'};
           font-family: 'Poppins', sans-serif;
           outline: none;
           transition: all 0.2s ease;
         }
         .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
         .newsletter-input:focus {
-          border-color: ${T.teal};
+          border-color: ${T.teal} !important;
           box-shadow: 0 0 0 2px ${T.teal}30;
         }
 
         .book-btn {
           width: 100%;
-          padding: 12px;
+          padding: ${isMobile ? '12px' : '14px'};
           border-radius: 10px;
           border: none;
           background: linear-gradient(135deg, ${T.teal}, ${T.tealDark});
           color: #000;
           font-weight: 700;
-          font-size: 14px;
+          font-size: ${isMobile ? '14px' : '15px'};
           font-family: 'Poppins', sans-serif;
           cursor: pointer;
           transition: all 0.2s ease;
-          margin-top: 12px;
+          margin-top: ${isMobile ? '8px' : '12px'};
         }
         .book-btn:hover {
           transform: translateY(-2px);
@@ -637,21 +234,35 @@ export default function Footer() {
         }
 
         .subscribe-btn {
-          padding: 0 14px;
+          padding: 0 ${isMobile ? '14px' : '16px'};
           border-radius: 10px;
           border: none;
           background: ${T.teal};
           color: #000;
           font-weight: 700;
-          font-size: 13px;
+          font-size: ${isMobile ? '12px' : '14px'};
           font-family: 'Poppins', sans-serif;
           cursor: pointer;
           white-space: nowrap;
-          height: 42px;
+          height: ${isMobile ? '42px' : '46px'};
           transition: background 0.2s;
           flex-shrink: 0;
         }
-        .subscribe-btn:hover { background: ${T.tealDark}; }
+        .subscribe-btn:hover { background: ${T.tealDark} !important; }
+
+        .address-block {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          margin-bottom: ${isMobile ? '12px' : '16px'};
+          color: rgba(255,255,255,.7);
+          font-size: ${isMobile ? '12px' : '14px'};
+          line-height: 1.6;
+        }
+        .address-icon {
+          font-size: ${isMobile ? '16px' : '18px'};
+          flex-shrink: 0;
+        }
 
         @keyframes footerGlow {
           0%,100% { opacity: .03; }
@@ -661,8 +272,15 @@ export default function Footer() {
         /* ── Footer main grid ── */
         .footer-grid {
           display: grid;
-          grid-template-columns: 1.2fr 1.5fr 1.2fr 1fr 1.5fr;
-          gap: 28px;
+          grid-template-columns: 1.5fr 1.2fr 1.2fr 1fr 1.8fr;
+          gap: ${isMobile ? '20px' : isTablet ? '24px' : '30px'};
+        }
+
+        /* ── Brand column specific ── */
+        .footer-brand-left {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
         }
 
         /* ── Bottom bar ── */
@@ -671,80 +289,95 @@ export default function Footer() {
           align-items: center;
           justify-content: space-between;
           flex-wrap: wrap;
-          gap: 12px;
+          gap: ${isMobile ? '10px' : '12px'};
         }
         .footer-legal-links {
           display: flex;
-          gap: 20px;
+          gap: ${isMobile ? '12px' : '20px'};
           flex-wrap: wrap;
         }
 
-        /* ── 1280px: tighten gaps ── */
+        /* Responsive Breakpoints */
         @media (max-width: 1280px) {
-          .footer-grid { gap: 20px; }
+          .footer-grid { gap: 25px; }
         }
 
-        /* ── 1024px: 3-col ── */
         @media (max-width: 1024px) {
           .footer-grid {
             grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
           }
-          /* Brand spans full row at top */
           .footer-col-brand {
             grid-column: 1 / -1;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            gap: 30px;
             align-items: start;
-            padding-bottom: 24px;
+            padding-bottom: 25px;
             border-bottom: 1px solid rgba(255,255,255,0.06);
           }
-          .footer-brand-left { }
-          .footer-brand-right { }
+          .footer-brand-left {
+            width: 100%;
+          }
+          .social-container {
+            margin-top: 15px;
+          }
         }
 
-        /* ── 768px: 2-col ── */
         @media (max-width: 768px) {
           .footer-grid {
             grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
           }
           .footer-col-brand {
             grid-column: 1 / -1;
             grid-template-columns: 1fr;
+            gap: 20px;
           }
           .footer-bottom-bar {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
+            text-align: center;
           }
           .footer-legal-links {
-            gap: 14px;
+            justify-content: center;
+            gap: 15px;
           }
         }
 
-        /* ── 480px: 1-col ── */
         @media (max-width: 480px) {
           .footer-grid {
             grid-template-columns: 1fr;
+            gap: 25px;
           }
           .footer-col-brand {
             grid-column: 1;
           }
           .footer-legal-links {
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
+            align-items: center;
+          }
+          .phone-row {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 5px !important;
+          }
+          .social-container {
+            justify-content: center;
           }
         }
       `}</style>
 
       {/* Background glow orbs */}
       <div style={{
-        position: "absolute", width: 600, height: 600, borderRadius: "50%",
+        position: "absolute", width: isMobile ? 300 : 600, height: isMobile ? 300 : 600, borderRadius: "50%",
         background: `radial-gradient(circle, ${T.teal}18 0%, transparent 70%)`,
         top: -200, left: -150, pointerEvents: "none",
         animation: "footerGlow 6s ease-in-out infinite",
       }} />
       <div style={{
-        position: "absolute", width: 400, height: 400, borderRadius: "50%",
+        position: "absolute", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%",
         background: `radial-gradient(circle, ${T.tealDark}14 0%, transparent 70%)`,
         bottom: -100, right: -80, pointerEvents: "none",
         animation: "footerGlow 8s ease-in-out infinite",
@@ -752,42 +385,84 @@ export default function Footer() {
       }} />
 
       {/* ── Main Footer ── */}
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "clamp(40px,6vw,70px) clamp(16px,3vw,32px) clamp(32px,5vw,50px)", position: "relative", zIndex: 1 }}>
+      <div style={{ 
+        maxWidth: 1280, 
+        margin: "0 auto", 
+        padding: isMobile ? "40px 20px 30px" : isTablet ? "50px 30px 40px" : "70px 40px 50px", 
+        position: "relative", 
+        zIndex: 1 
+      }}>
         <div className="footer-grid">
 
-          {/* COLUMN 1: Brand — spans full row on ≤1024 via CSS */}
+          {/* COLUMN 1: Brand */}
           <div className="footer-col-brand">
             <div className="footer-brand-left">
               <Link href="/" style={{ textDecoration: "none" }}>
                 <Image
                   src="/NNCLOGO.jpg"
                   alt="NNC Digital Solutions"
-                  width={150}
-                  height={56}
-                  style={{ objectFit: "contain", borderRadius: "10px", marginBottom: "14px" }}
+                  width={isMobile ? 140 : 160}
+                  height={isMobile ? 50 : 58}
+                  style={{ objectFit: "contain", borderRadius: "10px", marginBottom: isMobile ? "15px" : "20px" }}
                   priority={false}
                 />
               </Link>
-              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", lineHeight: 1.7, marginBottom: "14px" }}>
+              <p style={{ 
+                color: "rgba(255,255,255,0.5)", 
+                fontSize: isMobile ? '13px' : '14px', 
+                lineHeight: 1.7, 
+                marginBottom: isMobile ? "15px" : "20px",
+                maxWidth: "300px"
+              }}>
                 A subsidiary of <strong style={{ color: T.teal }}>Nakshatra Namaha Creations Pvt. Ltd.</strong>
               </p>
               {/* Trust Badges */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "7px", marginBottom: "18px" }}>
+              <div style={{ 
+                display: "flex", 
+                flexWrap: "wrap", 
+                gap: isMobile ? "6px" : "8px", 
+                marginBottom: isMobile ? "15px" : "20px" 
+              }}>
                 {TRUST_BADGES.map(badge => (
                   <span key={badge} className="badge">{badge}</span>
                 ))}
               </div>
-              {/* Socials */}
-              <div style={{ display: "flex", gap: "8px" }}>
+              {/* Social Media Icons - One Line */}
+              <div className="social-container">
                 {SOCIALS.map(s => (
-                  <a key={s.label} href={s.href} className="social-btn" target="_blank" rel="noopener noreferrer" aria-label={s.label}>
-                    {s.icon}
+                  <a 
+                    key={s.label} 
+                    href={s.href} 
+                    className="social-btn" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label={s.label}
+                    style={{ 
+                      background: s.bgColor,
+                      borderColor: s.borderColor,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = s.color;
+                      e.currentTarget.style.borderColor = s.color;
+                      e.currentTarget.style.boxShadow = `0 15px 30px ${s.color}80`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = s.bgColor;
+                      e.currentTarget.style.borderColor = s.borderColor;
+                      e.currentTarget.style.boxShadow = '0 6px 16px rgba(0,0,0,0.2)';
+                    }}
+                  >
+                    <Image 
+                      src={s.icon} 
+                      alt={s.label}
+                      width={isMobile ? 26 : 30}
+                      height={isMobile ? 26 : 30}
+                      className="social-icon-img"
+                    />
                   </a>
                 ))}
               </div>
             </div>
-
-            {/* On ≤1024 we show contact inline next to brand. On ≤768 it becomes its own row below. */}
             <div className="footer-brand-right" style={{ display: "none" }} />
           </div>
 
@@ -795,8 +470,8 @@ export default function Footer() {
           <div>
             <h3 className="footer-heading">Services</h3>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              {SERVICES.map(s => (
-                <Link key={s.href} href={s.href} className="footer-link" style={{ marginBottom: "8px" }}>
+              {SERVICES.slice(0, isMobile ? 5 : 9).map(s => (
+                <Link key={s.href} href={s.href} className="footer-link" style={{ marginBottom: isMobile ? "8px" : "10px" }}>
                   {s.label}
                 </Link>
               ))}
@@ -808,7 +483,7 @@ export default function Footer() {
             <h3 className="footer-heading">Industries</h3>
             <div style={{ display: "flex", flexDirection: "column" }}>
               {INDUSTRIES.map(i => (
-                <Link key={i.href} href={i.href} className="footer-link" style={{ marginBottom: "8px" }}>
+                <Link key={i.href} href={i.href} className="footer-link" style={{ marginBottom: isMobile ? "8px" : "10px" }}>
                   {i.label}
                 </Link>
               ))}
@@ -821,11 +496,11 @@ export default function Footer() {
             <div style={{ display: "flex", flexDirection: "column" }}>
               {COMPANY.map(c => (
                 c.external ? (
-                  <a key={c.label} href={c.href} className="footer-link" style={{ marginBottom: "8px" }} target="_blank" rel="noopener noreferrer">
-                    {c.label} <span style={{ fontSize: "12px", opacity: 0.6 }}>↗</span>
+                  <a key={c.label} href={c.href} className="footer-link" style={{ marginBottom: isMobile ? "8px" : "10px" }} target="_blank" rel="noopener noreferrer">
+                    {c.label} <span style={{ fontSize: isMobile ? "10px" : "12px", opacity: 0.6 }}>↗</span>
                   </a>
                 ) : (
-                  <Link key={c.href} href={c.href} className="footer-link" style={{ marginBottom: "8px" }}>
+                  <Link key={c.href} href={c.href} className="footer-link" style={{ marginBottom: isMobile ? "8px" : "10px" }}>
                     {c.label}
                   </Link>
                 )
@@ -837,20 +512,43 @@ export default function Footer() {
           <div>
             <h3 className="footer-heading">Contact</h3>
 
+            {/* Address Section */}
+            <div className="address-block">
+              <span className="address-icon">📍</span>
+              <span>
+                <strong style={{ color: T.teal }}>Headquarters:</strong><br />
+                50 Philip Ave, Guelph, ON N1E 1R4, Canada
+              </span>
+            </div>
+
             {/* Phone numbers */}
-            <div style={{ marginBottom: "16px" }}>
+            <div style={{ marginBottom: isMobile ? "15px" : "20px" }}>
               {CONTACTS.map(c => (
-                <div key={c.country} style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
-                  <span style={{ fontSize: "15px" }}>{c.flag}</span>
+                <div key={c.country} className="phone-row" style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  gap: isMobile ? "8px" : "10px", 
+                  marginBottom: isMobile ? "8px" : "10px",
+                  flexWrap: isMobile ? "wrap" : "nowrap"
+                }}>
+                  <span style={{ fontSize: isMobile ? "16px" : "18px" }}>{c.flag}</span>
                   <span style={{
-                    fontSize: "11px", fontWeight: 600,
+                    fontSize: isMobile ? "11px" : "12px", 
+                    fontWeight: 600,
                     color: "rgba(255,255,255,0.4)",
-                    textTransform: "uppercase", letterSpacing: "0.06em",
-                    minWidth: "42px",
+                    textTransform: "uppercase", 
+                    letterSpacing: "0.06em",
+                    minWidth: isMobile ? "40px" : "45px",
                   }}>
                     {c.country}:
                   </span>
-                  <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} style={{ color: T.teal, fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
+                  <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} style={{ 
+                    color: T.teal, 
+                    fontSize: isMobile ? '13px' : '14px', 
+                    fontWeight: 600, 
+                    textDecoration: "none",
+                    wordBreak: "break-word"
+                  }}>
                     {c.phone}
                   </a>
                 </div>
@@ -858,9 +556,21 @@ export default function Footer() {
             </div>
 
             {/* Email */}
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "18px" }}>
-              <span style={{ fontSize: "15px" }}>✉️</span>
-              <a href="mailto:hello@nncdigital.com" style={{ color: T.teal, fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
+            <div style={{ 
+              display: "flex", 
+              alignItems: "center", 
+              gap: "10px", 
+              marginBottom: isMobile ? "15px" : "20px",
+              flexWrap: isMobile ? "wrap" : "nowrap"
+            }}>
+              <span style={{ fontSize: isMobile ? "16px" : "18px" }}>✉️</span>
+              <a href="mailto:hello@nncdigital.com" style={{ 
+                color: T.teal, 
+                fontSize: isMobile ? '13px' : '14px', 
+                fontWeight: 600, 
+                textDecoration: "none",
+                wordBreak: "break-word"
+              }}>
                 hello@nncdigital.com
               </a>
             </div>
@@ -871,13 +581,23 @@ export default function Footer() {
             </Link>
 
             {/* Newsletter */}
-            <div style={{ marginTop: "20px" }}>
-              <h4 style={{ color: "#fff", fontSize: "13px", fontWeight: 600, marginBottom: "10px" }}>
+            <div style={{ marginTop: isMobile ? "20px" : "25px" }}>
+              <h4 style={{ 
+                color: "#fff", 
+                fontSize: isMobile ? '13px' : '14px', 
+                fontWeight: 600, 
+                marginBottom: isMobile ? "10px" : "12px" 
+              }}>
                 Newsletter
               </h4>
-              <div style={{ display: "flex", gap: "8px", alignItems: "stretch" }}>
+              <div style={{ 
+                display: "flex", 
+                gap: isMobile ? "8px" : "10px", 
+                alignItems: "stretch",
+                flexDirection: isMobile ? "column" : "row"
+              }}>
                 <input type="email" placeholder="Your email" className="newsletter-input" />
-                <button className="subscribe-btn">Subscribe</button>
+                <button className="subscribe-btn" style={{ width: isMobile ? "100%" : "auto" }}>Subscribe</button>
               </div>
             </div>
           </div>
@@ -889,10 +609,21 @@ export default function Footer() {
       <div style={{ height: "1px", background: "rgba(255,255,255,.06)", margin: "0 clamp(16px,3vw,32px)" }} />
 
       {/* ── Bottom Bar ── */}
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "20px clamp(16px,3vw,32px) 24px", position: "relative", zIndex: 1 }}>
+      <div style={{ 
+        maxWidth: 1280, 
+        margin: "0 auto", 
+        padding: isMobile ? "25px 20px 30px" : "25px 40px 30px", 
+        position: "relative", 
+        zIndex: 1 
+      }}>
         <div className="footer-bottom-bar">
           {/* Copyright */}
-          <div style={{ fontSize: "13px", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>
+          <div style={{ 
+            fontSize: isMobile ? '12px' : '13px', 
+            color: "rgba(255,255,255,0.4)", 
+            lineHeight: 1.6,
+            textAlign: isMobile ? "center" : "left"
+          }}>
             © {year} NNC Digital Solutions. All rights reserved. | A{" "}
             <a href="https://www.nakshatranamahacreations.com" target="_blank" rel="noopener noreferrer"
               style={{ color: T.teal, textDecoration: "none" }}>
@@ -902,20 +633,42 @@ export default function Footer() {
 
           {/* Legal links */}
           <div className="footer-legal-links">
-            <Link href="/privacy" className="footer-bottom-link">Privacy Policy</Link>
-            <Link href="/terms" className="footer-bottom-link">Terms of Service</Link>
-            <Link href="/cookies" className="footer-bottom-link">Cookie Policy</Link>
+            <Link href="/privacy-policy" className="footer-bottom-link">Privacy Policy</Link>
+            <Link href="/termsofservice" className="footer-bottom-link">Terms of Service</Link>
+            <Link href="/cookies-policy" className="footer-bottom-link">Cookie Policy</Link>
             <Link href="/sitemap" className="footer-bottom-link">Sitemap</Link>
           </div>
         </div>
 
         {/* Serving regions */}
         <div style={{
-          marginTop: "14px", fontSize: "12px", color: "rgba(255,255,255,0.3)",
-          display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap", lineHeight: 1.7,
+          marginTop: isMobile ? "15px" : "20px", 
+          fontSize: isMobile ? '11px' : '12px', 
+          color: "rgba(255,255,255,0.3)",
+          display: "flex", 
+          alignItems: "center", 
+          gap: "8px", 
+          flexWrap: "wrap", 
+          lineHeight: 1.7,
+          justifyContent: isMobile ? "center" : "flex-start"
         }}>
           <span>🌍</span>
           <span>Serving businesses in Canada, United States, United Kingdom, UAE & Australia.</span>
+        </div>
+
+        {/* Address in bottom bar */}
+        <div style={{
+          marginTop: isMobile ? "8px" : "10px", 
+          fontSize: isMobile ? '10px' : '11px', 
+          color: "rgba(255,255,255,0.2)",
+          display: "flex", 
+          alignItems: "center", 
+          gap: "8px", 
+          flexWrap: "wrap",
+          justifyContent: isMobile ? "center" : "flex-start"
+        }}>
+          <span>🏢</span>
+          <span>50 Philip Ave, Guelph, ON N1E 1R4, Canada</span>
         </div>
       </div>
     </footer>
