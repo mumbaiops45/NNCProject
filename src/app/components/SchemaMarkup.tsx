@@ -1,22 +1,36 @@
-"use client";
+// app/components/SchemaMarkup.tsx
 import Script from "next/script";
 
-export default function SchemaMarkup({ schema, id }: { schema: any; id: string }) {
+interface SchemaMarkupProps {
+  schema: any;
+  id: string;
+}
+
+export default function SchemaMarkup({ schema, id }: SchemaMarkupProps) {
+  // Handle array of schemas
   if (Array.isArray(schema)) {
     return (
       <>
-        {schema.map((s, i) => (
-          <Script key={i} id={`${id}-${i}`} type="application/ld+json">
-            {JSON.stringify(s)}
-          </Script>
+        {schema.map((s, index) => (
+          <Script
+            key={`${id}-${index}`}
+            id={`${id}-${index}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(s) }}
+            strategy="beforeInteractive"
+          />
         ))}
       </>
     );
   }
-  
+
+  // Single schema
   return (
-    <Script id={id} type="application/ld+json">
-      {JSON.stringify(schema)}
-    </Script>
+    <Script
+      id={id}
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      strategy="beforeInteractive"
+    />
   );
 }
