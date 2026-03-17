@@ -135,7 +135,7 @@ export default function CRMAccordion() {
 
   return (
     <section style={{
-      padding: "96px 48px",
+      padding: "50px 48px",
       background: "#030B18",
       position: "relative", overflow: "hidden",
       fontFamily: "'Poppins', sans-serif",

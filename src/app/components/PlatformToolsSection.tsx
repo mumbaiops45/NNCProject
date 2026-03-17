@@ -16,7 +16,7 @@ const TOOLS = [
 export default function PlatformToolsSection() {
   return (
     <section style={{
-      padding: "80px 48px",
+      padding: "10px 48px",
       background: "#030B18",
       position: "relative", overflow: "hidden",
       fontFamily: "'Poppins',sans-serif",

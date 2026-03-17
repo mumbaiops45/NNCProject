@@ -37,7 +37,7 @@ const BENEFITS = [
 export default function KeyBenefits() {
   return (
     <section style={{
-      padding: "88px 48px",
+      padding: "48px 48px",
       background: "linear-gradient(180deg,#030B18 0%,#061425 100%)",
       position: "relative", overflow: "hidden",
       fontFamily: "'Poppins',sans-serif",
@@ -136,43 +136,43 @@ export default function KeyBenefits() {
 
       {/* BG grid */}
       <div style={{
-        position:"absolute", inset:0, pointerEvents:"none", zIndex:0,
-        backgroundImage:"linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)",
-        backgroundSize:"56px 56px",
-      }}/>
+        position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0,
+        backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)",
+        backgroundSize: "56px 56px",
+      }} />
 
       {/* Glow */}
       <div style={{
-        position:"absolute", bottom:"0%", left:"50%", transform:"translateX(-50%)",
-        width:600, height:300, borderRadius:"50%",
-        background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",
-        pointerEvents:"none", zIndex:0,
-      }}/>
+        position: "absolute", bottom: "0%", left: "50%", transform: "translateX(-50%)",
+        width: 600, height: 300, borderRadius: "50%",
+        background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",
+        pointerEvents: "none", zIndex: 0,
+      }} />
 
-      <div style={{ maxWidth:1280, margin:"0 auto", position:"relative", zIndex:2 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
 
         {/* Heading */}
-        <div style={{ textAlign:"center", marginBottom:60 }}>
+        <div style={{ textAlign: "center", marginBottom: 60 }}>
           <div style={{
-            display:"inline-flex", alignItems:"center", gap:8,
-            background:"rgba(0,201,167,0.08)", border:"1px solid rgba(0,201,167,0.22)",
-            borderRadius:100, padding:"6px 18px", marginBottom:16,
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.22)",
+            borderRadius: 100, padding: "6px 18px", marginBottom: 16,
           }}>
-            <span style={{ width:6, height:6, borderRadius:"50%", background:TEAL, display:"block", boxShadow:`0 0 8px ${TEAL}` }}/>
-            <span style={{ color:TEAL, fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: TEAL, display: "block", boxShadow: `0 0 8px ${TEAL}` }} />
+            <span style={{ color: TEAL, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>
               Why It Matters
             </span>
           </div>
           <h2 style={{
-            fontSize:"clamp(26px,3vw,42px)", fontWeight:900, color:"#fff",
-            letterSpacing:"-0.02em", lineHeight:1.15, marginBottom:16,
+            fontSize: "clamp(26px,3vw,42px)", fontWeight: 900, color: "#fff",
+            letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: 16,
           }}>
             Key Benefits of{" "}
-            <span style={{ background:`linear-gradient(135deg,${TEAL},#1fd1b5)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+            <span style={{ background: `linear-gradient(135deg,${TEAL},#1fd1b5)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               CRM Development
             </span>
           </h2>
-          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:16, lineHeight:1.75, maxWidth:520, margin:"0 auto", fontWeight:400 }}>
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 16, lineHeight: 1.75, maxWidth: 520, margin: "0 auto", fontWeight: 400 }}>
             Here&apos;s what you gain with advanced, next-gen CRM development services.
           </p>
         </div>
@@ -180,21 +180,21 @@ export default function KeyBenefits() {
         {/* 2×2 grid */}
         <div className="kb-grid">
           {BENEFITS.map((b, i) => (
-            <div key={i} className="kb-card" style={{ animationDelay:`${i * 0.12}s` }}>
+            <div key={i} className="kb-card" style={{ animationDelay: `${i * 0.12}s` }}>
 
               {/* Number */}
               <div className="kb-num">{b.num}</div>
 
               {/* Content */}
-              <div style={{ flex:1 }}>
-                <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:10 }}>
-                  <span style={{ fontSize:22 }}>{b.icon}</span>
-                  <h3 style={{ color:"#fff", fontSize:19, fontWeight:800, margin:0 }}>{b.title}</h3>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                  <span style={{ fontSize: 22 }}>{b.icon}</span>
+                  <h3 style={{ color: "#fff", fontSize: 19, fontWeight: 800, margin: 0 }}>{b.title}</h3>
                 </div>
-                <p style={{ color:"rgba(255,255,255,0.52)", fontSize:14.5, lineHeight:1.75, margin:"0 0 14px", fontWeight:400 }}>
+                <p style={{ color: "rgba(255,255,255,0.52)", fontSize: 14.5, lineHeight: 1.75, margin: "0 0 14px", fontWeight: 400 }}>
                   {b.desc}
                 </p>
-                <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                   {b.tags.map(tag => (
                     <span key={tag} className="kb-tag">{tag}</span>
                   ))}
@@ -206,16 +206,18 @@ export default function KeyBenefits() {
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ textAlign:"center", marginTop:52 }}>
-          <button style={{
-            padding:"14px 36px", borderRadius:10, border:"none",
-            background:`linear-gradient(135deg,${TEAL},${TEAL_DARK})`,
-            color:"#000", fontWeight:700, fontSize:15,
-            fontFamily:"'Poppins',sans-serif", cursor:"pointer",
-            transition:"transform .2s, box-shadow .2s",
-          }}
-            onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-2px)";(e.currentTarget as HTMLElement).style.boxShadow="0 12px 32px rgba(0,201,167,0.4)";}}
-            onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.boxShadow="";}}
+        <div style={{ textAlign: "center", marginTop: 52 }}>
+          <button
+            onClick={() => window.open('/crm-development', '_blank')}
+            style={{
+              padding: "14px 36px", borderRadius: 10, border: "none",
+              background: `linear-gradient(135deg,${TEAL},${TEAL_DARK})`,
+              color: "#000", fontWeight: 700, fontSize: 15,
+              fontFamily: "'Poppins',sans-serif", cursor: "pointer",
+              transition: "transform .2s, box-shadow .2s",
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 12px 32px rgba(0,201,167,0.4)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.boxShadow = ""; }}
           >
             Start Your CRM Journey →
           </button>

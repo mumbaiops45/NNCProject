@@ -1,7 +1,8 @@
 "use client";
 
-const TEAL      = "#00C9A7";
+const TEAL = "#00C9A7";
 const TEAL_DARK = "#00a07a";
+import Link from "next/link";
 
 const SERVICES = [
   {
@@ -81,7 +82,7 @@ const SERVICES = [
 export default function ServicesSection() {
   return (
     <section style={{
-      padding: "80px 48px 48px",
+      padding: "40px 48px 48px",
       background: "linear-gradient(180deg, #030B18 0%, #061425 60%, #030B18 100%)",
       position: "relative",
       overflow: "hidden",
@@ -313,25 +314,27 @@ export default function ServicesSection() {
 
         {/* Bottom CTA */}
         <div style={{ textAlign: "center", marginTop: 56 }}>
-          <button style={{
-            padding: "14px 36px", borderRadius: 10,
-            background: `linear-gradient(135deg, ${TEAL}, ${TEAL_DARK})`,
-            border: "none", color: "#000", fontWeight: 700,
-            fontSize: 15, fontFamily: "'Poppins', sans-serif",
-            cursor: "pointer",
-            transition: "transform 0.2s, box-shadow 0.2s",
-          }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 12px 36px rgba(0,201,167,0.4)";
+          <Link href="/crm-development">
+            <button style={{
+              padding: "14px 36px", borderRadius: 10,
+              background: `linear-gradient(135deg, ${TEAL}, ${TEAL_DARK})`,
+              border: "none", color: "#000", fontWeight: 700,
+              fontSize: 15, fontFamily: "'Poppins', sans-serif",
+              cursor: "pointer",
+              transition: "transform 0.2s, box-shadow 0.2s",
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
-            }}
-          >
-            View All Services →
-          </button>
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(-2px)";
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 12px 36px rgba(0,201,167,0.4)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.transform = "translateY(0)";
+                (e.currentTarget as HTMLButtonElement).style.boxShadow = "none";
+              }}
+            >
+              View CRM Development →
+            </button>
+          </Link>
         </div>
 
       </div>

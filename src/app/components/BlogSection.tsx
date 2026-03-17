@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { T } from "./tokens";
 import Reveal from "./Reveal";
 
@@ -11,6 +12,7 @@ const BLOGS = [
     readTime: "5 min read",
     gradient: `linear-gradient(135deg, ${T.teal}22, ${T.tealDark}44)`,
     accent: T.teal,
+    slug: "why-off-the-shelf-crms-fail",
   },
   {
     tag: "Automation",
@@ -20,6 +22,7 @@ const BLOGS = [
     readTime: "6 min read",
     gradient: `linear-gradient(135deg, #1a3a6b33, #0a1f4488)`,
     accent: "#4f9cff",
+    slug: "business-processes-to-automate",
   },
   {
     tag: "Digital Growth",
@@ -29,13 +32,18 @@ const BLOGS = [
     readTime: "7 min read",
     gradient: `linear-gradient(135deg, #2d1b6933, #1a0f4488)`,
     accent: "#a78bfa",
+    slug: "gdpr-pipeda-ccpa-compliance",
   },
 ];
 
 export default function BlogSection() {
+  const handleBlogClick = (slug: string) => {
+    window.location.href = `/blog/${slug}`;
+  };
+
   return (
     <section style={{
-      padding: "100px 48px",
+      padding: "40px 48px",
       background: T.navy0,
       fontFamily: "'Outfit', sans-serif",
     }}>
@@ -86,6 +94,7 @@ export default function BlogSection() {
             <Reveal key={i} delay={0.08 * i}>
               <div
                 className="blog-card"
+                onClick={() => handleBlogClick(b.slug)}
                 style={{
                   background: "rgba(255,255,255,.03)",
                   border: "1px solid rgba(255,255,255,.08)",
@@ -163,25 +172,27 @@ export default function BlogSection() {
 
         {/* View all */}
         <Reveal delay={0.3} style={{ textAlign: "center", marginTop: 52 }}>
-          <button style={{
-            padding: "13px 36px", borderRadius: 10,
-            background: "transparent",
-            border: `1px solid rgba(0,201,167,.4)`,
-            color: T.teal, fontWeight: 700, fontSize: 14,
-            fontFamily: "'Outfit',sans-serif", cursor: "pointer",
-            transition: "background .2s ease, border-color .2s ease",
-          }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,201,167,.08)";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = T.teal;
+          <Link href="/blog">
+            <button style={{
+              padding: "13px 36px", borderRadius: 10,
+              background: "transparent",
+              border: `1px solid rgba(0,201,167,.4)`,
+              color: T.teal, fontWeight: 700, fontSize: 14,
+              fontFamily: "'Outfit',sans-serif", cursor: "pointer",
+              transition: "background .2s ease, border-color .2s ease",
             }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = "transparent";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,201,167,.4)";
-            }}
-          >
-            View All Articles →
-          </button>
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = "rgba(0,201,167,.08)";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = T.teal;
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLButtonElement).style.background = "transparent";
+                (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(0,201,167,.4)";
+              }}
+            >
+              View All Articles →
+            </button>
+          </Link>
         </Reveal>
 
       </div>

@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 
-const TEAL      = "#00C9A7";
+const TEAL = "#00C9A7";
 const TEAL_DARK = "#00a07a";
 
 const LEFT_ITEMS = [
@@ -116,12 +117,12 @@ function AccItem({
 }
 
 export default function HireCRMDev() {
-  const [leftOpen,  setLeftOpen]  = useState<number | null>(0);
+  const [leftOpen, setLeftOpen] = useState<number | null>(0);
   const [rightOpen, setRightOpen] = useState<number | null>(0);
 
   return (
     <section style={{
-      padding: "80px 48px",
+      padding: "50px 48px",
       background: "linear-gradient(180deg,#010812 0%,#030B18 100%)",
       position: "relative", overflow: "hidden",
       fontFamily: "'Poppins',sans-serif",
@@ -147,7 +148,28 @@ export default function HireCRMDev() {
 
         @media (max-width: 768px) {
           .hcd-grid { grid-template-columns: 1fr !important; }
-          .hcd-btns { flex-direction: column !important; }
+          .hcd-btns { 
+            flex-direction: column !important;
+            align-items: stretch !important;
+            width: 100% !important;
+            max-width: 320px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            gap: 12px !important;
+          }
+          .hcd-btns a {
+            width: 100% !important;
+          }
+          .hcd-cta-btn,
+          .hcd-outline-btn {
+            width: 100% !important;
+            padding: 14px 20px !important;
+            font-size: 14px !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
         }
         @media (max-width: 480px) {
           .hcd-section { padding: 56px 20px !important; }
@@ -155,50 +177,50 @@ export default function HireCRMDev() {
       `}</style>
 
       {/* Glow orbs */}
-      <div style={{ position:"absolute", top:"10%", left:"5%", width:400, height:400, borderRadius:"50%", background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents:"none", zIndex:0 }}/>
-      <div style={{ position:"absolute", bottom:"10%", right:"5%", width:300, height:300, borderRadius:"50%", background:"radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%)", pointerEvents:"none", zIndex:0 }}/>
+      <div style={{ position: "absolute", top: "10%", left: "5%", width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+      <div style={{ position: "absolute", bottom: "10%", right: "5%", width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
 
-      <div style={{ maxWidth:1280, margin:"0 auto", position:"relative", zIndex:2 }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
 
         {/* Heading */}
-        <div style={{ textAlign:"center", marginBottom:56 }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
           <div style={{
-            display:"inline-flex", alignItems:"center", gap:8,
-            background:"rgba(0,201,167,0.08)", border:"1px solid rgba(0,201,167,0.22)",
-            borderRadius:100, padding:"6px 18px", marginBottom:16,
+            display: "inline-flex", alignItems: "center", gap: 8,
+            background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.22)",
+            borderRadius: 100, padding: "6px 18px", marginBottom: 16,
           }}>
-            <span style={{ width:6, height:6, borderRadius:"50%", background:TEAL, display:"block", boxShadow:`0 0 8px ${TEAL}` }}/>
-            <span style={{ color:TEAL, fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase" }}>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: TEAL, display: "block", boxShadow: `0 0 8px ${TEAL}` }} />
+            <span style={{ color: TEAL, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>
               Hire Developers
             </span>
           </div>
           <h2 style={{
-            fontSize:"clamp(24px,3vw,40px)", fontWeight:900, color:"#fff",
-            letterSpacing:"-0.02em", lineHeight:1.15, marginBottom:16,
+            fontSize: "clamp(24px,3vw,40px)", fontWeight: 900, color: "#fff",
+            letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: 16,
           }}>
             Hire CRM Software Developers{" "}
-            <span style={{ background:`linear-gradient(135deg,${TEAL},#1fd1b5)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
+            <span style={{ background: `linear-gradient(135deg,${TEAL},#1fd1b5)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Tailored to Your Needs
             </span>
           </h2>
-          <p style={{ color:"rgba(255,255,255,0.45)", fontSize:16, lineHeight:1.75, maxWidth:560, margin:"0 auto", fontWeight:400 }}>
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 16, lineHeight: 1.75, maxWidth: 560, margin: "0 auto", fontWeight: 400 }}>
             Whether you&apos;re an enterprise, agency, or fast-scaling start-up — we have the right CRM developer for your exact challenge.
           </p>
         </div>
 
         {/* Column labels */}
-        <div className="hcd-grid" style={{ marginBottom:16 }}>
-          <p style={{ color:TEAL, fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase" }}>
+        <div className="hcd-grid" style={{ marginBottom: 16 }}>
+          <p style={{ color: TEAL, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>
             By Business Type
           </p>
-          <p style={{ color:TEAL, fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase" }}>
+          <p style={{ color: TEAL, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>
             By CRM Type
           </p>
         </div>
 
         {/* Two-column accordion */}
         <div className="hcd-grid">
-          <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {LEFT_ITEMS.map((item, i) => (
               <AccItem
                 key={item.title}
@@ -209,7 +231,7 @@ export default function HireCRMDev() {
               />
             ))}
           </div>
-          <div style={{ display:"flex", flexDirection:"column", gap:12 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {RIGHT_ITEMS.map((item, i) => (
               <AccItem
                 key={item.title}
@@ -223,24 +245,29 @@ export default function HireCRMDev() {
         </div>
 
         {/* Bottom CTA */}
-        <div className="hcd-btns" style={{ display:"flex", gap:16, marginTop:48, justifyContent:"center", flexWrap:"wrap" }}>
-          <button className="hcd-cta-btn" style={{
-            padding:"14px 32px", borderRadius:10, border:"none",
-            background:`linear-gradient(135deg,${TEAL},${TEAL_DARK})`,
-            color:"#000", fontWeight:700, fontSize:15,
-            fontFamily:"'Poppins',sans-serif", cursor:"pointer",
-          }}>
-            📅 Hire a CRM Developer
-          </button>
-          <button className="hcd-outline-btn" style={{
-            padding:"14px 32px", borderRadius:10,
-            border:"1.5px solid rgba(0,201,167,0.35)",
-            background:"transparent", color:TEAL,
-            fontWeight:600, fontSize:15,
-            fontFamily:"'Poppins',sans-serif", cursor:"pointer",
-          }}>
-            View Pricing →
-          </button>
+        <div className="hcd-btns" style={{ display: "flex", gap: 16, marginTop: 48, justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/hire-crm-developers">
+            <button className="hcd-cta-btn" style={{
+              padding: "14px 32px", borderRadius: 10, border: "none",
+              background: `linear-gradient(135deg,${TEAL},${TEAL_DARK})`,
+              color: "#000", fontWeight: 700, fontSize: 15,
+              fontFamily: "'Poppins',sans-serif", cursor: "pointer",
+            }}>
+              📅 Hire a CRM Developer
+            </button>
+          </Link>
+
+          <Link href="/pricing">
+            <button className="hcd-outline-btn" style={{
+              padding: "14px 32px", borderRadius: 10,
+              border: "1.5px solid rgba(0,201,167,0.35)",
+              background: "transparent", color: TEAL,
+              fontWeight: 600, fontSize: 15,
+              fontFamily: "'Poppins',sans-serif", cursor: "pointer",
+            }}>
+              View Pricing →
+            </button>
+          </Link>
         </div>
 
       </div>

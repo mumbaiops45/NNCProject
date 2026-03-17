@@ -49,7 +49,7 @@ export default function WhyChooseUs() {
 
   return (
     <section style={{
-      padding: "88px 48px",
+      padding: "40px 48px 60px", // 👈 Changed from "88px 48px" to "40px 48px 60px" (reduced top from 88px to 40px)
       background: "linear-gradient(180deg,#030B18 0%,#061425 100%)",
       position: "relative", overflow: "hidden",
       fontFamily: "'Poppins',sans-serif",
@@ -114,10 +114,11 @@ export default function WhyChooseUs() {
 
         @media (max-width: 960px) {
           .wcu-layout { grid-template-columns: 1fr !important; gap: 44px !important; }
+          section { padding: 32px 24px 48px !important; } /* 👈 Added responsive padding for tablet */
         }
         @media (max-width: 640px) {
           .wcu-stats-grid { grid-template-columns: 1fr 1fr !important; }
-          .wcu-section { padding: 60px 20px !important; }
+          section { padding: 24px 16px 40px !important; } /* 👈 Added responsive padding for mobile */
         }
       `}</style>
 
@@ -133,7 +134,7 @@ export default function WhyChooseUs() {
             <div style={{
               display:"inline-flex", alignItems:"center", gap:8,
               background:"rgba(0,201,167,0.08)", border:"1px solid rgba(0,201,167,0.22)",
-              borderRadius:100, padding:"6px 18px", marginBottom:20,
+              borderRadius:100, padding:"6px 18px", marginBottom:16, // 👈 Reduced from 20 to 16
             }}>
               <span style={{ width:6, height:6, borderRadius:"50%", background:TEAL, display:"block", boxShadow:`0 0 8px ${TEAL}` }}/>
               <span style={{ color:TEAL, fontSize:11, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase" }}>
@@ -143,7 +144,7 @@ export default function WhyChooseUs() {
 
             <h2 style={{
               fontSize:"clamp(24px,2.8vw,38px)", fontWeight:900, color:"#fff",
-              letterSpacing:"-0.02em", lineHeight:1.15, marginBottom:20,
+              letterSpacing:"-0.02em", lineHeight:1.15, marginBottom:16, // 👈 Reduced from 20 to 16
             }}>
               Why Choose Us as Your{" "}
               <span style={{ background:`linear-gradient(135deg,${TEAL},#1fd1b5)`, WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>
@@ -151,7 +152,7 @@ export default function WhyChooseUs() {
               </span>{" "}Agency?
             </h2>
 
-            <p style={{ color:"rgba(255,255,255,0.55)", fontSize:15, lineHeight:1.8, marginBottom:16, fontWeight:400 }}>
+            <p style={{ color:"rgba(255,255,255,0.55)", fontSize:15, lineHeight:1.8, marginBottom:14, fontWeight:400 }}> {/* 👈 Reduced from 16 to 14 */}
               NNC Digital Solutions is backed by{" "}
               <span style={{ color:"#fff", fontWeight:600 }}>Nakshatra Namaha Creations Pvt. Ltd.</span>{" "}
               — one of Bangalore&apos;s most respected digital studios with{" "}
@@ -160,12 +161,12 @@ export default function WhyChooseUs() {
               <span style={{ color:TEAL, fontWeight:600 }}>565+ projects delivered</span>{" "}
               across India.
             </p>
-            <p style={{ color:"rgba(255,255,255,0.55)", fontSize:15, lineHeight:1.8, marginBottom:32, fontWeight:400 }}>
+            <p style={{ color:"rgba(255,255,255,0.55)", fontSize:15, lineHeight:1.8, marginBottom:28, fontWeight:400 }}> {/* 👈 Reduced from 32 to 28 */}
               To serve growing businesses in North America and the United Kingdom, we launched NNC Digital as our international arm — bringing the same proven technical expertise and client-first culture to the Canadian, US, and UK markets.
             </p>
 
             {/* Bullet points */}
-            <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:36 }}>
+            <div style={{ display:"flex", flexDirection:"column", gap:10, marginBottom:32 }}> {/* 👈 Reduced from 36 to 32 */}
               {POINTS.map((p, i) => (
                 <div key={i} className="wcu-point">
                   <span style={{ fontSize:18, flexShrink:0 }}>{p.icon}</span>
@@ -251,7 +252,7 @@ export default function WhyChooseUs() {
             </div>
 
             {/* Badges below video */}
-            <div style={{ display:"flex", gap:10, marginTop:20, flexWrap:"wrap" }}>
+            <div style={{ display:"flex", gap:10, marginTop:16, flexWrap:"wrap" }}> {/* 👈 Reduced from 20 to 16 */}
               {["🇨🇦 Canada","🇺🇸 USA","🇬🇧 UK","🇮🇳 India"].map(b => (
                 <span key={b} style={{
                   padding:"6px 14px", borderRadius:100,
@@ -265,7 +266,7 @@ export default function WhyChooseUs() {
             </div>
 
             {/* CTA below */}
-            <div style={{ display:"flex", gap:12, marginTop:24 }}>
+            <div style={{ display:"flex", gap:12, marginTop:20 }}> {/* 👈 Reduced from 24 to 20 */}
               <button style={{
                 flex:1, padding:"13px 20px", borderRadius:10, border:"none",
                 background:`linear-gradient(135deg,${TEAL},${TEAL_DARK})`,

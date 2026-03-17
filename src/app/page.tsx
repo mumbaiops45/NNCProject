@@ -1,39 +1,4 @@
-// // src/app/page.tsx
-// import Navbar          from "./components/Navbar";
-// import HeroSection     from "./components/HeroSection";
-// import ClientLogos     from "./components/ClientLogos";
-// import SuccessStories  from "./components/SuccessStories";
-// import ServicesSection from "./components/ServicesSection";
-// import KeyBenefits     from "./components/KeyBenefits";
-// import PlatformTools   from "./components/PlatformTools";
-// import AIFeatures      from "./components/AIFeatures";
-// import CTABanner       from "./components/CTABanner";
-// import WhyChooseUs     from "./components/WhyChooseUs";
-// import GlobalPresence  from "./components/GlobalPresence";
-// import FAQSection      from "./components/FAQSection";
-// import ContactForm     from "./components/ContactForm";
 
-// export default function Home() {
-//   return (
-//     <main>
-//       <Navbar />
-//       <HeroSection />
-//       <ClientLogos />
-//       <SuccessStories />
-//       <ServicesSection />
-//       <KeyBenefits />
-//       <PlatformTools />
-//       <AIFeatures />
-//       <CTABanner />
-//       <WhyChooseUs />
-//       <GlobalPresence />
-//       <FAQSection />
-//       <ContactForm />
-//     </main>
-//   );
-// }
-
-// src/app/page.tsx
 import Navbar          from "./components/Navbar";
 import HeroSection     from "./components/HeroSection";
 import StatsBar        from "./components/StatsBar";

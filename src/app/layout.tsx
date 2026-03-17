@@ -3,7 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 import Footer from "./components/Footer";
-import ScrollToTopButton from "@/styles/ScrollToTopButton";
+// import ScrollToTopButton from "@/styles/ScrollToTopButton";
+// import CookieConsentPopup from "./cookies-policy/cookiespop";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
         {/* Footer for all pages */}
         <Footer />
         {/* <ScrollToTopButton /> */}
+        {/* <CookieConsentPopup/> */}
 
       </body>
     </html>

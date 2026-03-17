@@ -19,7 +19,7 @@ export default function GlobalPresence() {
   const [tab, setTab] = useState<"intl"|"india">("intl");
 
   return (
-    <section style={{ padding:"100px 48px", background:T.navy1, fontFamily:"'Outfit',sans-serif" }}>
+    <section style={{ padding:"40px 48px", background:T.navy1, fontFamily:"'Outfit',sans-serif" }}>
       <style>{`
         .loc-card { transition: transform .22s ease, border-color .22s ease; }
         .loc-card:hover { transform:translateY(-5px); border-color:#00C9A7 !important; }
