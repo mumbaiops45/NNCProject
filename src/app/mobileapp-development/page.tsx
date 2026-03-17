@@ -4,7 +4,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-
+import { getServiceSchema } from "../lib/schema";        // ✅ ADD THIS
+import SchemaMarkup from "../components/SchemaMarkup";
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const T = "#00C9A7";
 const TD = "#00a07a";
@@ -247,90 +248,95 @@ function AccItem({ item, open, toggle, isMobile }: { item: { icon: string; title
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function MobileAppDevelopmentPage() {
-  const [windowWidth, setWindowWidth] = useState(0);
+    // ✅ ADD THIS SERVICE SCHEMA RIGHT HERE
+    const serviceSchema = getServiceSchema(
+      "Mobile App Development",
+      "Custom Mobile App Development for iOS and Android in Canada, USA & UK. We build fast, reliable applications designed around real user behaviour — from MVP to enterprise scale."
+    );
+    const [windowWidth, setWindowWidth] = useState(0);
 
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    useEffect(() => {
+      setWindowWidth(window.innerWidth);
+      const handleResize = () => setWindowWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
-  const isMobile = windowWidth <= 640;
-  const isTablet = windowWidth > 640 && windowWidth <= 1024;
-  const isDesktop = windowWidth > 1024;
+    const isMobile = windowWidth <= 640;
+    const isTablet = windowWidth > 640 && windowWidth <= 1024;
+    const isDesktop = windowWidth > 1024;
 
-  const [form, setForm] = useState({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const setF = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setLoading(true); setTimeout(() => { setLoading(false); setSubmitted(true); }, 1200); };
+    const [form, setForm] = useState({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" });
+    const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const setF = (k: string, v: string) => setForm(f => ({ ...f, [k]: v }));
+    const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setLoading(true); setTimeout(() => { setLoading(false); setSubmitted(true); }, 1200); };
 
-  const [story, setStory] = useState(0);
-  const [accL, setAccL] = useState<number | null>(0);
-  const [accR, setAccR] = useState<number | null>(0);
-  const [hireL, setHireL] = useState<number | null>(0);
-  const [hireR, setHireR] = useState<number | null>(0);
-  const [faq, setFaq] = useState<number | null>(0);
-  const [gTab, setGTab] = useState<"int" | "india">("int");
+    const [story, setStory] = useState(0);
+    const [accL, setAccL] = useState<number | null>(0);
+    const [accR, setAccR] = useState<number | null>(0);
+    const [hireL, setHireL] = useState<number | null>(0);
+    const [hireR, setHireR] = useState<number | null>(0);
+    const [faq, setFaq] = useState<number | null>(0);
+    const [gTab, setGTab] = useState<"int" | "india">("int");
 
-  const [cForm, setCForm] = useState({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "" });
-  const [cSubmitted, setCSubmitted] = useState(false);
-  const [cLoading, setCLoading] = useState(false);
-  const setCF = (k: string, v: string) => setCForm(f => ({ ...f, [k]: v }));
-  const handleCSubmit = (e: React.FormEvent) => { e.preventDefault(); setCLoading(true); setTimeout(() => { setCLoading(false); setCSubmitted(true); }, 1200); };
+    const [cForm, setCForm] = useState({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "" });
+    const [cSubmitted, setCSubmitted] = useState(false);
+    const [cLoading, setCLoading] = useState(false);
+    const setCF = (k: string, v: string) => setCForm(f => ({ ...f, [k]: v }));
+    const handleCSubmit = (e: React.FormEvent) => { e.preventDefault(); setCLoading(true); setTimeout(() => { setCLoading(false); setCSubmitted(true); }, 1200); };
 
-  // Responsive input styles
-  const iS: React.CSSProperties = {
-    width: "100%",
-    padding: isMobile ? "10px 12px" : "11px 14px",
-    borderRadius: 9,
-    background: "rgba(255,255,255,0.07)",
-    border: "1px solid rgba(255,255,255,0.14)",
-    color: "#fff",
-    fontSize: isMobile ? "13px" : "13.5px",
-    fontFamily: "'Poppins',sans-serif",
-    outline: "none",
-    boxSizing: "border-box",
-    transition: "border-color .2s,background .2s"
-  };
-  
-  const iSLg: React.CSSProperties = {
-    ...iS,
-    padding: isMobile ? "12px 14px" : "13px 16px",
-    fontSize: isMobile ? "14px" : "14.5px"
-  };
+    // Responsive input styles
+    const iS: React.CSSProperties = {
+      width: "100%",
+      padding: isMobile ? "10px 12px" : "11px 14px",
+      borderRadius: 9,
+      background: "rgba(255,255,255,0.07)",
+      border: "1px solid rgba(255,255,255,0.14)",
+      color: "#fff",
+      fontSize: isMobile ? "13px" : "13.5px",
+      fontFamily: "'Poppins',sans-serif",
+      outline: "none",
+      boxSizing: "border-box",
+      transition: "border-color .2s,background .2s"
+    };
 
-  // Responsive section padding
-  const getSectionPadding = () => {
-    if (isMobile) return "40px 16px";
-    if (isTablet) return "60px 32px";
-    return "40px 48px";
-  };
+    const iSLg: React.CSSProperties = {
+      ...iS,
+      padding: isMobile ? "12px 14px" : "13px 16px",
+      fontSize: isMobile ? "14px" : "14.5px"
+    };
 
-  const getHeroPadding = () => {
-    if (isMobile) return "40px 16px 60px";
-    if (isTablet) return "80px 32px 80px";
-    return "90px 48px 80px";
-  };
+    // Responsive section padding
+    const getSectionPadding = () => {
+      if (isMobile) return "40px 16px";
+      if (isTablet) return "60px 32px";
+      return "40px 48px";
+    };
 
-  const getHeroFontSize = () => {
-    if (isMobile) return "28px";
-    if (isTablet) return "36px";
-    return "48px";
-  };
+    const getHeroPadding = () => {
+      if (isMobile) return "40px 16px 60px";
+      if (isTablet) return "80px 32px 80px";
+      return "90px 48px 80px";
+    };
 
-  const getGridColumns = (mobile: number, tablet: number, desktop: number) => {
-    if (isMobile) return `repeat(${mobile}, 1fr)`;
-    if (isTablet) return `repeat(${tablet}, 1fr)`;
-    return `repeat(${desktop}, 1fr)`;
-  };
+    const getHeroFontSize = () => {
+      if (isMobile) return "28px";
+      if (isTablet) return "36px";
+      return "48px";
+    };
 
-  return (
-    <>
-      <Navbar />
+    const getGridColumns = (mobile: number, tablet: number, desktop: number) => {
+      if (isMobile) return `repeat(${mobile}, 1fr)`;
+      if (isTablet) return `repeat(${tablet}, 1fr)`;
+      return `repeat(${desktop}, 1fr)`;
+    };
 
-      <style jsx global>{`
+    return (
+      <>
+        <Navbar />
+        <SchemaMarkup schema={serviceSchema} id="mobile-app-development-schema" />
+        <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -493,669 +499,669 @@ export default function MobileAppDevelopmentPage() {
         }
       `}</style>
 
-      {/* ══════════════════════════════════════════════════
+        {/* ══════════════════════════════════════════════════
     M1 — HERO
 ══════════════════════════════════════════════════ */}
-      <section style={{ padding: getHeroPadding(), background: `linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`, position: "relative", overflow: "hidden", minHeight: isMobile ? "auto" : "90vh", display: "flex", alignItems: "center" }}>
-        <Particles />
-        {/* <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, backgroundImage: `linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`, backgroundSize: "60px 60px" }} /> */}
-        {!isMobile && (
-          <>
-            <div style={{ position: "absolute", width: isTablet ? 500 : 650, height: isTablet ? 500 : 650, borderRadius: "50%", background: `radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`, top: "40%", left: "-10%", transform: "translateY(-50%)", animation: "heroPulse 8s ease-in-out infinite", pointerEvents: "none", zIndex: 1 }} />
-            <div style={{ position: "absolute", width: isTablet ? 300 : 400, height: isTablet ? 300 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)", top: "10%", right: "5%", animation: "heroPulse 10s ease-in-out infinite .5s", pointerEvents: "none", zIndex: 1 }} />
-            <div style={{ position: "absolute", width: isTablet ? 400 : 520, height: isTablet ? 400 : 520, borderRadius: "50%", border: "1px dashed rgba(0,201,167,.08)", top: "50%", left: "-12%", transform: "translateY(-50%)", animation: "heroSpin 55s linear infinite", pointerEvents: "none", zIndex: 1 }} />
-            {/* <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)", animation: "heroScan 7s linear infinite", pointerEvents: "none", zIndex: 2 }} /> */}
-          </>
-        )}
-
-        <div className="hero-layout">
-          {/* Left */}
-          <div style={{ animation: "heroFadeUp .7s ease both" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.25)", borderRadius: 100, padding: isMobile ? "6px 14px" : "7px 18px", marginBottom: isMobile ? 16 : 28, animation: "heroGlow 3s ease-in-out infinite" }}>
-              <span style={{ width: isMobile ? 6 : 7, height: isMobile ? 6 : 7, borderRadius: "50%", background: T, boxShadow: `0 0 10px ${T}`, animation: "heroBlink 1.4s ease-in-out infinite" }} />
-              <span style={{ color: T, fontSize: isMobile ? 10 : 11.5, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const }}>Mobile App Development — Canada, USA &amp; UK</span>
-            </div>
-            <h1 style={{ fontSize: getHeroFontSize(), fontWeight: 900, lineHeight: 1.12, marginBottom: isMobile ? 14 : 22, letterSpacing: "-0.025em", color: "#fff" }}>
-              Custom <GradText>Mobile App Development</GradText> for Businesses in Canada, USA &amp; UK
-            </h1>
-            <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "16.5px", lineHeight: 1.85, marginBottom: isMobile ? 18 : 28, maxWidth: 600 }}>
-              Your customers and your team live on mobile. We build iOS and Android applications that are fast, reliable, and designed around real user behaviour — from MVP to enterprise scale.
-            </p>
-
-            {/* Platform pills */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 16 : 28 }}>
-              {[{ i: "🍎", l: "iOS (Swift)" }, { i: "🤖", l: "Android (Kotlin)" }, { i: "⚡", l: "React Native" }, { i: "🦋", l: "Flutter" }, { i: "📦", l: "Offline-First" }].map(b => (
-                <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
-              ))}
-            </div>
-
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 36 }}>
-              {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
-                <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
-              ))}
-            </div>
-            <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
-              {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
-                <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}>
-                  <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,0.3)" }}>{p.label}</span><span style={{ color: T }}>{p.phone}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Hero Form */}
-          <div style={{ background: "rgba(8,20,40,0.85)", border: "1px solid rgba(0,201,167,0.22)", borderRadius: 20, padding: isMobile ? "24px 16px" : "32px 28px", backdropFilter: "blur(16px)", boxShadow: "0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,transparent,${T},transparent)` }} />
-            {submitted ? (
-              <div style={{ textAlign: "center", padding: isMobile ? "20px 0" : "40px 0" }}>
-                <div style={{ fontSize: isMobile ? 44 : 52, marginBottom: 16 }}>✅</div>
-                <h3 style={{ color: "#fff", fontSize: isMobile ? 18 : 20, fontWeight: 800, marginBottom: 10 }}>Request Received!</h3>
-                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 14, lineHeight: 1.7, marginBottom: 24 }}>We&apos;ll contact you within 24 hours with a free consultation.</p>
-                <Link href="/mobile-app-development">
-                  <button onClick={() => { setSubmitted(false); setForm({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" }); }} className="btn-teal" style={{ minWidth: "auto", padding: isMobile ? "10px 22px" : "11px 26px", fontSize: isMobile ? "13px" : "14px" }}>Send Another →</button>
-                </Link>
-              </div>
-            ) : (
-              <>
-                <div style={{ marginBottom: isMobile ? 14 : 22 }}>
-                  <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 4 }}>Free Consultation</p>
-                  <h2 style={{ color: "#fff", fontSize: isMobile ? 16 : 18, fontWeight: 800, margin: 0, lineHeight: 1.3 }}>Get a Free Mobile App Strategy Call</h2>
-                </div>
-                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-                  <div className="cf-name">
-                    <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>First Name *</label><input className="fi" required style={iS} placeholder="Jane" value={form.firstName} onChange={e => setF("firstName", e.target.value)} /></div>
-                    <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Last Name</label><input className="fi" style={iS} placeholder="Smith" value={form.lastName} onChange={e => setF("lastName", e.target.value)} /></div>
-                  </div>
-                  <div>
-                    <label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Phone</label>
-                    <div style={{ display: "flex", gap: 8, flexDirection: isMobile ? "column" : "row" }}>
-                      <select className="fi" style={{ ...iS, width: isMobile ? "100%" : 82, flexShrink: 0, padding: isMobile ? "10px 12px" : "11px 6px", cursor: "pointer" }} value={form.dialCode} onChange={e => setF("dialCode", e.target.value)}>
-                        {DIAL_CODES.map((d, i) => <option key={i} value={d.code}>{d.flag} {d.code}</option>)}
-                      </select>
-                      <input className="fi" style={iS} type="tel" placeholder="647 XXX XXXX" value={form.phone} onChange={e => setF("phone", e.target.value)} />
-                    </div>
-                  </div>
-                  <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Business Email *</label><input className="fi" required type="email" style={iS} placeholder="jane@company.com" value={form.email} onChange={e => setF("email", e.target.value)} /></div>
-                  <div>
-                    <label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Service</label>
-                    <select className="fi" style={{ ...iS, cursor: "pointer" }} value={form.service} onChange={e => setF("service", e.target.value)}>
-                      <option value="">Select service...</option>
-                      {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </div>
-                  <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Message</label><textarea className="fi" style={{ ...iS, minHeight: isMobile ? 70 : 76, resize: "vertical" as const }} placeholder="Tell us about your app idea..." value={form.message} onChange={e => setF("message", e.target.value)} /></div>
-                  <button className="btn-teal" type="submit" disabled={loading} style={{ marginTop: 4, opacity: loading ? 0.6 : 1, cursor: loading ? "wait" : "pointer", width: "100%" }}>
-                    {loading ? "Sending..." : "📱 Get Free App Consultation →"}
-                  </button>
-                  <p style={{ color: "rgba(255,255,255,0.28)", fontSize: isMobile ? 10 : 11, textAlign: "center", margin: 0 }}>🔒 Secure &amp; confidential. No spam, ever.</p>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M2 — CLIENT LOGOS
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: `1px solid rgba(0,201,167,.1)`, borderBottom: `1px solid rgba(0,201,167,.1)` }}>
-        <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
-          <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase" as const, marginBottom: 12 }}>Our Happy Clients</p>
-          <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
-            Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
-          </h2>
-        </div>
-        <div style={{ overflow: "hidden" }}>
-          <div className="cl-track">
-            {[...LOGOS, ...LOGOS].map((f, i) => (
-              <div
-                key={i}
-                style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}
-              >
-                <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* STATS BAR */}
-      <section style={{ position: "relative", overflow: "hidden", background: `linear-gradient(180deg,${N2} 0%,${N1} 60%,${N2} 100%)`, borderTop: `1px solid rgba(0,201,167,0.12)`, borderBottom: `1px solid rgba(0,201,167,0.12)`, padding: isMobile ? "50px 20px" : "72px 48px" }}>
-        <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent 0%,rgba(0,201,167,0.3) 50%,transparent 100%)", animation: "heroScan 4s linear infinite", pointerEvents: "none" }} />
-        <div className="stats-row">
-          {STATS_TOP.map((s, i) => (
-            <div key={i} className="card-hover" style={{ position: "relative", textAlign: "center", padding: isMobile ? "24px 16px" : "44px 28px", borderRadius: 20, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.2)", transition: "transform .3s,box-shadow .3s", cursor: "default", animation: `sbFadeUp .7s ease ${i * .12}s both` }}>
-              <div style={{ width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", fontSize: isMobile ? 20 : 24 }}>{s.icon}</div>
-              <div style={{ fontSize: isMobile ? "32px" : "48px", fontWeight: 900, lineHeight: 1, marginBottom: 8, background: "linear-gradient(135deg,#fff 30%,#00C9A7 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                <Counter to={s.val} sfx={s.sfx} />
-              </div>
-              <div style={{ fontSize: isMobile ? 13 : 15, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{s.label}</div>
-              <div style={{ fontSize: isMobile ? 11 : 12.5, color: "rgba(255,255,255,0.38)", fontWeight: 500 }}>{s.sub}</div>
-              <div style={{ position: "absolute", bottom: 0, left: "25%", right: "25%", height: 2, background: `linear-gradient(90deg,transparent,${T},transparent)`, borderRadius: 2, animation: `sbLineGrow .6s ease ${.5 + i * .1}s both` }} />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M3 — SUCCESS STORIES
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.02) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
-        <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
-            <SectionBadge label="Proven Results" />
-            <SectionH2>Mobile App <GradText>Success Stories</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, maxWidth: 500, margin: "0 auto" }}>Real results from real mobile apps built for businesses in Canada, USA &amp; UK.</p>
-          </div>
-          <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
-            {CASES.map((c, i) => (
-              <button key={i} className={`ss-tab${story === i ? " act" : ""}`} onClick={() => setStory(i)} style={{ padding: isMobile ? "8px 14px" : "10px 20px", fontSize: isMobile ? "12px" : "13.5px" }}><span>{c.icon}</span>{c.industry}</button>
-            ))}
-          </div>
-          <div key={story} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${CASES[story].tagBd}`, borderRadius: 24, overflow: "hidden", animation: "sbFadeUp .45s ease both" }}>
-            <div style={{ height: 3, background: `linear-gradient(90deg,transparent,${CASES[story].tagClr},transparent)` }} />
-            <div style={{ padding: isMobile ? "20px" : "36px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
-                <div style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, fontSize: isMobile ? 24 : 26, display: "flex", alignItems: "center", justifyContent: "center", background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}` }}>{CASES[story].icon}</div>
-                <span style={{ padding: isMobile ? "3px 12px" : "4px 14px", borderRadius: 100, fontSize: isMobile ? 10 : 12, fontWeight: 700, background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}`, color: CASES[story].tagClr, textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>{CASES[story].tag}</span>
-              </div>
-              <h3 style={{ color: "#fff", fontSize: isMobile ? "18px" : "22px", fontWeight: 800, marginBottom: isMobile ? 16 : 28, lineHeight: 1.3 }}>{CASES[story].title}</h3>
-              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 20, marginBottom: isMobile ? 24 : 32 }}>
-                {[{ label: "Challenge", text: CASES[story].challenge, icon: "⚠️" }, { label: "Solution", text: CASES[story].solution, icon: "💡" }].map(col => (
-                  <div key={col.label} style={{ padding: isMobile ? "14px" : "20px", borderRadius: 14, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                    <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 8 }}>{col.icon} {col.label}</p>
-                    <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, lineHeight: 1.7, margin: 0 }}>{col.text}</p>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: isMobile ? 10 : 14 }}>
-                {CASES[story].metrics.map((m, i) => (
-                  <div key={i} style={{ textAlign: "center", padding: isMobile ? "12px 8px" : "18px 14px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)", transition: "transform .25s,background .25s", cursor: "default" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)"; }}>
-                    <div style={{ fontSize: isMobile ? 18 : 22, marginBottom: 6 }}>{m.i}</div>
-                    <div style={{ fontSize: isMobile ? "20px" : "26px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{m.v}</div>
-                    <div style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 10 : 12, fontWeight: 500 }}>{m.l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 24 }}>
-            {CASES.map((_, i) => (
-              <button key={i} onClick={() => setStory(i)} style={{ width: story === i ? 24 : 8, height: 8, borderRadius: 100, background: story === i ? T : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer", transition: "all .3s ease" }} />
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 44 }}>
-            <Link href="/case-studies" className="btn-teal">View All Case Studies →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M4 — SERVICES
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
-            <SectionBadge label="What We Build" />
-            <SectionH2>Mobile App Development Services <GradText>We Offer</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 580, margin: "0 auto" }}>iOS, Android, and cross-platform app development for businesses across Canada, USA &amp; UK.</p>
-          </div>
-          <div className="svc-grid">
-            {SERVICES.map((s, i) => (
-              <Link key={s.title} href={`/services/${s.slug}`} style={{ textDecoration: "none" }}>
-                <div className="svc-card" style={{ padding: isMobile ? "20px" : "24px 20px" }}>
-                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-                    <div className="svc-icon" style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 22 : 24, flexShrink: 0 }}>{s.icon}</div>
-                    <span style={{ padding: "3px 10px", borderRadius: 100, fontSize: isMobile ? 9 : 10.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{s.tag}</span>
-                  </div>
-                  <h3 style={{ fontSize: isMobile ? "15px" : "17px", fontWeight: 700, color: "#fff", lineHeight: 1.3, margin: 0 }}>{s.title}</h3>
-                  <p style={{ fontSize: isMobile ? "12px" : "13.5px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: T, fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto" }}>Learn More <span>→</span></span>
-                </div>
-              </Link>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
-            <Link href="/services" className="btn-teal">View All Services →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M5 — KEY BENEFITS
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
-            <SectionBadge label="Why It Matters" />
-            <SectionH2>Key Benefits of <GradText>Mobile App Development</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Here&apos;s what you gain when your mobile app is built by a team that prioritises performance, integration, and long-term success.</p>
-          </div>
-          <div className="kb-grid">
-            {BENEFITS.map((b, i) => (
-              <div key={i} className="kb-card" style={{ padding: isMobile ? "16px" : "24px 20px", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 20 }}>
-                <div style={{ fontSize: isMobile ? "42px" : "52px", fontWeight: 900, lineHeight: 1, background: "linear-gradient(135deg,rgba(0,201,167,0.15) 0%,rgba(0,201,167,0.05) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", flexShrink: 0, width: isMobile ? "100%" : 72, textAlign: "center" }}>{b.num}</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}><span style={{ fontSize: isMobile ? 20 : 22 }}>{b.icon}</span><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>{b.title}</h3></div>
-                  <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: "0 0 12px" }}>{b.desc}</p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                    {b.tags.map(tag => <span key={tag} style={{ padding: "3px 8px", borderRadius: 100, fontSize: isMobile ? 9 : 10.5, fontWeight: 600, letterSpacing: ".06em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{tag}</span>)}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
-            <Link href="/contact" className="btn-teal">Start Your App Project →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M6 — PLATFORM TOOLS
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: N1, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: isMobile ? 300 : 600, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
-            <SectionBadge label="Our Tech Stack" />
-            <SectionH2>Leading Mobile Platform Tools <GradText>That We Use</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>A production-proven mobile stack — chosen for performance, reliability, and long-term maintainability.</p>
-          </div>
-          <div className="pt-grid">
-            {TOOLS.map((tool, i) => (
-              <div key={i} className="pt-card" style={{ background: tool.clr, border: `1px solid ${tool.bd}`, padding: isMobile ? "16px 12px" : "20px 16px" }}>
-                <div className="pt-icon" style={{ width: isMobile ? 48 : 56, height: isMobile ? 48 : 56, borderRadius: 15, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 24 : 26, marginBottom: isMobile ? 12 : 16, background: "rgba(255,255,255,0.05)", border: `1px solid ${tool.bd}`, transition: "transform .25s" }}>{tool.icon}</div>
-                <h3 style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 700, marginBottom: 6, lineHeight: 1.3 }}>{tool.name}</h3>
-                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "11px" : "13px", lineHeight: 1.6, margin: 0 }}>{tool.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    CAPABILITIES ACCORDION
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: N0, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", bottom: "10%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
-            <SectionBadge label="App Capabilities" />
-            <SectionH2>Everything Your Mobile App <GradText>Needs to Succeed</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, maxWidth: 520, margin: "0 auto" }}>Explore the full capability set we bring to every mobile app project.</p>
-          </div>
-          <div className="two-col">
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-              {ACCORDION_L.map((item, i) => <AccItem key={item.title} item={item} open={accL === i} toggle={() => setAccL(accL === i ? null : i)} isMobile={isMobile} />)}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-              {ACCORDION_R.map((item, i) => <AccItem key={item.title} item={item} open={accR === i} toggle={() => setAccR(accR === i ? null : i)} isMobile={isMobile} />)}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M7 — HIRE DEVELOPERS
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "10%", left: "5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
-            <SectionBadge label="Hire Developers" />
-            <SectionH2>Hire Mobile App Developers <GradText>Tailored to Your Needs</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>Whether you&apos;re launching an MVP, scaling an enterprise app, or extending your agency team — we have the right developer for your project.</p>
-          </div>
-          <div className="two-col" style={{ marginBottom: isMobile ? 12 : 16 }}>
-            <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>By Business Type</p>
-            <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>By App Type</p>
-          </div>
-          <div className="two-col">
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-              {HIRE_LEFT.map((item, i) => <AccItem key={item.title} item={item} open={hireL === i} toggle={() => setHireL(hireL === i ? null : i)} isMobile={isMobile} />)}
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-              {HIRE_RIGHT.map((item, i) => <AccItem key={item.title} item={item} open={hireR === i} toggle={() => setHireR(hireR === i ? null : i)} isMobile={isMobile} />)}
-            </div>
-          </div>
-          <div style={{ display: "flex", gap: isMobile ? 12 : 16, marginTop: isMobile ? 32 : 48, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/hire-developers" className="btn-teal">📱 Hire a Mobile Developer</Link>
-            <Link href="/pricing" className="btn-outline">View Pricing →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M8 — AI-POWERED
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "0%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 700, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ marginBottom: isMobile ? 32 : 40, maxWidth: 620, marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
-            <SectionBadge label="AI-Powered" />
-            <SectionH2>Leverage <GradText>AI-Powered Mobile</GradText> App Solutions</SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.8 }}>We build AI directly into your mobile app — personalisation, predictive retention, and intelligent automation from day one.</p>
-          </div>
-          <div className="two-col-wide">
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 12 : 16 }}>
-              {AI_FEATS.map((f, i) => (
-                <div key={i} className="ai-feat-card" style={{ display: "flex", gap: isMobile ? 12 : 18, alignItems: "flex-start", padding: isMobile ? "16px" : "24px 22px", borderRadius: 16, background: f.clr, border: `1px solid ${f.bd}`, transition: "transform .25s,box-shadow .25s", cursor: "default" }}>
-                  <div className="ai-icon-w" style={{ width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, borderRadius: 14, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 22 : 24, background: f.clr, border: `1px solid ${f.bd}`, transition: "transform .25s" }}>{f.icon}</div>
-                  <div>
-                    <h3 style={{ color: "#fff", fontSize: isMobile ? "15px" : "17px", fontWeight: 700, marginBottom: 6, lineHeight: 1.3 }}>{f.title}</h3>
-                    <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
-                  </div>
-                </div>
-              ))}
-              <Link href="/ai-solutions" className="btn-teal" style={{ marginTop: 8, alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 10 }}>🤖 Explore AI Mobile Solutions →</Link>
-            </div>
-
-            {/* AI Visual */}
-            <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", background: "linear-gradient(135deg,#0a1f38 0%,#061425 100%)", border: "1px solid rgba(0,201,167,0.15)", minHeight: isMobile ? "auto" : 460, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: isMobile ? "20px" : "36px 32px" }}>
-              <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,0.5),transparent)", animation: "aiScan 3s linear infinite" }} />
-              <div style={{ position: "absolute", top: "5%", right: "5%", width: isMobile ? 120 : 180, height: isMobile ? 120 : 180, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.12) 0%,transparent 70%)", animation: "aiPulse 4s ease-in-out infinite", pointerEvents: "none" }} />
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
-                  <div style={{ width: isMobile ? 8 : 10, height: isMobile ? 8 : 10, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 10px #22c55e" }} />
-                  <span style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" as const }}>AI Engine — Live</span>
-                </div>
-                {[{ label: "Personalisation accuracy", val: "95%", color: T }, { label: "Churn prediction model", val: "91%", color: "#818cf8" }, { label: "Push notification CTR", val: "38%", color: T }, { label: "In-app AI resolution", val: "87%", color: "#f59e0b" }].map((row, i) => (
-                  <div key={i} style={{ marginBottom: isMobile ? 10 : 16 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}><span style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 11 : 12.5, fontWeight: 500 }}>{row.label}</span><span style={{ color: row.color, fontSize: isMobile ? 11 : 12.5, fontWeight: 700 }}>{row.val}</span></div>
-                    <div style={{ height: 4, borderRadius: 4, background: "rgba(255,255,255,0.06)", overflow: "hidden" }}><div style={{ height: "100%", borderRadius: 4, background: `linear-gradient(90deg,${row.color},${row.color}88)`, width: row.val }} /></div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: isMobile ? 8 : 12, position: "relative", zIndex: 2, marginTop: isMobile ? 16 : 0 }}>
-                {[{ label: "Active Users", val: "48.2K", icon: "👥" }, { label: "Sessions/Day", val: "124K", icon: "📱" }, { label: "AI CSAT", val: "4.9★", icon: "⭐" }].map((m, i) => (
-                  <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: isMobile ? "10px 6px" : "14px 12px", textAlign: "center" }}>
-                    <div style={{ fontSize: isMobile ? 18 : 20, marginBottom: 4 }}>{m.icon}</div>
-                    <div style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 800, marginBottom: 2 }}>{m.val}</div>
-                    <div style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 500 }}>{m.label}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M9 — CTA BANNER
-══════════════════════════════════════════════════ */}
-      <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "50px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
-          <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-          <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 760, margin: "0 auto" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 100, padding: isMobile ? "5px 14px" : "6px 18px", marginBottom: 20 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "block" }} />
-              <span style={{ color: "#fff", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>Get Started Today</span>
-            </div>
-            <h2 style={{ fontSize: isMobile ? "24px" : isTablet ? "36px" : "42px", fontWeight: 900, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 16 }}>
-              Want Mobile App Solutions That Take Your<br />Business to the <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>Next Level?</span>
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.82)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "17px", lineHeight: 1.75, marginBottom: isMobile ? 28 : 32 }}>Connect with NNC Digital today — iOS, Android, or cross-platform. Let&apos;s build your app together.</p>
-            <div style={{ display: "flex", gap: isMobile ? 12 : 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/contact" className="btn-teal" style={{ background: "#fff", color: "#0055b3", minWidth: isMobile ? "100%" : "auto" }}>✦ Connect Now</Link>
-              <Link href="/book-consultation" className="btn-outline" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff", minWidth: isMobile ? "100%" : "auto" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#fff"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.1)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.5)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}>📅 Book a Free Call →</Link>
-            </div>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 13, marginTop: 20 }}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M10 — WHY CHOOSE US (VIDEO REMOVED)
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "20%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div className="two-col-wide">
-            <div>
-              <SectionBadge label="Our Story" />
-              <SectionH2>Why Choose Us as Your <GradText>Mobile App Development</GradText> Partner?</SectionH2>
-              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: 16 }}>NNC Digital Solutions is backed by <span style={{ color: "#fff", fontWeight: 600 }}>Nakshatra Namaha Creations Pvt. Ltd.</span> — one of Bangalore&apos;s most respected digital studios with <span style={{ color: T, fontWeight: 600 }}>8+ years of experience</span> and <span style={{ color: T, fontWeight: 600 }}>500+ mobile apps delivered</span>.</p>
-              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: isMobile ? 24 : 32 }}>We launched NNC Digital as our international arm — bringing the same proven mobile expertise to Canadian, US, and UK markets with transparent pricing, dedicated client-facing teams, and long-term partnership.</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 8 : 10, marginBottom: 30 }}>
-                {WCU_POINTS.map((p, i) => (
-                  <div key={i} className="wcu-point" style={{ display: "flex", alignItems: "center", gap: 14, padding: isMobile ? "12px 14px" : "14px 18px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", transition: "border-color .2s,background .2s,transform .2s", cursor: "default" }}>
-                    <span style={{ fontSize: isMobile ? 16 : 18, flexShrink: 0 }}>{p.icon}</span>
-                    <span style={{ color: "rgba(255,255,255,0.72)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{p.text}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="wcu-stats">
-                {WCU_STATS.map(st => (
-                  <div key={st.l} className="wcu-stat" style={{ textAlign: "center", padding: isMobile ? "14px 10px" : "22px 14px", borderRadius: 14, border: "1px solid rgba(0,201,167,0.15)", background: "rgba(0,201,167,0.05)", transition: "transform .25s,background .25s", cursor: "default" }}>
-                    <div style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}><Counter to={st.n} sfx={st.s} /></div>
-                    <div style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 500 }}>{st.l}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              {/* Video removed - replaced with CTA card */}
-              <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 24, padding: isMobile ? "30px 20px" : "40px 30px", textAlign: "center" }}>
-                <div style={{ fontSize: isMobile ? 48 : 64, marginBottom: 16 }}>📱</div>
-                <h3 style={{ color: "#fff", fontSize: isMobile ? "20px" : "24px", fontWeight: 800, marginBottom: 12 }}>Ready to Build Your Mobile App?</h3>
-                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? "14px" : "16px", lineHeight: 1.7, marginBottom: 24 }}>
-                  Join 500+ businesses that have launched successful iOS and Android apps with NNC Digital.
-                </p>
-                <Link href="/contact" className="btn-teal" style={{ width: isMobile ? "100%" : "auto" }}>Get Started Today →</Link>
-              </div>
-              <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
-                {["🇨🇦 Canada", "🇺🇸 USA", "🇬🇧 UK", "🇮🇳 India"].map(b => (
-                  <span key={b} style={{ padding: isMobile ? "5px 12px" : "6px 14px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.6)", fontSize: isMobile ? "11px" : "12.5px", fontWeight: 500 }}>{b}</span>
-                ))}
-              </div>
-              <div style={{ display: "flex", gap: isMobile ? 10 : 12, marginTop: 20 }}>
-                <Link href="/book-consultation" className="btn-teal" style={{ flex: 1, padding: isMobile ? "11px 16px" : "13px 20px" }}>📅 Book a Free App Strategy Call</Link>
-                <Link href="/portfolio" className="btn-outline" style={{ flex: 1, padding: isMobile ? "11px 16px" : "13px 20px" }}>Our Portfolio →</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M11 — GLOBAL PRESENCE
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
-            <SectionBadge label="Our Reach" />
-            <SectionH2>Global <GradText>Presence</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 500, margin: "0 auto" }}>Client-facing offices in North America &amp; the UK. Engineering headquarters in Bangalore, India.</p>
-          </div>
-          <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
-            {[{ key: "int", label: "🌍 North America & UK" }, { key: "india", label: "🇮🇳 India (Engineering HQ)" }].map(t => (
-              <button key={t.key} className="gp-tab" onClick={() => setGTab(t.key as "int" | "india")} style={{ padding: isMobile ? "8px 16px" : "11px 24px", fontSize: isMobile ? 12 : 14, fontWeight: 700, border: `1px solid ${gTab === t.key ? "rgba(0,201,167,0.5)" : "rgba(255,255,255,0.1)"}`, background: gTab === t.key ? "rgba(0,201,167,0.12)" : "rgba(255,255,255,0.03)", color: gTab === t.key ? T : "rgba(255,255,255,0.55)", cursor: "pointer", transition: "all .22s", boxShadow: gTab === t.key ? "0 4px 20px rgba(0,201,167,0.12)" : "none" }}>{t.label}</button>
-            ))}
-          </div>
-          {gTab === "int" && (
-            <div>
-              <div className="gp-offices" style={{ marginBottom: 24 }}>
-                {INT_OFFICES.map((o, i) => (
-                  <div key={i} className="gp-card" style={{ padding: isMobile ? "20px" : "28px 24px", borderRadius: 18, background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.18)", transition: "transform .25s,box-shadow .25s,border-color .25s", cursor: "default" }}>
-                    <div style={{ fontSize: isMobile ? 32 : 36, marginBottom: isMobile ? 10 : 14 }}>{o.flag}</div>
-                    <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, marginBottom: 4 }}>{o.city}</h3>
-                    <p style={{ color: T, fontSize: isMobile ? 10 : 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: isMobile ? 12 : 16 }}>{o.tz}</p>
-                    <a href={`tel:${o.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.7)", fontSize: isMobile ? 12 : 14, fontWeight: 600, textDecoration: "none", marginBottom: 8 }}>📞 {o.phone}</a>
-                    <a href={`mailto:${o.email}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 13, textDecoration: "none" }}>✉️ {o.email}</a>
-                  </div>
-                ))}
-              </div>
-              <div style={{ borderRadius: 14, padding: isMobile ? "16px 20px" : "20px 28px", background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}><div style={{ width: isMobile ? 8 : 10, height: isMobile ? 8 : 10, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} /><span style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, fontWeight: 500 }}>Available Mon–Fri, 9am–6pm in your time zone</span></div>
-                <a href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: T, fontSize: isMobile ? 12 : 14, fontWeight: 700, textDecoration: "none" }}>hello@nncdigital.com →</a>
-              </div>
-            </div>
+        <section style={{ padding: getHeroPadding(), background: `linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`, position: "relative", overflow: "hidden", minHeight: isMobile ? "auto" : "90vh", display: "flex", alignItems: "center" }}>
+          <Particles />
+          {/* <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1, backgroundImage: `linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`, backgroundSize: "60px 60px" }} /> */}
+          {!isMobile && (
+            <>
+              <div style={{ position: "absolute", width: isTablet ? 500 : 650, height: isTablet ? 500 : 650, borderRadius: "50%", background: `radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`, top: "40%", left: "-10%", transform: "translateY(-50%)", animation: "heroPulse 8s ease-in-out infinite", pointerEvents: "none", zIndex: 1 }} />
+              <div style={{ position: "absolute", width: isTablet ? 300 : 400, height: isTablet ? 300 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)", top: "10%", right: "5%", animation: "heroPulse 10s ease-in-out infinite .5s", pointerEvents: "none", zIndex: 1 }} />
+              <div style={{ position: "absolute", width: isTablet ? 400 : 520, height: isTablet ? 400 : 520, borderRadius: "50%", border: "1px dashed rgba(0,201,167,.08)", top: "50%", left: "-12%", transform: "translateY(-50%)", animation: "heroSpin 55s linear infinite", pointerEvents: "none", zIndex: 1 }} />
+              {/* <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)", animation: "heroScan 7s linear infinite", pointerEvents: "none", zIndex: 2 }} /> */}
+            </>
           )}
-          {gTab === "india" && (
-            <div>
-              <div style={{ borderRadius: 20, padding: isMobile ? "20px" : "36px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", marginBottom: 24 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, marginBottom: isMobile ? 20 : 24, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: isMobile ? 28 : 32 }}>🇮🇳</span>
-                  <div><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>Nakshatra Namaha Creations Pvt. Ltd.</h3><p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 12 : 13, margin: "4px 0 0" }}>Engineering &amp; Delivery HQ — Bangalore, India</p></div>
-                </div>
-                <div className="gp-ind-grid">
-                  {INDIA_OFFICES.map((o, i) => (
-                    <div key={i} className="gp-ind" style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, padding: isMobile ? "12px" : "16px 18px", borderRadius: 12, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transition: "background .2s,border-color .2s", cursor: "default" }}>
-                      <span style={{ fontSize: isMobile ? 20 : 22 }}>🇮🇳</span>
-                      <div><p style={{ color: "#fff", fontSize: isMobile ? "13px" : "14px", fontWeight: 700, margin: 0 }}>{o.city}</p><p style={{ color: "rgba(255,255,255,0.38)", fontSize: isMobile ? 10 : 12, margin: "2px 0 0" }}>{o.note}</p>{o.phone && <p style={{ color: T, fontSize: isMobile ? 11 : 12.5, fontWeight: 600, margin: "4px 0 0" }}>{o.phone}</p>}</div>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ marginTop: isMobile ? 16 : 24, paddingTop: isMobile ? 16 : 20, borderTop: "1px solid rgba(255,255,255,0.07)" }}><p style={{ color: "rgba(255,255,255,0.35)", fontSize: isMobile ? 12 : 13, margin: 0 }}>✉️ info@nakshatranamahacreations.com</p></div>
+
+          <div className="hero-layout">
+            {/* Left */}
+            <div style={{ animation: "heroFadeUp .7s ease both" }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.25)", borderRadius: 100, padding: isMobile ? "6px 14px" : "7px 18px", marginBottom: isMobile ? 16 : 28, animation: "heroGlow 3s ease-in-out infinite" }}>
+                <span style={{ width: isMobile ? 6 : 7, height: isMobile ? 6 : 7, borderRadius: "50%", background: T, boxShadow: `0 0 10px ${T}`, animation: "heroBlink 1.4s ease-in-out infinite" }} />
+                <span style={{ color: T, fontSize: isMobile ? 10 : 11.5, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const }}>Mobile App Development — Canada, USA &amp; UK</span>
               </div>
-              <div className="gp-india-stats">
-                {[{ n: "8+", l: "Years Active" }, { n: "500+", l: "Mobile Apps" }, { n: "100+", l: "Team Members" }, { n: "4", l: "India Offices" }].map((s, i) => (
-                  <div key={i} style={{ textAlign: "center", padding: isMobile ? "14px 8px" : "20px 12px", borderRadius: 14, background: "rgba(0,201,167,0.06)", border: "1px solid rgba(0,201,167,0.15)", transition: "transform .25s,background .25s", cursor: "default" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.12)"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}>
-                    <p style={{ fontSize: isMobile ? "22px" : "26px", fontWeight: 900, color: T, margin: 0 }}>{s.n}</p>
-                    <p style={{ fontSize: isMobile ? 9 : 11, color: "rgba(255,255,255,0.4)", margin: "4px 0 0", fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.06em" }}>{s.l}</p>
-                  </div>
+              <h1 style={{ fontSize: getHeroFontSize(), fontWeight: 900, lineHeight: 1.12, marginBottom: isMobile ? 14 : 22, letterSpacing: "-0.025em", color: "#fff" }}>
+                Custom <GradText>Mobile App Development</GradText> for Businesses in Canada, USA &amp; UK
+              </h1>
+              <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "16.5px", lineHeight: 1.85, marginBottom: isMobile ? 18 : 28, maxWidth: 600 }}>
+                Your customers and your team live on mobile. We build iOS and Android applications that are fast, reliable, and designed around real user behaviour — from MVP to enterprise scale.
+              </p>
+
+              {/* Platform pills */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 16 : 28 }}>
+                {[{ i: "🍎", l: "iOS (Swift)" }, { i: "🤖", l: "Android (Kotlin)" }, { i: "⚡", l: "React Native" }, { i: "🦋", l: "Flutter" }, { i: "📦", l: "Offline-First" }].map(b => (
+                  <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
+                ))}
+              </div>
+
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 36 }}>
+                {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
+                  <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
+                ))}
+              </div>
+              <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+                {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
+                  <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}>
+                    <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,0.3)" }}>{p.label}</span><span style={{ color: T }}>{p.phone}</span>
+                  </a>
                 ))}
               </div>
             </div>
-          )}
-        </div>
-      </section>
 
-      {/* ══════════════════════════════════════════════════
-    M12 — FAQ
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "30%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
-            <SectionBadge label="FAQs" />
-            <SectionH2>Frequently Asked <GradText>Questions</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Everything you need to know about mobile app development for businesses in Canada, USA &amp; UK.</p>
-          </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-            {FAQS.map((f, i) => (
-              <div key={i} className={`faq-item${faq === i ? " fopen" : ""}`} onClick={() => setFaq(faq === i ? null : i)}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 12 : 16, padding: isMobile ? "14px 16px" : "20px 22px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
-                    <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q{i + 1}</span>
-                    <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === i ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>{f.q}</span>
-                  </div>
-                  <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === i ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === i ? T : "rgba(255,255,255,0.12)"}`, color: faq === i ? "#000" : "rgba(255,255,255,0.5)", transform: faq === i ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
-                </div>
-                <div style={{ maxHeight: faq === i ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
-                  <p style={{ padding: isMobile ? "0 16px 14px 48px" : "0 22px 22px 60px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>{f.a}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 40 }}>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 12 : 14, marginBottom: 16 }}>Still have questions? We respond within 24 hours.</p>
-            <Link href="/contact" className="btn-teal">Ask Us Anything →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ══════════════════════════════════════════════════
-    M13 — CONTACT FORM
-══════════════════════════════════════════════════ */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N0} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 700, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
-            <SectionBadge label="Get In Touch" />
-            <SectionH2>Ready to Build <GradText>Your Mobile App?</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 540, margin: "0 auto" }}>Tell us about your app idea. We respond within 24 hours with a free consultation and honest advice.</p>
-          </div>
-          <div className="cf-grid">
-            {/* Left — Form */}
-            <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: isMobile ? "20px" : "36px" }}>
-              {cSubmitted ? (
+            {/* Hero Form */}
+            <div style={{ background: "rgba(8,20,40,0.85)", border: "1px solid rgba(0,201,167,0.22)", borderRadius: 20, padding: isMobile ? "24px 16px" : "32px 28px", backdropFilter: "blur(16px)", boxShadow: "0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,transparent,${T},transparent)` }} />
+              {submitted ? (
                 <div style={{ textAlign: "center", padding: isMobile ? "20px 0" : "40px 0" }}>
-                  <div style={{ fontSize: isMobile ? 48 : 56, marginBottom: 16 }}>✅</div>
-                  <h3 style={{ color: "#fff", fontSize: isMobile ? 18 : 22, fontWeight: 800, marginBottom: 8 }}>Message Sent!</h3>
-                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, marginBottom: 20 }}>Thank you — we&apos;ll respond within 24 hours with practical advice.</p>
+                  <div style={{ fontSize: isMobile ? 44 : 52, marginBottom: 16 }}>✅</div>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? 18 : 20, fontWeight: 800, marginBottom: 10 }}>Request Received!</h3>
+                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 14, lineHeight: 1.7, marginBottom: 24 }}>We&apos;ll contact you within 24 hours with a free consultation.</p>
                   <Link href="/mobile-app-development">
-                    <button onClick={() => { setCSubmitted(false); setCForm({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "" }); }} className="btn-teal" style={{ minWidth: "auto", padding: isMobile ? "10px 22px" : "12px 28px", fontSize: isMobile ? "13px" : "14px" }}>Send Another →</button>
+                    <button onClick={() => { setSubmitted(false); setForm({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" }); }} className="btn-teal" style={{ minWidth: "auto", padding: isMobile ? "10px 22px" : "11px 26px", fontSize: isMobile ? "13px" : "14px" }}>Send Another →</button>
                   </Link>
                 </div>
               ) : (
-                <form onSubmit={handleCSubmit}>
-                  <div className="cf-name" style={{ marginBottom: isMobile ? 12 : 16 }}>
-                    <div><label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Full Name *</label><input className="fi" required style={iSLg} placeholder="Jane Smith" value={cForm.name} onChange={e => setCF("name", e.target.value)} /></div>
+                <>
+                  <div style={{ marginBottom: isMobile ? 14 : 22 }}>
+                    <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 4 }}>Free Consultation</p>
+                    <h2 style={{ color: "#fff", fontSize: isMobile ? 16 : 18, fontWeight: 800, margin: 0, lineHeight: 1.3 }}>Get a Free Mobile App Strategy Call</h2>
+                  </div>
+                  <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+                    <div className="cf-name">
+                      <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>First Name *</label><input className="fi" required style={iS} placeholder="Jane" value={form.firstName} onChange={e => setF("firstName", e.target.value)} /></div>
+                      <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Last Name</label><input className="fi" style={iS} placeholder="Smith" value={form.lastName} onChange={e => setF("lastName", e.target.value)} /></div>
+                    </div>
                     <div>
-                      <label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Phone</label>
+                      <label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Phone</label>
                       <div style={{ display: "flex", gap: 8, flexDirection: isMobile ? "column" : "row" }}>
-                        <select className="fi" style={{ ...iSLg, width: isMobile ? "100%" : 90, flexShrink: 0, padding: isMobile ? "12px 14px" : "13px 8px", cursor: "pointer" }} value={cForm.dialCode} onChange={e => setCF("dialCode", e.target.value)}>
+                        <select className="fi" style={{ ...iS, width: isMobile ? "100%" : 82, flexShrink: 0, padding: isMobile ? "10px 12px" : "11px 6px", cursor: "pointer" }} value={form.dialCode} onChange={e => setF("dialCode", e.target.value)}>
                           {DIAL_CODES.map((d, i) => <option key={i} value={d.code}>{d.flag} {d.code}</option>)}
                         </select>
-                        <input className="fi" style={iSLg} type="tel" placeholder="647 XXX XXXX" value={cForm.phone} onChange={e => setCF("phone", e.target.value)} />
+                        <input className="fi" style={iS} type="tel" placeholder="647 XXX XXXX" value={form.phone} onChange={e => setF("phone", e.target.value)} />
                       </div>
                     </div>
-                  </div>
-                  <div style={{ marginBottom: isMobile ? 12 : 16 }}><label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Business Email *</label><input className="fi" required type="email" style={iSLg} placeholder="jane@yourcompany.com" value={cForm.email} onChange={e => setCF("email", e.target.value)} /></div>
-                  <div style={{ marginBottom: isMobile ? 12 : 16 }}>
-                    <label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Service of Interest</label>
-                    <select className="fi" style={{ ...iSLg, cursor: "pointer" }} value={cForm.service} onChange={e => setCF("service", e.target.value)}>
-                      <option value="">Select a service...</option>
-                      {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </div>
-                  <div style={{ marginBottom: 20 }}><label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Project Description</label><textarea className="fi" style={{ ...iSLg, minHeight: isMobile ? 80 : 110, resize: "vertical" as const }} placeholder="Describe your app idea, target users, platform, and timeline..." value={cForm.project} onChange={e => setCF("project", e.target.value)} /></div>
-                  <button className="btn-teal" type="submit" disabled={cLoading} style={{ width: "100%", opacity: cLoading ? 0.6 : 1, cursor: cLoading ? "wait" : "pointer" }}>{cLoading ? "Sending..." : "Submit — Get Free App Consultation →"}</button>
-                  <p style={{ color: "rgba(255,255,255,0.3)", fontSize: isMobile ? 10 : 11.5, textAlign: "center", marginTop: 12 }}>🔒 Your information is 100% secure and never shared.</p>
-                </form>
+                    <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Business Email *</label><input className="fi" required type="email" style={iS} placeholder="jane@company.com" value={form.email} onChange={e => setF("email", e.target.value)} /></div>
+                    <div>
+                      <label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Service</label>
+                      <select className="fi" style={{ ...iS, cursor: "pointer" }} value={form.service} onChange={e => setF("service", e.target.value)}>
+                        <option value="">Select service...</option>
+                        {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
+                      </select>
+                    </div>
+                    <div><label style={{ display: "block", fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Message</label><textarea className="fi" style={{ ...iS, minHeight: isMobile ? 70 : 76, resize: "vertical" as const }} placeholder="Tell us about your app idea..." value={form.message} onChange={e => setF("message", e.target.value)} /></div>
+                    <button className="btn-teal" type="submit" disabled={loading} style={{ marginTop: 4, opacity: loading ? 0.6 : 1, cursor: loading ? "wait" : "pointer", width: "100%" }}>
+                      {loading ? "Sending..." : "📱 Get Free App Consultation →"}
+                    </button>
+                    <p style={{ color: "rgba(255,255,255,0.28)", fontSize: isMobile ? 10 : 11, textAlign: "center", margin: 0 }}>🔒 Secure &amp; confidential. No spam, ever.</p>
+                  </form>
+                </>
               )}
             </div>
+          </div>
+        </section>
 
-            {/* Right — Info */}
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 16 : 20 }}>
-              <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.18)", borderRadius: 18, padding: isMobile ? "20px" : "28px 26px" }}>
-                <h3 style={{ color: "#fff", fontSize: isMobile ? "15px" : "16px", fontWeight: 800, marginBottom: isMobile ? 14 : 18 }}>What Happens After You Submit?</h3>
-                {[{ s: "1", text: "We review your app brief within a few hours — no bots." }, { s: "2", text: "A senior mobile developer calls you within 24 hours." }, { s: "3", text: "We send a free scoping document with timeline & fixed cost." }, { s: "4", text: "You decide — no pressure, no obligation." }].map((s, i) => (
-                  <div key={i} style={{ display: "flex", gap: isMobile ? 10 : 14, alignItems: "flex-start", marginBottom: i < 3 ? (isMobile ? 12 : 16) : 0, padding: isMobile ? "8px 12px" : "12px 14px", borderRadius: 10, background: "rgba(255,255,255,0.03)", transition: "background .2s", cursor: "default" }}
-                    onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.07)"}
-                    onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)"}>
-                    <div style={{ width: isMobile ? 28 : 32, height: isMobile ? 28 : 32, borderRadius: "50%", flexShrink: 0, background: `linear-gradient(135deg,${T},${TD})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 10 : 11, fontWeight: 900, color: "#000" }}>{s.s}</div>
-                    <p style={{ color: "rgba(255,255,255,0.65)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.6, margin: 0 }}>{s.text}</p>
-                  </div>
-                ))}
+        {/* ══════════════════════════════════════════════════
+    M2 — CLIENT LOGOS
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: `1px solid rgba(0,201,167,.1)`, borderBottom: `1px solid rgba(0,201,167,.1)` }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
+            <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase" as const, marginBottom: 12 }}>Our Happy Clients</p>
+            <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
+              Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
+            </h2>
+          </div>
+          <div style={{ overflow: "hidden" }}>
+            <div className="cl-track">
+              {[...LOGOS, ...LOGOS].map((f, i) => (
+                <div
+                  key={i}
+                  style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}
+                >
+                  <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* STATS BAR */}
+        <section style={{ position: "relative", overflow: "hidden", background: `linear-gradient(180deg,${N2} 0%,${N1} 60%,${N2} 100%)`, borderTop: `1px solid rgba(0,201,167,0.12)`, borderBottom: `1px solid rgba(0,201,167,0.12)`, padding: isMobile ? "50px 20px" : "72px 48px" }}>
+          <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent 0%,rgba(0,201,167,0.3) 50%,transparent 100%)", animation: "heroScan 4s linear infinite", pointerEvents: "none" }} />
+          <div className="stats-row">
+            {STATS_TOP.map((s, i) => (
+              <div key={i} className="card-hover" style={{ position: "relative", textAlign: "center", padding: isMobile ? "24px 16px" : "44px 28px", borderRadius: 20, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.2)", transition: "transform .3s,box-shadow .3s", cursor: "default", animation: `sbFadeUp .7s ease ${i * .12}s both` }}>
+                <div style={{ width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 14px", background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", fontSize: isMobile ? 20 : 24 }}>{s.icon}</div>
+                <div style={{ fontSize: isMobile ? "32px" : "48px", fontWeight: 900, lineHeight: 1, marginBottom: 8, background: "linear-gradient(135deg,#fff 30%,#00C9A7 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                  <Counter to={s.val} sfx={s.sfx} />
+                </div>
+                <div style={{ fontSize: isMobile ? 13 : 15, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{s.label}</div>
+                <div style={{ fontSize: isMobile ? 11 : 12.5, color: "rgba(255,255,255,0.38)", fontWeight: 500 }}>{s.sub}</div>
+                <div style={{ position: "absolute", bottom: 0, left: "25%", right: "25%", height: 2, background: `linear-gradient(90deg,transparent,${T},transparent)`, borderRadius: 2, animation: `sbLineGrow .6s ease ${.5 + i * .1}s both` }} />
               </div>
-              <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
-                <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
-                {[{ flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" }, { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" }, { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }].map((c, i) => (
-                  <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}>
-                    <span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>
-                    <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ color: T, fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>{c.phone}</a>
-                  </div>
-                ))}
-                <div style={{ marginTop: isMobile ? 12 : 16, paddingTop: isMobile ? 12 : 16, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                  <a href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "12px" : "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>✉️ hello@nncdigital.com</a>
+            ))}
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M3 — SUCCESS STORIES
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.02) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+          <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="Proven Results" />
+              <SectionH2>Mobile App <GradText>Success Stories</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, maxWidth: 500, margin: "0 auto" }}>Real results from real mobile apps built for businesses in Canada, USA &amp; UK.</p>
+            </div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
+              {CASES.map((c, i) => (
+                <button key={i} className={`ss-tab${story === i ? " act" : ""}`} onClick={() => setStory(i)} style={{ padding: isMobile ? "8px 14px" : "10px 20px", fontSize: isMobile ? "12px" : "13.5px" }}><span>{c.icon}</span>{c.industry}</button>
+              ))}
+            </div>
+            <div key={story} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${CASES[story].tagBd}`, borderRadius: 24, overflow: "hidden", animation: "sbFadeUp .45s ease both" }}>
+              <div style={{ height: 3, background: `linear-gradient(90deg,transparent,${CASES[story].tagClr},transparent)` }} />
+              <div style={{ padding: isMobile ? "20px" : "36px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
+                  <div style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, fontSize: isMobile ? 24 : 26, display: "flex", alignItems: "center", justifyContent: "center", background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}` }}>{CASES[story].icon}</div>
+                  <span style={{ padding: isMobile ? "3px 12px" : "4px 14px", borderRadius: 100, fontSize: isMobile ? 10 : 12, fontWeight: 700, background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}`, color: CASES[story].tagClr, textTransform: "uppercase" as const, letterSpacing: "0.08em" }}>{CASES[story].tag}</span>
+                </div>
+                <h3 style={{ color: "#fff", fontSize: isMobile ? "18px" : "22px", fontWeight: 800, marginBottom: isMobile ? 16 : 28, lineHeight: 1.3 }}>{CASES[story].title}</h3>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 20, marginBottom: isMobile ? 24 : 32 }}>
+                  {[{ label: "Challenge", text: CASES[story].challenge, icon: "⚠️" }, { label: "Solution", text: CASES[story].solution, icon: "💡" }].map(col => (
+                    <div key={col.label} style={{ padding: isMobile ? "14px" : "20px", borderRadius: 14, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
+                      <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const, marginBottom: 8 }}>{col.icon} {col.label}</p>
+                      <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, lineHeight: 1.7, margin: 0 }}>{col.text}</p>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: isMobile ? 10 : 14 }}>
+                  {CASES[story].metrics.map((m, i) => (
+                    <div key={i} style={{ textAlign: "center", padding: isMobile ? "12px 8px" : "18px 14px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)", transition: "transform .25s,background .25s", cursor: "default" }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)"; }}>
+                      <div style={{ fontSize: isMobile ? 18 : 22, marginBottom: 6 }}>{m.i}</div>
+                      <div style={{ fontSize: isMobile ? "20px" : "26px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{m.v}</div>
+                      <div style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 10 : 12, fontWeight: 500 }}>{m.l}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                {["🔵 Google Partner", "🏆 ISO Certified", "🔒 GDPR Compliant", "🍁 PIPEDA Ready", "⭐ Clutch Top Agency"].map(b => (
-                  <span key={b} style={{ padding: isMobile ? "4px 10px" : "6px 12px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "10px" : "12px", fontWeight: 500 }}>{b}</span>
-                ))}
+            </div>
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 24 }}>
+              {CASES.map((_, i) => (
+                <button key={i} onClick={() => setStory(i)} style={{ width: story === i ? 24 : 8, height: 8, borderRadius: 100, background: story === i ? T : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer", transition: "all .3s ease" }} />
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 44 }}>
+              <Link href="/case-studies" className="btn-teal">View All Case Studies →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M4 — SERVICES
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="What We Build" />
+              <SectionH2>Mobile App Development Services <GradText>We Offer</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 580, margin: "0 auto" }}>iOS, Android, and cross-platform app development for businesses across Canada, USA &amp; UK.</p>
+            </div>
+            <div className="svc-grid">
+              {SERVICES.map((s, i) => (
+                <Link key={s.title} href={`/services/${s.slug}`} style={{ textDecoration: "none" }}>
+                  <div className="svc-card" style={{ padding: isMobile ? "20px" : "24px 20px" }}>
+                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
+                      <div className="svc-icon" style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 22 : 24, flexShrink: 0 }}>{s.icon}</div>
+                      <span style={{ padding: "3px 10px", borderRadius: 100, fontSize: isMobile ? 9 : 10.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{s.tag}</span>
+                    </div>
+                    <h3 style={{ fontSize: isMobile ? "15px" : "17px", fontWeight: 700, color: "#fff", lineHeight: 1.3, margin: 0 }}>{s.title}</h3>
+                    <p style={{ fontSize: isMobile ? "12px" : "13.5px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: T, fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto" }}>Learn More <span>→</span></span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
+              <Link href="/services" className="btn-teal">View All Services →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M5 — KEY BENEFITS
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="Why It Matters" />
+              <SectionH2>Key Benefits of <GradText>Mobile App Development</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Here&apos;s what you gain when your mobile app is built by a team that prioritises performance, integration, and long-term success.</p>
+            </div>
+            <div className="kb-grid">
+              {BENEFITS.map((b, i) => (
+                <div key={i} className="kb-card" style={{ padding: isMobile ? "16px" : "24px 20px", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 20 }}>
+                  <div style={{ fontSize: isMobile ? "42px" : "52px", fontWeight: 900, lineHeight: 1, background: "linear-gradient(135deg,rgba(0,201,167,0.15) 0%,rgba(0,201,167,0.05) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", flexShrink: 0, width: isMobile ? "100%" : 72, textAlign: "center" }}>{b.num}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}><span style={{ fontSize: isMobile ? 20 : 22 }}>{b.icon}</span><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>{b.title}</h3></div>
+                    <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: "0 0 12px" }}>{b.desc}</p>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                      {b.tags.map(tag => <span key={tag} style={{ padding: "3px 8px", borderRadius: 100, fontSize: isMobile ? 9 : 10.5, fontWeight: 600, letterSpacing: ".06em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{tag}</span>)}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
+              <Link href="/contact" className="btn-teal">Start Your App Project →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M6 — PLATFORM TOOLS
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: N1, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: isMobile ? 300 : 600, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="Our Tech Stack" />
+              <SectionH2>Leading Mobile Platform Tools <GradText>That We Use</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>A production-proven mobile stack — chosen for performance, reliability, and long-term maintainability.</p>
+            </div>
+            <div className="pt-grid">
+              {TOOLS.map((tool, i) => (
+                <div key={i} className="pt-card" style={{ background: tool.clr, border: `1px solid ${tool.bd}`, padding: isMobile ? "16px 12px" : "20px 16px" }}>
+                  <div className="pt-icon" style={{ width: isMobile ? 48 : 56, height: isMobile ? 48 : 56, borderRadius: 15, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 24 : 26, marginBottom: isMobile ? 12 : 16, background: "rgba(255,255,255,0.05)", border: `1px solid ${tool.bd}`, transition: "transform .25s" }}>{tool.icon}</div>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 700, marginBottom: 6, lineHeight: 1.3 }}>{tool.name}</h3>
+                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "11px" : "13px", lineHeight: 1.6, margin: 0 }}>{tool.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    CAPABILITIES ACCORDION
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: N0, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", bottom: "10%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 70%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="App Capabilities" />
+              <SectionH2>Everything Your Mobile App <GradText>Needs to Succeed</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, maxWidth: 520, margin: "0 auto" }}>Explore the full capability set we bring to every mobile app project.</p>
+            </div>
+            <div className="two-col">
+              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+                {ACCORDION_L.map((item, i) => <AccItem key={item.title} item={item} open={accL === i} toggle={() => setAccL(accL === i ? null : i)} isMobile={isMobile} />)}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+                {ACCORDION_R.map((item, i) => <AccItem key={item.title} item={item} open={accR === i} toggle={() => setAccR(accR === i ? null : i)} isMobile={isMobile} />)}
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </>
-  );
-}
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M7 — HIRE DEVELOPERS
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "10%", left: "5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="Hire Developers" />
+              <SectionH2>Hire Mobile App Developers <GradText>Tailored to Your Needs</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 15, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>Whether you&apos;re launching an MVP, scaling an enterprise app, or extending your agency team — we have the right developer for your project.</p>
+            </div>
+            <div className="two-col" style={{ marginBottom: isMobile ? 12 : 16 }}>
+              <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>By Business Type</p>
+              <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>By App Type</p>
+            </div>
+            <div className="two-col">
+              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+                {HIRE_LEFT.map((item, i) => <AccItem key={item.title} item={item} open={hireL === i} toggle={() => setHireL(hireL === i ? null : i)} isMobile={isMobile} />)}
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+                {HIRE_RIGHT.map((item, i) => <AccItem key={item.title} item={item} open={hireR === i} toggle={() => setHireR(hireR === i ? null : i)} isMobile={isMobile} />)}
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: isMobile ? 12 : 16, marginTop: isMobile ? 32 : 48, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href="/hire-developers" className="btn-teal">📱 Hire a Mobile Developer</Link>
+              <Link href="/pricing" className="btn-outline">View Pricing →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M8 — AI-POWERED
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "0%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 700, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ marginBottom: isMobile ? 32 : 40, maxWidth: 620, marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
+              <SectionBadge label="AI-Powered" />
+              <SectionH2>Leverage <GradText>AI-Powered Mobile</GradText> App Solutions</SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.8 }}>We build AI directly into your mobile app — personalisation, predictive retention, and intelligent automation from day one.</p>
+            </div>
+            <div className="two-col-wide">
+              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 12 : 16 }}>
+                {AI_FEATS.map((f, i) => (
+                  <div key={i} className="ai-feat-card" style={{ display: "flex", gap: isMobile ? 12 : 18, alignItems: "flex-start", padding: isMobile ? "16px" : "24px 22px", borderRadius: 16, background: f.clr, border: `1px solid ${f.bd}`, transition: "transform .25s,box-shadow .25s", cursor: "default" }}>
+                    <div className="ai-icon-w" style={{ width: isMobile ? 44 : 52, height: isMobile ? 44 : 52, borderRadius: 14, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 22 : 24, background: f.clr, border: `1px solid ${f.bd}`, transition: "transform .25s" }}>{f.icon}</div>
+                    <div>
+                      <h3 style={{ color: "#fff", fontSize: isMobile ? "15px" : "17px", fontWeight: 700, marginBottom: 6, lineHeight: 1.3 }}>{f.title}</h3>
+                      <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
+                    </div>
+                  </div>
+                ))}
+                <Link href="/ai-solutions" className="btn-teal" style={{ marginTop: 8, alignSelf: "flex-start", display: "inline-flex", alignItems: "center", gap: 10 }}>🤖 Explore AI Mobile Solutions →</Link>
+              </div>
+
+              {/* AI Visual */}
+              <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", background: "linear-gradient(135deg,#0a1f38 0%,#061425 100%)", border: "1px solid rgba(0,201,167,0.15)", minHeight: isMobile ? "auto" : 460, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: isMobile ? "20px" : "36px 32px" }}>
+                <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,0.5),transparent)", animation: "aiScan 3s linear infinite" }} />
+                <div style={{ position: "absolute", top: "5%", right: "5%", width: isMobile ? 120 : 180, height: isMobile ? 120 : 180, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.12) 0%,transparent 70%)", animation: "aiPulse 4s ease-in-out infinite", pointerEvents: "none" }} />
+                <div style={{ position: "relative", zIndex: 2 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
+                    <div style={{ width: isMobile ? 8 : 10, height: isMobile ? 8 : 10, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 10px #22c55e" }} />
+                    <span style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" as const }}>AI Engine — Live</span>
+                  </div>
+                  {[{ label: "Personalisation accuracy", val: "95%", color: T }, { label: "Churn prediction model", val: "91%", color: "#818cf8" }, { label: "Push notification CTR", val: "38%", color: T }, { label: "In-app AI resolution", val: "87%", color: "#f59e0b" }].map((row, i) => (
+                    <div key={i} style={{ marginBottom: isMobile ? 10 : 16 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}><span style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 11 : 12.5, fontWeight: 500 }}>{row.label}</span><span style={{ color: row.color, fontSize: isMobile ? 11 : 12.5, fontWeight: 700 }}>{row.val}</span></div>
+                      <div style={{ height: 4, borderRadius: 4, background: "rgba(255,255,255,0.06)", overflow: "hidden" }}><div style={{ height: "100%", borderRadius: 4, background: `linear-gradient(90deg,${row.color},${row.color}88)`, width: row.val }} /></div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: isMobile ? 8 : 12, position: "relative", zIndex: 2, marginTop: isMobile ? 16 : 0 }}>
+                  {[{ label: "Active Users", val: "48.2K", icon: "👥" }, { label: "Sessions/Day", val: "124K", icon: "📱" }, { label: "AI CSAT", val: "4.9★", icon: "⭐" }].map((m, i) => (
+                    <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: isMobile ? "10px 6px" : "14px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: isMobile ? 18 : 20, marginBottom: 4 }}>{m.icon}</div>
+                      <div style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 800, marginBottom: 2 }}>{m.val}</div>
+                      <div style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 500 }}>{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M9 — CTA BANNER
+══════════════════════════════════════════════════ */}
+        <section style={{ position: "relative", overflow: "hidden" }}>
+          <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "50px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
+            <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
+            <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 760, margin: "0 auto" }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 100, padding: isMobile ? "5px 14px" : "6px 18px", marginBottom: 20 }}>
+                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "block" }} />
+                <span style={{ color: "#fff", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>Get Started Today</span>
+              </div>
+              <h2 style={{ fontSize: isMobile ? "24px" : isTablet ? "36px" : "42px", fontWeight: 900, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 16 }}>
+                Want Mobile App Solutions That Take Your<br />Business to the <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>Next Level?</span>
+              </h2>
+              <p style={{ color: "rgba(255,255,255,0.82)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "17px", lineHeight: 1.75, marginBottom: isMobile ? 28 : 32 }}>Connect with NNC Digital today — iOS, Android, or cross-platform. Let&apos;s build your app together.</p>
+              <div style={{ display: "flex", gap: isMobile ? 12 : 16, justifyContent: "center", flexWrap: "wrap" }}>
+                <Link href="/contact" className="btn-teal" style={{ background: "#fff", color: "#0055b3", minWidth: isMobile ? "100%" : "auto" }}>✦ Connect Now</Link>
+                <Link href="/book-consultation" className="btn-outline" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff", minWidth: isMobile ? "100%" : "auto" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#fff"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.1)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.5)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}>📅 Book a Free Call →</Link>
+              </div>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 13, marginTop: 20 }}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M10 — WHY CHOOSE US (VIDEO REMOVED)
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "20%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div className="two-col-wide">
+              <div>
+                <SectionBadge label="Our Story" />
+                <SectionH2>Why Choose Us as Your <GradText>Mobile App Development</GradText> Partner?</SectionH2>
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: 16 }}>NNC Digital Solutions is backed by <span style={{ color: "#fff", fontWeight: 600 }}>Nakshatra Namaha Creations Pvt. Ltd.</span> — one of Bangalore&apos;s most respected digital studios with <span style={{ color: T, fontWeight: 600 }}>8+ years of experience</span> and <span style={{ color: T, fontWeight: 600 }}>500+ mobile apps delivered</span>.</p>
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: isMobile ? 24 : 32 }}>We launched NNC Digital as our international arm — bringing the same proven mobile expertise to Canadian, US, and UK markets with transparent pricing, dedicated client-facing teams, and long-term partnership.</p>
+                <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 8 : 10, marginBottom: 30 }}>
+                  {WCU_POINTS.map((p, i) => (
+                    <div key={i} className="wcu-point" style={{ display: "flex", alignItems: "center", gap: 14, padding: isMobile ? "12px 14px" : "14px 18px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.06)", background: "rgba(255,255,255,0.02)", transition: "border-color .2s,background .2s,transform .2s", cursor: "default" }}>
+                      <span style={{ fontSize: isMobile ? 16 : 18, flexShrink: 0 }}>{p.icon}</span>
+                      <span style={{ color: "rgba(255,255,255,0.72)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{p.text}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="wcu-stats">
+                  {WCU_STATS.map(st => (
+                    <div key={st.l} className="wcu-stat" style={{ textAlign: "center", padding: isMobile ? "14px 10px" : "22px 14px", borderRadius: 14, border: "1px solid rgba(0,201,167,0.15)", background: "rgba(0,201,167,0.05)", transition: "transform .25s,background .25s", cursor: "default" }}>
+                      <div style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}><Counter to={st.n} sfx={st.s} /></div>
+                      <div style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 500 }}>{st.l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                {/* Video removed - replaced with CTA card */}
+                <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 24, padding: isMobile ? "30px 20px" : "40px 30px", textAlign: "center" }}>
+                  <div style={{ fontSize: isMobile ? 48 : 64, marginBottom: 16 }}>📱</div>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? "20px" : "24px", fontWeight: 800, marginBottom: 12 }}>Ready to Build Your Mobile App?</h3>
+                  <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? "14px" : "16px", lineHeight: 1.7, marginBottom: 24 }}>
+                    Join 500+ businesses that have launched successful iOS and Android apps with NNC Digital.
+                  </p>
+                  <Link href="/contact" className="btn-teal" style={{ width: isMobile ? "100%" : "auto" }}>Get Started Today →</Link>
+                </div>
+                <div style={{ display: "flex", gap: 10, marginTop: 20, flexWrap: "wrap" }}>
+                  {["🇨🇦 Canada", "🇺🇸 USA", "🇬🇧 UK", "🇮🇳 India"].map(b => (
+                    <span key={b} style={{ padding: isMobile ? "5px 12px" : "6px 14px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.6)", fontSize: isMobile ? "11px" : "12.5px", fontWeight: 500 }}>{b}</span>
+                  ))}
+                </div>
+                <div style={{ display: "flex", gap: isMobile ? 10 : 12, marginTop: 20 }}>
+                  <Link href="/book-consultation" className="btn-teal" style={{ flex: 1, padding: isMobile ? "11px 16px" : "13px 20px" }}>📅 Book a Free App Strategy Call</Link>
+                  <Link href="/portfolio" className="btn-outline" style={{ flex: 1, padding: isMobile ? "11px 16px" : "13px 20px" }}>Our Portfolio →</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M11 — GLOBAL PRESENCE
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
+              <SectionBadge label="Our Reach" />
+              <SectionH2>Global <GradText>Presence</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 500, margin: "0 auto" }}>Client-facing offices in North America &amp; the UK. Engineering headquarters in Bangalore, India.</p>
+            </div>
+            <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
+              {[{ key: "int", label: "🌍 North America & UK" }, { key: "india", label: "🇮🇳 India (Engineering HQ)" }].map(t => (
+                <button key={t.key} className="gp-tab" onClick={() => setGTab(t.key as "int" | "india")} style={{ padding: isMobile ? "8px 16px" : "11px 24px", fontSize: isMobile ? 12 : 14, fontWeight: 700, border: `1px solid ${gTab === t.key ? "rgba(0,201,167,0.5)" : "rgba(255,255,255,0.1)"}`, background: gTab === t.key ? "rgba(0,201,167,0.12)" : "rgba(255,255,255,0.03)", color: gTab === t.key ? T : "rgba(255,255,255,0.55)", cursor: "pointer", transition: "all .22s", boxShadow: gTab === t.key ? "0 4px 20px rgba(0,201,167,0.12)" : "none" }}>{t.label}</button>
+              ))}
+            </div>
+            {gTab === "int" && (
+              <div>
+                <div className="gp-offices" style={{ marginBottom: 24 }}>
+                  {INT_OFFICES.map((o, i) => (
+                    <div key={i} className="gp-card" style={{ padding: isMobile ? "20px" : "28px 24px", borderRadius: 18, background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.18)", transition: "transform .25s,box-shadow .25s,border-color .25s", cursor: "default" }}>
+                      <div style={{ fontSize: isMobile ? 32 : 36, marginBottom: isMobile ? 10 : 14 }}>{o.flag}</div>
+                      <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, marginBottom: 4 }}>{o.city}</h3>
+                      <p style={{ color: T, fontSize: isMobile ? 10 : 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: isMobile ? 12 : 16 }}>{o.tz}</p>
+                      <a href={`tel:${o.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.7)", fontSize: isMobile ? 12 : 14, fontWeight: 600, textDecoration: "none", marginBottom: 8 }}>📞 {o.phone}</a>
+                      <a href={`mailto:${o.email}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 13, textDecoration: "none" }}>✉️ {o.email}</a>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ borderRadius: 14, padding: isMobile ? "16px 20px" : "20px 28px", background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}><div style={{ width: isMobile ? 8 : 10, height: isMobile ? 8 : 10, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} /><span style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, fontWeight: 500 }}>Available Mon–Fri, 9am–6pm in your time zone</span></div>
+                  <a href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: T, fontSize: isMobile ? 12 : 14, fontWeight: 700, textDecoration: "none" }}>hello@nncdigital.com →</a>
+                </div>
+              </div>
+            )}
+            {gTab === "india" && (
+              <div>
+                <div style={{ borderRadius: 20, padding: isMobile ? "20px" : "36px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", marginBottom: 24 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, marginBottom: isMobile ? 20 : 24, flexWrap: "wrap" }}>
+                    <span style={{ fontSize: isMobile ? 28 : 32 }}>🇮🇳</span>
+                    <div><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>Nakshatra Namaha Creations Pvt. Ltd.</h3><p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 12 : 13, margin: "4px 0 0" }}>Engineering &amp; Delivery HQ — Bangalore, India</p></div>
+                  </div>
+                  <div className="gp-ind-grid">
+                    {INDIA_OFFICES.map((o, i) => (
+                      <div key={i} className="gp-ind" style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, padding: isMobile ? "12px" : "16px 18px", borderRadius: 12, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transition: "background .2s,border-color .2s", cursor: "default" }}>
+                        <span style={{ fontSize: isMobile ? 20 : 22 }}>🇮🇳</span>
+                        <div><p style={{ color: "#fff", fontSize: isMobile ? "13px" : "14px", fontWeight: 700, margin: 0 }}>{o.city}</p><p style={{ color: "rgba(255,255,255,0.38)", fontSize: isMobile ? 10 : 12, margin: "2px 0 0" }}>{o.note}</p>{o.phone && <p style={{ color: T, fontSize: isMobile ? 11 : 12.5, fontWeight: 600, margin: "4px 0 0" }}>{o.phone}</p>}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ marginTop: isMobile ? 16 : 24, paddingTop: isMobile ? 16 : 20, borderTop: "1px solid rgba(255,255,255,0.07)" }}><p style={{ color: "rgba(255,255,255,0.35)", fontSize: isMobile ? 12 : 13, margin: 0 }}>✉️ info@nakshatranamahacreations.com</p></div>
+                </div>
+                <div className="gp-india-stats">
+                  {[{ n: "8+", l: "Years Active" }, { n: "500+", l: "Mobile Apps" }, { n: "100+", l: "Team Members" }, { n: "4", l: "India Offices" }].map((s, i) => (
+                    <div key={i} style={{ textAlign: "center", padding: isMobile ? "14px 8px" : "20px 12px", borderRadius: 14, background: "rgba(0,201,167,0.06)", border: "1px solid rgba(0,201,167,0.15)", transition: "transform .25s,background .25s", cursor: "default" }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.12)"; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}>
+                      <p style={{ fontSize: isMobile ? "22px" : "26px", fontWeight: 900, color: T, margin: 0 }}>{s.n}</p>
+                      <p style={{ fontSize: isMobile ? 9 : 11, color: "rgba(255,255,255,0.4)", margin: "4px 0 0", fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.06em" }}>{s.l}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M12 — FAQ
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "30%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
+              <SectionBadge label="FAQs" />
+              <SectionH2>Frequently Asked <GradText>Questions</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Everything you need to know about mobile app development for businesses in Canada, USA &amp; UK.</p>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+              {FAQS.map((f, i) => (
+                <div key={i} className={`faq-item${faq === i ? " fopen" : ""}`} onClick={() => setFaq(faq === i ? null : i)}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: isMobile ? 12 : 16, padding: isMobile ? "14px 16px" : "20px 22px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+                      <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q{i + 1}</span>
+                      <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === i ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>{f.q}</span>
+                    </div>
+                    <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === i ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === i ? T : "rgba(255,255,255,0.12)"}`, color: faq === i ? "#000" : "rgba(255,255,255,0.5)", transform: faq === i ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
+                  </div>
+                  <div style={{ maxHeight: faq === i ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
+                    <p style={{ padding: isMobile ? "0 16px 14px 48px" : "0 22px 22px 60px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>{f.a}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 40 }}>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 12 : 14, marginBottom: 16 }}>Still have questions? We respond within 24 hours.</p>
+              <Link href="/contact" className="btn-teal">Ask Us Anything →</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ══════════════════════════════════════════════════
+    M13 — CONTACT FORM
+══════════════════════════════════════════════════ */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N0} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "20%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 700, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
+              <SectionBadge label="Get In Touch" />
+              <SectionH2>Ready to Build <GradText>Your Mobile App?</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 540, margin: "0 auto" }}>Tell us about your app idea. We respond within 24 hours with a free consultation and honest advice.</p>
+            </div>
+            <div className="cf-grid">
+              {/* Left — Form */}
+              <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: isMobile ? "20px" : "36px" }}>
+                {cSubmitted ? (
+                  <div style={{ textAlign: "center", padding: isMobile ? "20px 0" : "40px 0" }}>
+                    <div style={{ fontSize: isMobile ? 48 : 56, marginBottom: 16 }}>✅</div>
+                    <h3 style={{ color: "#fff", fontSize: isMobile ? 18 : 22, fontWeight: 800, marginBottom: 8 }}>Message Sent!</h3>
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, marginBottom: 20 }}>Thank you — we&apos;ll respond within 24 hours with practical advice.</p>
+                    <Link href="/mobile-app-development">
+                      <button onClick={() => { setCSubmitted(false); setCForm({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "" }); }} className="btn-teal" style={{ minWidth: "auto", padding: isMobile ? "10px 22px" : "12px 28px", fontSize: isMobile ? "13px" : "14px" }}>Send Another →</button>
+                    </Link>
+                  </div>
+                ) : (
+                  <form onSubmit={handleCSubmit}>
+                    <div className="cf-name" style={{ marginBottom: isMobile ? 12 : 16 }}>
+                      <div><label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Full Name *</label><input className="fi" required style={iSLg} placeholder="Jane Smith" value={cForm.name} onChange={e => setCF("name", e.target.value)} /></div>
+                      <div>
+                        <label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Phone</label>
+                        <div style={{ display: "flex", gap: 8, flexDirection: isMobile ? "column" : "row" }}>
+                          <select className="fi" style={{ ...iSLg, width: isMobile ? "100%" : 90, flexShrink: 0, padding: isMobile ? "12px 14px" : "13px 8px", cursor: "pointer" }} value={cForm.dialCode} onChange={e => setCF("dialCode", e.target.value)}>
+                            {DIAL_CODES.map((d, i) => <option key={i} value={d.code}>{d.flag} {d.code}</option>)}
+                          </select>
+                          <input className="fi" style={iSLg} type="tel" placeholder="647 XXX XXXX" value={cForm.phone} onChange={e => setCF("phone", e.target.value)} />
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ marginBottom: isMobile ? 12 : 16 }}><label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Business Email *</label><input className="fi" required type="email" style={iSLg} placeholder="jane@yourcompany.com" value={cForm.email} onChange={e => setCF("email", e.target.value)} /></div>
+                    <div style={{ marginBottom: isMobile ? 12 : 16 }}>
+                      <label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Service of Interest</label>
+                      <select className="fi" style={{ ...iSLg, cursor: "pointer" }} value={cForm.service} onChange={e => setCF("service", e.target.value)}>
+                        <option value="">Select a service...</option>
+                        {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
+                      </select>
+                    </div>
+                    <div style={{ marginBottom: 20 }}><label style={{ display: "block", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase" as const, letterSpacing: "0.04em" }}>Project Description</label><textarea className="fi" style={{ ...iSLg, minHeight: isMobile ? 80 : 110, resize: "vertical" as const }} placeholder="Describe your app idea, target users, platform, and timeline..." value={cForm.project} onChange={e => setCF("project", e.target.value)} /></div>
+                    <button className="btn-teal" type="submit" disabled={cLoading} style={{ width: "100%", opacity: cLoading ? 0.6 : 1, cursor: cLoading ? "wait" : "pointer" }}>{cLoading ? "Sending..." : "Submit — Get Free App Consultation →"}</button>
+                    <p style={{ color: "rgba(255,255,255,0.3)", fontSize: isMobile ? 10 : 11.5, textAlign: "center", marginTop: 12 }}>🔒 Your information is 100% secure and never shared.</p>
+                  </form>
+                )}
+              </div>
+
+              {/* Right — Info */}
+              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 16 : 20 }}>
+                <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.18)", borderRadius: 18, padding: isMobile ? "20px" : "28px 26px" }}>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? "15px" : "16px", fontWeight: 800, marginBottom: isMobile ? 14 : 18 }}>What Happens After You Submit?</h3>
+                  {[{ s: "1", text: "We review your app brief within a few hours — no bots." }, { s: "2", text: "A senior mobile developer calls you within 24 hours." }, { s: "3", text: "We send a free scoping document with timeline & fixed cost." }, { s: "4", text: "You decide — no pressure, no obligation." }].map((s, i) => (
+                    <div key={i} style={{ display: "flex", gap: isMobile ? 10 : 14, alignItems: "flex-start", marginBottom: i < 3 ? (isMobile ? 12 : 16) : 0, padding: isMobile ? "8px 12px" : "12px 14px", borderRadius: 10, background: "rgba(255,255,255,0.03)", transition: "background .2s", cursor: "default" }}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.07)"}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.03)"}>
+                      <div style={{ width: isMobile ? 28 : 32, height: isMobile ? 28 : 32, borderRadius: "50%", flexShrink: 0, background: `linear-gradient(135deg,${T},${TD})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 10 : 11, fontWeight: 900, color: "#000" }}>{s.s}</div>
+                      <p style={{ color: "rgba(255,255,255,0.65)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.6, margin: 0 }}>{s.text}</p>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
+                  <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
+                  {[{ flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" }, { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" }, { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }].map((c, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}>
+                      <span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>
+                      <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ color: T, fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>{c.phone}</a>
+                    </div>
+                  ))}
+                  <div style={{ marginTop: isMobile ? 12 : 16, paddingTop: isMobile ? 12 : 16, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                    <a href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "12px" : "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>✉️ hello@nncdigital.com</a>
+                  </div>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {["🔵 Google Partner", "🏆 ISO Certified", "🔒 GDPR Compliant", "🍁 PIPEDA Ready", "⭐ Clutch Top Agency"].map(b => (
+                    <span key={b} style={{ padding: isMobile ? "4px 10px" : "6px 12px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "10px" : "12px", fontWeight: 500 }}>{b}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }

@@ -4,6 +4,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import { getServiceSchema } from "../lib/schema";       
+import SchemaMarkup from "../components/SchemaMarkup";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const T = "#00C9A7";
@@ -243,6 +245,11 @@ function AccItem({ item, open, toggle, isMobile }: { item: { icon: string; title
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function WebDevelopmentPage() {
+  const serviceSchema = getServiceSchema(
+    "Web Development", 
+    "Web Development Services That Drive Real Business Results in Canada, USA & UK. Enterprise websites and custom web apps that are fast, mobile-optimised, SEO-ready, and built to convert visitors into paying customers."
+  );
+
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -325,6 +332,7 @@ export default function WebDevelopmentPage() {
   return (
     <>
       <Navbar />
+       <SchemaMarkup schema={serviceSchema} id="web-development-schema" />
 
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');

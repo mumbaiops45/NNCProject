@@ -2,7 +2,8 @@
 "use client";
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import Navbar from "../components/Navbar";
-
+import { getServiceSchema } from "../lib/schema";        // ✅ ADD THIS
+import SchemaMarkup from "../components/SchemaMarkup"; 
 // ─── Design tokens ─────────────────────────────────────────────────────────────
 const A = "#00A1E0";   // Salesforce blue
 const AD = "#0088cc";
@@ -184,7 +185,10 @@ function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 export default function SalesforcePage() {
-
+ const serviceSchema = getServiceSchema(
+    "Salesforce CRM", 
+    "Salesforce CRM Development, Customisation & Implementation for Canada, USA & UK. Our certified specialists configure and customise Salesforce to match your exact business processes."
+  );
   // ── Responsive breakpoints (mirrors PricingPage pattern) ──────────────────
   const [windowWidth, setWindowWidth] = useState(0);
   useEffect(() => {
@@ -232,6 +236,7 @@ export default function SalesforcePage() {
   return (
     <>
       <Navbar/>
+      <SchemaMarkup schema={serviceSchema} id="salesforce-schema" />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
         *,*::before,*::after{box-sizing:border-box;}

@@ -1,6 +1,4 @@
-// app/lib/schema.ts
-
-// Organisation Schema (for all pages)
+// ALL YOUR SCHEMA FUNCTIONS GO HERE
 export function getOrganisationSchema() {
   return {
     "@context": "https://schema.org",
@@ -18,13 +16,11 @@ export function getOrganisationSchema() {
       "@type": "ContactPoint",
       "contactType": "customer service",
       "telephone": "+1-647-XXX-XXXX",
-      "email": "hello@nncdigital.com",
-      "availableLanguage": "English"
+      "email": "hello@nncdigital.com"
     }
   };
 }
 
-// Service Schema (for service pages like CRM, ERP, etc.)
 export function getServiceSchema(serviceType: string, description?: string) {
   return {
     "@context": "https://schema.org",
@@ -32,15 +28,13 @@ export function getServiceSchema(serviceType: string, description?: string) {
     "serviceType": serviceType,
     "provider": {
       "@type": "Organization",
-      "name": "NNC Digital Solutions",
-      "url": "https://nncdigital.com"
+      "name": "NNC Digital Solutions"
     },
     "areaServed": ["CA", "US", "GB"],
-    "description": description || `${serviceType} services for businesses in Canada, USA, and UK.`
+    "description": description || `${serviceType} services`
   };
 }
 
-// FAQ Schema (for pages with FAQs)
 export function getFAQSchema(faqs: Array<{ q: string; a: string }>) {
   return {
     "@context": "https://schema.org",
@@ -56,7 +50,6 @@ export function getFAQSchema(faqs: Array<{ q: string; a: string }>) {
   };
 }
 
-// Breadcrumb Schema (for navigation)
 export function getBreadcrumbSchema(breadcrumbs: Array<{ name: string; url: string }>) {
   return {
     "@context": "https://schema.org",
@@ -70,23 +63,14 @@ export function getBreadcrumbSchema(breadcrumbs: Array<{ name: string; url: stri
   };
 }
 
-// Local Business Schema (for offices)
 export function getLocalBusinessSchema(offices: Array<{
-  city: string;
-  region: string;
-  country: string;
-  telephone: string;
-  email: string;
-  address: string;
+  city: string; region: string; country: string; 
+  telephone: string; email: string; address: string;
 }>) {
   return offices.map(office => ({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": `NNC Digital Solutions - ${office.city}`,
-    "parentOrganization": {
-      "@type": "Organization",
-      "name": "NNC Digital Solutions"
-    },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": office.city,
@@ -95,7 +79,6 @@ export function getLocalBusinessSchema(offices: Array<{
       "streetAddress": office.address
     },
     "telephone": office.telephone,
-    "email": office.email,
-    "url": "https://nncdigital.com/contact"
+    "email": office.email
   }));
 }

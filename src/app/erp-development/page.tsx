@@ -3,6 +3,8 @@
 "use client";
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import Navbar from "../components/Navbar";
+import { getServiceSchema } from "../lib/schema";        
+import SchemaMarkup from "../components/SchemaMarkup"; 
 
 // ─── Design tokens ─────────────────────────────────────────────────────────────
 const T  = "#00C9A7";
@@ -208,6 +210,10 @@ function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 export default function ERPPage() {
+   const serviceSchema = getServiceSchema(
+    "ERP Development", 
+    "Custom ERP Development Services for Canada, USA & UK. Unify inventory, finance, HR, and operations into one powerful platform with our custom ERP solutions."
+  );
 
   // ── Responsive (mirrors PricingPage pattern) ───────────────────────────────
   const [windowWidth,setWindowWidth]=useState(0);
@@ -260,6 +266,7 @@ export default function ERPPage() {
   return (
     <>
       <Navbar/>
+      <SchemaMarkup schema={serviceSchema} id="erp-service-schema" />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
         *,*::before,*::after{box-sizing:border-box;}

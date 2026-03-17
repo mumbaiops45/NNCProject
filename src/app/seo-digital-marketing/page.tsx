@@ -3,6 +3,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Navbar from "../components/Navbar";
+import { getServiceSchema } from "../lib/schema";        // ✅ ADD THIS
+import SchemaMarkup from "../components/SchemaMarkup";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const T = "#00C9A7";
@@ -189,7 +191,10 @@ function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string}
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function SEOandDigitalMarketingPage() {
-
+ const serviceSchema = getServiceSchema(
+    "SEO & Digital Marketing", 
+    "SEO & Digital Marketing That Drives Qualified Traffic and Measurable Revenue for businesses in Canada, USA & UK. We build data-driven marketing strategies that make your business visible online."
+  );
   const [form,setForm] = useState({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});
   const [submitted,setSubmitted] = useState(false);
   const [loading,setLoading] = useState(false);
@@ -214,7 +219,7 @@ export default function SEOandDigitalMarketingPage() {
   return (
     <>
       <Navbar />
-
+<SchemaMarkup schema={serviceSchema} id="seo-digital-marketing-schema" />
       {/* ── Global Responsive Styles ── */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');

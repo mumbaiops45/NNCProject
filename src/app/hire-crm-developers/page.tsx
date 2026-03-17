@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-
+import { getServiceSchema } from "../lib/schema";
+import SchemaMarkup from "../components/SchemaMarkup";
 // ─── Design tokens ────────────────────────────────────────────────────────────
 const T = "#00C9A7";
 const TD = "#00a07a";
@@ -223,6 +224,10 @@ function AccItem({ item, open, toggle }: { item: { icon: string; title: string; 
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function HireCRMDevelopersPage() {
+  const serviceSchema = getServiceSchema(
+    "Hire CRM Developers",
+    "Hire Dedicated CRM Developers for Your Business in Canada, USA & UK. Need experienced CRM developers without building an in-house team? NNC Digital provides dedicated developers who integrate with your workflow and deliver results — from Salesforce to HubSpot to custom CRM."
+  );
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -296,7 +301,7 @@ export default function HireCRMDevelopersPage() {
   return (
     <>
       <Navbar />
-
+      <SchemaMarkup schema={serviceSchema} id="hire-crm-developers-schema" />
       <style jsx global>{`
         @keyframes heroFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes heroGlow { 0%,100% { box-shadow: 0 0 20px rgba(0,201,167,.15); } 50% { box-shadow: 0 0 40px rgba(0,201,167,.38); } }

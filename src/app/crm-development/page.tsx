@@ -3,6 +3,8 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { getServiceSchema } from "../lib/schema";
+import SchemaMarkup from "../components/SchemaMarkup";
 import Navbar from "../components/Navbar";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -266,6 +268,10 @@ function AccItem({ item, open, toggle, isMobile }: { item: { icon: string; title
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function CRMHero() {
+   const serviceSchema = getServiceSchema(
+    "CRM Development", 
+    "Best and Most Reliable CRM Development Services for Canada, USA & UK. Custom CRM solutions that transform how your business manages customers, automates sales, and drives revenue growth."
+  );
   const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
@@ -341,7 +347,7 @@ export default function CRMHero() {
   return (
     <>
       <Navbar />
-      
+      <SchemaMarkup schema={serviceSchema} id="crm-service-schema" />
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
