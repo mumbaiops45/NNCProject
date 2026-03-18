@@ -620,7 +620,7 @@ export default function WebDevelopmentPage() {
     STATS BAR
 ══════════════════════════════════════════════════ */}
       <section style={{ position: "relative", overflow: "hidden", background: `linear-gradient(180deg,${N2} 0%,${N1} 60%,${N2} 100%)`, borderTop: `1px solid rgba(0,201,167,0.12)`, borderBottom: `1px solid rgba(0,201,167,0.12)`, padding: isMobile ? "50px 20px" : "72px 48px" }}>
-        <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent 0%,rgba(0,201,167,0.3) 50%,transparent 100%)", animation: "heroScan 4s linear infinite", pointerEvents: "none" }} />
+        <div />
         <div className="stats-row">
           {STATS_TOP.map((s, i) => (
             <div key={i} className="card-hover" style={{ position: "relative", textAlign: "center", padding: isMobile ? "24px 16px" : "44px 28px", borderRadius: 20, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.2)", transition: "transform .3s,box-shadow .3s", cursor: "default", animation: `sbFadeUp .7s ease ${i * .12}s both` }}>

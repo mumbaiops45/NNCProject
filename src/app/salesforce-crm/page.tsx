@@ -1,8 +1,7 @@
-
 "use client";
 import { useState, useEffect, useRef, CSSProperties } from "react";
 import Navbar from "../components/Navbar";
-import { getServiceSchema } from "../lib/schema";        // ✅ ADD THIS
+import { getServiceSchema } from "../lib/schema";
 import SchemaMarkup from "../components/SchemaMarkup"; 
 // ─── Design tokens ─────────────────────────────────────────────────────────────
 const A = "#00A1E0";   // Salesforce blue
@@ -185,11 +184,11 @@ function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string}
 
 // ─── Page ──────────────────────────────────────────────────────────────────────
 export default function SalesforcePage() {
- const serviceSchema = getServiceSchema(
+  const serviceSchema = getServiceSchema(
     "Salesforce CRM", 
     "Salesforce CRM Development, Customisation & Implementation for Canada, USA & UK. Our certified specialists configure and customise Salesforce to match your exact business processes."
   );
-  // ── Responsive breakpoints (mirrors PricingPage pattern) ──────────────────
+
   const [windowWidth, setWindowWidth] = useState(0);
   useEffect(() => {
     setWindowWidth(window.innerWidth);
@@ -200,15 +199,14 @@ export default function SalesforcePage() {
   const isMobile  = windowWidth <= 640;
   const isTablet  = windowWidth > 640 && windowWidth <= 1024;
 
-  // ── Responsive helpers ────────────────────────────────────────────────────
-  const sp = () => isMobile ? "50px 20px" : isTablet ? "70px 32px" : "90px 48px";        // section padding
-  const heroFS  = () => isMobile ? "32px" : isTablet ? "44px" : "54px";                   // hero h1
-  const h2FS    = () => isMobile ? "26px" : isTablet ? "32px" : "38px";                   // section h2
-  const bodyFS  = () => isMobile ? "14px" : isTablet ? "15px" : "16px";                   // body text
-  const cardP   = () => isMobile ? "20px" : isTablet ? "24px" : "28px";                   // card padding
-  const grid2   = () => isMobile ? "1fr" : "1fr 1fr";                                     // 2-col grid
-  const grid3   = () => isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(3,1fr)"; // 3-col grid
-  const grid4   = () => isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)"; // 4-col grid
+  const sp = () => isMobile ? "50px 20px" : isTablet ? "70px 32px" : "40px 48px";
+  const heroFS  = () => isMobile ? "32px" : isTablet ? "44px" : "54px";
+  const h2FS    = () => isMobile ? "26px" : isTablet ? "32px" : "38px";
+  const bodyFS  = () => isMobile ? "14px" : isTablet ? "15px" : "16px";
+  const cardP   = () => isMobile ? "20px" : isTablet ? "24px" : "28px";
+  const grid3   = () => isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(3,1fr)";
+  const grid4   = () => isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)";
+
   const [form,setForm]=useState({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});
   const [submitted,setSubmitted]=useState(false);
   const [loading,setLoading]=useState(false);
@@ -233,6 +231,13 @@ export default function SalesforcePage() {
   const btnSF:CSSProperties={display:"inline-block",padding:isMobile?"12px 22px":"13px 28px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${A},${AD})`,color:"#000",fontWeight:700,fontSize:isMobile?"14px":"15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"};
   const btnOut:CSSProperties={display:"inline-block",padding:isMobile?"12px 22px":"13px 28px",borderRadius:10,border:`1.5px solid rgba(0,161,224,0.35)`,background:"transparent",color:A,fontWeight:600,fontSize:isMobile?"14px":"15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"border-color .2s,background .2s"};
 
+  // ── HERO TOP PADDING ──
+  // Navbar is ~70px tall. We add just enough padding-top so content clears it
+  // without huge empty space. Values: mobile 20px, tablet 24px, desktop 28px.
+  const heroPaddingTop  = isMobile ? "20px" : isTablet ? "24px" : "28px";
+  const heroPaddingBot  = isMobile ? "40px" : isTablet ? "50px" : "56px";
+  const heroPaddingLR   = isMobile ? "20px" : isTablet ? "32px" : "48px";
+
   return (
     <>
       <Navbar/>
@@ -242,10 +247,8 @@ export default function SalesforcePage() {
         *,*::before,*::after{box-sizing:border-box;}
         body{font-family:'Poppins',sans-serif;}
 
-        /* Animations */
         @keyframes heroPulse  {0%,100%{opacity:.7;transform:translateY(-50%) scale(1)}50%{opacity:1;transform:translateY(-50%) scale(1.04)}}
         @keyframes heroSpin   {from{transform:translateY(-50%) rotate(0deg)}to{transform:translateY(-50%) rotate(360deg)}}
-        @keyframes heroScan   {0%{top:-2px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
         @keyframes heroGlow   {0%,100%{box-shadow:0 0 0 rgba(0,161,224,0)}50%{box-shadow:0 0 20px rgba(0,161,224,.2)}}
         @keyframes heroFadeUp {from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
         @keyframes heroBlink  {0%,100%{opacity:1}50%{opacity:.35}}
@@ -253,11 +256,9 @@ export default function SalesforcePage() {
         @keyframes sbFadeUp   {from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
         @keyframes clScroll   {0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* Logo strip */
         .cl-track{display:flex;width:max-content;animation:clScroll 32s linear infinite;}
         .cl-track:hover{animation-play-state:paused;}
 
-        /* Hover-only helpers (cannot be done inline) */
         .svc-card:hover{transform:translateY(-6px);border-color:rgba(0,161,224,0.3)!important;background:rgba(0,161,224,0.04)!important;}
         .kb-card:hover {transform:translateY(-4px);border-color:rgba(0,161,224,0.2)!important;}
         .pt-card:hover {transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,0.3);}
@@ -274,31 +275,90 @@ export default function SalesforcePage() {
         .gp-tab.act     {background:rgba(0,161,224,0.12);color:${A};box-shadow:0 4px 20px rgba(0,161,224,0.12);}
         .faq-item       {border-radius:16px;overflow:hidden;cursor:pointer;transition:all .25s ease;}
         input:hover,select:hover,textarea:hover{border-color:${A}!important;}
+
+        /* ── ss-tab & gp-tab base styles ── */
+        .ss-tab {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 18px;
+          border-radius: 100px;
+          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(255,255,255,0.03);
+          color: rgba(255,255,255,0.6);
+          font-size: 13px;
+          font-weight: 600;
+          font-family: 'Poppins', sans-serif;
+          cursor: pointer;
+          transition: all .2s ease;
+        }
+        .gp-tab {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 10px 24px;
+          border-radius: 100px;
+          border: 1px solid rgba(255,255,255,0.12);
+          background: rgba(255,255,255,0.03);
+          color: rgba(255,255,255,0.6);
+          font-size: 14px;
+          font-weight: 600;
+          font-family: 'Poppins', sans-serif;
+          cursor: pointer;
+          transition: all .2s ease;
+        }
       `}</style>
 
       {/* ══ M1 — HERO ══════════════════════════════════════════════════════════════ */}
-      <section className="hero-sf" style={{padding:"clamp(24px,5vw,72px) clamp(16px,4vw,48px) clamp(32px,5vw,60px)",background:`linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`,position:"relative",overflow:"hidden",display:"flex",alignItems:"flex-start"}}>
+      <section style={{
+        // ── FIX: tight top padding so heading sits close to navbar ──
+        paddingTop: heroPaddingTop,
+        paddingBottom: heroPaddingBot,
+        paddingLeft: heroPaddingLR,
+        paddingRight: heroPaddingLR,
+        background: `linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`,
+        position: "relative",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "flex-start",
+      }}>
         <Particles/>
-        {/* <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:1,backgroundImage:`linear-gradient(rgba(0,161,224,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,161,224,.03) 1px,transparent 1px)`,backgroundSize:"60px 60px"}}/> */}
         <div style={{position:"absolute",width:650,height:650,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,161,224,.14) 0%,transparent 65%)",top:"40%",left:"-10%",transform:"translateY(-50%)",animation:"heroPulse 8s ease-in-out infinite",pointerEvents:"none",zIndex:1}}/>
         <div style={{position:"absolute",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,.1) 0%,transparent 65%)",top:"10%",right:"5%",animation:"heroPulse 10s ease-in-out infinite .5s",pointerEvents:"none",zIndex:1}}/>
         <div style={{position:"absolute",width:520,height:520,borderRadius:"50%",border:"1px dashed rgba(0,161,224,.08)",top:"50%",left:"-12%",transform:"translateY(-50%)",animation:"heroSpin 55s linear infinite",pointerEvents:"none",zIndex:1}}/>
-        {/* <div style={{position:"absolute",left:0,right:0,height:1,background:"linear-gradient(90deg,transparent,rgba(0,161,224,.28),transparent)",animation:"heroScan 7s linear infinite",pointerEvents:"none",zIndex:2}}/> */}
 
-        <div style={{display:"grid",gridTemplateColumns:isMobile||isTablet?"1fr":"1fr 420px",gap:isMobile?"24px":isTablet?"32px":"40px",maxWidth:1280,margin:"0 auto",width:"100%",position:"relative",zIndex:3,alignItems:"center",paddingTop:isMobile?"16px":isTablet?"24px":"32px"}}>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: isMobile || isTablet ? "1fr" : "1fr 420px",
+          gap: isMobile ? "24px" : isTablet ? "32px" : "40px",
+          maxWidth: 1280,
+          margin: "0 auto",
+          width: "100%",
+          position: "relative",
+          zIndex: 3,
+          alignItems: "center",
+        }}>
           {/* Left */}
           <div style={{animation:"heroFadeUp .7s ease both"}}>
-            <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(0,161,224,0.08)",border:"1px solid rgba(0,161,224,0.25)",borderRadius:100,padding:isMobile?"6px 14px":"7px 18px",marginBottom:isMobile?20:28,animation:"heroGlow 3s ease-in-out infinite"}}>
+            <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(0,161,224,0.08)",border:"1px solid rgba(0,161,224,0.25)",borderRadius:100,padding:isMobile?"6px 14px":"7px 18px",marginBottom:isMobile?16:22,animation:"heroGlow 3s ease-in-out infinite"}}>
               <span style={{width:7,height:7,borderRadius:"50%",background:A,boxShadow:`0 0 10px ${A}`,animation:"heroBlink 1.4s ease-in-out infinite"}}/>
               <span style={{color:A,fontSize:isMobile?"10px":isTablet?"11px":"11.5px",fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const}}>Salesforce CRM — Canada, USA &amp; UK</span>
             </div>
-            <h1 style={{fontSize:heroFS(),fontWeight:900,lineHeight:1.12,marginBottom:isMobile?16:22,letterSpacing:"-0.025em",color:"#fff"}}>
+            <h1 style={{
+              fontSize: heroFS(),
+              fontWeight: 900,
+              lineHeight: 1.12,
+              marginBottom: isMobile ? 14 : 20,
+              letterSpacing: "-0.025em",
+              color: "#fff",
+              marginTop: 0,
+            }}>
               Salesforce CRM Development, <GradText>Customisation &amp; Implementation</GradText> for Canada, USA &amp; UK
             </h1>
-            <p style={{color:"rgba(255,255,255,0.52)",fontSize:bodyFS(),lineHeight:1.85,marginBottom:isMobile?20:28,maxWidth:600}}>
+            <p style={{color:"rgba(255,255,255,0.52)",fontSize:bodyFS(),lineHeight:1.85,marginBottom:isMobile?18:24,maxWidth:600}}>
               {isMobile ? "Salesforce is the world's most powerful CRM — configured and customised for your business by our certified specialists." : "Salesforce is the world's most powerful CRM platform — but out of the box, it's designed for everyone, which means it's optimised for no one. Our specialists configure and customise it for you."}
             </p>
-            <div style={{display:"flex",flexWrap:"wrap",gap:isMobile?6:8,marginBottom:isMobile?20:28}}>
+            <div style={{display:"flex",flexWrap:"wrap",gap:isMobile?6:8,marginBottom:isMobile?18:24}}>
               {[{i:"🔵",l:"Google Partner"},{i:"🏆",l:"ISO Certified"},{i:"🔒",l:"GDPR Compliant"},{i:"🍁",l:"PIPEDA Ready"},{i:"⭐",l:"Clutch Top Agency"}].map(b=>(
                 <span key={b.l} style={{display:"inline-flex",alignItems:"center",gap:6,padding:isMobile?"5px 10px":"6px 13px",borderRadius:100,border:"1px solid rgba(255,255,255,0.12)",background:"rgba(255,255,255,0.04)",color:"rgba(255,255,255,0.65)",fontSize:isMobile?"11px":"12.5px",fontWeight:600}}>{b.i} {b.l}</span>
               ))}
@@ -316,7 +376,7 @@ export default function SalesforcePage() {
           <div style={{background:"rgba(8,20,40,0.85)",border:"1px solid rgba(0,161,224,0.22)",borderRadius:20,padding:isMobile?"24px 18px":"32px 28px",backdropFilter:"blur(16px)",boxShadow:"0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,161,224,0.06)",position:"relative",overflow:"hidden"}}>
             <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,transparent,${A},transparent)`}}/>
             {submitted?(
-              <div style={{textAlign:"center",padding:`${sp().split(" ")[0]} 0`}}>
+              <div style={{textAlign:"center",padding:"40px 0"}}>
                 <div style={{fontSize:52,marginBottom:16}}>✅</div>
                 <h3 style={{color:"#fff",fontSize:20,fontWeight:800,marginBottom:10}}>Request Received!</h3>
                 <p style={{color:"rgba(255,255,255,0.5)",fontSize:14,lineHeight:1.7,marginBottom:24}}>We'll contact you within 24 hours with a free consultation.</p>
@@ -425,7 +485,6 @@ export default function SalesforcePage() {
             ))}
           </div>
           <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",justifyContent:"center",marginTop:36}}>
-            {/* ✅ → /case-studies */}
             <a href="/case-studies" className="btn-sf" style={btnSF}>View All Case Studies →</a>
           </div>
         </div>
@@ -441,7 +500,7 @@ export default function SalesforcePage() {
             <p style={{color:"rgba(255,255,255,0.5)",fontSize:bodyFS(),lineHeight:1.75,maxWidth:580,margin:"0 auto"}}>A comprehensive lineup of Salesforce solutions for clients across Canada, USA &amp; UK.</p>
           </div>
           <div style={{display:"grid",gridTemplateColumns:grid3(),gap:isMobile?16:20}}>
-            {SERVICES.map((s,i)=>(
+            {SERVICES.map((s)=>(
               <a key={s.title} href={`/services/salesforce/${s.slug}`} className="svc-card" style={{display:"flex",flexDirection:"column",gap:14,padding:cardP(),borderRadius:18,border:"1px solid rgba(255,255,255,0.07)",background:"rgba(255,255,255,0.02)",transition:"transform .3s,border-color .3s,background .3s",textDecoration:"none",cursor:"pointer"}}>
                 <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
                   <div style={{width:52,height:52,borderRadius:14,background:"rgba(0,161,224,0.1)",border:"1px solid rgba(0,161,224,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0,transition:"background .3s"}}>{s.icon}</div>
@@ -454,7 +513,6 @@ export default function SalesforcePage() {
             ))}
           </div>
           <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",justifyContent:"center",marginTop:40}}>
-            {/* ✅ → /services/salesforce */}
             <a href="/services/salesforce" className="btn-sf" style={btnSF}>View All Salesforce Services →</a>
           </div>
         </div>
@@ -471,7 +529,7 @@ export default function SalesforcePage() {
           </div>
           <div style={{display:"grid",gridTemplateColumns:grid4(),gap:isMobile?14:20}}>
             {BENEFITS.map((b,i)=>(
-              <div key={i} className="kb-card" style={{display:"flex",flexDirection:isMobile?"column":"row",gap:isMobile?14:20,padding:cardP(),borderRadius:18,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.02)",transition:"transform .3s,border-color .3s",animationDelay:`${i*.12}s`}}>
+              <div key={i} className="kb-card" style={{display:"flex",flexDirection:isMobile?"column":"row",gap:isMobile?14:20,padding:cardP(),borderRadius:18,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.02)",transition:"transform .3s,border-color .3s"}}>
                 <div style={{fontSize:isMobile?"32px":isTablet?"44px":"60px",fontWeight:900,lineHeight:1,color:A,opacity:.25,flexShrink:0,width:64,textAlign:"center"}}>{b.num}</div>
                 <div style={{flex:1}}>
                   <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}><span style={{fontSize:22}}>{b.icon}</span><h3 style={{color:"#fff",fontSize:isMobile?"15px":isTablet?"16px":"18px",fontWeight:800,margin:0}}>{b.title}</h3></div>
@@ -484,7 +542,6 @@ export default function SalesforcePage() {
             ))}
           </div>
           <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",justifyContent:"center",marginTop:40}}>
-            {/* ✅ → /contact */}
             <a href="/contact" className="btn-sf" style={btnSF}>Start Your Salesforce Journey →</a>
           </div>
         </div>
@@ -533,9 +590,7 @@ export default function SalesforcePage() {
             </div>
           </div>
           <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",marginTop:40,justifyContent:"center"}}>
-            {/* ✅ → /hire-salesforce-developer */}
             <a href="/hire-salesforce-developer" className="btn-sf" style={btnSF}>📅 Hire a Salesforce Developer</a>
-            {/* ✅ → /pricing */}
             <a href="/pricing" className="btn-out" style={btnOut}
               onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor=A;(e.currentTarget as HTMLElement).style.background="rgba(0,161,224,0.07)";}}
               onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(0,161,224,0.35)";(e.currentTarget as HTMLElement).style.background="transparent";}}>View Pricing →</a>
@@ -575,11 +630,9 @@ export default function SalesforcePage() {
             </h2>
             <p style={{color:"rgba(255,255,255,.82)",fontSize:"clamp(14px,1.5vw,17px)",lineHeight:1.75,marginBottom:36}}>Connect with NNC Digital today and let's build your custom Salesforce solution together.</p>
             <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",justifyContent:"center"}}>
-              {/* ✅ → /contact */}
               <a href="/contact" style={{display:"inline-flex",alignItems:"center",gap:10,padding:"15px 36px",borderRadius:12,background:"#fff",color:"#0055b3",fontWeight:800,fontSize:"clamp(13px,1.3vw,15px)",fontFamily:"'Poppins',sans-serif",textDecoration:"none",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}
                 onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-3px)";(e.currentTarget as HTMLElement).style.boxShadow="0 16px 40px rgba(0,0,0,0.25)";}}
                 onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.boxShadow="";}}>✦ Connect Now</a>
-              {/* ✅ → /book-consultation */}
               <a href="/book-consultation" style={{display:"inline-flex",alignItems:"center",gap:10,padding:"15px 32px",borderRadius:12,background:"transparent",color:"#fff",fontWeight:700,fontSize:"clamp(13px,1.3vw,15px)",fontFamily:"'Poppins',sans-serif",border:"2px solid rgba(255,255,255,0.5)",textDecoration:"none",cursor:"pointer",transition:"border-color .2s,background .2s"}}
                 onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor="#fff";(e.currentTarget as HTMLElement).style.background="rgba(255,255,255,0.1)";}}
                 onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(255,255,255,0.5)";(e.currentTarget as HTMLElement).style.background="transparent";}}>📅 Book a Free Call →</a>
@@ -589,7 +642,7 @@ export default function SalesforcePage() {
         </div>
       </section>
 
-      {/* ══ M10 — WHY CHOOSE US (no video) ════════════════════════════════════════ */}
+      {/* ══ M10 — WHY CHOOSE US ════════════════════════════════════════════════════ */}
       <section style={{padding:sp(),background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",top:"20%",right:"-5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,161,224,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{position:"absolute",top:"60%",left:"-5%",width:350,height:350,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.04) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
@@ -617,9 +670,7 @@ export default function SalesforcePage() {
             ))}
           </div>
           <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",justifyContent:"center"}}>
-            {/* ✅ → /book-consultation */}
             <a href="/book-consultation" className="btn-sf" style={btnSF}>📅 Book a Strategy Call</a>
-            {/* ✅ → /case-studies */}
             <a href="/case-studies" className="btn-out" style={btnOut}
               onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor=A;(e.currentTarget as HTMLElement).style.background="rgba(0,161,224,0.07)";}}
               onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(0,161,224,0.35)";(e.currentTarget as HTMLElement).style.background="transparent";}}>Our Work →</a>
@@ -720,7 +771,6 @@ export default function SalesforcePage() {
           <div style={{textAlign:"center",marginTop:36}}>
             <p style={{color:"rgba(255,255,255,0.4)",fontSize:14,marginBottom:16}}>Still have questions? We respond within 24 hours.</p>
             <div style={{display:"flex",flexWrap:"wrap",flexDirection:isMobile?"column":"row",gap:isMobile?10:14,alignItems:isMobile?"stretch":"center",justifyContent:"center"}}>
-              {/* ✅ → /contact */}
               <a href="/contact" className="btn-sf" style={btnSF}>Ask Us Anything →</a>
             </div>
           </div>

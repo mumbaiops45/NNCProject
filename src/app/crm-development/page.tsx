@@ -1274,7 +1274,7 @@ export default function CRMHero() {
               <div style={{ position: "absolute", width: isTablet ? 500 : 650, height: isTablet ? 500 : 650, borderRadius: "50%", background: `radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`, top: "40%", left: "-10%", transform: "translateY(-50%)", animation: "heroPulse 8s ease-in-out infinite", pointerEvents: "none", zIndex: 1 }} />
               <div style={{ position: "absolute", width: isTablet ? 300 : 400, height: isTablet ? 300 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)", top: "10%", right: "5%", animation: "heroPulse 10s ease-in-out infinite .5s", pointerEvents: "none", zIndex: 1 }} />
               <div style={{ position: "absolute", width: isTablet ? 400 : 520, height: isTablet ? 400 : 520, borderRadius: "50%", border: "1px dashed rgba(0,201,167,.08)", top: "50%", left: "-12%", transform: "translateY(-50%)", animation: "heroSpin 55s linear infinite", pointerEvents: "none", zIndex: 1 }} />
-              <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)", animation: "heroScan 7s linear infinite", pointerEvents: "none", zIndex: 2 }} />
+              {/* <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)", animation: "heroScan 7s linear infinite", pointerEvents: "none", zIndex: 2 }} /> */}
             </>
           )}
 
@@ -1413,7 +1413,7 @@ export default function CRMHero() {
 
         {/* M3 — STATS */}
         <section className="sec sec-grad-n1n2-n1" style={{ borderTop: "1px solid rgba(0,201,167,.12)", borderBottom: "1px solid rgba(0,201,167,.12)" }}>
-          <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.3),transparent)", animation: "heroScan 4s linear infinite", pointerEvents: "none" }} />
+          <div style={{  animation: "heroScan 4s linear infinite", pointerEvents: "none" }} />
           <div className="stats-row">
             {STATS.map((s, i) => (
               <div key={i} className="stat-card" style={{ animationDelay: `${i * .12}s` }}>

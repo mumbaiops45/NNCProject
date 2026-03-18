@@ -418,7 +418,7 @@ export default function ERPPage() {
 
       {/* ══ M3 — STATS ════════════════════════════════════════════════════════════ */}
       <section style={{padding:sp(),background:N1,borderTop:"1px solid rgba(0,201,167,.12)",borderBottom:"1px solid rgba(0,201,167,.12)",position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",left:0,right:0,height:1,background:"linear-gradient(90deg,transparent,rgba(0,201,167,.3),transparent)",animation:"heroScan 4s linear infinite",pointerEvents:"none"}}/>
+        <div/>
         <div style={{display:"grid",gridTemplateColumns:isMobile?"repeat(2,1fr)":isTablet?"repeat(2,1fr)":"repeat(4,1fr)",gap:isMobile?14:20,maxWidth:1280,margin:"0 auto"}}>
           {STATS.map((s,i)=>(
             <div key={i} className="stat-card" style={{textAlign:"center",padding:isMobile?"18px 12px":"24px 16px",borderRadius:18,background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.06)",transition:"transform .3s,border-color .3s"}}>
