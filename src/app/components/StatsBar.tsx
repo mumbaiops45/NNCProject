@@ -176,15 +176,6 @@ export default function StatsBar() {
           background: linear-gradient(180deg, transparent, rgba(255,255,255,0.08), transparent);
         }
 
-        /* Scan line */
-        .sb-scan {
-          position: absolute;
-          left: 0; right: 0;
-          height: 1px;
-          background: linear-gradient(90deg, transparent 0%, rgba(0,201,167,0.3) 50%, transparent 100%);
-          animation: scanMove 4s linear infinite;
-          pointer-events: none;
-        }
 
         /* Section heading */
         .sb-heading {

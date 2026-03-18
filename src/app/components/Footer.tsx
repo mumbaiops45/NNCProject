@@ -2295,8 +2295,8 @@ export default function Footer() {
           flexWrap: "wrap",
           justifyContent: isMobile ? "center" : "flex-start"
         }}>
-          <span>🏢</span>
-          <span>50 Philip Ave, Guelph, ON N1E 1R4, Canada</span>
+          {/* <span>🏢</span> */}
+          {/* <span>50 Philip Ave, Guelph, ON N1E 1R4, Canada</span> */}
         </div>
       </div>
     </footer>

@@ -99,11 +99,14 @@ export default function Navbar() {
         .nnc-root *, .nnc-root *::before, .nnc-root *::after { box-sizing: border-box; }
 
         /* ══ TOP BAR ══ */
-        .nnc-topbar {
-          background: rgba(0,201,167,0.06);
-          border-bottom: 1px solid rgba(0,201,167,0.11);
-          font-family: 'Poppins', sans-serif;
-        }
+       .nnc-topbar {
+  background: rgba(3, 11, 24, 0.97);
+  border-bottom: 1px solid rgba(0,201,167,0.11);
+  font-family: 'Poppins', sans-serif;
+  backdrop-filter: blur(24px); 
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: 50px 50px 0 0;
+}
         .nnc-topbar-inner {
           max-width: 1320px; margin: 0 auto; padding: 5px 40px;
           display: flex; align-items: center; justify-content: flex-end; gap: 28px;
@@ -122,34 +125,42 @@ export default function Navbar() {
         .nnc-topbar-sep { color: rgba(255,255,255,0.1); font-size: 11px; }
 
         /* ══ FIXED NAV SHELL ══ */
-        .nnc-sticky-shell {
-          position: fixed;
-          top: 20px; /* Added top margin */
-          left: 20px;
-          right: 20px;
-          z-index: 999;
-          width: calc(100% - 40px); /* Subtract left and right margins */
-          margin: 0 auto;
-        }
-
+       .nnc-sticky-shell {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  width: 100%;
+  margin: 0 auto;
+  background: transparent;
+}
         /* ══ SPACER — pushes page content below the fixed navbar ══ */
-        .nnc-spacer {
-          height: 90px; /* Increased to account for top margin */
-        }
+       .nnc-spacer {
+  height: 125px; /* Topbar height + header height */
+}
+@media (max-width: 1000px) {
+  .nnc-spacer { height: 70px; }
+}
+@media (max-width: 480px) {
+  .nnc-spacer { height: 62px; }
+}
         @media (max-width: 1000px) {
           .nnc-spacer { height: 82px; }
         }
 
         /* ══ MAIN HEADER ══ */
-        .nnc-header {
-          font-family: 'Poppins', sans-serif;
-          background: rgba(3, 11, 24, 0.97);
-          backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: 50px; /* Rounded corners */
-          transition: box-shadow 0.3s ease, border-color 0.3s ease;
-          width: 100%;
-        }
+       .nnc-header {
+  font-family: 'Poppins', sans-serif;
+  background: rgba(3, 11, 24, 0.97);
+  backdrop-filter: blur(24px); 
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: none;
+  border-radius: 0 0 50px 50px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  width: 100%;
+}
         .nnc-header.scrolled { 
           box-shadow: 0 10px 40px rgba(0,0,0,0.55);
           border-color: rgba(0,201,167,0.3);
@@ -352,16 +363,22 @@ export default function Navbar() {
         }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .nnc-mob {
-          position: fixed; top: 20px; right: 20px; bottom: 20px;
-          width: min(360px, 92vw); z-index: 999;
-          background: #030f20;
-          border: 1px solid rgba(0,201,167,0.16);
-          border-radius: 30px; /* Rounded mobile menu */
-          overflow-y: auto; overscroll-behavior: contain;
-          display: flex; flex-direction: column;
-          animation: slideIn 0.25s cubic-bezier(0.22,1,0.36,1);
-        }
+       .nnc-mob {
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+  bottom: 0;
+  width: min(360px, 92vw); 
+  z-index: 999;
+  background: #030f20;
+  border: 1px solid rgba(0,201,167,0.16);
+  border-radius: 30px 0 0 30px;
+  overflow-y: auto; 
+  overscroll-behavior: contain;
+  display: flex; 
+  flex-direction: column;
+  animation: slideIn 0.25s cubic-bezier(0.22,1,0.36,1);
+}
         @keyframes slideIn {
           from { transform: translateX(100%); }
           to   { transform: translateX(0); }
@@ -457,17 +474,16 @@ export default function Navbar() {
         .nnc-mob-phone:hover { color: #00C9A7; background: rgba(0,201,167,0.06); }
 
         /* ══ RESPONSIVE ══ */
-        @media (max-width: 1000px) {
-          .nnc-nav     { display: none !important; }
-          .nnc-cta     { display: none !important; }
-          .nnc-ham     { display: flex !important; }
-          .nnc-topbar  { display: none !important; }
-          .nnc-sticky-shell {
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            width: calc(100% - 20px);
-          }
+      @media (max-width: 1000px) {
+  .nnc-nav     { display: none !important; }
+  .nnc-cta     { display: none !important; }
+  .nnc-ham     { display: flex !important; }
+  .nnc-topbar  { display: none !important; }
+  .nnc-header {
+    border-radius: 50px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+}
         }
         @media (max-width: 480px) {
           .nnc-inner { padding: 0 12px; height: 62px; }

@@ -3,9 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import SchemaMarkup from "./components/SchemaMarkup";
 import Footer from "./components/Footer";
-import { getOrganisationSchema } from "./lib/schema"; // 👈 ADD THIS IMPORT
-// import ScrollToTopButton from "@/styles/ScrollToTopButton";
-// import CookieConsentPopup from "./cookies-policy/cookiespop";
+import Cursor from "./components/Cursor"; 
+import { getOrganisationSchema } from "./lib/schema";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -33,12 +32,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const orgSchema = getOrganisationSchema(); // Now this works with the import
+  const orgSchema = getOrganisationSchema();
   
   return (
     <html lang="en" className={poppins.variable}>
       <head>
-        {/* 👈 MOVE SchemaMarkup INSIDE head tag */}
         <SchemaMarkup schema={orgSchema} id="organization-schema" />
       </head>
       <body
@@ -46,6 +44,7 @@ export default function RootLayout({
           fontFamily: "var(--font-poppins), sans-serif",
         }}
       >
+        <Cursor /> 
         {children}
         <Footer />
         {/* <ScrollToTopButton /> */}
