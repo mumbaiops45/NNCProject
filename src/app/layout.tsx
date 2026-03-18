@@ -5,6 +5,7 @@ import SchemaMarkup from "./components/SchemaMarkup";
 import Footer from "./components/Footer";
 import Cursor from "./components/Cursor"; 
 import { getOrganisationSchema } from "./lib/schema";
+import ContactButtons from "./components/ContactButtons";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
       >
         <Cursor /> 
         {children}
+         <ContactButtons /> 
         <Footer />
         {/* <ScrollToTopButton /> */}
         {/* <CookieConsentPopup/> */}
