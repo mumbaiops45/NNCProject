@@ -17,7 +17,8 @@ const N2 = "#061425";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
-  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png"];
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png",
+  "clients12.png", "clients13.png", "clients14.png", "clients15.png", "clients16.png", "clients17.png", "clients18.png"];
 
 const SUCCESS_STORIES = [
   {
@@ -99,14 +100,23 @@ const WCU_POINTS = [
   { icon: "🔄", text: "End-to-end: Strategy, Integration, Automation, Change" },
 ];
 const WCU_STATS = [{ n: 1500, s: "+", l: "Projects Delivered" }, { n: 1800, s: "+", l: "IT Talents" }, { n: 98, s: "%", l: "Retention Rate" }, { n: 25, s: "+", l: "Industries" }];
-
 const FAQS = [
-  { q: "What does a digital readiness assessment involve?", a: "Our assessment is a 2-4 week deep dive into your current state. We analyse your technology stack, business processes, team capabilities, and market position. The outcome is a detailed report with a heatmap of opportunities, risks, and a recommended roadmap for transformation. For Canadian and UK clients, this includes specific compliance checks for PIPEDA and GDPR." },
-  { q: "How long does a digital transformation programme take?", a: "Transformation is a journey, not a one-off project. A phased approach is key. An initial pilot or MVP for a specific department typically takes 3-6 months. A full enterprise-wide transformation can take 12-36 months, delivered in value-driven stages. We provide a clear, phased roadmap with tangible business outcomes at each step, tailored to your organisation's pace." },
-  { q: "Can you integrate our existing (legacy) tools?", a: "Absolutely. We specialise in connecting modern platforms with legacy systems. We use robust integration platforms (iPaaS) like MuleSoft or custom APIs to create a unified data layer, ensuring your existing investments are not wasted and data flows seamlessly between old and new." },
-  { q: "How do you handle change management?", a: "We believe technology changes are 20% tech and 80% people. Our approach includes stakeholder analysis, clear communication plans, role-based training (from execs to end-users), and a post-launch 'hypercare' period. We help you build a culture that embraces, not fears, digital change." },
-  { q: "What does digital transformation cost for a business in Canada or the UK?", a: "Costs vary dramatically based on scope. A focused digital readiness assessment starts from CAD $8,000–$15,000 / £5,500–£11,000. A departmental transformation pilot ranges from CAD $40,000–$120,000 / £30,000–£90,000. Enterprise programmes are individually scoped. We provide transparent, fixed-cost proposals for each phase before work begins." },
-  { q: "How do you ensure compliance with data regulations?", a: "Compliance is built into our transformation framework. For UK/EU clients, we implement GDPR-by-design principles. For Canadian clients, we follow PIPEDA guidelines, and for US clients, CCPA. Our solutions include data mapping, consent management, audit trails, and robust security controls to ensure you remain compliant as you scale." },
+  { 
+    q: "What does a digital readiness assessment involve?", 
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process." 
+  },
+  { 
+    q: "How long does a digital transformation programme take?", 
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process." 
+  },
+  { 
+    q: "Can you integrate our existing tools?", 
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process." 
+  },
+  { 
+    q: "How do you handle change management?", 
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process." 
+  },
 ];
 
 const INT_OFFICES = [
@@ -600,25 +610,77 @@ export default function DigitalTransformationPage() {
       </section>
 
       {/* M2 — CLIENT LOGOS */}
-      <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: `1px solid rgba(0,201,167,.1)`, borderBottom: `1px solid rgba(0,201,167,.1)` }}>
-        <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
-          <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase" as const, marginBottom: 12 }}>Our Happy Clients</p>
-          <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
-            Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
-          </h2>
-        </div>
-        <div style={{ overflow: "hidden" }}>
-          <div className="cl-track">
-            {[...LOGOS, ...LOGOS].map((f, i) => (
-              <div key={i} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 64, padding: isMobile ? "8px 12px" : "10px 16px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s,box-shadow .3s" }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
-                <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 28 : 36, width: "auto", maxWidth: isMobile ? 90 : 110, objectFit: "contain" }} />
-              </div>
-            ))}
+      <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
+            <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
+            <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
+              Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
+            </h2>
           </div>
-        </div>
-      </section>
+
+          {/* Row 1 - Sliding Left to Right */}
+          <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+            <div className="cl-track" style={{ animation: "marquee 30s linear infinite" }}>
+              {LOGOS.slice(0, 6).map((logo, i) => (
+                <div key={`row1-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(0, 6).map((logo, i) => (
+                <div key={`row1-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 - Sliding Right to Left (reverse direction) */}
+          <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+            <div className="cl-track" style={{ animation: "marqueeReverse 35s linear infinite" }}>
+              {LOGOS.slice(6, 12).map((logo, i) => (
+                <div key={`row2-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(6, 12).map((logo, i) => (
+                <div key={`row2-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 - Sliding Left to Right (different speed) */}
+          <div style={{ overflow: "hidden" }}>
+            <div className="cl-track" style={{ animation: "marquee 40s linear infinite" }}>
+              {LOGOS.slice(12, 18).map((logo, i) => (
+                <div key={`row3-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(12, 18).map((logo, i) => (
+                <div key={`row3-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
       {/* M3 — SUCCESS STORIES */}
       <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "20px 48px", background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
@@ -678,20 +740,20 @@ export default function DigitalTransformationPage() {
           </div>
           <div className="svc-grid" style={{ gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(3,1fr)" }}>
             {SERVICES.map((s, i) => (
-              <Link key={s.title} href={`/services/${s.slug}`} className="svc-card" style={{ textDecoration: "none", padding: isMobile ? "18px" : "24px" }}>
+              <Link key={s.title} href={``} className="svc-card" style={{ textDecoration: "none", padding: isMobile ? "18px" : "24px" }}>
                 <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
                   <div className="svc-icon" style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 22 : 24, flexShrink: 0, transition: "background .3s,transform .3s" }}>{s.icon}</div>
                   <span style={{ padding: "3px 10px", borderRadius: 100, fontSize: isMobile ? 9 : 10.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" as const, color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{s.tag}</span>
                 </div>
                 <h3 style={{ fontSize: isMobile ? "15px" : "17px", fontWeight: 700, color: "#fff", lineHeight: 1.3, margin: 0 }}>{s.title}</h3>
                 <p style={{ fontSize: isMobile ? "12px" : "13.5px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: T, fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto" }}>Learn More <span>→</span></span>
+                {/* <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: T, fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto" }}>Learn More <span>→</span></span> */}
               </Link>
             ))}
           </div>
-          <div style={{ textAlign: "center", marginTop: 48 }}>
+          {/* <div style={{ textAlign: "center", marginTop: 48 }}>
             <Link href="/services" className="btn-teal">View All Services →</Link>
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -795,30 +857,23 @@ export default function DigitalTransformationPage() {
       </section>
 
       {/* M9 — FULL-WIDTH CTA BANNER */}
-      <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "50px 20px" : isTablet ? "70px 32px" : "80px 48px", textAlign: "center", position: "relative" }}>
-          <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-          <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 760, margin: "0 auto" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 100, padding: isMobile ? "5px 14px" : "6px 18px", marginBottom: 20 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "block" }} />
-              <span style={{ color: "#fff", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>Start Today</span>
+   <section style={{ position: "relative", overflow: "hidden" }}>
+          <div style={{ background: "linear-gradient(135deg, #0055b3 0%, #0077cc 35%, #0055b3 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "60px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
+            <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 800, margin: "0 auto" }}>
+              <h2 style={{ fontSize: isMobile ? "clamp(22px, 6vw, 28px)" : isTablet ? "32px" : "clamp(36px, 4vw, 48px)", fontWeight: 800, color: "#fff", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 16 }}>
+                Want <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>DIGITAL TRANSFORMATION solutions</span> that take your business to the next level?
+              </h2>
+              <p style={{ color: "rgba(255,255,255,0.9)", fontSize: isMobile ? "16px" : "18px", lineHeight: 1.6, marginBottom: isMobile ? 28 : 36, fontWeight: 500 }}>
+                Connect with NNC Digital today.
+              </p>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Link href="/contact" className="btn-white">Connect Now</Link>
+              </div>
             </div>
-            <h2 style={{ fontSize: isMobile ? "24px" : isTablet ? "32px" : "42px", fontWeight: 900, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 16 }}>
-              Want Digital Transformation That Takes Your<br />Business to the <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>Next Level?</span>
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.82)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "16px", lineHeight: 1.75, marginBottom: isMobile ? 28 : 32 }}>Connect with NNC Digital today and let's build your transformation roadmap together.</p>
-            <div style={{ display: "flex", gap: isMobile ? 12 : 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/contact" className="btn-teal" style={{ background: "#fff", color: "#0055b3", minWidth: isMobile ? "100%" : "auto" }}>✦ Connect Now</Link>
-              <Link href="/book-consultation" className="btn-outline" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff", minWidth: isMobile ? "100%" : "auto" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "#fff"; (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.1)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.5)"; (e.currentTarget as HTMLElement).style.background = "transparent"; }}>📅 Book a Free Call →</Link>
-            </div>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 13, marginTop: 24 }}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* M10 — WHY CHOOSE US - VIDEO REMOVED */}
       <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "20px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
@@ -851,7 +906,7 @@ export default function DigitalTransformationPage() {
           </div>
 
           <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/book-consultation" className="btn-teal">📅 Book a Strategy Call</Link>
+            <Link href="/contact" className="btn-teal">📅 Book a Strategy Call</Link>
             <Link href="/case-studies" className="btn-outline">Our Work →</Link>
           </div>
         </div>
@@ -860,70 +915,216 @@ export default function DigitalTransformationPage() {
       {/* M11 — GLOBAL PRESENCE */}
       <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "80px 48px", background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
-            <SectionBadge label="Our Reach" />
-            <SectionH2>Global <GradText>Presence</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 500, margin: "0 auto" }}>Client-facing offices in North America &amp; the UK. Engineering headquarters in Bangalore, India.</p>
-          </div>
-          <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
-            {[{ key: "int", label: "🌍 North America & UK" }, { key: "india", label: "🇮🇳 India (Engineering HQ)" }].map(t => (
-              <button key={t.key} onClick={() => setGTab(t.key as "int" | "india")} style={{ padding: isMobile ? "8px 16px" : "11px 24px", borderRadius: 10, border: `1px solid ${gTab === t.key ? "rgba(0,201,167,0.5)" : "rgba(255,255,255,0.1)"}`, background: gTab === t.key ? "rgba(0,201,167,0.12)" : "rgba(255,255,255,0.03)", color: gTab === t.key ? T : "rgba(255,255,255,0.55)", fontSize: isMobile ? 12 : 14, fontWeight: 700, fontFamily: "'Poppins',sans-serif", cursor: "pointer", transition: "all .22s", boxShadow: gTab === t.key ? "0 4px 20px rgba(0,201,167,0.12)" : "none" }}>{t.label}</button>
-            ))}
-          </div>
-          {gTab === "int" && (
-            <div>
-              <div className="gp-offices" style={{ marginBottom: 24 }}>
-                {INT_OFFICES.map((o, i) => (
-                  <div key={i} className="gp-card" style={{ padding: isMobile ? "20px" : "28px 24px", borderRadius: 18, background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.18)", transition: "transform .25s,box-shadow .25s,border-color .25s", cursor: "default" }}>
-                    <div style={{ fontSize: isMobile ? 32 : 36, marginBottom: isMobile ? 10 : 14 }}>{o.flag}</div>
-                    <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, marginBottom: 4 }}>{o.city}</h3>
-                    <p style={{ color: T, fontSize: isMobile ? 10 : 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: isMobile ? 12 : 16 }}>{o.tz}</p>
-                    <a href={`tel:${o.phone.replace(/\s|-/g, "")}`} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.7)", fontSize: isMobile ? 12 : 14, fontWeight: 600, textDecoration: "none", marginBottom: 8, transition: "color .2s" }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = T; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.7)"; }}>📞 {o.phone}</a>
-                    <a href={`mailto:${o.email}`} style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 11 : 13, textDecoration: "none", transition: "color .2s" }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = T; }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.5)"; }}>✉️ {o.email}</a>
-                  </div>
-                ))}
-              </div>
-              <div style={{ borderRadius: 14, padding: isMobile ? "16px 20px" : "20px 28px", background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}><div style={{ width: isMobile ? 8 : 10, height: isMobile ? 8 : 10, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} /><span style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, fontWeight: 500 }}>Available Mon–Fri, 9am–6pm in your time zone</span></div>
-                <a href="mailto:hello@nncdigital.com" style={{ color: T, fontSize: isMobile ? 12 : 14, fontWeight: 700, textDecoration: "none" }}>hello@nncdigital.com →</a>
-              </div>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
+
+          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+
+
+            {/* Heading with gradient and underline */}
+            <h2 style={{
+              fontSize: "clamp(32px, 5vw, 48px)",
+              fontWeight: 800,
+              color: "#fff",
+              textAlign: "center",
+              margin: "0 0 20px 0",
+              letterSpacing: "-0.02em"
+            }}>
+              Global <span style={{ background: `linear-gradient(135deg, ${T}, #fff)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Presence</span>
+            </h2>
+            <div style={{ width: "120px", height: "4px", background: `linear-gradient(90deg, transparent, ${T}, transparent)`, margin: "0 auto 40px", borderRadius: "2px" }} />
+
+            {/* Tabs with enhanced styling */}
+            <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
+              {[
+                { key: "int", label: "North America & UK", icon: "🌎" },
+                { key: "india", label: "India (HQ)", icon: "🇮🇳" }
+              ].map(t => (
+                <button
+                  key={t.key}
+                  className={`gp-tab${gTab === t.key ? " act" : ""}`}
+                  onClick={() => setGTab(t.key as "int" | "india")}
+                  style={{
+                    padding: isMobile ? "12px 24px" : "14px 32px",
+                    borderRadius: "50px",
+                    border: "none",
+                    background: gTab === t.key ? `linear-gradient(135deg, ${T}, ${TD})` : "rgba(255,255,255,0.05)",
+                    color: gTab === t.key ? "#000" : "#fff",
+                    fontSize: isMobile ? 14 : 16,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    boxShadow: gTab === t.key ? `0 8px 20px ${T}40` : "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    backdropFilter: "blur(10px)"
+                  }}
+                  onMouseEnter={e => {
+                    if (gTab !== t.key) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (gTab !== t.key) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }
+                  }}
+                >
+                  <span>{t.icon}</span> {t.label}
+                </button>
+              ))}
             </div>
-          )}
-          {gTab === "india" && (
-            <div>
-              <div style={{ borderRadius: 20, padding: isMobile ? "20px" : "36px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", marginBottom: 24 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, marginBottom: isMobile ? 20 : 24, flexWrap: "wrap" }}>
-                  <span style={{ fontSize: isMobile ? 28 : 32 }}>🇮🇳</span>
-                  <div><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>Nakshatra Namaha Creations Pvt. Ltd.</h3><p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 12 : 13, margin: "4px 0 0" }}>Engineering &amp; Delivery HQ — Bangalore, India</p></div>
-                </div>
-                <div className="gp-ind-grid" style={{ gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)" }}>
-                  {INDIA_OFFICES.map((o, i) => (
-                    <div key={i} style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, padding: isMobile ? "12px" : "16px 18px", borderRadius: 12, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", transition: "background .2s,border-color .2s", cursor: "default" }}>
-                      <span style={{ fontSize: isMobile ? 20 : 22 }}>🇮🇳</span>
-                      <div><p style={{ color: "#fff", fontSize: isMobile ? "13px" : "14px", fontWeight: 700, margin: 0 }}>{o.city}</p><p style={{ color: "rgba(255,255,255,0.38)", fontSize: isMobile ? 10 : 12, margin: "2px 0 0" }}>{o.note}</p>{o.phone && <p style={{ color: T, fontSize: isMobile ? 11 : 12.5, fontWeight: 600, margin: "4px 0 0" }}>{o.phone}</p>}</div>
+
+            {/* Content Cards */}
+            {gTab === "int" && (
+              <div style={{
+                background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
+                borderRadius: 24,
+                padding: isMobile ? 24 : 36,
+                border: `1px solid ${T}20`,
+                backdropFilter: "blur(10px)",
+                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.5)"
+              }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  {[
+                    { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
+                    { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
+                    { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 16,
+                      padding: "16px",
+                      background: "rgba(255,255,255,0.02)",
+                      borderRadius: 16,
+                      border: "1px solid rgba(255,255,255,0.05)",
+                      transition: "all 0.3s ease",
+                      cursor: "default"
+                    }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = "translateX(8px)";
+                        e.currentTarget.style.background = `${T}08`;
+                        e.currentTarget.style.borderColor = `${T}40`;
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = "translateX(0)";
+                        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+                      }}>
+                      <div style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: "14px",
+                        background: `${T}15`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 24
+                      }}>
+                        {item.flag}
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>
+                          {item.city}
+                        </p>
+                        <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
+                          {item.phone}
+                        </p>
+                      </div>
+                      <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                     </div>
                   ))}
                 </div>
-                <div style={{ marginTop: isMobile ? 16 : 24, paddingTop: isMobile ? 16 : 20, borderTop: "1px solid rgba(255,255,255,0.07)" }}><p style={{ color: "rgba(255,255,255,0.35)", fontSize: isMobile ? 12 : 13, margin: 0 }}>✉️ info@nakshatranamahacreations.com</p></div>
               </div>
-              <div className="gp-india-stats">
-                {[{ n: "8+", l: "Years Active" }, { n: "565+", l: "Projects" }, { n: "100+", l: "Team Members" }, { n: "4", l: "India Offices" }].map((s, i) => (
-                  <div key={i} style={{ textAlign: "center", padding: isMobile ? "14px 8px" : "20px 12px", borderRadius: 14, background: "rgba(0,201,167,0.06)", border: "1px solid rgba(0,201,167,0.15)", transition: "transform .25s,background .25s", cursor: "default" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.12)"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}>
-                    <p style={{ fontSize: isMobile ? "22px" : "26px", fontWeight: 900, color: T, margin: 0 }}>{s.n}</p>
-                    <p style={{ fontSize: isMobile ? 9 : 11, color: "rgba(255,255,255,0.4)", margin: "4px 0 0", fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.06em" }}>{s.l}</p>
+            )}
+
+            {gTab === "india" && (
+              <div style={{
+                background: `linear-gradient(145deg, ${T}05, ${T}02)`,
+                borderRadius: 24,
+                padding: isMobile ? 24 : 36,
+                border: `1px solid ${T}30`,
+                backdropFilter: "blur(10px)",
+                boxShadow: `0 20px 40px -15px ${T}20`
+              }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                   </div>
-                ))}
+
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                  </div>
+
+                  <div style={{
+                    marginTop: 20,
+                    padding: "20px",
+                    background: `${T}08`,
+                    borderRadius: 16,
+                    border: `1px dashed ${T}40`,
+                    textAlign: "center"
+                  }}>
+                    <span style={{ color: T, fontSize: isMobile ? 14 : 16, fontWeight: 600, letterSpacing: "0.5px" }}>
+                      ✉ info@nakshatranamahacreations.com
+                    </span>
+                  </div>
+                </div>
               </div>
+            )}
+
+            {/* Decorative bottom dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
+              {[1, 2, 3, 4, 5].map(i => (
+                <div key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: T, opacity: 0.2 + (i * 0.1) }} />
+              ))}
             </div>
-          )}
-        </div>
+          </div>
       </section>
 
       {/* M12 — FAQS */}

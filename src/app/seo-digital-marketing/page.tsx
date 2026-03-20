@@ -1,9 +1,8 @@
-
-
 "use client";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
-import { getServiceSchema } from "../lib/schema";        // ✅ ADD THIS
+import { getServiceSchema } from "../lib/schema";
 import SchemaMarkup from "../components/SchemaMarkup";
 
 // ─── Design tokens ────────────────────────────────────────────────────────────
@@ -14,8 +13,9 @@ const N1 = "#030B18";
 const N2 = "#061425";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const LOGOS = ["clients1.png","clients2.png","clients3.png","clients4.png","clients5.png",
-  "clients6.png","clients7.png","clients8.png","clients9.png","clients10.png","clients11.png"];
+const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png",
+  "clients12.png", "clients13.png", "clients14.png", "clients15.png", "clients16.png", "clients17.png", "clients18.png"];
 
 const SUCCESS_STORIES = [
   {
@@ -96,13 +96,24 @@ const WCU_POINTS = [
 ];
 const WCU_STATS = [{n:1500,s:"+",l:"Projects Delivered"},{n:1800,s:"+",l:"IT Talents"},{n:98,s:"%",l:"Retention Rate"},{n:25,s:"+",l:"Industries"}];
 
+// MODULE 12 — FAQS (Corrected with placeholder answers)
 const FAQS = [
-  {q:"How long does SEO take to show results in Canada or the UK?",a:"SEO is a long-term investment, but you'll typically see measurable progress within 3-6 months. Technical fixes and on-page optimisations show initial ranking improvements in 4-8 weeks. For competitive, high-volume keywords in markets like Toronto or London, significant traffic growth usually takes 6-12 months. We provide monthly progress reports so you can track every milestone."},
-  {q:"Do you manage Google Ads in the USA and Canada?",a:"Yes. Our Google-certified specialists manage campaigns across North America and the UK. We handle everything: keyword research, ad copy, landing page optimisation, bid management, and conversion tracking. For Canadian clients, we manage both English and French campaigns. For US clients, we optimise for specific states, cities, or DMAs. All campaigns are built with a relentless focus on ROAS and CPA."},
-  {q:"Can you audit our existing website's SEO?",a:"Absolutely. Our technical SEO audit covers: crawlability and indexation, Core Web Vitals and page speed, site structure and internal linking, on-page optimisation (meta data, headers, content), backlink profile analysis, and competitor benchmarking. You'll receive a detailed report with prioritised fixes and an estimated timeline for implementation. Turnaround is 5-10 business days."},
-  {q:"What is your local SEO approach for Toronto or London?",a:"For multi-location businesses in cities like Toronto or London, our local SEO strategy includes: Google Business Profile optimisation for each location, local keyword research ('near me', 'in [city]'), localised content and landing pages, consistent NAP citations across directories, review generation and management, and local link building. We help you dominate the local pack and drive foot traffic."},
-  {q:"How do you report on marketing performance?",a:"We build custom dashboards (usually in Google Looker Studio) that connect directly to your data sources: Google Analytics, Google Ads, Meta, LinkedIn, and your CRM. You get a single source of truth with real-time data on the metrics that matter to your business — no vanity metrics, no PDFs. Monthly strategy calls are included to review performance and plan next steps."},
-  {q:"Do you offer content marketing and copywriting?",a:"Yes. Our in-house team includes SEO-focused copywriters and content strategists. We produce blog posts, pillar pages, whitepapers, case studies, and website copy that's optimised to rank and convert. For UK clients, we work with native British English writers. For Canadian clients, we adapt content for your specific regional audience."},
+  {
+    q: "How long does SEO take to show results in Canada or the UK?",
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
+  },
+  {
+    q: "Do you manage Google Ads in the USA and Canada?",
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
+  },
+  {
+    q: "Can you audit our existing website's SEO?",
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
+  },
+  {
+    q: "What is your local SEO approach for Toronto or London?",
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
+  },
 ];
 
 const INT_OFFICES = [
@@ -191,10 +202,24 @@ function AccItem({item,open,toggle}:{item:{icon:string;title:string;desc:string}
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function SEOandDigitalMarketingPage() {
- const serviceSchema = getServiceSchema(
+  const serviceSchema = getServiceSchema(
     "SEO & Digital Marketing", 
     "SEO & Digital Marketing That Drives Qualified Traffic and Measurable Revenue for businesses in Canada, USA & UK. We build data-driven marketing strategies that make your business visible online."
   );
+
+  // Add responsive state
+  const [windowWidth, setWindowWidth] = useState(0);
+  
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const isMobile = windowWidth <= 640;
+  const isTablet = windowWidth > 640 && windowWidth <= 1024;
+
   const [form,setForm] = useState({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});
   const [submitted,setSubmitted] = useState(false);
   const [loading,setLoading] = useState(false);
@@ -213,13 +238,20 @@ export default function SEOandDigitalMarketingPage() {
   const setCF = (k:string,v:string) => setCForm(f=>({...f,[k]:v}));
   const handleCSubmit = (e:React.FormEvent) => {e.preventDefault();setCLoading(true);setTimeout(()=>{setCLoading(false);setCSubmitted(true);},1200);};
 
-  const iS:React.CSSProperties = {width:"100%",padding:"11px 14px",borderRadius:9,background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.14)",color:"#fff",fontSize:13.5,fontFamily:"'Poppins',sans-serif",outline:"none",boxSizing:"border-box",transition:"border-color .2s,background .2s"};
-  const iSLg:React.CSSProperties = {...iS,padding:"13px 16px",fontSize:14.5};
+  // Add getSectionPadding function
+  const getSectionPadding = () => {
+    if (isMobile) return "40px 16px";
+    if (isTablet) return "60px 32px";
+    return "80px 48px";
+  };
+
+  const iS:React.CSSProperties = {width:"100%",padding:isMobile ? "10px 12px" : "11px 14px",borderRadius:9,background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.14)",color:"#fff",fontSize:isMobile ? "13px" : "13.5px",fontFamily:"'Poppins',sans-serif",outline:"none",boxSizing:"border-box",transition:"border-color .2s,background .2s"};
+  const iSLg:React.CSSProperties = {...iS,padding:isMobile ? "12px 14px" : "13px 16px",fontSize:isMobile ? "14px" : "14.5px"};
 
   return (
     <>
       <Navbar />
-<SchemaMarkup schema={serviceSchema} id="seo-digital-marketing-schema" />
+      <SchemaMarkup schema={serviceSchema} id="seo-digital-marketing-schema" />
       {/* ── Global Responsive Styles ── */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
@@ -235,6 +267,8 @@ export default function SEOandDigitalMarketingPage() {
         @keyframes ctaBgShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
         @keyframes sbFadeUp   { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
         @keyframes clScroll   { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes marqueeReverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
         /* Logo track */
         .cl-track { display:flex; width:max-content; animation:clScroll 32s linear infinite; }
@@ -252,12 +286,25 @@ export default function SEOandDigitalMarketingPage() {
           z-index:3;
           align-items:center;
         }
+        @media (max-width:768px) {
+          .hero-layout { grid-template-columns:1fr; gap:32px; }
+        }
 
         /* Two-col */
         .two-col { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+        @media (max-width:768px) {
+          .two-col { grid-template-columns:1fr; gap:16px; }
+        }
 
         /* Services grid */
-        .svc-grid { display:grid; gap:20px; }
+        .svc-grid { display:grid; gap:20px; grid-template-columns:repeat(3,1fr); }
+        @media (max-width:1024px) {
+          .svc-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        @media (max-width:640px) {
+          .svc-grid { grid-template-columns:1fr; }
+        }
+        
         .svc-card {
           display:flex; flex-direction:column; gap:14px; padding:24px;
           border-radius:18px; border:1px solid rgba(255,255,255,0.07);
@@ -268,7 +315,14 @@ export default function SEOandDigitalMarketingPage() {
         .svc-card:hover .svc-icon { background:rgba(0,201,167,0.2)!important; transform:scale(1.1); }
 
         /* Key benefits grid */
-        .kb-grid { display:grid; gap:20px; }
+        .kb-grid { display:grid; gap:20px; grid-template-columns:repeat(4,1fr); }
+        @media (max-width:960px) {
+          .kb-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        @media (max-width:640px) {
+          .kb-grid { grid-template-columns:1fr; }
+        }
+        
         .kb-card {
           display:flex; gap:20px; padding:28px 24px; border-radius:18px;
           border:1px solid rgba(255,255,255,0.06); background:rgba(255,255,255,0.02);
@@ -277,18 +331,42 @@ export default function SEOandDigitalMarketingPage() {
         .kb-card:hover { transform:translateY(-4px); border-color:rgba(0,201,167,0.2); background:rgba(0,201,167,0.04); }
 
         /* Tools grid */
-        .pt-grid { display:grid; gap:16px; }
+        .pt-grid { display:grid; gap:16px; grid-template-columns:repeat(4,1fr); }
+        @media (max-width:1024px) {
+          .pt-grid { grid-template-columns:repeat(4,1fr); }
+        }
+        @media (max-width:768px) {
+          .pt-grid { grid-template-columns:repeat(3,1fr); }
+        }
+        @media (max-width:480px) {
+          .pt-grid { grid-template-columns:repeat(2,1fr); }
+        }
+        
         .pt-card { display:flex;flex-direction:column;padding:24px 20px;border-radius:16px;text-align:center;align-items:center;transition:transform .3s,box-shadow .3s; }
         .pt-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(0,0,0,0.3); }
         .pt-card:hover .pt-icon { transform:scale(1.15)!important; }
 
         /* Global presence */
         .gp-offices { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+        @media (max-width:768px) {
+          .gp-offices { grid-template-columns:repeat(2,1fr); }
+        }
+        @media (max-width:480px) {
+          .gp-offices { grid-template-columns:1fr; }
+        }
+        
         .gp-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,0.3); border-color:rgba(0,201,167,0.35)!important; }
 
         /* Contact grid */
         .cf-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; }
+        @media (max-width:768px) {
+          .cf-grid { grid-template-columns:1fr; gap:24px; }
+        }
+        
         .cf-name { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+        @media (max-width:480px) {
+          .cf-name { grid-template-columns:1fr; gap:12px; }
+        }
 
         /* Story tabs */
         .ss-tab {
@@ -308,132 +386,41 @@ export default function SEOandDigitalMarketingPage() {
         .h-teal:hover    { color:#00C9A7!important; }
         .fi:focus        { border-color:rgba(0,201,167,0.5)!important; background:rgba(0,201,167,0.05)!important; }
         .gp-ind:hover    { background:rgba(255,255,255,0.06)!important; border-color:rgba(255,255,255,0.15)!important; }
-
-        /* ── Tablet ≤ 1024px ── */
-        @media (max-width:1024px) {
-          .hero-layout { grid-template-columns:1fr; gap:32px; }
-          .svc-grid    { grid-template-columns:repeat(2,1fr)!important; }
-          .kb-grid     { grid-template-columns:repeat(2,1fr)!important; }
-          .pt-grid     { grid-template-columns:repeat(4,1fr)!important; }
-          .ai-feat-grid{ grid-template-columns:repeat(2,1fr)!important; }
-          .wcu-stats   { grid-template-columns:repeat(2,1fr)!important; }
-          .wcu-pts     { grid-template-columns:repeat(2,1fr)!important; }
-          .gp-india-stats { grid-template-columns:repeat(2,1fr)!important; }
-          .gp-ind-grid { grid-template-columns:repeat(2,1fr)!important; }
-        }
-
-        /* ── Mobile ≤ 768px ── */
-        @media (max-width:768px) {
-          section:not(.hero-section) { padding:36px 20px!important; }
-
-          /* Reduce space above section headings */
-          section > div > div[style*="textAlign"],
-          section > div > div > div[style*="textAlign"] {
-            margin-bottom:20px!important;
-          }
-
-          /* Tighten badge and h2 spacing */
-          .sec-head { margin-bottom:20px!important; }
-          .sec-head > div { margin-bottom:8px!important; }
-          .sec-head h2 { margin-bottom:8px!important; font-size:clamp(20px,5vw,28px)!important; }
-          .sec-head p  { font-size:13px!important; margin-top:6px!important; }
-          .hero-layout { gap:28px; }
-          .two-col     { grid-template-columns:1fr!important; gap:12px!important; }
-          .cf-grid     { grid-template-columns:1fr!important; gap:24px!important; }
-          .cf-name     { grid-template-columns:1fr!important; gap:12px!important; }
-          .svc-grid    { grid-template-columns:1fr!important; }
-          .kb-grid     { grid-template-columns:1fr!important; }
-          .pt-grid     { grid-template-columns:repeat(2,1fr)!important; }
-          .ai-feat-grid{ grid-template-columns:repeat(2,1fr)!important; }
-          .gp-offices  { grid-template-columns:1fr!important; gap:14px!important; }
-          .wcu-stats   { grid-template-columns:repeat(2,1fr)!important; }
-          .wcu-pts     { grid-template-columns:1fr!important; }
-          .gp-india-stats { grid-template-columns:repeat(2,1fr)!important; }
-          .gp-ind-grid { grid-template-columns:1fr!important; }
-          .ss-tab      { font-size:12px!important; padding:8px 14px!important; }
-          .mob-badge   { font-size:11px!important; padding:5px 10px!important; }
-          .platform-pill{ font-size:11px!important; padding:5px 11px!important; }
-
-          /* ── Equal-size full-width buttons on mobile ── */
-          .btn-row {
-            flex-direction:column!important;
-            align-items:stretch!important;
-            gap:12px!important;
-          }
-          .btn-row a,
-          .btn-row button {
-            width:100%!important;
-            text-align:center!important;
-            justify-content:center!important;
-            padding:14px 20px!important;
-            font-size:14px!important;
-            box-sizing:border-box!important;
-            flex:none!important;
-            min-width:0!important;
-          }
-        }
-
-        /* ── Small mobile ≤ 480px ── */
-        @media (max-width:480px) {
-          section:not(.hero-section) { padding:28px 16px!important; }
-          .pt-grid  { grid-template-columns:1fr!important; }
-          .ai-feat-grid { grid-template-columns:1fr!important; }
-          .kb-card  { flex-direction:column!important; gap:14px!important; }
-          .ss-tab   { width:100%; justify-content:center; }
-
-          /* Ensure buttons stay full-width at smallest screens too */
-          .btn-row {
-            flex-direction:column!important;
-            align-items:stretch!important;
-          }
-          .btn-row a,
-          .btn-row button {
-            width:100%!important;
-            text-align:center!important;
-            justify-content:center!important;
-            padding:14px 16px!important;
-            font-size:14px!important;
-          }
-        }
       `}</style>
 
-      {/* ══════════════════════════════════════════════════
-          M1 — HERO + INLINE LEAD FORM
-      ══════════════════════════════════════════════════ */}
+      {/* M1 — HERO */}
       <section className="hero-section" style={{padding:"clamp(10px,5vw,60px) clamp(16px,4vw,48px) clamp(28px,5vw,52px)",background:`linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`,position:"relative",overflow:"hidden",minHeight:"unset",display:"flex",alignItems:"flex-start"}}>
         <Particles/>
-        {/* <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:1,backgroundImage:`linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`,backgroundSize:"60px 60px"}}/> */}
         <div style={{position:"absolute",width:650,height:650,borderRadius:"50%",background:`radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`,top:"40%",left:"-10%",transform:"translateY(-50%)",animation:"heroPulse 8s ease-in-out infinite",pointerEvents:"none",zIndex:1}}/>
         <div style={{position:"absolute",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)",top:"10%",right:"5%",animation:"heroPulse 10s ease-in-out infinite .5s",pointerEvents:"none",zIndex:1}}/>
         <div style={{position:"absolute",width:520,height:520,borderRadius:"50%",border:"1px dashed rgba(0,201,167,.08)",top:"50%",left:"-12%",transform:"translateY(-50%)",animation:"heroSpin 55s linear infinite",pointerEvents:"none",zIndex:1}}/>
-        {/* <div style={{position:"absolute",left:0,right:0,height:1,background:"linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)",animation:"heroScan 7s linear infinite",pointerEvents:"none",zIndex:2}}/> */}
 
         <div className="hero-layout">
           {/* Left */}
           <div style={{animation:"heroFadeUp .7s ease both"}}>
-            <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.25)",borderRadius:100,padding:"7px 18px",marginBottom:28,animation:"heroGlow 3s ease-in-out infinite,heroFadeUp .7s ease both"}}>
-              <span style={{width:7,height:7,borderRadius:"50%",background:T,boxShadow:`0 0 10px ${T}`,animation:"heroBlink 1.4s ease-in-out infinite"}}/>
-              <span style={{color:T,fontSize:"clamp(10px,1.2vw,11.5px)",fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const}}>SEO & Digital Marketing — Canada, USA &amp; UK</span>
+            <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.25)",borderRadius:100,padding:isMobile ? "6px 14px" : "7px 18px",marginBottom:isMobile ? 20 : 28,animation:"heroGlow 3s ease-in-out infinite,heroFadeUp .7s ease both"}}>
+              <span style={{width:isMobile ? 6 : 7,height:isMobile ? 6 : 7,borderRadius:"50%",background:T,boxShadow:`0 0 10px ${T}`,animation:"heroBlink 1.4s ease-in-out infinite"}}/>
+              <span style={{color:T,fontSize:isMobile ? "10px" : "11.5px",fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const}}>SEO & Digital Marketing — Canada, USA &amp; UK</span>
             </div>
-            <h1 style={{fontSize:"clamp(26px,3.8vw,54px)",fontWeight:900,lineHeight:1.12,marginBottom:22,letterSpacing:"-0.025em",color:"#fff",animation:"heroFadeUp .7s ease .12s both"}}>
+            <h1 style={{fontSize:isMobile ? "28px" : isTablet ? "36px" : "48px",fontWeight:900,lineHeight:1.12,marginBottom:isMobile ? 14 : 22,letterSpacing:"-0.025em",color:"#fff",animation:"heroFadeUp .7s ease .12s both"}}>
               SEO & Digital Marketing That Drives <GradText>Qualified Traffic</GradText> and Measurable Revenue
             </h1>
-            <p style={{color:"rgba(255,255,255,0.52)",fontSize:"clamp(13px,1.3vw,16.5px)",lineHeight:1.85,marginBottom:28,maxWidth:600,animation:"heroFadeUp .7s ease .22s both"}}>
+            <p style={{color:"rgba(255,255,255,0.52)",fontSize:isMobile ? "14px" : isTablet ? "15px" : "16.5px",lineHeight:1.85,marginBottom:isMobile ? 18 : 28,maxWidth:600,animation:"heroFadeUp .7s ease .22s both"}}>
               Most businesses in Canada, the USA, and the UK are invisible online — not because their services aren't great, but because their digital presence hasn't been built to be found. We fix that.
             </p>
-            <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:28,animation:"heroFadeUp .7s ease .27s both"}}>
+            <div style={{display:"flex",flexWrap:"wrap",gap:isMobile ? 6 : 8,marginBottom:isMobile ? 16 : 28,animation:"heroFadeUp .7s ease .27s both"}}>
               {[{i:"🔍",l:"SEO"},{i:"📍",l:"Local SEO"},{i:"🎯",l:"Google Ads"},{i:"📘",l:"Meta Ads"},{i:"💼",l:"LinkedIn"}].map(b=>(
-                <span key={b.l} className="platform-pill" style={{display:"inline-flex",alignItems:"center",gap:6,padding:"6px 14px",borderRadius:100,border:"1px solid rgba(0,201,167,0.25)",background:"rgba(0,201,167,0.06)",color:"rgba(255,255,255,0.8)",fontSize:12.5,fontWeight:600}}>{b.i} {b.l}</span>
+                <span key={b.l} className="platform-pill" style={{display:"inline-flex",alignItems:"center",gap:6,padding:isMobile ? "5px 12px" : "6px 14px",borderRadius:100,border:"1px solid rgba(0,201,167,0.25)",background:"rgba(0,201,167,0.06)",color:"rgba(255,255,255,0.8)",fontSize:isMobile ? 11 : 12.5,fontWeight:600}}>{b.i} {b.l}</span>
               ))}
             </div>
-            <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:36,animation:"heroFadeUp .7s ease .32s both"}}>
+            <div style={{display:"flex",flexWrap:"wrap",gap:isMobile ? 6 : 8,marginBottom:isMobile ? 20 : 36,animation:"heroFadeUp .7s ease .32s both"}}>
               {[{i:"🔵",l:"Google Partner"},{i:"🏆",l:"ISO Certified"},{i:"🔒",l:"GDPR Compliant"},{i:"🍁",l:"PIPEDA Ready"},{i:"⭐",l:"Clutch Top Agency"}].map(b=>(
-                <span key={b.l} className="mob-badge" style={{display:"inline-flex",alignItems:"center",gap:6,padding:"6px 13px",borderRadius:100,border:"1px solid rgba(255,255,255,0.12)",background:"rgba(255,255,255,0.04)",color:"rgba(255,255,255,0.65)",fontSize:12.5,fontWeight:600,cursor:"default"}}>{b.i} {b.l}</span>
+                <span key={b.l} className="mob-badge" style={{display:"inline-flex",alignItems:"center",gap:6,padding:isMobile ? "5px 12px" : "6px 13px",borderRadius:100,border:"1px solid rgba(255,255,255,0.12)",background:"rgba(255,255,255,0.04)",color:"rgba(255,255,255,0.65)",fontSize:isMobile ? 11 : 12.5,fontWeight:600,cursor:"default"}}>{b.i} {b.l}</span>
               ))}
             </div>
             <div style={{display:"flex",gap:20,flexWrap:"wrap",animation:"heroFadeUp .7s ease .36s both"}}>
               {[{flag:"🇨🇦",label:"CA:",phone:"+1 647-XXX-XXXX"},{flag:"🇬🇧",label:"UK:",phone:"+44 20-XXXX-XXXX"}].map(p=>(
-                <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g,"")}`} className="h-teal" style={{display:"flex",alignItems:"center",gap:7,color:"rgba(255,255,255,0.5)",fontSize:"clamp(12px,1.1vw,13.5px)",fontWeight:600,textDecoration:"none",transition:"color .2s"}}>
+                <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g,"")}`} className="h-teal" style={{display:"flex",alignItems:"center",gap:7,color:"rgba(255,255,255,0.5)",fontSize:isMobile ? "12px" : "13.5px",fontWeight:600,textDecoration:"none",transition:"color .2s"}}>
                   <span>{p.flag}</span><span style={{color:"rgba(255,255,255,0.3)"}}>{p.label}</span><span style={{color:T}}>{p.phone}</span>
                 </a>
               ))}
@@ -441,48 +428,48 @@ export default function SEOandDigitalMarketingPage() {
           </div>
 
           {/* Hero Form */}
-          <div style={{background:"rgba(8,20,40,0.85)",border:"1px solid rgba(0,201,167,0.22)",borderRadius:20,padding:"32px 28px",backdropFilter:"blur(16px)",boxShadow:"0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)",position:"relative",overflow:"hidden",animation:"heroFadeUp .7s ease .15s both"}}>
+          <div style={{background:"rgba(8,20,40,0.85)",border:"1px solid rgba(0,201,167,0.22)",borderRadius:20,padding:isMobile ? "24px 20px" : "32px 28px",backdropFilter:"blur(16px)",boxShadow:"0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)",position:"relative",overflow:"hidden",animation:"heroFadeUp .7s ease .15s both"}}>
             <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,transparent,${T},transparent)`}}/>
             {submitted?(
-              <div style={{textAlign:"center",padding:"40px 0"}}>
-                <div style={{fontSize:52,marginBottom:16}}>✅</div>
-                <h3 style={{color:"#fff",fontSize:20,fontWeight:800,marginBottom:10}}>Request Received!</h3>
-                <p style={{color:"rgba(255,255,255,0.5)",fontSize:14,lineHeight:1.7,marginBottom:24}}>We'll contact you within 24 hours to discuss your marketing goals.</p>
-                <button onClick={()=>{setSubmitted(false);setForm({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});}} style={{padding:"11px 26px",borderRadius:9,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:14,fontFamily:"'Poppins',sans-serif",cursor:"pointer"}}>Send Another →</button>
+              <div style={{textAlign:"center",padding:isMobile ? "30px 0" : "40px 0"}}>
+                <div style={{fontSize:isMobile ? 44 : 52,marginBottom:16}}>✅</div>
+                <h3 style={{color:"#fff",fontSize:isMobile ? 18 : 20,fontWeight:800,marginBottom:10}}>Request Received!</h3>
+                <p style={{color:"rgba(255,255,255,0.5)",fontSize:isMobile ? 13 : 14,lineHeight:1.7,marginBottom:24}}>We'll contact you within 24 hours to discuss your marketing goals.</p>
+                <button onClick={()=>{setSubmitted(false);setForm({firstName:"",lastName:"",phone:"",dialCode:"+1",email:"",service:"",message:""});}} style={{padding:isMobile ? "10px 22px" : "11px 26px",borderRadius:9,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "14px",fontFamily:"'Poppins',sans-serif",cursor:"pointer"}}>Send Another →</button>
               </div>
             ):(
               <>
-                <div style={{marginBottom:22}}>
-                  <p style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const,marginBottom:4}}>Free Consultation</p>
-                  <h2 style={{color:"#fff",fontSize:18,fontWeight:800,margin:0,lineHeight:1.3}}>Get a Free SEO & Marketing Audit</h2>
+                <div style={{marginBottom:isMobile ? 14 : 22}}>
+                  <p style={{color:T,fontSize:isMobile ? 10 : 11,fontWeight:700,letterSpacing:"0.1em",textTransform:"uppercase" as const,marginBottom:4}}>Free Consultation</p>
+                  <h2 style={{color:"#fff",fontSize:isMobile ? 16 : 18,fontWeight:800,margin:0,lineHeight:1.3}}>Get a Free SEO & Marketing Audit</h2>
                 </div>
-                <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:12}}>
+                <form onSubmit={handleSubmit} style={{display:"flex",flexDirection:"column",gap:isMobile ? 10 : 12}}>
                   <div className="cf-name">
-                    <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>First Name *</label><input className="fi" required style={iS} placeholder="Jane" value={form.firstName} onChange={e=>setF("firstName",e.target.value)}/></div>
-                    <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Last Name</label><input className="fi" style={iS} placeholder="Smith" value={form.lastName} onChange={e=>setF("lastName",e.target.value)}/></div>
+                    <div><label style={{display:"block",fontSize:isMobile ? 10 : 11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>First Name *</label><input className="fi" required style={iS} placeholder="Jane" value={form.firstName} onChange={e=>setF("firstName",e.target.value)}/></div>
+                    <div><label style={{display:"block",fontSize:isMobile ? 10 : 11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Last Name</label><input className="fi" style={iS} placeholder="Smith" value={form.lastName} onChange={e=>setF("lastName",e.target.value)}/></div>
                   </div>
                   <div>
-                    <label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Phone</label>
-                    <div style={{display:"flex",gap:8}}>
-                      <select className="fi" style={{...iS,width:82,flexShrink:0,padding:"11px 6px",cursor:"pointer"}} value={form.dialCode} onChange={e=>setF("dialCode",e.target.value)}>
+                    <label style={{display:"block",fontSize:isMobile ? 10 : 11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Phone</label>
+                    <div style={{display:"flex",gap:8,flexDirection:isMobile ? "column" : "row"}}>
+                      <select className="fi" style={{...iS,width:isMobile ? "100%" : 82,flexShrink:0,padding:isMobile ? "10px 12px" : "11px 6px",cursor:"pointer"}} value={form.dialCode} onChange={e=>setF("dialCode",e.target.value)}>
                         {DIAL_CODES.map((d,i)=><option key={i} value={d.code}>{d.flag} {d.code}</option>)}
                       </select>
                       <input className="fi" style={iS} type="tel" placeholder="647 XXX XXXX" value={form.phone} onChange={e=>setF("phone",e.target.value)}/>
                     </div>
                   </div>
-                  <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Business Email *</label><input className="fi" required type="email" style={iS} placeholder="jane@company.com" value={form.email} onChange={e=>setF("email",e.target.value)}/></div>
+                  <div><label style={{display:"block",fontSize:isMobile ? 10 : 11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Business Email *</label><input className="fi" required type="email" style={iS} placeholder="jane@company.com" value={form.email} onChange={e=>setF("email",e.target.value)}/></div>
                   <div>
-                    <label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Service</label>
+                    <label style={{display:"block",fontSize:isMobile ? 10 : 11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Service</label>
                     <select className="fi" style={{...iS,cursor:"pointer"}} value={form.service} onChange={e=>setF("service",e.target.value)}>
                       <option value="">Select...</option>
                       {SERVICES_LIST.map(s=><option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
-                  <div><label style={{display:"block",fontSize:11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Message</label><textarea className="fi" style={{...iS,minHeight:76,resize:"vertical" as const}} placeholder="Tell us about your marketing goals and target audience..." value={form.message} onChange={e=>setF("message",e.target.value)}/></div>
-                  <button className="btn-teal" type="submit" disabled={loading} style={{padding:"13px",borderRadius:10,border:"none",marginTop:4,background:loading?"rgba(0,201,167,0.5)":`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:800,fontSize:14.5,fontFamily:"'Poppins',sans-serif",cursor:loading?"wait":"pointer",transition:"transform .2s,box-shadow .2s"}}>
+                  <div><label style={{display:"block",fontSize:isMobile ? 10 : 11,fontWeight:600,color:"rgba(255,255,255,0.45)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Message</label><textarea className="fi" style={{...iS,minHeight:isMobile ? 70 : 76,resize:"vertical" as const}} placeholder="Tell us about your marketing goals and target audience..." value={form.message} onChange={e=>setF("message",e.target.value)}/></div>
+                  <button className="btn-teal" type="submit" disabled={loading} style={{padding:isMobile ? "12px" : "13px",borderRadius:10,border:"none",marginTop:4,background:loading?"rgba(0,201,167,0.5)":`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:800,fontSize:isMobile ? "13px" : "14.5px",fontFamily:"'Poppins',sans-serif",cursor:loading?"wait":"pointer",transition:"transform .2s,box-shadow .2s"}}>
                     {loading?"Sending...":"📊 Get Free Marketing Audit →"}
                   </button>
-                  <p style={{color:"rgba(255,255,255,0.28)",fontSize:11,textAlign:"center",margin:0}}>🔒 Secure &amp; confidential. No spam, ever.</p>
+                  <p style={{color:"rgba(255,255,255,0.28)",fontSize:isMobile ? 10 : 11,textAlign:"center",margin:0}}>🔒 Secure &amp; confidential. No spam, ever.</p>
                 </form>
               </>
             )}
@@ -490,478 +477,633 @@ export default function SEOandDigitalMarketingPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M2 — CLIENT LOGOS
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"40px 0",background:N0,overflow:"hidden",borderTop:`1px solid rgba(0,201,167,.1)`,borderBottom:`1px solid rgba(0,201,167,.1)`}}>
-        <div className="sec-head" style={{textAlign:"center",marginBottom:40,padding:"0 24px"}}>
-          <p style={{fontWeight:600,fontSize:11.5,color:"rgba(255,255,255,.28)",letterSpacing:"0.14em",textTransform:"uppercase" as const,marginBottom:12}}>Our Happy Clients</p>
-          <h2 style={{fontSize:"clamp(18px,2.6vw,32px)",fontWeight:800,color:"#fff",letterSpacing:"-0.02em",lineHeight:1.25,margin:0}}>
+      {/* M2 — CLIENT LOGOS (3 rows of 6 logos) */}
+      <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
+        <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
+          <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
+          <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
             Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
           </h2>
         </div>
-        <div style={{overflow:"hidden"}}>
-          <div className="cl-track">
-            {[...LOGOS,...LOGOS].map((f,i)=>(
-              <div key={i} style={{flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",height:64,padding:"10px 16px",background:"#fff",borderRadius:10,margin:"0 8px",boxShadow:"0 6px 20px rgba(0,0,0,0.15)",opacity:.9,transition:"transform .3s,box-shadow .3s"}}
-                onMouseEnter={e=>{const el=e.currentTarget as HTMLElement;el.style.transform="scale(1.08)";el.style.boxShadow="0 10px 28px rgba(0,0,0,0.25)";}}
-                onMouseLeave={e=>{const el=e.currentTarget as HTMLElement;el.style.transform="";el.style.boxShadow="0 6px 20px rgba(0,0,0,0.15)";}}>
-                <img src={`/${f}`} alt={`Client ${i+1}`} style={{height:36,width:"auto",maxWidth:110,objectFit:"contain"}}/>
+
+        {/* Row 1 - Sliding Left to Right */}
+        <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+          <div className="cl-track" style={{ animation: "marquee 30s linear infinite" }}>
+            {LOGOS.slice(0, 6).map((logo, i) => (
+              <div key={`row1-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {LOGOS.slice(0, 6).map((logo, i) => (
+              <div key={`row1-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 2 - Sliding Right to Left (reverse direction) */}
+        <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+          <div className="cl-track" style={{ animation: "marqueeReverse 35s linear infinite" }}>
+            {LOGOS.slice(6, 12).map((logo, i) => (
+              <div key={`row2-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {LOGOS.slice(6, 12).map((logo, i) => (
+              <div key={`row2-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 3 - Sliding Left to Right (different speed) */}
+        <div style={{ overflow: "hidden" }}>
+          <div className="cl-track" style={{ animation: "marquee 40s linear infinite" }}>
+            {LOGOS.slice(12, 18).map((logo, i) => (
+              <div key={`row3-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {/* Duplicate for seamless loop */}
+            {LOGOS.slice(12, 18).map((logo, i) => (
+              <div key={`row3-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M3 — SUCCESS STORIES
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"52px 48px",background:`linear-gradient(180deg,${N2} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
+      {/* M3 — SUCCESS STORIES */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N2} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:0,backgroundImage:"linear-gradient(rgba(0,201,167,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.02) 1px,transparent 1px)",backgroundSize:"56px 56px"}}/>
         <div style={{maxWidth:1200,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:28}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 28}}>
             <SectionBadge label="Proven Results"/>
             <SectionH2>SEO & Digital Marketing <GradText>Success Stories</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(14px,1.3vw,16px)",lineHeight:1.7,maxWidth:500,margin:"0 auto"}}>Real results for businesses in Canada, USA &amp; UK.</p>
+            <p style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.7,maxWidth:500,margin:"0 auto"}}>Real results for businesses in Canada, USA &amp; UK.</p>
           </div>
-          <div style={{display:"flex",gap:10,justifyContent:"center",marginBottom:40,flexWrap:"wrap"}}>
+          <div style={{display:"flex",gap:10,justifyContent:"center",marginBottom:isMobile ? 24 : 32,flexWrap:"wrap"}}>
             {SUCCESS_STORIES.map((c,i)=>(
-              <button key={i} className={`ss-tab${story===i?" act":""}`} onClick={()=>setStory(i)}><span>{c.icon}</span>{c.industry} — {c.result}</button>
+              <button key={i} className={`ss-tab${story===i?" act":""}`} onClick={()=>setStory(i)} style={{padding:isMobile ? "6px 14px" : "8px 18px",fontSize:isMobile ? "11px" : "13px"}}><span>{c.icon}</span>{c.industry} — {c.result}</button>
             ))}
           </div>
           <div key={story} style={{background:"rgba(255,255,255,0.02)",border:`1px solid rgba(0,201,167,.3)`,borderRadius:24,overflow:"hidden",animation:"sbFadeUp .45s ease both"}}>
             <div style={{height:3,background:`linear-gradient(90deg,transparent,${T},transparent)`}}/>
-            <div style={{padding:"clamp(20px,3vw,36px)"}}>
+            <div style={{padding:isMobile ? "20px" : "36px"}}>
               <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:20,flexWrap:"wrap"}}>
-                <div style={{width:52,height:52,borderRadius:14,fontSize:26,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,201,167,0.12)",border:`1px solid rgba(0,201,167,.3)`}}>{SUCCESS_STORIES[story].icon}</div>
-                <span style={{padding:"4px 14px",borderRadius:100,fontSize:12,fontWeight:700,background:"rgba(0,201,167,0.12)",border:`1px solid rgba(0,201,167,.3)`,color:T,textTransform:"uppercase" as const,letterSpacing:"0.08em"}}>{SUCCESS_STORIES[story].result}</span>
+                <div style={{width:isMobile ? 48 : 52,height:isMobile ? 48 : 52,borderRadius:14,fontSize:isMobile ? 24 : 26,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,201,167,0.12)",border:`1px solid rgba(0,201,167,.3)`}}>{SUCCESS_STORIES[story].icon}</div>
+                <span style={{padding:isMobile ? "3px 12px" : "4px 14px",borderRadius:100,fontSize:isMobile ? 10 : 12,fontWeight:700,background:"rgba(0,201,167,0.12)",border:`1px solid rgba(0,201,167,.3)`,color:T,textTransform:"uppercase" as const,letterSpacing:"0.08em"}}>{SUCCESS_STORIES[story].result}</span>
               </div>
-              <h3 style={{color:"#fff",fontSize:"clamp(16px,2vw,24px)",fontWeight:800,marginBottom:16,lineHeight:1.3}}>{SUCCESS_STORIES[story].title}</h3>
-              <p style={{color:"rgba(255,255,255,0.6)",fontSize:"clamp(13px,1.2vw,15px)",lineHeight:1.7,marginBottom:28}}>{SUCCESS_STORIES[story].description}</p>
-              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:14}}>
+              <h3 style={{color:"#fff",fontSize:isMobile ? "18px" : "22px",fontWeight:800,marginBottom:isMobile ? 14 : 22,lineHeight:1.3}}>{SUCCESS_STORIES[story].title}</h3>
+              <p style={{color:"rgba(255,255,255,0.6)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.7,marginBottom:isMobile ? 20 : 28}}>{SUCCESS_STORIES[story].description}</p>
+              <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:isMobile ? 8 : 12}}>
                 {SUCCESS_STORIES[story].metrics.map((m,i)=>(
-                  <div key={i} style={{textAlign:"center",padding:"clamp(12px,2vw,18px) 14px",borderRadius:14,border:"1px solid rgba(255,255,255,0.07)",background:"rgba(255,255,255,0.03)",transition:"transform .25s,background .25s",cursor:"default"}}
+                  <div key={i} style={{textAlign:"center",padding:isMobile ? "12px 8px" : "18px 14px",borderRadius:14,border:"1px solid rgba(255,255,255,0.07)",background:"rgba(255,255,255,0.03)",transition:"transform .25s,background .25s",cursor:"default"}}
                     onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-4px)";(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.06)";}}
                     onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.background="rgba(255,255,255,0.03)";}}>
-                    <div style={{fontSize:"clamp(16px,2vw,22px)",marginBottom:8}}>{m.i}</div>
-                    <div style={{fontSize:"clamp(20px,2.5vw,30px)",fontWeight:900,marginBottom:4,background:`linear-gradient(135deg,#fff 30%,${T})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>{m.v}</div>
-                    <div style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(11px,1vw,12px)",fontWeight:500}}>{m.l}</div>
+                    <div style={{fontSize:isMobile ? 16 : 20,marginBottom:6}}>{m.i}</div>
+                    <div style={{fontSize:isMobile ? "18px" : "24px",fontWeight:900,marginBottom:4,background:`linear-gradient(135deg,#fff 30%,${T})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>{m.v}</div>
+                    <div style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? 10 : 11,fontWeight:500}}>{m.l}</div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-          <div style={{display:"flex",justifyContent:"center",gap:8,marginTop:28}}>
+          <div style={{display:"flex",justifyContent:"center",gap:8,marginTop:24}}>
             {SUCCESS_STORIES.map((_,i)=>(
               <button key={i} onClick={()=>setStory(i)} style={{width:story===i?24:8,height:8,borderRadius:100,background:story===i?T:"rgba(255,255,255,0.2)",border:"none",cursor:"pointer",transition:"all .3s ease"}}/>
             ))}
           </div>
-          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:44}}>
-            {/* ✅ → /case-studies */}
-            <a href="/case-studies" className="btn-teal" style={{display:"inline-block",padding:"14px 36px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>View All Case Studies →</a>
+          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:isMobile ? 28 : 36}}>
+            <a href="/case-studies" className="btn-teal" style={{padding:isMobile ? "12px 28px" : "14px 36px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>View All Case Studies →</a>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M4 — SERVICES WE OFFER
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px 32px",background:`linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
+      {/* M4 — SERVICES WE OFFER */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:0,backgroundImage:"linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)",backgroundSize:"56px 56px"}}/>
         <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:36}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 36}}>
             <SectionBadge label="What We Deliver"/>
             <SectionH2>SEO & Digital Marketing <GradText>Services We Offer</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.5)",fontSize:"clamp(14px,1.3vw,16px)",lineHeight:1.75,maxWidth:580,margin:"0 auto"}}>Data-driven marketing strategies for businesses across Canada, USA &amp; UK.</p>
+            <p style={{color:"rgba(255,255,255,0.5)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.75,maxWidth:580,margin:"0 auto"}}>Data-driven marketing strategies for businesses across Canada, USA &amp; UK.</p>
           </div>
-          <div className="svc-grid" style={{gridTemplateColumns:"repeat(3,1fr)"}}>
+          <div className="svc-grid">
             {SERVICES.map((s,i)=>(
-              // ✅ Each service card → /services/{slug}
-              <a key={s.title} href={`/services/${s.slug}`} className="svc-card" style={{animationDelay:`${i*.06}s`}}>
+              <a key={s.title} href={`/services/${s.slug}`} className="svc-card" style={{padding:isMobile ? "20px" : "24px"}}>
                 <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",gap:12}}>
-                  <div className="svc-icon" style={{width:52,height:52,borderRadius:14,background:"rgba(0,201,167,0.1)",border:"1px solid rgba(0,201,167,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:24,flexShrink:0,transition:"background .3s,transform .3s"}}>{s.icon}</div>
-                  <span style={{padding:"3px 10px",borderRadius:100,fontSize:10.5,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase" as const,color:T,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.18)"}}>{s.tag}</span>
+                  <div className="svc-icon" style={{width:isMobile ? 48 : 52,height:isMobile ? 48 : 52,borderRadius:14,background:"rgba(0,201,167,0.1)",border:"1px solid rgba(0,201,167,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:isMobile ? 22 : 24,flexShrink:0,transition:"background .3s,transform .3s"}}>{s.icon}</div>
+                  <span style={{padding:isMobile ? "2px 8px" : "3px 10px",borderRadius:100,fontSize:isMobile ? 9 : 10.5,fontWeight:600,letterSpacing:"0.08em",textTransform:"uppercase" as const,color:T,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.18)"}}>{s.tag}</span>
                 </div>
-                <h3 style={{fontSize:"clamp(14px,1.3vw,17px)",fontWeight:700,color:"#fff",lineHeight:1.3,margin:0}}>{s.title}</h3>
-                <p style={{fontSize:13.5,color:"rgba(255,255,255,0.5)",lineHeight:1.7,margin:0}}>{s.desc}</p>
-                <span style={{display:"inline-flex",alignItems:"center",gap:6,color:T,fontSize:13,fontWeight:600,marginTop:"auto"}}>Learn More <span>→</span></span>
+                <h3 style={{fontSize:isMobile ? "15px" : "17px",fontWeight:700,color:"#fff",lineHeight:1.3,margin:0}}>{s.title}</h3>
+                <p style={{fontSize:isMobile ? "12px" : "13.5px",color:"rgba(255,255,255,0.5)",lineHeight:1.7,margin:0}}>{s.desc}</p>
+                <span style={{display:"inline-flex",alignItems:"center",gap:6,color:T,fontSize:isMobile ? "12px" : "13px",fontWeight:600,marginTop:"auto"}}>Learn More <span>→</span></span>
               </a>
             ))}
           </div>
-          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:56}}>
-            {/* ✅ → /services */}
-            <a href="/services" className="btn-teal" style={{display:"inline-block",padding:"14px 36px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,border:"none",color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>View All Services →</a>
+          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:isMobile ? 32 : 40}}>
+            <a href="/services" className="btn-teal" style={{padding:isMobile ? "12px 28px" : "14px 36px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>View All Services →</a>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M5 — KEY BENEFITS
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"52px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
+      {/* M5 — KEY BENEFITS */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,pointerEvents:"none",zIndex:0,backgroundImage:"linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)",backgroundSize:"56px 56px"}}/>
         <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:36}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 36}}>
             <SectionBadge label="Why Market With Us"/>
             <SectionH2>Key Benefits of <GradText>SEO & Digital Marketing</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(14px,1.3vw,16px)",lineHeight:1.75,maxWidth:520,margin:"0 auto"}}>Here's what you gain when you partner with a data-driven marketing team.</p>
+            <p style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.75,maxWidth:520,margin:"0 auto"}}>Here's what you gain when you partner with a data-driven marketing team.</p>
           </div>
-          <div className="kb-grid" style={{gridTemplateColumns:"repeat(4,1fr)"}}>
+          <div className="kb-grid">
             {BENEFITS.map((b,i)=>(
-              <div key={i} className="kb-card" style={{animationDelay:`${i*.12}s`}}>
-                <div style={{fontSize:"clamp(36px,5vw,64px)",fontWeight:900,lineHeight:1,background:"linear-gradient(135deg,rgba(0,201,167,0.15) 0%,rgba(0,201,167,0.05) 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",flexShrink:0,width:72,textAlign:"center"}}>{b.num}</div>
+              <div key={i} className="kb-card" style={{padding:isMobile ? "16px" : "20px",flexDirection:isMobile ? "column" : "row"}}>
+                <div style={{fontSize:isMobile ? "36px" : "42px",fontWeight:900,lineHeight:1,background:"linear-gradient(135deg,rgba(0,201,167,0.15) 0%,rgba(0,201,167,0.05) 100%)",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent",flexShrink:0,width:isMobile ? "auto" : 72,textAlign:"center"}}>{b.num}</div>
                 <div style={{flex:1}}>
-                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}><span style={{fontSize:22}}>{b.icon}</span><h3 style={{color:"#fff",fontSize:"clamp(15px,1.4vw,19px)",fontWeight:800,margin:0}}>{b.title}</h3></div>
-                  <p style={{color:"rgba(255,255,255,0.52)",fontSize:"clamp(13px,1vw,14.5px)",lineHeight:1.75,margin:"0 0 14px"}}>{b.desc}</p>
+                  <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}><span style={{fontSize:20}}>{b.icon}</span><h3 style={{color:"#fff",fontSize:isMobile ? "16px" : "18px",fontWeight:800,margin:0}}>{b.title}</h3></div>
+                  <p style={{color:"rgba(255,255,255,0.52)",fontSize:isMobile ? "12px" : "14px",lineHeight:1.7,margin:"0 0 12px"}}>{b.desc}</p>
                   <div style={{display:"flex",flexWrap:"wrap",gap:6}}>
-                    {b.tags.map(tag=><span key={tag} style={{display:"inline-flex",alignItems:"center",padding:"3px 10px",borderRadius:100,fontSize:10.5,fontWeight:600,letterSpacing:".06em",textTransform:"uppercase" as const,color:T,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.18)"}}>{tag}</span>)}
+                    {b.tags.map(tag=><span key={tag} style={{padding:isMobile ? "2px 8px" : "3px 10px",borderRadius:100,fontSize:isMobile ? 9 : 10.5,fontWeight:600,letterSpacing:".06em",textTransform:"uppercase" as const,color:T,background:"rgba(0,201,167,0.08)",border:"1px solid rgba(0,201,167,0.18)"}}>{tag}</span>)}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:52}}>
-            {/* ✅ → /free-audit */}
-            <a href="/free-audit" className="btn-teal" style={{display:"inline-block",padding:"14px 36px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>Get Your Free Audit →</a>
+          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:isMobile ? 32 : 40}}>
+            <a href="/free-audit" className="btn-teal" style={{padding:isMobile ? "12px 28px" : "14px 36px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>Get Your Free Audit →</a>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M6 — PLATFORM TOOLS
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px",background:N1,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:600,height:400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+      {/* M6 — PLATFORM TOOLS */}
+      <section style={{padding:getSectionPadding(),background:N1,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)",width:isMobile ? 400 : 600,height:isMobile ? 300 : 400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:32}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 32}}>
             <SectionBadge label="Our Tech Stack"/>
             <SectionH2>Leading Platform Tools <GradText>That We Use</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(14px,1.3vw,16px)",lineHeight:1.75,maxWidth:560,margin:"0 auto"}}>We use enterprise-grade tools to plan, execute, and report on every campaign.</p>
+            <p style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.75,maxWidth:560,margin:"0 auto"}}>We use enterprise-grade tools to plan, execute, and report on every campaign.</p>
           </div>
-          <div className="pt-grid" style={{gridTemplateColumns:"repeat(4,1fr)"}}>
+          <div className="pt-grid">
             {TOOLS.map((tool,i)=>(
-              <div key={i} className="pt-card" style={{background:tool.clr,border:`1px solid ${tool.bd}`}}>
-                <div className="pt-icon" style={{width:56,height:56,borderRadius:15,display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,marginBottom:16,background:"rgba(255,255,255,0.05)",border:`1px solid ${tool.bd}`,transition:"transform .25s"}}>{tool.icon}</div>
-                <h3 style={{color:"#fff",fontSize:"clamp(13px,1.2vw,16px)",fontWeight:700,marginBottom:8,lineHeight:1.3}}>{tool.name}</h3>
-                <p style={{color:"rgba(255,255,255,0.5)",fontSize:13,lineHeight:1.7,margin:0}}>{tool.purpose}</p>
+              <div key={i} className="pt-card" style={{background:tool.clr,border:`1px solid ${tool.bd}`,padding:isMobile ? "16px 12px" : "20px 16px"}}>
+                <div className="pt-icon" style={{width:isMobile ? 48 : 56,height:isMobile ? 48 : 56,borderRadius:15,display:"flex",alignItems:"center",justifyContent:"center",fontSize:isMobile ? 22 : 26,marginBottom:isMobile ? 12 : 16,background:"rgba(255,255,255,0.05)",border:`1px solid ${tool.bd}`,transition:"transform .25s"}}>{tool.icon}</div>
+                <h3 style={{color:"#fff",fontSize:isMobile ? "14px" : "16px",fontWeight:700,marginBottom:6}}>{tool.name}</h3>
+                <p style={{color:"rgba(255,255,255,0.5)",fontSize:isMobile ? "11px" : "13px",lineHeight:1.6,margin:0}}>{tool.purpose}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M7 — TAILORED APPROACH (ACCORDION)
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"10%",left:"5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+      {/* M7 — TAILORED APPROACH (ACCORDION) */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"10%",left:"5%",width:isMobile ? 200 : 400,height:isMobile ? 200 : 400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:32}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 32}}>
             <SectionBadge label="Tailored Approach"/>
             <SectionH2>Marketing <GradText>Tailored to Your Needs</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(14px,1.3vw,16px)",lineHeight:1.75,maxWidth:560,margin:"0 auto"}}>We adapt our marketing strategies to your business type and growth goals.</p>
+            <p style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.75,maxWidth:560,margin:"0 auto"}}>We adapt our marketing strategies to your business type and growth goals.</p>
           </div>
-          <div className="two-col" style={{marginBottom:16}}>
-            <p style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>By Business Type</p>
-            <p style={{color:T,fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>By Marketing Type</p>
+          <div className="two-col" style={{marginBottom:isMobile ? 12 : 16}}>
+            <p style={{color:T,fontSize:isMobile ? 10 : 11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>By Business Type</p>
+            <p style={{color:T,fontSize:isMobile ? 10 : 11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>By Marketing Type</p>
           </div>
           <div className="two-col">
-            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+            <div style={{display:"flex",flexDirection:"column",gap:isMobile ? 10 : 12}}>
               {HIRE_LEFT.map((item,i)=><AccItem key={item.title} item={item} open={hireL===i} toggle={()=>setHireL(hireL===i?null:i)}/>)}
             </div>
-            <div style={{display:"flex",flexDirection:"column",gap:12}}>
+            <div style={{display:"flex",flexDirection:"column",gap:isMobile ? 10 : 12}}>
               {HIRE_RIGHT.map((item,i)=><AccItem key={item.title} item={item} open={hireR===i} toggle={()=>setHireR(hireR===i?null:i)}/>)}
             </div>
           </div>
-          <div className="btn-row" style={{display:"flex",gap:16,marginTop:48,justifyContent:"center",flexWrap:"wrap"}}>
-            {/* ✅ → /free-marketing-plan */}
-            <a href="/free-marketing-plan" className="btn-teal" style={{display:"inline-block",padding:"14px 32px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>📊 Get a Free Marketing Plan</a>
-            {/* ✅ → /pricing */}
-            <a href="/pricing" style={{display:"inline-block",padding:"14px 32px",borderRadius:10,border:"1.5px solid rgba(0,201,167,0.35)",background:"transparent",color:T,fontWeight:600,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"border-color .2s,background .2s"}}
+          <div className="btn-row" style={{display:"flex",gap:isMobile ? 12 : 16,marginTop:isMobile ? 32 : 40,justifyContent:"center",flexWrap:"wrap"}}>
+            <a href="/free-marketing-plan" className="btn-teal" style={{padding:isMobile ? "12px 24px" : "14px 32px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>📊 Get a Free Marketing Plan</a>
+            <a href="/pricing" style={{padding:isMobile ? "12px 24px" : "14px 32px",borderRadius:10,border:"1.5px solid rgba(0,201,167,0.35)",background:"transparent",color:T,fontWeight:600,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"border-color .2s,background .2s"}}
               onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor=T;(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.07)";}}
               onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(0,201,167,0.35)";(e.currentTarget as HTMLElement).style.background="transparent";}}>View Pricing →</a>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M8 — AI-POWERED SOLUTIONS
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px",background:`linear-gradient(180deg,${N2} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"0%",left:"50%",transform:"translateX(-50%)",width:700,height:400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+      {/* M8 — AI-POWERED SOLUTIONS */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N2} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"0%",left:"50%",transform:"translateX(-50%)",width:isMobile ? 600 : 700,height:isMobile ? 200 : 400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{maxWidth:1280,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{marginBottom:32,maxWidth:620,marginLeft:"auto",marginRight:"auto",textAlign:"center"}}>
+          <div className="sec-head" style={{marginBottom:isMobile ? 24 : 32,maxWidth:620,marginLeft:"auto",marginRight:"auto",textAlign:"center"}}>
             <SectionBadge label="AI-Powered"/>
             <SectionH2>Leverage <GradText>AI-Powered Marketing</GradText> Solutions</SectionH2>
-            <p style={{color:"rgba(255,255,255,0.5)",fontSize:"clamp(14px,1.3vw,16px)",lineHeight:1.8}}>We use AI to analyse data, predict trends, automate campaigns, and deliver real-time insights for better ROI.</p>
+            <p style={{color:"rgba(255,255,255,0.5)",fontSize:isMobile ? "13px" : "14px",lineHeight:1.8}}>We use AI to analyse data, predict trends, automate campaigns, and deliver real-time insights for better ROI.</p>
           </div>
-          <div className="ai-feat-grid" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:20}}>
+          <div className="ai-feat-grid" style={{display:"grid",gridTemplateColumns:isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)",gap:isMobile ? 16 : 20}}>
             {AI_FEATS.map((f,i)=>(
-              <div key={i} style={{background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.15)",borderRadius:16,padding:"clamp(20px,2.5vw,28px) 20px",textAlign:"center"}}>
-                <div style={{fontSize:36,marginBottom:16}}>{f.icon}</div>
-                <h3 style={{color:"#fff",fontSize:"clamp(14px,1.3vw,16px)",fontWeight:700,marginBottom:10}}>{f.title}</h3>
-                <p style={{color:"rgba(255,255,255,0.52)",fontSize:13,lineHeight:1.6,margin:0}}>{f.desc}</p>
+              <div key={i} style={{background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.15)",borderRadius:16,padding:isMobile ? "20px 16px" : "28px 20px",textAlign:"center"}}>
+                <div style={{fontSize:isMobile ? 30 : 36,marginBottom:isMobile ? 12 : 16}}>{f.icon}</div>
+                <h3 style={{color:"#fff",fontSize:isMobile ? "14px" : "16px",fontWeight:700,marginBottom:8}}>{f.title}</h3>
+                <p style={{color:"rgba(255,255,255,0.52)",fontSize:isMobile ? "11px" : "13px",lineHeight:1.6,margin:0}}>{f.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M9 — FULL-WIDTH CTA BANNER
-      ══════════════════════════════════════════════════ */}
-      <section style={{position:"relative",overflow:"hidden"}}>
-        <div style={{background:"linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)",backgroundSize:"300% 300%",animation:"ctaBgShift 8s ease infinite",padding:"clamp(40px,5vw,56px) clamp(20px,5vw,48px)",textAlign:"center",position:"relative"}}>
-          <div style={{position:"absolute",top:"-20%",left:"-5%",width:350,height:350,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)",pointerEvents:"none"}}/>
-          <div style={{position:"absolute",bottom:"-20%",right:"-5%",width:300,height:300,borderRadius:"50%",background:"radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)",pointerEvents:"none"}}/>
-          <div style={{position:"absolute",inset:0,pointerEvents:"none",backgroundImage:"linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)",backgroundSize:"48px 48px"}}/>
-          <div style={{position:"relative",zIndex:2,maxWidth:760,margin:"0 auto"}}>
-            <div style={{display:"inline-flex",alignItems:"center",gap:8,background:"rgba(255,255,255,0.15)",border:"1px solid rgba(255,255,255,0.3)",borderRadius:100,padding:"6px 18px",marginBottom:24}}>
-              <span style={{width:6,height:6,borderRadius:"50%",background:"#fff",display:"block"}}/>
-              <span style={{color:"#fff",fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const}}>Start Today</span>
-            </div>
-            <h2 style={{fontSize:"clamp(22px,3.5vw,48px)",fontWeight:900,color:"#fff",lineHeight:1.15,letterSpacing:"-0.02em",marginBottom:20}}>
-              Want SEO & Digital Marketing That Takes Your<br/>Business to the <span style={{textDecoration:"underline",textDecorationColor:"rgba(255,255,255,0.4)"}}>Next Level?</span>
+      {/* M9 — FULL-WIDTH CTA BANNER */}
+      <section style={{ position: "relative", overflow: "hidden" }}>
+        <div style={{ background: "linear-gradient(135deg, #0055b3 0%, #0077cc 35%, #0055b3 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "60px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
+          <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
+          <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
+          <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 800, margin: "0 auto" }}>
+            <h2 style={{ fontSize: isMobile ? "clamp(22px, 6vw, 28px)" : isTablet ? "32px" : "clamp(36px, 4vw, 48px)", fontWeight: 800, color: "#fff", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 16 }}>
+              Want <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>SEO & DIGITAL MARKETING solutions</span> that take your business to the next level?
             </h2>
-            <p style={{color:"rgba(255,255,255,0.82)",fontSize:"clamp(14px,1.5vw,17px)",lineHeight:1.75,marginBottom:40}}>Connect with NNC Digital today and let's build your data-driven marketing strategy together.</p>
-            <div className="btn-row" style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
-              {/* ✅ → /contact */}
-              <a href="/contact" style={{display:"inline-flex",alignItems:"center",gap:10,padding:"16px 40px",borderRadius:12,background:"#fff",color:"#0055b3",fontWeight:800,fontSize:"clamp(13px,1.3vw,16px)",fontFamily:"'Poppins',sans-serif",textDecoration:"none",cursor:"pointer",transition:"transform .2s,box-shadow .2s"}}
-                onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-3px)";(e.currentTarget as HTMLElement).style.boxShadow="0 16px 40px rgba(0,0,0,0.25)";}}
-                onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.boxShadow="";}}>✦ Connect Now</a>
-              {/* ✅ → /book-consultation */}
-              <a href="/book-consultation" style={{display:"inline-flex",alignItems:"center",gap:10,padding:"16px 36px",borderRadius:12,background:"transparent",color:"#fff",fontWeight:700,fontSize:"clamp(13px,1.3vw,16px)",fontFamily:"'Poppins',sans-serif",border:"2px solid rgba(255,255,255,0.5)",textDecoration:"none",cursor:"pointer",transition:"border-color .2s,background .2s"}}
-                onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor="#fff";(e.currentTarget as HTMLElement).style.background="rgba(255,255,255,0.1)";}}
-                onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(255,255,255,0.5)";(e.currentTarget as HTMLElement).style.background="transparent";}}>📅 Book a Free Audit →</a>
+            <p style={{ color: "rgba(255,255,255,0.9)", fontSize: isMobile ? "16px" : "18px", lineHeight: 1.6, marginBottom: isMobile ? 28 : 36, fontWeight: 500 }}>
+              Connect with NNC Digital today.
+            </p>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <Link href="/contact" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", padding: isMobile ? "14px 32px" : "16px 40px", borderRadius: "8px", background: "#fff", color: "#0055b3", fontWeight: 700, fontSize: isMobile ? "15px" : "16px", fontFamily: "'Poppins', sans-serif", border: "none", cursor: "pointer", textDecoration: "none", transition: "transform 0.2s ease, box-shadow 0.2s ease", boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 16px 30px rgba(0,0,0,0.2)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)"; }}>Connect Now</Link>
             </div>
-            <p style={{color:"rgba(255,255,255,0.5)",fontSize:13,marginTop:28}}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M10 — WHY CHOOSE US (no video — full width)
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"52px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"20%",right:"-5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
-        <div style={{position:"absolute",top:"60%",left:"-5%",width:350,height:350,borderRadius:"50%",background:"radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+      {/* M10 — WHY CHOOSE US */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"20%",right:"-5%",width:isMobile ? 200 : 400,height:isMobile ? 200 : 400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+        <div style={{position:"absolute",top:"60%",left:"-5%",width:isMobile ? 200 : 350,height:isMobile ? 200 : 350,borderRadius:"50%",background:"radial-gradient(circle,rgba(99,102,241,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{maxWidth:1100,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:32}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 32}}>
             <SectionBadge label="Our Story"/>
             <SectionH2>Why Choose Us as Your <GradText>Digital Marketing</GradText> Partner?</SectionH2>
-            <p style={{color:"rgba(255,255,255,0.55)",fontSize:"clamp(13px,1.2vw,15px)",lineHeight:1.8,maxWidth:700,margin:"0 auto 8px"}}>Backed by <span style={{color:"#fff",fontWeight:600}}>Nakshatra Namaha Creations Pvt. Ltd.</span> — one of Bangalore&apos;s most respected digital studios with <span style={{color:T,fontWeight:600}}>8+ years of experience</span> and <span style={{color:T,fontWeight:600}}>565+ projects delivered</span>.</p>
-            <p style={{color:"rgba(255,255,255,0.55)",fontSize:"clamp(13px,1.2vw,15px)",lineHeight:1.8,maxWidth:700,margin:"0 auto"}}>We launched NNC Digital as our international arm — bringing the same proven expertise to Canadian, US, and UK markets with dedicated client-facing teams, transparent pricing, and long-term partnership.</p>
+            <p style={{color:"rgba(255,255,255,0.55)",fontSize:isMobile ? "13px" : "15px",lineHeight:1.8,maxWidth:700,margin:"0 auto 8px"}}>Backed by <span style={{color:"#fff",fontWeight:600}}>Nakshatra Namaha Creations Pvt. Ltd.</span> — one of Bangalore&apos;s most respected digital studios with <span style={{color:T,fontWeight:600}}>8+ years of experience</span> and <span style={{color:T,fontWeight:600}}>565+ projects delivered</span>.</p>
+            <p style={{color:"rgba(255,255,255,0.55)",fontSize:isMobile ? "13px" : "15px",lineHeight:1.8,maxWidth:700,margin:"0 auto"}}>We launched NNC Digital as our international arm — bringing the same proven expertise to Canadian, US, and UK markets with dedicated client-facing teams, transparent pricing, and long-term partnership.</p>
           </div>
 
-          <div className="wcu-pts" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:12,marginBottom:40}}>
+          <div className="wcu-pts" style={{display:"grid",gridTemplateColumns:isMobile ? "1fr" : "repeat(2,1fr)",gap:12,marginBottom:isMobile ? 24 : 40}}>
             {WCU_POINTS.map((p,i)=>(
-              <div key={i} className="wcu-point" style={{display:"flex",alignItems:"center",gap:14,padding:"14px 18px",borderRadius:12,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.02)",transition:"border-color .2s,background .2s,transform .2s",cursor:"default"}}>
-                <span style={{fontSize:18,flexShrink:0}}>{p.icon}</span>
-                <span style={{color:"rgba(255,255,255,0.72)",fontSize:"clamp(12px,1.1vw,14px)",fontWeight:500}}>{p.text}</span>
+              <div key={i} className="wcu-point" style={{display:"flex",alignItems:"center",gap:14,padding:isMobile ? "12px 14px" : "14px 18px",borderRadius:12,border:"1px solid rgba(255,255,255,0.06)",background:"rgba(255,255,255,0.02)",transition:"border-color .2s,background .2s,transform .2s",cursor:"default"}}>
+                <span style={{fontSize:isMobile ? 16 : 18,flexShrink:0}}>{p.icon}</span>
+                <span style={{color:"rgba(255,255,255,0.72)",fontSize:isMobile ? "12px" : "14px",fontWeight:500}}>{p.text}</span>
               </div>
             ))}
           </div>
 
-          <div className="wcu-stats" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:16,marginBottom:40}}>
+          <div className="wcu-stats" style={{display:"grid",gridTemplateColumns:isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)",gap:16,marginBottom:isMobile ? 24 : 40}}>
             {WCU_STATS.map(st=>(
-              <div key={st.l} className="wcu-stat" style={{textAlign:"center",padding:"clamp(14px,2vw,22px) 14px",borderRadius:14,border:"1px solid rgba(0,201,167,0.15)",background:"rgba(0,201,167,0.05)",transition:"transform .25s,background .25s",cursor:"default"}}>
-                <div style={{fontSize:"clamp(18px,2.2vw,28px)",fontWeight:900,marginBottom:4,background:`linear-gradient(135deg,#fff 30%,${T})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}><Counter to={st.n} sfx={st.s}/></div>
-                <div style={{color:"rgba(255,255,255,0.4)",fontSize:11,fontWeight:500}}>{st.l}</div>
+              <div key={st.l} className="wcu-stat" style={{textAlign:"center",padding:isMobile ? "16px 10px" : "22px 14px",borderRadius:14,border:"1px solid rgba(0,201,167,0.15)",background:"rgba(0,201,167,0.05)",transition:"transform .25s,background .25s",cursor:"default"}}>
+                <div style={{fontSize:isMobile ? "18px" : "24px",fontWeight:900,marginBottom:4,background:`linear-gradient(135deg,#fff 30%,${T})`,WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}><Counter to={st.n} sfx={st.s}/></div>
+                <div style={{color:"rgba(255,255,255,0.4)",fontSize:isMobile ? 10 : 11,fontWeight:500}}>{st.l}</div>
               </div>
             ))}
           </div>
 
-          <div className="btn-row" style={{display:"flex",gap:16,justifyContent:"center",flexWrap:"wrap"}}>
-            {/* ✅ → /book-consultation */}
-            <a href="/book-consultation" className="btn-teal" style={{display:"inline-block",padding:"14px 32px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>📅 Book a Strategy Call</a>
-            {/* ✅ → /case-studies */}
-            <a href="/case-studies" style={{display:"inline-block",padding:"14px 32px",borderRadius:10,border:"1.5px solid rgba(0,201,167,0.35)",background:"transparent",color:T,fontWeight:600,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"border-color .2s,background .2s"}}
+          <div className="btn-row" style={{display:"flex",gap:isMobile ? 12 : 16,justifyContent:"center",flexWrap:"wrap"}}>
+            <a href="/book-consultation" className="btn-teal" style={{padding:isMobile ? "12px 24px" : "14px 32px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>📅 Book a Strategy Call</a>
+            <a href="/case-studies" style={{padding:isMobile ? "12px 24px" : "14px 32px",borderRadius:10,border:"1.5px solid rgba(0,201,167,0.35)",background:"transparent",color:T,fontWeight:600,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"border-color .2s,background .2s"}}
               onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.borderColor=T;(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.07)";}}
               onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.borderColor="rgba(0,201,167,0.35)";(e.currentTarget as HTMLElement).style.background="transparent";}}>Our Work →</a>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M11 — GLOBAL PRESENCE
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px",background:`linear-gradient(180deg,${N0} 0%,${N1} 100%)`,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",bottom:0,left:"50%",transform:"translateX(-50%)",width:600,height:300,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
-        <div style={{maxWidth:1180,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:28}}>
-            <SectionBadge label="Our Reach"/>
-            <SectionH2>Global <GradText>Presence</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(13px,1.2vw,15px)",lineHeight:1.75,maxWidth:500,margin:"0 auto"}}>Client-facing offices in North America &amp; the UK. Engineering headquarters in Bangalore, India.</p>
-          </div>
-          <div style={{display:"flex",gap:12,justifyContent:"center",marginBottom:40,flexWrap:"wrap"}}>
-            {[{key:"int",label:"🌍 North America & UK"},{key:"india",label:"🇮🇳 India (Engineering HQ)"}].map(t=>(
-              <button key={t.key} onClick={()=>setGTab(t.key as "int"|"india")} style={{padding:"11px 24px",borderRadius:10,border:`1px solid ${gTab===t.key?"rgba(0,201,167,0.5)":"rgba(255,255,255,0.1)"}`,background:gTab===t.key?"rgba(0,201,167,0.12)":"rgba(255,255,255,0.03)",color:gTab===t.key?T:"rgba(255,255,255,0.55)",fontSize:"clamp(12px,1.2vw,14px)",fontWeight:700,fontFamily:"'Poppins',sans-serif",cursor:"pointer",transition:"all .22s",boxShadow:gTab===t.key?"0 4px 20px rgba(0,201,167,0.12)":"none"}}>{t.label}</button>
+      {/* M11 — GLOBAL PRESENCE */}
+      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
+
+        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+
+          {/* Heading with gradient */}
+          <h2 style={{
+            fontSize: isMobile ? "32px" : "48px",
+            fontWeight: 800,
+            color: "#fff",
+            textAlign: "center",
+            margin: "0 0 20px 0",
+            letterSpacing: "-0.02em"
+          }}>
+            Global <span style={{ background: `linear-gradient(135deg, ${T}, #fff)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Presence</span>
+          </h2>
+          <div style={{ width: "120px", height: "4px", background: `linear-gradient(90deg, transparent, ${T}, transparent)`, margin: "0 auto 40px", borderRadius: "2px" }} />
+
+          {/* Tabs */}
+          <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
+            {[
+              { key: "int", label: "North America & UK", icon: "🌎" },
+              { key: "india", label: "India (HQ)", icon: "🇮🇳" }
+            ].map(t => (
+              <button
+                key={t.key}
+                className={`gp-tab${gTab === t.key ? " act" : ""}`}
+                onClick={() => setGTab(t.key as "int" | "india")}
+                style={{
+                  padding: isMobile ? "12px 24px" : "14px 32px",
+                  borderRadius: "50px",
+                  border: "none",
+                  background: gTab === t.key ? `linear-gradient(135deg, ${T}, ${TD})` : "rgba(255,255,255,0.05)",
+                  color: gTab === t.key ? "#000" : "#fff",
+                  fontSize: isMobile ? 14 : 16,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  boxShadow: gTab === t.key ? `0 8px 20px ${T}40` : "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  backdropFilter: "blur(10px)"
+                }}
+                onMouseEnter={e => {
+                  if (gTab !== t.key) {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (gTab !== t.key) {
+                    e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }
+                }}
+              >
+                <span>{t.icon}</span> {t.label}
+              </button>
             ))}
           </div>
-          {gTab==="int"&&(
-            <div>
-              <div className="gp-offices" style={{marginBottom:24}}>
-                {INT_OFFICES.map((o,i)=>(
-                  <div key={i} className="gp-card" style={{padding:"28px 24px",borderRadius:18,background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.18)",transition:"transform .25s,box-shadow .25s,border-color .25s",cursor:"default"}}>
-                    <div style={{fontSize:36,marginBottom:14}}>{o.flag}</div>
-                    <h3 style={{color:"#fff",fontSize:"clamp(15px,1.4vw,18px)",fontWeight:800,marginBottom:4}}>{o.city}</h3>
-                    <p style={{color:T,fontSize:12,fontWeight:700,letterSpacing:"0.08em",textTransform:"uppercase" as const,marginBottom:16}}>{o.tz}</p>
-                    <a href={`tel:${o.phone.replace(/\s|-/g,"")}`} className="h-teal" style={{display:"flex",alignItems:"center",gap:8,color:"rgba(255,255,255,0.7)",fontSize:14,fontWeight:600,textDecoration:"none",marginBottom:8,transition:"color .2s"}}>📞 {o.phone}</a>
-                    <a href={`mailto:${o.email}`} className="h-teal" style={{display:"flex",alignItems:"center",gap:8,color:"rgba(255,255,255,0.5)",fontSize:13,textDecoration:"none",transition:"color .2s"}}>✉️ {o.email}</a>
-                  </div>
-                ))}
-              </div>
-              <div style={{borderRadius:14,padding:"20px 28px",background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.15)",display:"flex",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",gap:16}}>
-                <div style={{display:"flex",alignItems:"center",gap:12}}><div style={{width:10,height:10,borderRadius:"50%",background:"#22c55e",boxShadow:"0 0 8px #22c55e"}}/><span style={{color:"rgba(255,255,255,0.6)",fontSize:"clamp(12px,1.1vw,14px)",fontWeight:500}}>Available Mon–Fri, 9am–6pm in your time zone</span></div>
-                <a href="mailto:hello@nncdigital.com" className="h-teal" style={{color:T,fontSize:14,fontWeight:700,textDecoration:"none"}}>hello@nncdigital.com →</a>
-              </div>
-            </div>
-          )}
-          {gTab==="india"&&(
-            <div>
-              <div style={{borderRadius:20,padding:"clamp(20px,3vw,36px)",background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.08)",marginBottom:24}}>
-                <div style={{display:"flex",alignItems:"center",gap:14,marginBottom:28,flexWrap:"wrap"}}>
-                  <span style={{fontSize:32}}>🇮🇳</span>
-                  <div><h3 style={{color:"#fff",fontSize:"clamp(14px,1.4vw,18px)",fontWeight:800,margin:0}}>Nakshatra Namaha Creations Pvt. Ltd.</h3><p style={{color:"rgba(255,255,255,0.4)",fontSize:13,margin:"4px 0 0"}}>Engineering &amp; Delivery HQ — Bangalore, India</p></div>
-                </div>
-                <div className="gp-ind-grid" style={{display:"grid",gridTemplateColumns:"repeat(2,1fr)",gap:16}}>
-                  {INDIA_OFFICES.map((o,i)=>(
-                    <div key={i} className="gp-ind" style={{display:"flex",alignItems:"center",gap:14,padding:"16px 18px",borderRadius:12,background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",transition:"background .2s,border-color .2s",cursor:"default"}}>
-                      <span style={{fontSize:22}}>🇮🇳</span>
-                      <div><p style={{color:"#fff",fontSize:14,fontWeight:700,margin:0}}>{o.city}</p><p style={{color:"rgba(255,255,255,0.38)",fontSize:12,margin:"2px 0 0"}}>{o.note}</p>{o.phone&&<p style={{color:T,fontSize:12.5,fontWeight:600,margin:"4px 0 0"}}>{o.phone}</p>}</div>
+
+          {/* Content Cards */}
+          {gTab === "int" && (
+            <div style={{
+              background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
+              borderRadius: 24,
+              padding: isMobile ? 24 : 36,
+              border: `1px solid ${T}20`,
+              backdropFilter: "blur(10px)",
+              boxShadow: "0 20px 40px -15px rgba(0,0,0,0.5)"
+            }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                {INT_OFFICES.map((item, i) => (
+                  <div key={i} style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease",
+                    cursor: "default"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}08`;
+                      e.currentTarget.style.borderColor = `${T}40`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                      e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+                    }}>
+                    <div style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: "14px",
+                      background: `${T}15`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontSize: 24
+                    }}>
+                      {item.flag}
                     </div>
-                  ))}
-                </div>
-                <div style={{marginTop:24,paddingTop:20,borderTop:"1px solid rgba(255,255,255,0.07)"}}><p style={{color:"rgba(255,255,255,0.35)",fontSize:13,margin:0}}>✉️ info@nakshatranamahacreations.com</p></div>
-              </div>
-              <div className="gp-india-stats" style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:16}}>
-                {[{n:"8+",l:"Years Active"},{n:"565+",l:"Projects"},{n:"100+",l:"Team Members"},{n:"4",l:"India Offices"}].map((s,i)=>(
-                  <div key={i} style={{textAlign:"center",padding:"20px 12px",borderRadius:14,background:"rgba(0,201,167,0.06)",border:"1px solid rgba(0,201,167,0.15)",transition:"transform .25s,background .25s",cursor:"default"}}
-                    onMouseEnter={e=>{(e.currentTarget as HTMLElement).style.transform="translateY(-4px)";(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.12)";}}
-                    onMouseLeave={e=>{(e.currentTarget as HTMLElement).style.transform="";(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.06)";}}>
-                    <p style={{fontSize:"clamp(20px,2.2vw,26px)",fontWeight:900,color:T,margin:0}}>{s.n}</p>
-                    <p style={{fontSize:11,color:"rgba(255,255,255,0.4)",margin:"4px 0 0",fontWeight:600,textTransform:"uppercase" as const,letterSpacing:"0.06em"}}>{s.l}</p>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>
+                        {item.city}
+                      </p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
+                        {item.phone}
+                      </p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                   </div>
                 ))}
               </div>
             </div>
           )}
+
+          {gTab === "india" && (
+            <div style={{
+              background: `linear-gradient(145deg, ${T}05, ${T}02)`,
+              borderRadius: 24,
+              padding: isMobile ? 24 : 36,
+              border: `1px solid ${T}30`,
+              backdropFilter: "blur(10px)",
+              boxShadow: `0 20px 40px -15px ${T}20`
+            }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease"
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateX(8px)";
+                    e.currentTarget.style.background = `${T}10`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                  </div>
+                  <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                </div>
+
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease"
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateX(8px)";
+                    e.currentTarget.style.background = `${T}10`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                  </div>
+                  <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                </div>
+
+                <div style={{
+                  marginTop: 20,
+                  padding: "20px",
+                  background: `${T}08`,
+                  borderRadius: 16,
+                  border: `1px dashed ${T}40`,
+                  textAlign: "center"
+                }}>
+                  <span style={{ color: T, fontSize: isMobile ? 14 : 16, fontWeight: 600, letterSpacing: "0.5px" }}>
+                    info@nakshatranamahacreations.com
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Decorative bottom dots */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
+            {[1, 2, 3, 4, 5].map(i => (
+              <div key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: T, opacity: 0.2 + (i * 0.1) }} />
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M12 — FAQS
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px",background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"30%",right:"-5%",width:400,height:400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+      {/* M12 — FAQS (Corrected with placeholder answers) */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N1} 0%,${N2} 100%)`,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"30%",right:"-5%",width:isMobile ? 200 : 400,height:isMobile ? 200 : 400,borderRadius:"50%",background:"radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{maxWidth:860,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:32}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 32}}>
             <SectionBadge label="FAQs"/>
-            <SectionH2>Frequently Asked <GradText>Questions</GradText></SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(13px,1.2vw,15px)",lineHeight:1.75,maxWidth:520,margin:"0 auto"}}>Everything you need to know about SEO & digital marketing for businesses in Canada, USA &amp; UK.</p>
+            <SectionH2>FAQs</SectionH2>
+            <p style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? "13px" : "15px",lineHeight:1.75,maxWidth:520,margin:"0 auto"}}>Everything you need to know about SEO & digital marketing for businesses in Canada, USA &amp; UK.</p>
           </div>
-          <div style={{display:"flex",flexDirection:"column",gap:12}}>
+          <div style={{display:"flex",flexDirection:"column",gap:isMobile ? 10 : 12}}>
             {FAQS.map((f,i)=>(
               <div key={i} onClick={()=>setFaq(faq===i?null:i)} style={{border:`1px solid ${faq===i?"rgba(0,201,167,0.4)":"rgba(255,255,255,0.08)"}`,borderRadius:16,background:faq===i?"rgba(0,201,167,0.06)":"rgba(255,255,255,0.02)",overflow:"hidden",cursor:"pointer",transition:"all .25s ease"}}>
-                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:16,padding:"clamp(14px,2vw,20px) clamp(14px,2vw,22px)"}}>
-                  <div style={{display:"flex",alignItems:"center",gap:12}}>
-                    <span style={{color:T,fontSize:12,fontWeight:800,background:"rgba(0,201,167,0.1)",border:"1px solid rgba(0,201,167,0.2)",borderRadius:8,padding:"4px 10px",flexShrink:0}}>Q{i+1}</span>
-                    <span style={{fontSize:"clamp(13px,1.3vw,15.5px)",fontWeight:700,color:faq===i?"#fff":"rgba(255,255,255,0.78)",lineHeight:1.4,transition:"color .2s"}}>{f.q}</span>
+                <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:isMobile ? 12 : 16,padding:isMobile ? "14px 16px" : "20px 22px"}}>
+                  <div style={{display:"flex",alignItems:"center",gap:isMobile ? 10 : 12}}>
+                    <span style={{color:T,fontSize:isMobile ? 12 : 13,fontWeight:800,background:"rgba(0,201,167,0.1)",border:"1px solid rgba(0,201,167,0.2)",borderRadius:8,padding:isMobile ? "3px 8px" : "4px 10px",flexShrink:0}}>Q{i+1}</span>
+                    <span style={{fontSize:isMobile ? "13px" : "15px",fontWeight:700,color:faq===i?"#fff":"rgba(255,255,255,0.78)",lineHeight:1.4}}>{f.q}</span>
                   </div>
-                  <div style={{width:30,height:30,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:17,fontWeight:700,lineHeight:1,background:faq===i?T:"rgba(255,255,255,0.07)",border:`1px solid ${faq===i?T:"rgba(255,255,255,0.12)"}`,color:faq===i?"#000":"rgba(255,255,255,0.5)",transform:faq===i?"rotate(45deg)":"rotate(0deg)",transition:"all .25s ease"}}>+</div>
+                  <div style={{width:isMobile ? 26 : 30,height:isMobile ? 26 : 30,borderRadius:"50%",flexShrink:0,display:"flex",alignItems:"center",justifyContent:"center",fontSize:isMobile ? 15 : 17,fontWeight:700,lineHeight:1,background:faq===i?T:"rgba(255,255,255,0.07)",border:`1px solid ${faq===i?T:"rgba(255,255,255,0.12)"}`,color:faq===i?"#000":"rgba(255,255,255,0.5)",transform:faq===i?"rotate(45deg)":"rotate(0deg)",transition:"all .25s ease"}}>+</div>
                 </div>
                 <div style={{maxHeight:faq===i?500:0,overflow:"hidden",transition:"max-height .38s ease"}}>
-                  <p style={{padding:"0 clamp(14px,2vw,22px) 22px clamp(50px,6vw,82px)",color:"rgba(255,255,255,0.55)",fontSize:"clamp(13px,1.1vw,14.5px)",lineHeight:1.8,margin:0}}>{f.a}</p>
+                  <p style={{padding:isMobile ? "0 16px 14px 48px" : "0 22px 22px 60px",color:"rgba(255,255,255,0.55)",fontSize:isMobile ? "12px" : "14px",lineHeight:1.7,margin:0}}>{f.a}</p>
                 </div>
               </div>
             ))}
           </div>
-          <div className="btn-row" style={{display:"flex",justifyContent:"center",marginTop:44}}>
-            <p style={{color:"rgba(255,255,255,0.4)",fontSize:14,marginBottom:20,width:"100%",textAlign:"center"}}>Still have questions? We respond within 24 hours.</p>
-            {/* ✅ → /contact */}
-            <a href="/contact" className="btn-teal" style={{display:"inline-block",padding:"13px 32px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>Ask Us Anything →</a>
+          <div className="btn-row" style={{display:"flex",flexDirection:"column",alignItems:"center",marginTop:isMobile ? 28 : 36}}>
+            <p style={{color:"rgba(255,255,255,0.4)",fontSize:isMobile ? 12 : 14,marginBottom:16,textAlign:"center"}}>Still have questions? We respond within 24 hours.</p>
+            <Link href="/contact" className="btn-teal" style={{padding:isMobile ? "12px 28px" : "13px 32px",borderRadius:10,background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:"pointer",textDecoration:"none",transition:"transform .2s,box-shadow .2s"}}>Ask Us Anything →</Link>
           </div>
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════
-          M13 — CONTACT FORM
-      ══════════════════════════════════════════════════ */}
-      <section style={{padding:"48px 48px",background:`linear-gradient(180deg,${N2} 0%,${N0} 100%)`,position:"relative",overflow:"hidden"}}>
-        <div style={{position:"absolute",top:"20%",left:"50%",transform:"translateX(-50%)",width:700,height:400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
+      {/* M13 — CONTACT FORM */}
+      <section style={{padding:getSectionPadding(),background:`linear-gradient(180deg,${N2} 0%,${N0} 100%)`,position:"relative",overflow:"hidden"}}>
+        <div style={{position:"absolute",top:"20%",left:"50%",transform:"translateX(-50%)",width:isMobile ? 400 : 700,height:isMobile ? 200 : 400,borderRadius:"50%",background:"radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)",pointerEvents:"none",zIndex:0}}/>
         <div style={{maxWidth:1180,margin:"0 auto",position:"relative",zIndex:2}}>
-          <div className="sec-head" style={{textAlign:"center",marginBottom:32}}>
+          <div className="sec-head" style={{textAlign:"center",marginBottom:isMobile ? 24 : 32}}>
             <SectionBadge label="Get In Touch"/>
             <SectionH2>Ready to Build <GradText>Next-Level</GradText> Custom Digital Solutions?</SectionH2>
-            <p style={{color:"rgba(255,255,255,0.45)",fontSize:"clamp(13px,1.3vw,15.5px)",lineHeight:1.75,maxWidth:540,margin:"0 auto"}}>Tell us about your marketing goals. We'll respond within 24 hours with a free audit and honest advice.</p>
+            <p style={{color:"rgba(255,255,255,0.45)",fontSize:isMobile ? "13px" : "15px",lineHeight:1.75,maxWidth:540,margin:"0 auto"}}>Tell us about your marketing goals. We'll respond within 24 hours with a free audit and honest advice.</p>
           </div>
           <div className="cf-grid">
             {/* Left — Form */}
-            <div style={{background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,padding:"clamp(20px,3vw,36px)"}}>
+            <div style={{background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,padding:isMobile ? "20px" : "36px"}}>
               {cSubmitted?(
-                <div style={{textAlign:"center",padding:"48px 0"}}>
-                  <div style={{fontSize:56,marginBottom:20}}>✅</div>
-                  <h3 style={{color:"#fff",fontSize:22,fontWeight:800,marginBottom:12}}>Message Sent!</h3>
-                  <p style={{color:"rgba(255,255,255,0.5)",fontSize:15,lineHeight:1.7,marginBottom:28}}>Thank you — we'll contact you within 24 hours with your free marketing audit.</p>
-                  <button onClick={()=>{setCSubmitted(false);setCForm({name:"",phone:"",dialCode:"+1",email:"",service:"",project:""});}} style={{padding:"12px 28px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:14,fontFamily:"'Poppins',sans-serif",cursor:"pointer"}}>Send Another →</button>
+                <div style={{textAlign:"center",padding:isMobile ? "30px 0" : "48px 0"}}>
+                  <div style={{fontSize:isMobile ? 48 : 56,marginBottom:16}}>✅</div>
+                  <h3 style={{color:"#fff",fontSize:isMobile ? 18 : 22,fontWeight:800,marginBottom:8}}>Message Sent!</h3>
+                  <p style={{color:"rgba(255,255,255,0.5)",fontSize:isMobile ? 13 : 15,lineHeight:1.7,marginBottom:20}}>Thank you — we'll contact you within 24 hours with your free marketing audit.</p>
+                  <button onClick={()=>{setCSubmitted(false);setCForm({name:"",phone:"",dialCode:"+1",email:"",service:"",project:""});}} style={{padding:isMobile ? "10px 22px" : "12px 28px",borderRadius:10,border:"none",background:`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:700,fontSize:isMobile ? "13px" : "14px",fontFamily:"'Poppins',sans-serif",cursor:"pointer"}}>Send Another →</button>
                 </div>
               ):(
                 <form onSubmit={handleCSubmit}>
-                  <div className="cf-name" style={{marginBottom:16}}>
-                    <div><label style={{display:"block",fontSize:12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:7,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Full Name *</label><input className="fi" required style={iSLg} placeholder="Jane Smith" value={cForm.name} onChange={e=>setCF("name",e.target.value)}/></div>
+                  <div className="cf-name" style={{marginBottom:isMobile ? 12 : 16}}>
+                    <div><label style={{display:"block",fontSize:isMobile ? 11 : 12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Name *</label><input className="fi" required style={iSLg} placeholder="Jane Smith" value={cForm.name} onChange={e=>setCF("name",e.target.value)}/></div>
                     <div>
-                      <label style={{display:"block",fontSize:12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:7,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Phone</label>
-                      <div style={{display:"flex",gap:8}}>
-                        <select className="fi" style={{...iSLg,width:90,flexShrink:0,padding:"13px 8px",cursor:"pointer"}} value={cForm.dialCode} onChange={e=>setCF("dialCode",e.target.value)}>
+                      <label style={{display:"block",fontSize:isMobile ? 11 : 12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Phone</label>
+                      <div style={{display:"flex",gap:8,flexDirection:isMobile ? "column" : "row"}}>
+                        <select className="fi" style={{...iSLg,width:isMobile ? "100%" : 90,flexShrink:0,padding:isMobile ? "12px 14px" : "13px 8px",cursor:"pointer"}} value={cForm.dialCode} onChange={e=>setCF("dialCode",e.target.value)}>
                           {DIAL_CODES.map((d,i)=><option key={i} value={d.code}>{d.flag} {d.code}</option>)}
                         </select>
                         <input className="fi" style={iSLg} type="tel" placeholder="647 XXX XXXX" value={cForm.phone} onChange={e=>setCF("phone",e.target.value)}/>
                       </div>
                     </div>
                   </div>
-                  <div style={{marginBottom:16}}><label style={{display:"block",fontSize:12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:7,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Business Email *</label><input className="fi" required type="email" style={iSLg} placeholder="jane@yourcompany.com" value={cForm.email} onChange={e=>setCF("email",e.target.value)}/></div>
-                  <div style={{marginBottom:16}}>
-                    <label style={{display:"block",fontSize:12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:7,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Service of Interest</label>
+                  <div style={{marginBottom:isMobile ? 12 : 16}}><label style={{display:"block",fontSize:isMobile ? 11 : 12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Business Email *</label><input className="fi" required type="email" style={iSLg} placeholder="jane@yourcompany.com" value={cForm.email} onChange={e=>setCF("email",e.target.value)}/></div>
+                  <div style={{marginBottom:isMobile ? 12 : 16}}>
+                    <label style={{display:"block",fontSize:isMobile ? 11 : 12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Service of Interest</label>
                     <select className="fi" style={{...iSLg,cursor:"pointer"}} value={cForm.service} onChange={e=>setCF("service",e.target.value)}>
                       <option value="">Select...</option>
                       {SERVICES_LIST.map(s=><option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
-                  <div style={{marginBottom:24}}><label style={{display:"block",fontSize:12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:7,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Project Description</label><textarea className="fi" style={{...iSLg,minHeight:110,resize:"vertical" as const}} placeholder="Tell us about your business, target audience, and marketing goals..." value={cForm.project} onChange={e=>setCF("project",e.target.value)}/></div>
-                  <button className="btn-teal" type="submit" disabled={cLoading} style={{width:"100%",padding:15,borderRadius:10,border:"none",background:cLoading?"rgba(0,201,167,0.5)":`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:800,fontSize:15,fontFamily:"'Poppins',sans-serif",cursor:cLoading?"wait":"pointer",transition:"transform .2s,box-shadow .2s"}}>{cLoading?"Sending...":"Submit — Get My Free Audit →"}</button>
-                  <p style={{color:"rgba(255,255,255,0.3)",fontSize:11.5,textAlign:"center",marginTop:12}}>🔒 Your information is 100% secure and never shared.</p>
+                  <div style={{marginBottom:isMobile ? 16 : 20}}><label style={{display:"block",fontSize:isMobile ? 11 : 12.5,fontWeight:600,color:"rgba(255,255,255,0.5)",marginBottom:5,textTransform:"uppercase" as const,letterSpacing:"0.04em"}}>Project Description</label><textarea className="fi" style={{...iSLg,minHeight:isMobile ? 80 : 110,resize:"vertical" as const}} placeholder="Tell us about your business, target audience, and marketing goals..." value={cForm.project} onChange={e=>setCF("project",e.target.value)}/></div>
+                  <button className="btn-teal" type="submit" disabled={cLoading} style={{width:"100%",padding:isMobile ? "13px" : "15px",borderRadius:10,border:"none",background:cLoading?"rgba(0,201,167,0.5)":`linear-gradient(135deg,${T},${TD})`,color:"#000",fontWeight:800,fontSize:isMobile ? "14px" : "15px",fontFamily:"'Poppins',sans-serif",cursor:cLoading?"wait":"pointer",transition:"transform .2s,box-shadow .2s"}}>{cLoading?"Sending...":"Submit — Get My Free Audit →"}</button>
+                  <p style={{color:"rgba(255,255,255,0.3)",fontSize:isMobile ? 10 : 11.5,textAlign:"center",marginTop:12}}>🔒 Your information is 100% secure and never shared.</p>
                 </form>
               )}
             </div>
 
             {/* Right — Info */}
-            <div style={{display:"flex",flexDirection:"column",gap:20}}>
-              <div style={{background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.18)",borderRadius:18,padding:"28px 26px"}}>
-                <h3 style={{color:"#fff",fontSize:16,fontWeight:800,marginBottom:18}}>What Happens After You Submit?</h3>
+            <div style={{display:"flex",flexDirection:"column",gap:isMobile ? 16 : 20}}>
+              <div style={{background:"rgba(0,201,167,0.05)",border:"1px solid rgba(0,201,167,0.18)",borderRadius:18,padding:isMobile ? "20px" : "28px"}}>
+                <h3 style={{color:"#fff",fontSize:isMobile ? "15px" : "16px",fontWeight:800,marginBottom:isMobile ? 14 : 18}}>What Happens After You Submit?</h3>
                 {[{s:"1",text:"We review your marketing goals within a few hours."},{s:"2",text:"A senior marketing strategist calls you within 24 hours."},{s:"3",text:"We prepare a free audit report with actionable recommendations."},{s:"4",text:"You decide — no pressure, no obligation."}].map((s,i)=>(
-                  <div key={i} style={{display:"flex",gap:14,alignItems:"flex-start",marginBottom:i<3?16:0,padding:"12px 14px",borderRadius:10,background:"rgba(255,255,255,0.03)",transition:"background .2s",cursor:"default"}}
+                  <div key={i} style={{display:"flex",gap:isMobile ? 10 : 14,alignItems:"flex-start",marginBottom:i<3? (isMobile ? 12 : 16):0,padding:isMobile ? "8px 12px" : "12px 14px",borderRadius:10,background:"rgba(255,255,255,0.03)",transition:"background .2s",cursor:"default"}}
                     onMouseEnter={e=>(e.currentTarget as HTMLElement).style.background="rgba(0,201,167,0.07)"}
                     onMouseLeave={e=>(e.currentTarget as HTMLElement).style.background="rgba(255,255,255,0.03)"}>
-                    <div style={{width:32,height:32,borderRadius:"50%",flexShrink:0,background:`linear-gradient(135deg,${T},${TD})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:900,color:"#000"}}>{s.s}</div>
-                    <p style={{color:"rgba(255,255,255,0.65)",fontSize:14,lineHeight:1.65,margin:0}}>{s.text}</p>
+                    <div style={{width:isMobile ? 28 : 32,height:isMobile ? 28 : 32,borderRadius:"50%",flexShrink:0,background:`linear-gradient(135deg,${T},${TD})`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:isMobile ? 10 : 11,fontWeight:900,color:"#000"}}>{s.s}</div>
+                    <p style={{color:"rgba(255,255,255,0.65)",fontSize:isMobile ? "12px" : "14px",lineHeight:1.6,margin:0}}>{s.text}</p>
                   </div>
                 ))}
               </div>
-              <div style={{background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:18,padding:"26px 26px"}}>
-                <h3 style={{color:"rgba(255,255,255,0.4)",fontSize:11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const,marginBottom:18}}>Direct Contacts</h3>
+              <div style={{background:"rgba(255,255,255,0.02)",border:"1px solid rgba(255,255,255,0.08)",borderRadius:18,padding:isMobile ? "20px" : "26px"}}>
+                <h3 style={{color:"rgba(255,255,255,0.4)",fontSize:isMobile ? 10 : 11,fontWeight:700,letterSpacing:"0.12em",textTransform:"uppercase" as const,marginBottom:isMobile ? 14 : 18}}>Direct Contacts</h3>
                 {[{flag:"🇨🇦",label:"Canada",phone:"+1 647-XXX-XXXX"},{flag:"🇺🇸",label:"USA",phone:"+1 631-XXX-XXXX"},{flag:"🇬🇧",label:"UK",phone:"+44 20-XXXX-XXXX"}].map((c,i)=>(
-                  <div key={i} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 0",borderBottom:i<2?"1px solid rgba(255,255,255,0.06)":"none"}}>
-                    <span style={{color:"rgba(255,255,255,0.55)",fontSize:14,fontWeight:500}}>{c.flag} {c.label}</span>
-                    <a href={`tel:${c.phone.replace(/\s|-/g,"")}`} className="h-teal" style={{color:T,fontSize:14,fontWeight:700,textDecoration:"none"}}>{c.phone}</a>
+                  <div key={i} style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:isMobile ? "8px 0" : "12px 0",borderBottom:i<2?"1px solid rgba(255,255,255,0.06)":"none",flexWrap:"wrap",gap:8}}>
+                    <span style={{color:"rgba(255,255,255,0.55)",fontSize:isMobile ? "12px" : "14px",fontWeight:500}}>{c.flag} {c.label}</span>
+                    <a href={`tel:${c.phone.replace(/\s|-/g,"")}`} className="h-teal" style={{color:T,fontSize:isMobile ? "12px" : "14px",fontWeight:700,textDecoration:"none"}}>{c.phone}</a>
                   </div>
                 ))}
-                <div style={{marginTop:16,paddingTop:16,borderTop:"1px solid rgba(255,255,255,0.06)"}}>
-                  <a href="mailto:hello@nncdigital.com" className="h-teal" style={{color:"rgba(255,255,255,0.5)",fontSize:14,textDecoration:"none",display:"flex",alignItems:"center",gap:8}}>✉️ hello@nncdigital.com</a>
+                <div style={{marginTop:isMobile ? 12 : 16,paddingTop:isMobile ? 12 : 16,borderTop:"1px solid rgba(255,255,255,0.06)"}}>
+                  <a href="mailto:hello@nncdigital.com" className="h-teal" style={{color:"rgba(255,255,255,0.5)",fontSize:isMobile ? "12px" : "14px",textDecoration:"none",display:"flex",alignItems:"center",gap:8}}>✉️ hello@nncdigital.com</a>
                 </div>
               </div>
               <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
                 {["🔵 Google Partner","🏆 ISO Certified","🔒 GDPR Compliant","🍁 PIPEDA Ready","⭐ Clutch Top Agency"].map(b=>(
-                  <span key={b} style={{padding:"6px 12px",borderRadius:100,border:"1px solid rgba(255,255,255,0.1)",background:"rgba(255,255,255,0.03)",color:"rgba(255,255,255,0.5)",fontSize:12,fontWeight:500}}>{b}</span>
+                  <span key={b} style={{padding:isMobile ? "4px 10px" : "6px 12px",borderRadius:100,border:"1px solid rgba(255,255,255,0.1)",background:"rgba(255,255,255,0.03)",color:"rgba(255,255,255,0.5)",fontSize:isMobile ? "10px" : "12px",fontWeight:500}}>{b}</span>
                 ))}
               </div>
             </div>

@@ -781,7 +781,7 @@ export default function Footer() {
           justifyContent: isMobile ? "center" : "flex-start"
         }}>
           <span>🌍</span>
-          <span>Serving businesses in Canada, United States, United Kingdom, UAE & Australia.</span>
+          <span>Serving businesses in Canada, United States, United Kingdom, UAE.</span>
         </div>
 
         {/* Address in bottom bar */}

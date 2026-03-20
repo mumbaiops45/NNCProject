@@ -1,4 +1,3 @@
-
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -16,286 +15,288 @@ const LOGOS = [
   { name: "Client 9",  file: "/clients9.png" },
   { name: "Client 10", file: "/clients10.png" },
   { name: "Client 11", file: "/clients11.png" },
+  { name: "Client 12", file: "/clients12.png" },
+  { name: "Client 13", file: "/clients13.png" },
+  { name: "Client 14", file: "/clients14.png" },
+  { name: "Client 15", file: "/clients15.png" },
+  { name: "Client 16", file: "/clients16.png" },
+  { name: "Client 17", file: "/clients17.png" },
+  { name: "Client 18", file: "/clients18.png" },
 ];
 
 export default function ClientLogos() {
-  const [windowWidth, setWindowWidth] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const [logoColors, setLogoColors] = useState<{[key: string]: 'dark' | 'light'}>({});
 
   useEffect(() => {
     setMounted(true);
-    setWindowWidth(window.innerWidth);
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const isMobile = mounted && windowWidth <= 640;
-  const isTablet = mounted && windowWidth > 640 && windowWidth <= 1024;
+  // Split logos into rows of 6
+  const row1 = LOGOS.slice(0, 6);
+  const row2 = LOGOS.slice(6, 12);
+  const row3 = LOGOS.slice(12, 18);
 
-  const doubled = [...LOGOS, ...LOGOS];
-
-  // Function to determine if logo is dark (needs inversion)
-  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>, fileName: string) => {
-    const img = e.currentTarget;
-    // Create a canvas to analyze logo color
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0, img.width, img.height);
-
-    // Sample the image to determine if it's dark
-    try {
-      const imageData = ctx.getImageData(0, 0, 10, 10);
-      let totalBrightness = 0;
-      for (let i = 0; i < imageData.data.length; i += 4) {
-        totalBrightness += (imageData.data[i] + imageData.data[i+1] + imageData.data[i+2]) / 3;
-      }
-      const avgBrightness = totalBrightness / (imageData.data.length / 4);
-      
-      // If average brightness is low, logo is dark and needs inversion
-      setLogoColors(prev => ({ 
-        ...prev, 
-        [fileName]: avgBrightness < 128 ? 'dark' : 'light' 
-      }));
-    } catch (error) {
-      // Default to light if analysis fails
-      setLogoColors(prev => ({ ...prev, [fileName]: 'light' }));
-    }
-  };
+  // Create duplicated arrays for seamless sliding
+  const row1Slides = [...row1, ...row1, ...row1];
+  const row2Slides = [...row2, ...row2, ...row2];
+  const row3Slides = [...row3, ...row3, ...row3];
 
   // Don't render until mounted to avoid hydration issues
   if (!mounted) return null;
 
   return (
     <section style={{
-      padding: isMobile ? "40px 0" : "60px 0",
+      padding: "40px 0",
       background: "#010812",
-      overflow: "hidden",
-      borderTop: "1px solid rgba(0,201,167,.15)",
-      borderBottom: "1px solid rgba(0,201,167,.15)",
       fontFamily: "'Poppins', sans-serif",
-      position: "relative",
+      overflow: "hidden",
     }}>
       <style>{`
-        @keyframes marquee {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        @keyframes slideLeft {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-100% / 3)); }
         }
-        .cl-track {
+
+        @keyframes slideRight {
+          0% { transform: translateX(calc(-100% / 3)); }
+          100% { transform: translateX(0); }
+        }
+
+        .slider-row {
           display: flex;
-          gap: ${isMobile ? '24px' : isTablet ? '32px' : '40px'};
+          gap: 24px;
           width: max-content;
-          animation: marquee ${isMobile ? '25s' : '32s'} linear infinite;
-          will-change: transform;
+          animation: slideLeft 30s linear infinite;
         }
-        .cl-track:hover { 
-          animation-play-state: ${isMobile ? 'running' : 'paused'}; 
+
+        .slider-row.reverse {
+          animation: slideRight 30s linear infinite;
         }
-        .cl-logo-wrap {
-          flex-shrink: 0;
+
+        .slider-row:hover,
+        .slider-row.reverse:hover {
+          animation-play-state: paused;
+        }
+
+        .client-logo-wrap {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: ${isMobile ? '70px' : '90px'};
-          width: ${isMobile ? '140px' : '180px'};
-          padding: ${isMobile ? '10px' : '15px'};
-          opacity: 1;
-          transition: all 0.3s ease;
+          height: 100px;
+          width: 180px;
           background: #ffffff;
-          border-radius: 12px;
+          border-radius: 8px;
+          padding: 15px;
           border: 1px solid rgba(255,255,255,0.1);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          flex-shrink: 0;
+          transition: all 0.3s ease;
         }
-        .cl-logo-wrap:hover {
-          transform: ${isMobile ? 'scale(1.02)' : 'scale(1.05)'};
-          background: #ffffff;
+
+        .client-logo-wrap:hover {
+          transform: scale(1.05);
           border-color: #00C9A7;
           box-shadow: 0 8px 24px rgba(0,201,167,0.25);
         }
-        .cl-logo-wrap img {
+
+        .client-logo-wrap img {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          transition: all 0.3s ease;
           max-width: 100%;
           max-height: 100%;
         }
-        /* Light logo (original) */
-        .cl-logo-wrap img.light-logo {
-          filter: brightness(1) contrast(1);
-        }
-        /* Dark logo - no inversion needed on white bg */
-        .cl-logo-wrap img.dark-logo {
-          filter: brightness(1) contrast(1);
-        }
-        /* Special handling for colored logos */
-        .cl-logo-wrap img.colored-logo {
-          filter: brightness(1) contrast(1.1) saturate(1.2);
-        }
-        .cl-logo-wrap:hover img {
-          filter: brightness(1.05) contrast(1.1);
-        }
-        .cl-divider {
-          flex-shrink: 0;
-          width: 1px;
-          height: ${isMobile ? '40px' : '50px'};
-          background: linear-gradient(180deg, transparent, #00C9A7, transparent);
-          align-self: center;
-          opacity: 0.6;
-        }
-        /* Fallback for when images fail to load */
+
         .logo-fallback {
           color: #000000;
-          font-weight: 700;
-          font-size: ${isMobile ? '14px' : '16px'};
-          background: #ffffff;
-          padding: 8px 16px;
-          border-radius: 30px;
-          border: 1px solid #00C9A7;
-          white-space: nowrap;
-          text-align: center;
-          width: 100%;
-          font-family: 'Poppins', sans-serif;
-        }
-        /* Client name overlay on hover */
-        .cl-logo-wrap {
-          position: relative;
-        }
-        .client-name-overlay {
-          position: absolute;
-          bottom: -25px;
-          left: 0;
-          right: 0;
-          text-align: center;
-          font-size: ${isMobile ? '10px' : '11px'};
-          color: #00C9A7;
           font-weight: 600;
-          opacity: 0;
-          transition: opacity 0.2s ease;
-          background: rgba(0,0,0,0.7);
-          padding: 4px 8px;
-          border-radius: 20px;
-          width: fit-content;
-          margin: 0 auto;
-          white-space: nowrap;
+          font-size: 14px;
+          text-align: center;
         }
-        .cl-logo-wrap:hover .client-name-overlay {
-          opacity: 1;
+
+        @media (max-width: 1024px) {
+          .client-logo-wrap {
+            height: 90px;
+            width: 160px;
+            padding: 12px;
+          }
+          .slider-row {
+            gap: 20px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          section {
+            padding: 60px 0 !important;
+          }
+          .client-logo-wrap {
+            height: 80px;
+            width: 140px;
+            padding: 10px;
+          }
+          .slider-row {
+            gap: 16px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .client-logo-wrap {
+            height: 70px;
+            width: 120px;
+            padding: 8px;
+          }
+          .slider-row {
+            gap: 12px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .client-logo-wrap {
+            height: 60px;
+            width: 100px;
+            padding: 6px;
+          }
+          .slider-row {
+            gap: 8px;
+          }
         }
       `}</style>
 
-      {/* Background glow effect */}
       <div style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "100%",
-        height: "150px",
-        background: "radial-gradient(circle, rgba(0,201,167,0.1) 0%, transparent 70%)",
-        pointerEvents: "none",
-        zIndex: 0,
-      }} />
-
-      {/* Heading */}
-      <div style={{ 
-        textAlign: "center", 
-        marginBottom: isMobile ? 30 : 40, 
-        padding: isMobile ? "0 16px" : "0 24px",
-        position: "relative",
-        zIndex: 1,
+        maxWidth: 1600,
+        margin: "0 auto",
+        padding: "0 24px",
       }}>
-        <p style={{
-          fontWeight: 600, 
-          fontSize: isMobile ? 11 : 12,
-          color: "#00C9A7", 
-          letterSpacing: "0.14em",
-          textTransform: "uppercase", 
-          marginBottom: isMobile ? 8 : 12,
+        {/* Heading - exactly as specified: "Our Happy Clients" */}
+        <h2 style={{
+          fontSize: "clamp(28px, 4vw, 36px)",
+          fontWeight: 700,
+          color: "#fff",
+          textAlign: "center",
+          margin: "0 0 50px 0",
+          letterSpacing: "-0.02em",
         }}>
           Our Happy Clients
-        </p>
-        <h2 style={{
-          fontSize: isMobile ? "clamp(20px, 6vw, 24px)" : "clamp(24px, 3vw, 32px)",
-          fontWeight: 700, 
-          color: "#fff",
-          letterSpacing: "-0.02em", 
-          lineHeight: 1.3,
-          margin: 0,
-          maxWidth: "800px",
-          marginInline: "auto",
-        }}>
-          Trusted by Businesses Across{" "}
-          <span style={{
-            background: "linear-gradient(135deg, #00C9A7, #40E0D0)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}>
-            North America & the UK
-          </span>
         </h2>
-      </div>
 
-      {/* Marquee */}
-      <div style={{ 
-        overflow: "hidden", 
-        position: "relative",
-        zIndex: 1,
-        maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
-        WebkitMaskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
-      }}>
-        <div className="cl-track">
-          {doubled.map((logo, i) => (
-            <div key={`${logo.file}-${i}`} style={{ display: "flex", alignItems: "center", gap: isMobile ? '24px' : '40px' }}>
-              <div className="cl-logo-wrap">
-                <Image
-                  src={logo.file}
-                  alt={logo.name}
-                  width={isMobile ? 120 : 150}
-                  height={isMobile ? 50 : 60}
-                  className={
-                    logoColors[logo.file] === 'dark' 
-                      ? '' 
-                      : logoColors[logo.file] === 'light' 
-                        ? '' 
-                        : ''
-                  }
-                  style={{
-                    width: 'auto',
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
-                  }}
-                  priority={i < 4}
-                  onLoad={(e) => handleImageLoad(e, logo.file)}
-                  onError={(e) => {
-                    // Fallback with color based on original logo
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      parent.innerHTML = `<span class="logo-fallback">${logo.name}</span>`;
-                    }
-                  }}
-                />
-                {/* Client name overlay on hover */}
-                <span className="client-name-overlay">{logo.name}</span>
-              </div>
-              {i < doubled.length - 1 && (
-                <div className="cl-divider" />
-              )}
+        {/* Slider Container - 3 rows without labels */}
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 30,
+        }}>
+          {/* Row 1 - Sliding Left to Right */}
+          <div style={{
+            overflow: "hidden",
+            width: "100%",
+          }}>
+            <div className="slider-row">
+              {row1Slides.map((logo, index) => (
+                <div key={`row1-${logo.file}-${index}`} className="client-logo-wrap">
+                  <Image
+                    src={logo.file}
+                    alt={logo.name}
+                    width={120}
+                    height={60}
+                    style={{
+                      width: 'auto',
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        const fallback = document.createElement('span');
+                        fallback.className = 'logo-fallback';
+                        fallback.textContent = logo.name;
+                        parent.appendChild(fallback);
+                      }
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Client name text below logos (alternative approach) */}
-     
+          {/* Row 2 - Sliding Right to Left (reverse) */}
+          <div style={{
+            overflow: "hidden",
+            width: "100%",
+          }}>
+            <div className="slider-row reverse">
+              {row2Slides.map((logo, index) => (
+                <div key={`row2-${logo.file}-${index}`} className="client-logo-wrap">
+                  <Image
+                    src={logo.file}
+                    alt={logo.name}
+                    width={120}
+                    height={60}
+                    style={{
+                      width: 'auto',
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        const fallback = document.createElement('span');
+                        fallback.className = 'logo-fallback';
+                        fallback.textContent = logo.name;
+                        parent.appendChild(fallback);
+                      }
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 - Sliding Left to Right (different speed) */}
+          <div style={{
+            overflow: "hidden",
+            width: "100%",
+          }}>
+            <div className="slider-row" style={{ animationDuration: "35s" }}>
+              {row3Slides.map((logo, index) => (
+                <div key={`row3-${logo.file}-${index}`} className="client-logo-wrap">
+                  <Image
+                    src={logo.file}
+                    alt={logo.name}
+                    width={120}
+                    height={60}
+                    style={{
+                      width: 'auto',
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                      objectFit: 'contain',
+                    }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const parent = target.parentElement;
+                      if (parent) {
+                        const fallback = document.createElement('span');
+                        fallback.className = 'logo-fallback';
+                        fallback.textContent = logo.name;
+                        parent.appendChild(fallback);
+                      }
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
     </section>
   );
 }

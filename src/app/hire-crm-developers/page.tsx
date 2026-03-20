@@ -14,7 +14,8 @@ const N2 = "#061425";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
-  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png"];
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png",
+  "clients12.png", "clients13.png", "clients14.png", "clients15.png", "clients16.png", "clients17.png", "clients18.png"];
 
 const SUCCESS_STORIES = [
   {
@@ -38,15 +39,10 @@ const SUCCESS_STORIES = [
 ];
 
 const SERVICES = [
-  { icon: "👨‍💻", title: "Full-Time Dedicated Developer (160 hrs/mo)", desc: "Tailored for businesses in Canada, USA & UK. A full-time remote developer who works exclusively on your CRM projects.", tag: "Full-Time" },
-  { icon: "⏱️", title: "Part-Time Dedicated Developer (80 hrs/mo)", desc: "Tailored for businesses in Canada, USA & UK. Perfect for ongoing maintenance, smaller projects, or budget-conscious teams.", tag: "Part-Time" },
-  { icon: "📋", title: "Project-Based Engagement", desc: "Tailored for businesses in Canada, USA & UK. Fixed-scope, fixed-price CRM development with a dedicated team for your specific project.", tag: "Project" },
-  { icon: "💼", title: "CRM Consulting Retainer", desc: "Tailored for businesses in Canada, USA & UK. Monthly consulting hours for strategy, architecture, and technical guidance.", tag: "Consulting" },
-  { icon: "🔄", title: "CRM Migration Team", desc: "Tailored for businesses in Canada, USA & UK. Dedicated developers to handle end-to-end migration from legacy systems.", tag: "Migration" },
-  { icon: "🔧", title: "CRM Integration Specialists", desc: "Tailored for businesses in Canada, USA & UK. Developers focused on connecting your CRM with ERP, e-commerce, and marketing tools.", tag: "Integration" },
-  { icon: "📊", title: "CRM Customisation Experts", desc: "Tailored for businesses in Canada, USA & UK. Custom objects, fields, workflows, and automations built to your exact specs.", tag: "Custom" },
-  { icon: "📈", title: "Salesforce Development Team", desc: "Tailored for businesses in Canada, USA & UK. Certified Salesforce developers for Sales Cloud, Service Cloud, and Marketing Cloud.", tag: "Salesforce" },
-  { icon: "🎯", title: "HubSpot Development Team", desc: "Tailored for businesses in Canada, USA & UK. HubSpot-certified developers for custom modules, integrations, and automations.", tag: "HubSpot" },
+  { icon: "👨‍💻", title: "Full-Time Dedicated Developer (160 hrs/mo)", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Full-Time" },
+  { icon: "⏱️", title: "Part-Time Dedicated Developer (80 hrs/mo)", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Part-Time" },
+  { icon: "📋", title: "Project-Based Engagement", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Project" },
+  { icon: "💼", title: "CRM Consulting Retainer", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Consulting" },
 ];
 
 const BENEFITS = [
@@ -57,16 +53,16 @@ const BENEFITS = [
 ];
 
 const TOOLS = [
-  { icon: "☁️", name: "Salesforce", purpose: "Enterprise-grade CRM development.", clr: "rgba(0,161,224,.08)", bd: "rgba(0,161,224,.22)" },
-  { icon: "🟠", name: "HubSpot", purpose: "Best-in-class marketing & sales CRM.", clr: "rgba(255,122,0,.08)", bd: "rgba(255,122,0,.22)" },
-  { icon: "🦎", name: "Zoho CRM", purpose: "Affordable, customisable CRM platform.", clr: "rgba(200,50,80,.08)", bd: "rgba(200,50,80,.22)" },
-  { icon: "🏢", name: "MS Dynamics 365", purpose: "Enterprise-grade integration.", clr: "rgba(0,120,215,.08)", bd: "rgba(0,120,215,.22)" },
-  { icon: "📈", name: "Pipedrive", purpose: "Best-in-class for sales pipelines.", clr: "rgba(0,150,130,.08)", bd: "rgba(0,150,130,.22)" },
+  { icon: "☁️", name: "Salesforce", purpose: "Enterprise-grade integration.", clr: "rgba(0,161,224,.08)", bd: "rgba(0,161,224,.22)" },
+  { icon: "🟠", name: "HubSpot", purpose: "Best-in-class for performance.", clr: "rgba(255,122,0,.08)", bd: "rgba(255,122,0,.22)" },
+  { icon: "🦎", name: "Zoho CRM", purpose: "Enterprise-grade integration.", clr: "rgba(200,50,80,.08)", bd: "rgba(200,50,80,.22)" },
+  { icon: "🏢", name: "MS Dynamics 365", purpose: "Best-in-class for performance.", clr: "rgba(0,120,215,.08)", bd: "rgba(0,120,215,.22)" },
+  { icon: "📈", name: "Pipedrive", purpose: "Enterprise-grade integration.", clr: "rgba(0,150,130,.08)", bd: "rgba(0,150,130,.22)" },
   { icon: "⚛️", name: "Custom CRM (React/Node)", purpose: "Best-in-class for performance.", clr: "rgba(97,218,251,.08)", bd: "rgba(97,218,251,.22)" },
   { icon: "🐍", name: "Custom CRM (Python/Django)", purpose: "Enterprise-grade integration.", clr: "rgba(53,114,165,.08)", bd: "rgba(53,114,165,.22)" },
-  { icon: "📱", name: "WhatsApp API", purpose: "Best-in-class for messaging.", clr: "rgba(37,211,102,.08)", bd: "rgba(37,211,102,.22)" },
+  { icon: "🐘", name: "Custom CRM (Laravel/PHP)", purpose: "Best-in-class for performance.", clr: "rgba(255,45,32,.08)", bd: "rgba(255,45,32,.22)" },
+  { icon: "💬", name: "WhatsApp API", purpose: "Enterprise-grade integration.", clr: "rgba(37,211,102,.08)", bd: "rgba(37,211,102,.22)" },
   { icon: "🔌", name: "REST & GraphQL", purpose: "Best-in-class for API integration.", clr: "rgba(226,77,141,.08)", bd: "rgba(226,77,141,.22)" },
-  { icon: "🐘", name: "Laravel/PHP", purpose: "Enterprise-grade custom CRM.", clr: "rgba(255,45,32,.08)", bd: "rgba(255,45,32,.22)" },
 ];
 
 const HIRE_LEFT = [
@@ -100,40 +96,31 @@ const WCU_STATS = [{ n: 1500, s: "+", l: "Projects Delivered" }, { n: 1800, s: "
 const FAQS = [
   {
     q: "How quickly can a developer start?",
-    a: "We can have a developer starting within 48 hours for urgent requirements. Standard process: submit a brief → interview pre-vetted candidates (24-48hrs) → select and onboard (24hrs). For clients in Canada, USA, and UK, we ensure time zone overlap and a smooth handoff from day one."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
     q: "What CRM platforms do your developers work with?",
-    a: "Our developers specialise in all major CRM platforms: Salesforce (Sales Cloud, Service Cloud, Marketing Cloud), HubSpot (all hubs), Zoho CRM, Microsoft Dynamics 365, Pipedrive, and custom CRM development using React, Node, Python/Django, Laravel/PHP, and more. We match you with developers who have platform-specific certifications and proven experience."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
     q: "Can I trial a developer before committing?",
-    a: "Yes — we offer a 40-hour paid trial (5 days) so you can evaluate technical skills, communication, and culture fit before committing to a long-term engagement. 98% of trials convert to full engagements. For clients in Canada, USA, and UK, we schedule trial hours during your business day for real-time collaboration."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
     q: "What does a dedicated CRM developer cost per month?",
-    a: "Pricing varies by experience level and engagement model: Junior/Mid-level Full-Time Developer (160 hrs/mo) starts from CAD $4,500–$6,500 / £3,200–£4,800. Senior/Lead Full-Time Developer starts from CAD $6,500–$9,500 / £4,800–£7,200. Part-time (80 hrs/mo) and project-based options are also available — typically 40-60% less than equivalent local hiring costs. All engagements are transparent, with no hidden fees."
-  },
-  {
-    q: "How do you ensure code quality and security?",
-    a: "Every developer follows our quality framework: mandatory code reviews for all pull requests, automated testing where applicable, security audits for data handling, GDPR/PIPEDA/CCPA compliance checks, and weekly progress reports. For enterprise clients, we can also implement your existing security policies and access controls."
-  },
-  {
-    q: "Can I scale the team up or down?",
-    a: "Absolutely. Our engagement model is designed for flexibility — you can increase hours, add developers, or scale down as your needs change. Need an extra developer for a month-long project? Done. Want to reduce from full-time to part-time after launch? Simple. No long-term contracts, no penalties."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
 ];
 
 const INT_OFFICES = [
-  { flag: "🇨🇦", city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", email: "hello@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇺🇸", city: "New York, USA", phone: "+1 631-XXX-XXXX", email: "hello@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇬🇧", city: "London, UK", phone: "+44 20-XXXX-XXXX", email: "hello@nncdigital.com", tz: "GMT / BST" },
+  { city: "Toronto, Canada — +1 647-XXX-XXXX", flag: "🇨🇦", bullet: "■■" },
+  { city: "New York, USA — +1 631-XXX-XXXX", flag: "🇺🇸", bullet: "■■" },
+  { city: "London, UK — +44 20-XXXX-XXXX", flag: "🇬🇧", bullet: "■■" },
 ];
+
 const INDIA_OFFICES = [
-  { city: "Bangalore (HQ)", phone: "+91 9900566466", note: "Primary engineering hub" },
-  { city: "Mysore", phone: null, note: "Design & QA" },
-  { city: "Mumbai", phone: null, note: "Sales & partnerships" },
-  { city: "Hyderabad", phone: null, note: "Mobile & cloud" },
+  { city: "Bangalore HQ — +91 9900566466", flag: "🇮🇳", bullet: "■■" },
+  { city: "Mysore | Mumbai | Hyderabad", flag: "🇮🇳", bullet: "■■" },
 ];
 
 const SERVICES_LIST = ["Full-Time Developer", "Part-Time Developer", "Project-Based", "CRM Consulting", "Salesforce Development", "HubSpot Development", "Zoho Development", "Custom CRM Development", "Other"];
@@ -639,7 +626,7 @@ export default function HireCRMDevelopersPage() {
               Hire Dedicated <GradText>CRM Developers</GradText><br />for Your Business in Canada, USA &amp; UK
             </h1>
             <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "16.5px", lineHeight: 1.85, marginBottom: isMobile ? 20 : 28, maxWidth: isMobile ? "100%" : 600 }}>
-              Need experienced CRM developers without building an in-house team? NNC Digital provides dedicated developers who integrate with your workflow and deliver results — from Salesforce to HubSpot to custom CRM.
+              Need experienced CRM developers without building an in-house team? NNC Digital provides dedicated developers who integrate with your workflow and deliver results.
             </p>
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 28 }}>
@@ -715,26 +702,78 @@ export default function HireCRMDevelopersPage() {
       </section>
 
       {/* M2 — CLIENT LOGOS */}
-      <section className="sec-dark" style={{ padding: isMobile ? "40px 0" : "60px 0", overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
-        <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 20px" }}>
-          <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
-          <h2 style={{ fontSize: isMobile ? "22px" : isTablet ? "26px" : "32px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
-            Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
-          </h2>
-        </div>
-        <div style={{ overflow: "hidden" }}>
-          <div className="cl-track">
-            {[...LOGOS, ...LOGOS].map((f, i) => (
-              <div key={i} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 10px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}
-              >
-                <img src={`/${f}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
-              </div>
-            ))}
+     <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
+            <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
+            <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
+              Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
+            </h2>
           </div>
-        </div>
-      </section>
+
+          {/* Row 1 - Sliding Left to Right */}
+          <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+            <div className="cl-track" style={{ animation: "marquee 30s linear infinite" }}>
+              {LOGOS.slice(0, 6).map((logo, i) => (
+                <div key={`row1-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(0, 6).map((logo, i) => (
+                <div key={`row1-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 - Sliding Right to Left (reverse direction) */}
+          <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+            <div className="cl-track" style={{ animation: "marqueeReverse 35s linear infinite" }}>
+              {LOGOS.slice(6, 12).map((logo, i) => (
+                <div key={`row2-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(6, 12).map((logo, i) => (
+                <div key={`row2-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 - Sliding Left to Right (different speed) */}
+          <div style={{ overflow: "hidden" }}>
+            <div className="cl-track" style={{ animation: "marquee 40s linear infinite" }}>
+              {LOGOS.slice(12, 18).map((logo, i) => (
+                <div key={`row3-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(12, 18).map((logo, i) => (
+                <div key={`row3-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
       {/* M3 — SUCCESS STORIES */}
       <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
@@ -804,18 +843,18 @@ export default function HireCRMDevelopersPage() {
                 <h3 style={{ fontSize: isMobile ? "15px" : "17px", fontWeight: 700, color: "#fff", lineHeight: 1.3, margin: 0 }}>{s.title}</h3>
                 <p style={{ fontSize: isMobile ? "12px" : "13.5px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
                 <Link href="/services">
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.3)", fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto", cursor: "pointer", transition: "color .2s, gap .2s" }}
+                  {/* <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "rgba(255,255,255,0.3)", fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto", cursor: "pointer", transition: "color .2s, gap .2s" }}
                     onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = T; (e.currentTarget as HTMLElement).style.gap = "12px"; }}
                     onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.3)"; (e.currentTarget as HTMLElement).style.gap = "6px"; }}>Learn More <span>→</span>
-                  </span>
+                  </span> */}
                 </Link>
               </div>
             ))}
           </div>
           <div style={{ textAlign: "center", marginTop: 48 }}>
-            <Link href="">
+            {/* <Link href="">
               <button className="btn-teal" style={{ padding: isMobile ? "12px 28px" : "14px 36px", borderRadius: 10, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: isMobile ? "13px" : "15px", fontFamily: "'Poppins',sans-serif", cursor: "pointer" }}>View All Engagement Models →</button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>
@@ -982,95 +1021,22 @@ export default function HireCRMDevelopersPage() {
 
       {/* M9 — FULL-WIDTH CTA BANNER */}
       <section style={{ position: "relative", overflow: "hidden" }}>
-        <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "60px 20px" : "88px 48px", textAlign: "center", position: "relative" }}>
-          <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
-          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-          <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 760, margin: "0 auto" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.3)", borderRadius: 100, padding: isMobile ? "5px 14px" : "6px 18px", marginBottom: 20 }}>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "block" }} />
-              <span style={{ color: "#fff", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>Hire Today</span>
+          <div style={{ background: "linear-gradient(135deg, #0055b3 0%, #0077cc 35%, #0055b3 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "60px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
+            <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 800, margin: "0 auto" }}>
+              <h2 style={{ fontSize: isMobile ? "clamp(22px, 6vw, 28px)" : isTablet ? "32px" : "clamp(36px, 4vw, 48px)", fontWeight: 800, color: "#fff", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 16 }}>
+                Want <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>HIRE CRM DEVELOPERS solutions</span> that take your business to the next level?
+              </h2>
+              <p style={{ color: "rgba(255,255,255,0.9)", fontSize: isMobile ? "16px" : "18px", lineHeight: 1.6, marginBottom: isMobile ? 28 : 36, fontWeight: 500 }}>
+                Connect with NNC Digital today.
+              </p>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Link href="/contact" className="btn-white">Connect Now</Link>
+              </div>
             </div>
-            <h2 style={{ fontSize: isMobile ? "24px" : isTablet ? "36px" : "48px", fontWeight: 900, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 16 }}>
-              Want CRM Developers That Take Your<br />Business to the <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>Next Level?</span>
-            </h2>
-            <p style={{ color: "rgba(255,255,255,0.82)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "17px", lineHeight: 1.75, marginBottom: 32 }}>Connect with NNC Digital today — Salesforce, HubSpot, Zoho, or custom CRM. Let's find your perfect developer.</p>
-            <div
-              style={{
-                display: "flex",
-                gap: isMobile ? 12 : 16,
-                justifyContent: "center",
-                flexWrap: "wrap"
-              }}
-            >
-              <Link href="/contact">
-                <button
-                  style={{
-                    width: isMobile ? 200 : 260,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 10,
-                    padding: isMobile ? "12px 0" : "16px 0",
-                    borderRadius: 12,
-                    background: "#fff",
-                    color: "#0055b3",
-                    fontWeight: 800,
-                    fontSize: isMobile ? "13px" : "16px",
-                    fontFamily: "'Poppins',sans-serif",
-                    border: "none",
-                    cursor: "pointer",
-                    transition: "transform .2s, box-shadow .2s"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-3px)";
-                    e.currentTarget.style.boxShadow = "0 16px 40px rgba(0,0,0,0.25)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "";
-                    e.currentTarget.style.boxShadow = "";
-                  }}
-                >
-                  ✦ Connect Now
-                </button>
-              </Link>
-
-              <Link href="/hire-developers">
-                <button
-                  style={{
-                    width: isMobile ? 200 : 260,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 10,
-                    padding: isMobile ? "12px 0" : "16px 0",
-                    borderRadius: 12,
-                    background: "transparent",
-                    color: "#fff",
-                    fontWeight: 700,
-                    fontSize: isMobile ? "13px" : "16px",
-                    fontFamily: "'Poppins',sans-serif",
-                    border: "2px solid rgba(255,255,255,0.5)",
-                    cursor: "pointer",
-                    transition: "border-color .2s, background .2s"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "#fff";
-                    e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.5)";
-                    e.currentTarget.style.background = "transparent";
-                  }}
-                >
-                  📅 Find a Developer →
-                </button>
-              </Link>
-            </div>
-            <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "11px" : "13px", marginTop: 24 }}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* M10 — WHY CHOOSE US - VIDEO COMPLETELY REMOVED */}
       <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
@@ -1188,103 +1154,303 @@ export default function HireCRMDevelopersPage() {
       </section>
 
       {/* M11 — GLOBAL PRESENCE */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+      <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "80px 48px", background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
-            <SectionBadge label="Our Reach" />
-            <SectionH2>Global <GradText>Presence</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 500, margin: "0 auto" }}>Client-facing offices in North America &amp; the UK. Engineering headquarters in Bangalore, India.</p>
-          </div>
-          <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
-            {[{ key: "int", label: "🌍 North America & UK" }, { key: "india", label: "🇮🇳 India (Engineering HQ)" }].map(t => (
-              <button key={t.key} className={`gp-tab${gTab === t.key ? " act" : ""}`} onClick={() => setGTab(t.key as "int" | "india")} style={{ padding: isMobile ? "8px 16px" : "11px 24px", fontSize: isMobile ? "12px" : "14px" }}>{t.label}</button>
-            ))}
-          </div>
-          {gTab === "int" && (
-            <div>
-              <div className="gp-offices">
-                {INT_OFFICES.map((o, i) => (
-                  <div key={i} className="gp-card" style={{ padding: isMobile ? "20px" : "28px 24px" }}>
-                    <div style={{ fontSize: isMobile ? 32 : 36, marginBottom: isMobile ? 10 : 14 }}>{o.flag}</div>
-                    <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, marginBottom: 4 }}>{o.city}</h3>
-                    <p style={{ color: T, fontSize: isMobile ? 10 : 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase" as const, marginBottom: isMobile ? 12 : 16 }}>{o.tz}</p>
-                    <a href={`tel:${o.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.7)", fontSize: isMobile ? "12px" : "14px", fontWeight: 600, textDecoration: "none", marginBottom: 8 }}>📞 {o.phone}</a>
-                    <a href={`mailto:${o.email}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "11px" : "13px", textDecoration: "none" }}>✉️ {o.email}</a>
-                  </div>
-                ))}
-              </div>
-              <div style={{ borderRadius: 14, padding: isMobile ? "16px 20px" : "20px 28px", background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16, marginTop: 24 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}><div style={{ width: isMobile ? 8 : 10, height: isMobile ? 8 : 10, borderRadius: "50%", background: "#22c55e", boxShadow: "0 0 8px #22c55e" }} /><span style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>Available Mon–Fri, 9am–6pm in your time zone</span></div>
-                <a href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: T, fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>hello@nncdigital.com →</a>
-              </div>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
+
+          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+
+
+            {/* Heading with gradient and underline */}
+            <h2 style={{
+              fontSize: "clamp(32px, 5vw, 48px)",
+              fontWeight: 800,
+              color: "#fff",
+              textAlign: "center",
+              margin: "0 0 20px 0",
+              letterSpacing: "-0.02em"
+            }}>
+              Global <span style={{ background: `linear-gradient(135deg, ${T}, #fff)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Presence</span>
+            </h2>
+            <div style={{ width: "120px", height: "4px", background: `linear-gradient(90deg, transparent, ${T}, transparent)`, margin: "0 auto 40px", borderRadius: "2px" }} />
+
+            {/* Tabs with enhanced styling */}
+            <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
+              {[
+                { key: "int", label: "North America & UK", icon: "🌎" },
+                { key: "india", label: "India (HQ)", icon: "🇮🇳" }
+              ].map(t => (
+                <button
+                  key={t.key}
+                  className={`gp-tab${gTab === t.key ? " act" : ""}`}
+                  onClick={() => setGTab(t.key as "int" | "india")}
+                  style={{
+                    padding: isMobile ? "12px 24px" : "14px 32px",
+                    borderRadius: "50px",
+                    border: "none",
+                    background: gTab === t.key ? `linear-gradient(135deg, ${T}, ${TD})` : "rgba(255,255,255,0.05)",
+                    color: gTab === t.key ? "#000" : "#fff",
+                    fontSize: isMobile ? 14 : 16,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    boxShadow: gTab === t.key ? `0 8px 20px ${T}40` : "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    backdropFilter: "blur(10px)"
+                  }}
+                  onMouseEnter={e => {
+                    if (gTab !== t.key) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (gTab !== t.key) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }
+                  }}
+                >
+                  <span>{t.icon}</span> {t.label}
+                </button>
+              ))}
             </div>
-          )}
-          {gTab === "india" && (
-            <div>
-              <div style={{ borderRadius: 20, padding: isMobile ? "24px 20px" : "36px 36px", background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", marginBottom: 24 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, marginBottom: 24 }}>
-                  <span style={{ fontSize: isMobile ? 28 : 32 }}>🇮🇳</span>
-                  <div><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>Nakshatra Namaha Creations Pvt. Ltd.</h3><p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? "12px" : "13px", margin: "4px 0 0" }}>Engineering &amp; Delivery HQ — Bangalore, India</p></div>
-                </div>
-                <div className="gp-ind-grid" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: isMobile ? 12 : 16 }}>
-                  {INDIA_OFFICES.map((o, i) => (
-                    <div key={i} className="gp-ind" style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, padding: isMobile ? "12px 14px" : "16px 18px", borderRadius: 12, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}>
-                      <span style={{ fontSize: isMobile ? 20 : 22 }}>🇮🇳</span>
-                      <div><p style={{ color: "#fff", fontSize: isMobile ? "13px" : "14px", fontWeight: 700, margin: 0 }}>{o.city}</p><p style={{ color: "rgba(255,255,255,0.38)", fontSize: isMobile ? "10px" : "12px", margin: "2px 0 0" }}>{o.note}</p>{o.phone && <p style={{ color: T, fontSize: isMobile ? "11px" : "12.5px", fontWeight: 600, margin: "4px 0 0" }}>{o.phone}</p>}</div>
+
+            {/* Content Cards */}
+            {gTab === "int" && (
+              <div style={{
+                background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
+                borderRadius: 24,
+                padding: isMobile ? 24 : 36,
+                border: `1px solid ${T}20`,
+                backdropFilter: "blur(10px)",
+                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.5)"
+              }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  {[
+                    { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
+                    { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
+                    { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 16,
+                      padding: "16px",
+                      background: "rgba(255,255,255,0.02)",
+                      borderRadius: 16,
+                      border: "1px solid rgba(255,255,255,0.05)",
+                      transition: "all 0.3s ease",
+                      cursor: "default"
+                    }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = "translateX(8px)";
+                        e.currentTarget.style.background = `${T}08`;
+                        e.currentTarget.style.borderColor = `${T}40`;
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = "translateX(0)";
+                        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+                      }}>
+                      <div style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: "14px",
+                        background: `${T}15`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 24
+                      }}>
+                        {item.flag}
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>
+                          {item.city}
+                        </p>
+                        <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
+                          {item.phone}
+                        </p>
+                      </div>
+                      <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                     </div>
                   ))}
                 </div>
-                <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid rgba(255,255,255,0.07)" }}><p style={{ color: "rgba(255,255,255,0.35)", fontSize: isMobile ? "12px" : "13px", margin: 0 }}>✉️ info@nakshatranamahacreations.com</p></div>
               </div>
-              <div className="gp-india-stats" style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? 12 : 16 }}>
-                {[{ n: "8+", l: "Years Active" }, { n: "565+", l: "Projects" }, { n: "100+", l: "Team Members" }, { n: "4", l: "India Offices" }].map((s, i) => (
-                  <div key={i} style={{ textAlign: "center", padding: isMobile ? "16px 8px" : "20px 12px", borderRadius: 14, background: "rgba(0,201,167,0.06)", border: "1px solid rgba(0,201,167,0.15)", transition: "transform .25s,background .25s", cursor: "default" }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.12)"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = ""; (e.currentTarget as HTMLElement).style.background = "rgba(0,201,167,0.06)"; }}>
-                    <p style={{ fontSize: isMobile ? "22px" : "26px", fontWeight: 900, color: T, margin: 0 }}>{s.n}</p>
-                    <p style={{ fontSize: isMobile ? "9px" : "11px", color: "rgba(255,255,255,0.4)", margin: "4px 0 0", fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "0.06em" }}>{s.l}</p>
+            )}
+
+            {gTab === "india" && (
+              <div style={{
+                background: `linear-gradient(145deg, ${T}05, ${T}02)`,
+                borderRadius: 24,
+                padding: isMobile ? 24 : 36,
+                border: `1px solid ${T}30`,
+                backdropFilter: "blur(10px)",
+                boxShadow: `0 20px 40px -15px ${T}20`
+              }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                   </div>
-                ))}
+
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                  </div>
+
+                  <div style={{
+                    marginTop: 20,
+                    padding: "20px",
+                    background: `${T}08`,
+                    borderRadius: 16,
+                    border: `1px dashed ${T}40`,
+                    textAlign: "center"
+                  }}>
+                    <span style={{ color: T, fontSize: isMobile ? 14 : 16, fontWeight: 600, letterSpacing: "0.5px" }}>
+                      ✉ info@nakshatranamahacreations.com
+                    </span>
+                  </div>
+                </div>
               </div>
+            )}
+
+            {/* Decorative bottom dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
+              {[1, 2, 3, 4, 5].map(i => (
+                <div key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: T, opacity: 0.2 + (i * 0.1) }} />
+              ))}
             </div>
-          )}
-        </div>
+          </div>
       </section>
 
-      {/* M12 — FAQS */}
-      <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", top: "30%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
-            <SectionBadge label="FAQs" />
-            <SectionH2>Frequently Asked <GradText>Questions</GradText></SectionH2>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Everything you need to know about hiring CRM developers for businesses in Canada, USA &amp; UK.</p>
+     {/* M12 — FAQS */}
+<section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+  <div style={{ position: "absolute", top: "30%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+  <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 2 }}>
+    <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
+      <SectionBadge label="FAQs" />
+      <SectionH2>FAQs</SectionH2>
+      <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Everything you need to know about hiring CRM developers for businesses in Canada, USA &amp; UK.</p>
+    </div>
+    <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
+      
+      {/* Q1: How quickly can a developer start? */}
+      <div className={`faq-item${faq === 0 ? " fopen" : ""}`} onClick={() => setFaq(faq === 0 ? null : 0)}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: isMobile ? "14px 16px" : "20px 22px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+            <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q1</span>
+            <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === 0 ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>How quickly can a developer start?</span>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-            {FAQS.map((f, i) => (
-              <div key={i} className={`faq-item${faq === i ? " fopen" : ""}`} onClick={() => setFaq(faq === i ? null : i)}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: isMobile ? "14px 16px" : "20px 22px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
-                    <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q{i + 1}</span>
-                    <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === i ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>{f.q}</span>
-                  </div>
-                  <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === i ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === i ? T : "rgba(255,255,255,0.12)"}`, color: faq === i ? "#000" : "rgba(255,255,255,0.5)", transform: faq === i ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
-                </div>
-                <div style={{ maxHeight: faq === i ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
-                  <p style={{ padding: isMobile ? "0 16px 14px 54px" : "0 22px 22px 80px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>{f.a}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style={{ textAlign: "center", marginTop: 40 }}>
-            <p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? "12px" : "14px", marginBottom: 16 }}>Still have questions? We respond within 24 hours.</p>
-            <Link href="/contact">
-              <button className="btn-teal" style={{ padding: isMobile ? "12px 28px" : "13px 32px", borderRadius: 10, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: isMobile ? "13px" : "15px", fontFamily: "'Poppins',sans-serif", cursor: "pointer" }}>Ask Us Anything →</button>
-            </Link>
-          </div>
+          <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === 0 ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === 0 ? T : "rgba(255,255,255,0.12)"}`, color: faq === 0 ? "#000" : "rgba(255,255,255,0.5)", transform: faq === 0 ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
         </div>
-      </section>
+        <div style={{ maxHeight: faq === 0 ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
+          <p style={{ padding: isMobile ? "0 16px 14px 54px" : "0 22px 22px 80px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>
+            Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process.
+          </p>
+        </div>
+      </div>
+
+      {/* Q2: What CRM platforms do your developers work with? */}
+      <div className={`faq-item${faq === 1 ? " fopen" : ""}`} onClick={() => setFaq(faq === 1 ? null : 1)}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: isMobile ? "14px 16px" : "20px 22px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+            <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q2</span>
+            <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === 1 ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>What CRM platforms do your developers work with?</span>
+          </div>
+          <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === 1 ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === 1 ? T : "rgba(255,255,255,0.12)"}`, color: faq === 1 ? "#000" : "rgba(255,255,255,0.5)", transform: faq === 1 ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
+        </div>
+        <div style={{ maxHeight: faq === 1 ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
+          <p style={{ padding: isMobile ? "0 16px 14px 54px" : "0 22px 22px 80px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>
+            Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process.
+          </p>
+        </div>
+      </div>
+
+      {/* Q3: Can I trial a developer before committing? */}
+      <div className={`faq-item${faq === 2 ? " fopen" : ""}`} onClick={() => setFaq(faq === 2 ? null : 2)}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: isMobile ? "14px 16px" : "20px 22px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+            <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q3</span>
+            <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === 2 ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>Can I trial a developer before committing?</span>
+          </div>
+          <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === 2 ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === 2 ? T : "rgba(255,255,255,0.12)"}`, color: faq === 2 ? "#000" : "rgba(255,255,255,0.5)", transform: faq === 2 ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
+        </div>
+        <div style={{ maxHeight: faq === 2 ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
+          <p style={{ padding: isMobile ? "0 16px 14px 54px" : "0 22px 22px 80px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>
+            Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process.
+          </p>
+        </div>
+      </div>
+
+      {/* Q4: What does a dedicated CRM developer cost per month? */}
+      <div className={`faq-item${faq === 3 ? " fopen" : ""}`} onClick={() => setFaq(faq === 3 ? null : 3)}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: isMobile ? "14px 16px" : "20px 22px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+            <span style={{ color: T, fontSize: isMobile ? 12 : 13, fontWeight: 800, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", borderRadius: 8, padding: isMobile ? "3px 8px" : "4px 10px", flexShrink: 0 }}>Q4</span>
+            <span style={{ fontSize: isMobile ? "13px" : "15px", fontWeight: 700, color: faq === 3 ? "#fff" : "rgba(255,255,255,0.78)", lineHeight: 1.4 }}>What does a dedicated CRM developer cost per month?</span>
+          </div>
+          <div style={{ width: isMobile ? 26 : 30, height: isMobile ? 26 : 30, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 15 : 17, fontWeight: 700, lineHeight: 1, background: faq === 3 ? T : "rgba(255,255,255,0.07)", border: `1px solid ${faq === 3 ? T : "rgba(255,255,255,0.12)"}`, color: faq === 3 ? "#000" : "rgba(255,255,255,0.5)", transform: faq === 3 ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
+        </div>
+        <div style={{ maxHeight: faq === 3 ? 500 : 0, overflow: "hidden", transition: "max-height .38s ease" }}>
+          <p style={{ padding: isMobile ? "0 16px 14px 54px" : "0 22px 22px 80px", color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>
+            Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style={{ textAlign: "center", marginTop: 40 }}>
+      <p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? "12px" : "14px", marginBottom: 16 }}>Still have questions? We respond within 24 hours.</p>
+      <Link href="/contact">
+        <button className="btn-teal" style={{ padding: isMobile ? "12px 28px" : "13px 32px", borderRadius: 10, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: isMobile ? "13px" : "15px", fontFamily: "'Poppins',sans-serif", cursor: "pointer" }}>Ask Us Anything →</button>
+      </Link>
+    </div>
+  </div>
+</section>
 
       {/* M13 — CONTACT FORM */}
       <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N0} 100%)`, position: "relative", overflow: "hidden" }}>

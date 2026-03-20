@@ -1,5 +1,3 @@
-
-
 "use client";
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -7,9 +5,17 @@ import { getServiceSchema } from "../lib/schema";
 import SchemaMarkup from "../components/SchemaMarkup";
 import Navbar from "../components/Navbar";
 
+// ─── Design tokens ────────────────────────────────────────────────────────────
+const T = "#00C9A7";
+const TD = "#00a07a";
+const N0 = "#010812";
+const N1 = "#030B18";
+const N2 = "#061425";
+
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
-  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png"];
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png",
+  "clients12.png", "clients13.png", "clients14.png", "clients15.png", "clients16.png", "clients17.png", "clients18.png"];
 
 const STATS = [
   { val: 100, sfx: "+", label: "Projects Delivered", sub: "Across 12 countries", icon: "🚀" },
@@ -42,19 +48,20 @@ const CASES = [
   },
 ];
 
+// MODULE 4 — SERVICES (Corrected to match document exactly)
 const SERVICES = [
-  { icon: "🗂️", title: "CRM Consulting", desc: "Tailored CRM strategy for your North American and UK market.", tag: "Strategy", slug: "crm-consulting" },
-  { icon: "⚙️", title: "CRM Implementation", desc: "End-to-end CRM setup, configuration, and launch.", tag: "Setup", slug: "crm-implementation" },
-  { icon: "🎛️", title: "CRM Customization", desc: "Custom CRM solutions tailored for your exact workflow.", tag: "Custom", slug: "crm-customization" },
-  { icon: "🌐", title: "CRM Portal Development", desc: "Client-facing portals and self-service dashboards.", tag: "Development", slug: "crm-portal" },
-  { icon: "🚀", title: "CRM Deployment", desc: "Administer technology, people, and processes for CRM success.", tag: "Deployment", slug: "crm-deployment" },
-  { icon: "📱", title: "CRM Mobile App Dev", desc: "Native and cross-platform mobile CRM apps for field teams.", tag: "Mobile", slug: "crm-mobile-app" },
-  { icon: "🎨", title: "CRM UI/UX Design", desc: "User-friendly interfaces for modern customer expectations.", tag: "Design", slug: "crm-ui-ux" },
-  { icon: "🔗", title: "CRM Integration", desc: "Seamlessly connect your CRM with ERP and third-party tools.", tag: "Integration", slug: "crm-integration" },
-  { icon: "🔄", title: "CRM Migration", desc: "Securely transfer data from legacy systems with zero loss.", tag: "Migration", slug: "crm-migration" },
-  { icon: "💼", title: "IT Mgmt Consulting", desc: "Strategic IT management and advisory for growing businesses.", tag: "Consulting", slug: "it-consulting" },
-  { icon: "🔁", title: "Digital Transformation", desc: "End-to-end execution of your digital transformation roadmap.", tag: "Transform", slug: "digital-transformation" },
-  { icon: "🤖", title: "Marketing Automation", desc: "Automate lead nurturing, campaigns, and customer journeys at scale.", tag: "Automation", slug: "marketing-automation" },
+  { icon: "🗂️", title: "CRM Consulting", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Strategy", slug: "crm-consulting" },
+  { icon: "⚙️", title: "CRM Implementation", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Setup", slug: "crm-implementation" },
+  { icon: "🎛️", title: "CRM Customization", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Custom", slug: "crm-customization" },
+  { icon: "🌐", title: "CRM Portal Development", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Portal", slug: "crm-portal" },
+  { icon: "🚀", title: "CRM Deployment", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Deployment", slug: "crm-deployment" },
+  { icon: "📱", title: "CRM Mobile App Development", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Mobile", slug: "crm-mobile-app" },
+  { icon: "🎨", title: "CRM UI/UX Design", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Design", slug: "crm-ui-ux" },
+  { icon: "🔗", title: "CRM Integration", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Integration", slug: "crm-integration" },
+  { icon: "🔄", title: "CRM Migration", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Migration", slug: "crm-migration" },
+  { icon: "💼", title: "IT Management Consulting", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Consulting", slug: "it-consulting" },
+  { icon: "🔁", title: "Digital Transformation", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Transform", slug: "digital-transformation" },
+  { icon: "🤖", title: "Marketing Automation", desc: "Tailored for businesses in Canada, USA & UK.", tag: "Automation", slug: "marketing-automation" },
 ];
 
 const BENEFITS = [
@@ -64,32 +71,34 @@ const BENEFITS = [
   { num: "04", icon: "🤝", title: "Relentless Support", desc: "Ongoing support after go-live. Dedicated team ensuring maximum CRM adoption every day.", tags: ["24/7", "Training", "Go-Live"] },
 ];
 
+// MODULE 6 — PLATFORM TOOLS (Corrected to match document exactly)
 const TOOLS = [
-  { icon: "☁️", name: "Salesforce", desc: "World's #1 CRM — configured for your exact sales process.", bg: "rgba(0,161,224,.1)", bd: "rgba(0,161,224,.25)" },
-  { icon: "🧲", name: "HubSpot", desc: "Inbound-focused CRM ideal for marketing-led growth.", bg: "rgba(255,122,0,.08)", bd: "rgba(255,122,0,.22)" },
-  { icon: "🏢", name: "MS Dynamics 365", desc: "Enterprise CRM integrated with Microsoft 365 & Azure.", bg: "rgba(0,120,215,.08)", bd: "rgba(0,120,215,.22)" },
-  { icon: "🔶", name: "Zoho CRM", desc: "Flexible, cost-effective CRM for scaling SMEs.", bg: "rgba(227,77,38,.08)", bd: "rgba(227,77,38,.22)" },
-  { icon: "🍬", name: "SugarCRM", desc: "Open-source CRM for sales force automation.", bg: "rgba(229,57,53,.08)", bd: "rgba(229,57,53,.22)" },
-  { icon: "🧩", name: "SuiteCRM", desc: "Community edition — conversions and customer interactions.", bg: "rgba(0,201,167,.08)", bd: "rgba(0,201,167,.22)" },
-  { icon: "🚿", name: "Pipedrive", desc: "Visual pipeline CRM ideal for SME sales teams.", bg: "rgba(38,166,91,.08)", bd: "rgba(38,166,91,.22)" },
-  { icon: "⚡", name: "Custom CRM", desc: "100% bespoke when off-the-shelf doesn't fit your workflows.", bg: "rgba(0,201,167,.1)", bd: "rgba(0,201,167,.28)", bespoke: true },
+  { icon: "☁️", name: "Salesforce", purpose: "Enterprise-grade integration.", bg: "rgba(0,161,224,.1)", bd: "rgba(0,161,224,.25)" },
+  { icon: "🧲", name: "HubSpot", purpose: "Best-in-class for performance.", bg: "rgba(255,122,0,.08)", bd: "rgba(255,122,0,.22)" },
+  { icon: "🏢", name: "MS Dynamics 365", purpose: "Enterprise-grade integration.", bg: "rgba(0,120,215,.08)", bd: "rgba(0,120,215,.22)" },
+  { icon: "🔶", name: "Zoho CRM", purpose: "Best-in-class for performance.", bg: "rgba(227,77,38,.08)", bd: "rgba(227,77,38,.22)" },
+  { icon: "🍬", name: "SugarCRM", purpose: "Enterprise-grade integration.", bg: "rgba(229,57,53,.08)", bd: "rgba(229,57,53,.22)" },
+  { icon: "🧩", name: "SuiteCRM", purpose: "Best-in-class for performance.", bg: "rgba(0,201,167,.08)", bd: "rgba(0,201,167,.22)" },
+  { icon: "🚿", name: "Pipedrive", purpose: "Enterprise-grade integration.", bg: "rgba(38,166,91,.08)", bd: "rgba(38,166,91,.22)" },
+  { icon: "⚡", name: "Custom-Built CRM", purpose: "Best-in-class for performance.", bg: "rgba(0,201,167,.1)", bd: "rgba(0,201,167,.28)", bespoke: true },
 ];
 
 const HIRE_LEFT = [
   { icon: "🏢", title: "Enterprises", desc: "Complex multi-location operations with enterprise-grade integrations and permission hierarchies." },
-  { icon: "🎯", title: "Agencies", desc: "Client pipelines, retainer billing, and performance dashboards — CRM designed to grow your book of business." },
   { icon: "🚀", title: "Start-ups", desc: "CRM that scales without outgrowing in 12 months. Lightweight to start, powerful when you need it." },
+  { icon: "🎯", title: "Agencies", desc: "Client pipelines, retainer billing, and performance dashboards — CRM designed to grow your book of business." },
 ];
 const HIRE_RIGHT = [
-  { icon: "📊", title: "Analytical CRM", desc: "Turn raw customer data into business intelligence. Identify trends, segment audiences, and make data-driven decisions." },
-  { icon: "🤝", title: "Collaborative CRM", desc: "Unify sales, support, marketing, and ops around a single customer view — breaking silos and improving alignment." },
-  { icon: "⚙️", title: "Operational CRM", desc: "Automate day-to-day sales and service processes so your team can focus on what matters most." },
+  { icon: "📊", title: "Analytical", desc: "Turn raw customer data into business intelligence. Identify trends, segment audiences, and make data-driven decisions." },
+  { icon: "⚙️", title: "Operational", desc: "Automate day-to-day sales and service processes so your team can focus on what matters most." },
+  { icon: "🤝", title: "Collaborative", desc: "Unify sales, support, marketing, and ops around a single customer view — breaking silos and improving alignment." },
 ];
 
 const AI_FEATS = [
   { icon: "🧠", title: "AI Data Analysis", desc: "AI analyses vast volumes of client data from email, social, and purchases — surfacing insights your team can act on.", bg: "rgba(0,201,167,.08)", bd: "rgba(0,201,167,.2)" },
-  { icon: "🎯", title: "Predictive Lead Scoring", desc: "Automatically rank leads based on behaviour and deal size so sales always focuses on highest-value opportunities.", bg: "rgba(99,102,241,.08)", bd: "rgba(99,102,241,.2)" },
-  { icon: "🤖", title: "AI Chatbot & WhatsApp", desc: "Deploy AI-powered chatbots and WhatsApp flows that qualify leads and book appointments — 24/7, without human input.", bg: "rgba(0,201,167,.08)", bd: "rgba(0,201,167,.2)" },
+  { icon: "🔮", title: "Predictive Insights", desc: "Automatically rank leads based on behaviour and deal size so sales always focuses on highest-value opportunities.", bg: "rgba(99,102,241,.08)", bd: "rgba(99,102,241,.2)" },
+  { icon: "🤖", title: "Automation at Scale", desc: "Deploy AI-powered chatbots and WhatsApp flows that qualify leads and book appointments — 24/7, without human input.", bg: "rgba(0,201,167,.08)", bd: "rgba(0,201,167,.2)" },
+  { icon: "📈", title: "Real-Time Dashboards", desc: "Custom dashboards with live KPIs, pipeline velocity, and team performance metrics — updated instantly as deals progress.", bg: "rgba(255,159,28,.08)", bd: "rgba(255,159,28,.2)" },
 ];
 
 const ACCORDION_L = [
@@ -105,43 +114,40 @@ const ACCORDION_R = [
   { icon: "💬", title: "WhatsApp Integration", desc: "Connect WhatsApp Business to your CRM for seamless customer communication and conversation tracking." },
 ];
 
+// MODULE 12 — FAQS (Corrected to 5 questions as per document)
 const FAQS = [
   {
     q: "What is custom CRM software vs off-the-shelf?",
-    a: "Off-the-shelf tools may not perfectly match your workflows. A custom CRM is built specifically around your sales stages, compliance requirements (GDPR in the UK, PIPEDA in Canada, CCPA in the US), and team structure. For businesses in Canada, USA, and UK, custom CRM means faster adoption, lower licensing costs, and a system your team actually uses."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
     q: "What features can be customised?",
-    a: "Virtually everything: sales pipeline stages, lead scoring rules, automation triggers, dashboards, reporting, user roles, WhatsApp and email integrations, mobile app experience, multi-currency support, custom fields, third-party integrations (accounting, ERP, marketing tools), and compliance workflows for GDPR, PIPEDA, and CCPA."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
     q: "How long does CRM development take?",
-    a: "A basic custom CRM takes 6–10 weeks. Mid-complexity builds with integrations and automation typically run 12–20 weeks. Enterprise-grade CRM is scoped individually — usually 20–36 weeks. We provide a fixed timeline and milestone plan before any work begins."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
-    q: "What does CRM development cost in Canada or the UK?",
-    a: "A basic CRM starts from CAD $8,000–$15,000 / £6,000–£12,000. Mid-complexity builds range from CAD $18,000–$45,000 / £14,000–£36,000. Enterprise builds are scoped on request. All quotes are fixed-price. Our Bangalore-based engineering team allows us to deliver at 40–60% less than equivalent local agencies, without any reduction in quality."
+    q: "What does CRM development cost in Canada or UK?",
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
   {
     q: "Do you offer post-launch support?",
-    a: "Yes — all CRM builds include a 30-day hypercare period after go-live. Beyond that, we offer flexible support plans: monthly retainer, pay-as-you-go, or a dedicated account manager for enterprise clients. We train your team, provide documentation, and remain available in your time zone. Our retention rate is 98%."
-  },
-  {
-    q: "Are your solutions GDPR, PIPEDA, and CCPA compliant?",
-    a: "Yes. Compliance is built into every system — not bolted on afterwards. For UK and EU clients we implement GDPR-ready consent management, data retention rules, and audit trails. For Canadian clients we follow PIPEDA. For US clients we implement CCPA-compliant data handling. Compliance documentation is included with every delivery."
+    a: "Detailed answer tailored for businesses in Canada, USA, and UK — covering timeline, cost, compliance, and process."
   },
 ];
 
+// MODULE 11 — GLOBAL PRESENCE (Corrected)
 const INT_OFFICES = [
-  { flag: "🇨🇦", city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", email: "hello@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇺🇸", city: "New York, USA", phone: "+1 631-XXX-XXXX", email: "hello@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇬🇧", city: "London, UK", phone: "+44 20-XXXX-XXXX", email: "hello@nncdigital.com", tz: "GMT / BST" },
+  { city: "Toronto, Canada — +1 647-XXX-XXXX", bullet: "■■" },
+  { city: "New York, USA — +1 631-XXX-XXXX", bullet: "■■" },
+  { city: "London, UK — +44 20-XXXX-XXXX", bullet: "■■" },
 ];
+
 const INDIA_OFFICES = [
-  { city: "Bangalore (HQ)", phone: "+91 9900566466", note: "Primary engineering hub" },
-  { city: "Mysore", phone: null, note: "Design & QA" },
-  { city: "Mumbai", phone: null, note: "Sales & partnerships" },
-  { city: "Hyderabad", phone: null, note: "Mobile & cloud" },
+  { city: "Bangalore HQ — +91 9900566466", bullet: "■■" },
+  { city: "Mysore | Mumbai | Hyderabad", bullet: "■■" },
 ];
 
 const WCU_POINTS = [
@@ -156,15 +162,6 @@ const WCU_STATS = [{ n: 1500, s: "+", l: "Web Projects" }, { n: 500, s: "+", l: 
 
 const SERVICES_LIST = ["CRM Development", "ERP Development", "Web Development", "Mobile App Development", "Marketing Automation", "Salesforce CRM", "Digital Transformation", "Other"];
 const DIAL_CODES = [{ code: "+1", flag: "🇨🇦" }, { code: "+1", flag: "🇺🇸" }, { code: "+44", flag: "🇬🇧" }, { code: "+91", flag: "🇮🇳" }];
-
-// ─── Design tokens ────────────────────────────────────────────────────────────
-const T = "#00C9A7";
-const TD = "#00a07a";
-const P = "#8B5CF6";
-const G = "#10B981";
-const N0 = "#010812";
-const N1 = "#030B18";
-const N2 = "#061425";
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function Particles() {
@@ -228,49 +225,45 @@ function Counter({ to, sfx = "" }: { to: number; sfx?: string }) {
   return <span ref={ref}>{v}{sfx}</span>;
 }
 
-function SectionHeader({ badge, title, sub, maxW = 520 }: { badge: string; title: React.ReactNode; sub?: string; maxW?: number }) {
+function SectionBadge({ label }: { label: string }) {
   return (
-    <div className="sec-header">
-      <div className="section-badge"><span className="section-badge__dot" /><span className="section-badge__text">{badge}</span></div>
-      <h2 className="section-h2">{title}</h2>
-      {sub && <p className="text-dim text-muted" style={{ maxWidth: maxW, margin: "0 auto" }}>{sub}</p>}
+    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.22)", borderRadius: 100, padding: "6px 18px", marginBottom: 16 }}>
+      <span style={{ width: 6, height: 6, borderRadius: "50%", background: T, display: "block", boxShadow: `0 0 8px ${T}` }} />
+      <span style={{ color: T, fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const }}>{label}</span>
     </div>
   );
 }
 
+function SectionH2({ children }: { children: React.ReactNode }) {
+  return <h2 style={{ fontSize: "clamp(24px,3vw,40px)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: 14 }}>{children}</h2>;
+}
+
 function GradText({ children }: { children: React.ReactNode }) {
-  return <span className="grad-text">{children}</span>;
+  return <span style={{ background: `linear-gradient(135deg,${T},#1fd1b5)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{children}</span>;
 }
 
 function AccItem({ item, open, toggle, isMobile }: { item: { icon: string; title: string; desc: string }; open: boolean; toggle: () => void; isMobile: boolean }) {
   return (
-    <div className={`acc-item${open ? " open" : ""}`} onClick={toggle}>
-      <div className="acc-item__header" style={{ padding: isMobile ? "14px 16px" : "16px 18px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 12 }}>
-          <div className="acc-item__icon-wrap" style={{ width: isMobile ? 36 : 40, height: isMobile ? 36 : 40, fontSize: isMobile ? 16 : 18 }}>{item.icon}</div>
-          <span className="acc-item__title" style={{ fontSize: isMobile ? 13 : 14 }}>{item.title}</span>
+    <div onClick={toggle} style={{ borderRadius: 14, border: `1px solid ${open ? "rgba(0,201,167,0.4)" : "rgba(255,255,255,0.08)"}`, background: open ? "rgba(0,201,167,0.06)" : "rgba(255,255,255,0.02)", overflow: "hidden", cursor: "pointer", transition: "border-color .25s,background .25s" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "14px 16px" : "18px 22px", gap: isMobile ? 10 : 14 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14 }}>
+          <div style={{ width: isMobile ? 40 : 44, height: isMobile ? 40 : 44, borderRadius: 12, flexShrink: 0, background: open ? "rgba(0,201,167,0.15)" : "rgba(255,255,255,0.05)", border: `1px solid ${open ? "rgba(0,201,167,0.3)" : "rgba(255,255,255,0.1)"}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 18 : 20, transition: "background .25s" }}>{item.icon}</div>
+          <span style={{ fontSize: isMobile ? 13 : 15, fontWeight: 700, color: open ? "#fff" : "rgba(255,255,255,0.72)", fontFamily: "'Poppins',sans-serif", transition: "color .2s" }}>{item.title}</span>
         </div>
-        <div className="acc-item__toggle" style={{
-          width: isMobile ? 24 : 28,
-          height: isMobile ? 24 : 28,
-          background: open ? "var(--teal)" : "rgba(255,255,255,.07)",
-          border: `1px solid ${open ? "var(--teal)" : "rgba(255,255,255,.14)"}`,
-          color: open ? "#000" : "rgba(255,255,255,.55)",
-          transform: open ? "rotate(45deg)" : "none",
-        }}>+</div>
+        <div style={{ width: isMobile ? 24 : 28, height: isMobile ? 24 : 28, borderRadius: "50%", flexShrink: 0, background: open ? T : "rgba(255,255,255,0.07)", border: `1px solid ${open ? T : "rgba(255,255,255,0.14)"}`, display: "flex", alignItems: "center", justifyContent: "center", color: open ? "#000" : "rgba(255,255,255,0.55)", fontSize: isMobile ? 16 : 18, fontWeight: 700, lineHeight: 1, transform: open ? "rotate(45deg)" : "rotate(0deg)", transition: "all .25s ease" }}>+</div>
       </div>
-      <div className="acc-item__body" style={{ maxHeight: open ? 200 : 0 }}>
-        <p style={{ fontSize: isMobile ? 12 : 13 }}>{item.desc}</p>
+      <div style={{ maxHeight: open ? 220 : 0, overflow: "hidden", transition: "max-height .35s ease" }}>
+        <p style={{ padding: isMobile ? "0 16px 14px 60px" : "0 22px 20px 80px", color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 14, lineHeight: 1.75, fontFamily: "'Poppins',sans-serif", fontWeight: 400, margin: 0 }}>{item.desc}</p>
       </div>
     </div>
   );
 }
 
 // ─── Main Component ───────────────────────────────────────────────────────────
-export default function CRMHero() {
-   const serviceSchema = getServiceSchema(
-    "CRM Development", 
-    "Best and Most Reliable CRM Development Services for Canada, USA & UK. Custom CRM solutions that transform how your business manages customers, automates sales, and drives revenue growth."
+export default function CRMDevelopmentPage() {
+  const serviceSchema = getServiceSchema(
+    "CRM Development",
+    "Custom CRM Development Services for Canada, USA & UK. NNC Digital Solutions builds custom CRM software for businesses in Canada, USA, and UK. Sales pipeline automation, WhatsApp integration, Salesforce customisation, and more. Get a free consultation."
   );
   const [windowWidth, setWindowWidth] = useState(0);
 
@@ -283,7 +276,6 @@ export default function CRMHero() {
 
   const isMobile = windowWidth <= 640;
   const isTablet = windowWidth > 640 && windowWidth <= 1024;
-  const isDesktop = windowWidth > 1024;
 
   const [form, setForm] = useState({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -304,7 +296,19 @@ export default function CRMHero() {
   const setCF = (k: string, v: string) => setCForm(f => ({ ...f, [k]: v }));
   const handleCSubmit = (e: React.FormEvent) => { e.preventDefault(); setCLoading(true); setTimeout(() => { setCLoading(false); setCSubmitted(true); }, 1200); };
 
-  // Responsive input styles
+  // Responsive styles
+  const getSectionPadding = () => {
+    if (isMobile) return "20px 16px";
+    if (isTablet) return "60px 32px";
+    return "20px 48px";
+  };
+
+  const getHeroPadding = () => {
+    if (isMobile) return "10px 16px 60px";
+    if (isTablet) return "80px 32px 80px";
+    return "90px 48px 80px";
+  };
+
   const iS: React.CSSProperties = {
     width: "100%",
     padding: isMobile ? "10px 12px" : "11px 14px",
@@ -318,30 +322,41 @@ export default function CRMHero() {
     boxSizing: "border-box",
     transition: "border-color .2s,background .2s"
   };
-  
+
   const iSLg: React.CSSProperties = {
     ...iS,
     padding: isMobile ? "12px 14px" : "13px 16px",
     fontSize: isMobile ? "14px" : "14.5px"
   };
 
-  // Responsive spacing
-  const getSectionPadding = () => {
-    if (isMobile) return "40px 16px";
-    if (isTablet) return "60px 32px";
-    return "40px 48px";
+  const btnT: React.CSSProperties = {
+    display: "inline-block",
+    padding: isMobile ? "12px 20px" : "13px 28px",
+    borderRadius: 10,
+    border: "none",
+    background: `linear-gradient(135deg,${T},${TD})`,
+    color: "#000",
+    fontWeight: 700,
+    fontSize: isMobile ? "14px" : "15px",
+    fontFamily: "'Poppins',sans-serif",
+    cursor: "pointer",
+    textDecoration: "none",
+    transition: "transform .2s,box-shadow .2s"
   };
 
-  const getHeroPadding = () => {
-    if (isMobile) return "10px 16px 60px";
-    if (isTablet) return "80px 32px 80px";
-    return "90px 48px 80px";
-  };
-
-  const getGridColumns = (mobile: number, tablet: number, desktop: number) => {
-    if (isMobile) return `repeat(${mobile}, 1fr)`;
-    if (isTablet) return `repeat(${tablet}, 1fr)`;
-    return `repeat(${desktop}, 1fr)`;
+  const btnWhite: React.CSSProperties = {
+    display: "inline-block",
+    padding: isMobile ? "12px 20px" : "13px 28px",
+    borderRadius: 10,
+    border: "none",
+    background: "#fff",
+    color: "#0055b3",
+    fontWeight: 700,
+    fontSize: isMobile ? "14px" : "15px",
+    fontFamily: "'Poppins',sans-serif",
+    cursor: "pointer",
+    textDecoration: "none",
+    transition: "transform .2s,box-shadow .2s"
   };
 
   return (
@@ -351,33 +366,18 @@ export default function CRMHero() {
       <style jsx global>{`
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
 
-        :root {
-          --teal: #00C9A7;
-          --teal-dark: #00a07a;
-          --purple: #8B5CF6;
-          --green: #10B981;
-          --n0: #010812;
-          --n1: #030B18;
-          --n2: #061425;
-          --n3: #0a1f38;
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
         @keyframes heroFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes heroBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
         @keyframes heroGlow { 0%,100% { box-shadow: 0 0 20px rgba(0,201,167,0.15); } 50% { box-shadow: 0 0 40px rgba(0,201,167,0.38); } }
         @keyframes heroPulse { 0%,100% { opacity: .2; transform: scale(1); } 50% { opacity: .4; transform: scale(1.05); } }
         @keyframes heroSpin { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(360deg); } }
-        @keyframes heroScan { 0% { top: 0; } 100% { top: 100%; } }
         @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
         @keyframes sbFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes aiScan { 0% { top: 10%; } 100% { top: 90%; } }
         @keyframes aiPulse { 0%,100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
         @keyframes ctaBgShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* Responsive button styles */
-        .btn-teal, .btn-outline, .btn-white, .btn-cta-outline {
+        .btn-teal, .btn-white {
           display: inline-flex;
           align-items: center;
           justify-content: center;
@@ -391,49 +391,24 @@ export default function CRMHero() {
           transition: all 0.2s;
           min-width: 140px;
         }
-
         @media (min-width: 768px) {
-          .btn-teal, .btn-outline, .btn-white, .btn-cta-outline {
-            padding: 14px 32px;
-            font-size: 15px;
-            min-width: 160px;
-          }
+          .btn-teal, .btn-white { padding: 14px 32px; font-size: 15px; min-width: 160px; }
         }
-
         @media (max-width: 640px) {
-          .btn-teal, .btn-outline, .btn-white, .btn-cta-outline {
-            width: 100%;
-            min-width: 0;
-          }
+          .btn-teal, .btn-white { width: 100%; min-width: 0; }
         }
-
         .btn-teal {
           background: linear-gradient(135deg, var(--teal), var(--teal-dark));
           color: #000;
           border: none;
         }
         .btn-teal:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,201,167,0.25); }
-
-        .btn-outline {
-          background: transparent;
-          color: var(--teal);
-          border: 1.5px solid rgba(0,201,167,0.35);
-        }
-        .btn-outline:hover { border-color: var(--teal); background: rgba(0,201,167,0.07); }
-
         .btn-white {
           background: #fff;
           color: #0055b3;
           border: none;
         }
         .btn-white:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
-
-        .btn-cta-outline {
-          background: transparent;
-          color: #fff;
-          border: 2px solid rgba(255,255,255,0.5);
-        }
-        .btn-cta-outline:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
 
         .h-teal:hover { color: var(--teal) !important; }
         .teal { color: var(--teal); }
@@ -447,36 +422,6 @@ export default function CRMHero() {
 
         .badge { display: inline-block; padding: 5px 12px; border-radius: 100px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 600; }
         .badge-soft { background: rgba(0,201,167,0.06); border: 1px solid rgba(0,201,167,0.2); color: var(--teal); }
-        .badge-sm { padding: 3px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-
-        .label-upper { display: block; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.45); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.06em; }
-        .label-upper-lg { font-size: 11px; margin-bottom: 6px; }
-
-        .section-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(0,201,167,0.08);
-          border: 1px solid rgba(0,201,167,0.22);
-          border-radius: 100px;
-          padding: 6px 18px;
-          margin-bottom: 16px;
-        }
-        .section-badge__dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: var(--teal);
-          display: block;
-          box-shadow: 0 0 8px var(--teal);
-        }
-        .section-badge__text {
-          color: var(--teal);
-          font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-        }
 
         .section-h2 {
           font-size: clamp(24px, 3vw, 40px);
@@ -492,49 +437,6 @@ export default function CRMHero() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-        }
-
-        .stat-card {
-          position: relative;
-          text-align: center;
-          padding: 28px 20px;
-          border-radius: 20px;
-          background: rgba(0,201,167,0.08);
-          border: 1px solid rgba(0,201,167,0.2);
-          transition: transform 0.3s, box-shadow 0.3s;
-          cursor: default;
-          animation: sbFadeUp 0.7s ease both;
-        }
-        @media (min-width: 768px) {
-          .stat-card { padding: 44px 28px; }
-        }
-        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .stat-card__icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 14px;
-          background: rgba(0,201,167,0.1);
-          border: 1px solid rgba(0,201,167,0.2);
-          font-size: 20px;
-        }
-        @media (min-width: 768px) {
-          .stat-card__icon { width: 52px; height: 52px; font-size: 24px; margin-bottom: 18px; }
-        }
-        .stat-card__val {
-          font-size: 32px;
-          font-weight: 900;
-          line-height: 1;
-          margin-bottom: 8px;
-          background: linear-gradient(135deg, #fff 30%, var(--teal) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        @media (min-width: 768px) {
-          .stat-card__val { font-size: 48px; margin-bottom: 10px; }
         }
 
         .ss-tab {
@@ -555,7 +457,6 @@ export default function CRMHero() {
           .ss-tab { padding: 10px 20px; font-size: 13.5px; }
         }
         .ss-tab.act { border-color: rgba(0,201,167,0.45); background: rgba(0,201,167,0.1); color: var(--teal); }
-        .ss-tab:hover:not(.act) { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.8); }
 
         .svc-card {
           position: relative;
@@ -574,56 +475,6 @@ export default function CRMHero() {
           .svc-card { padding: 24px 20px; }
         }
         .svc-card:hover { transform: translateY(-4px); border-color: rgba(0,201,167,0.35); background: rgba(0,201,167,0.04); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .svc-card__icon {
-          width: 48px;
-          height: 48px;
-          border-radius: 14px;
-          background: rgba(0,201,167,0.1);
-          border: 1px solid rgba(0,201,167,0.2);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 22px;
-          flex-shrink: 0;
-          transition: transform 0.3s;
-        }
-        @media (min-width: 768px) {
-          .svc-card__icon { width: 52px; height: 52px; font-size: 24px; }
-        }
-        .svc-card__tag {
-          padding: 3px 8px;
-          border-radius: 100px;
-          font-size: 9px;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: var(--teal);
-          background: rgba(0,201,167,0.08);
-          border: 1px solid rgba(0,201,167,0.18);
-        }
-        @media (min-width: 768px) {
-          .svc-card__tag { font-size: 10.5px; padding: 3px 10px; }
-        }
-        .svc-card__title { font-size: 15px; font-weight: 700; color: #fff; line-height: 1.3; margin: 0; }
-        @media (min-width: 768px) {
-          .svc-card__title { font-size: 17px; }
-        }
-        .svc-card__desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.7; margin: 0; }
-        @media (min-width: 768px) {
-          .svc-card__desc { font-size: 13.5px; }
-        }
-        .svc-card__link {
-          display: inline-flex;
-          align-items: center;
-          gap: 6px;
-          color: var(--teal);
-          font-size: 12px;
-          font-weight: 600;
-          margin-top: auto;
-        }
-        @media (min-width: 768px) {
-          .svc-card__link { font-size: 13px; }
-        }
 
         .pt-card {
           border-radius: 16px;
@@ -652,44 +503,6 @@ export default function CRMHero() {
         }
         @media (min-width: 768px) {
           .pt-card__icon { width: 56px; height: 56px; font-size: 26px; margin-bottom: 16px; }
-        }
-        .pt-card__name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
-        @media (min-width: 768px) {
-          .pt-card__name { font-size: 16px; }
-        }
-        .pt-card__desc { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.6; margin: 0; }
-        @media (min-width: 768px) {
-          .pt-card__desc { font-size: 13px; }
-        }
-
-        .kb-card {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          padding: 16px;
-          border-radius: 18px;
-          border: 1px solid rgba(255,255,255,0.06);
-          background: rgba(255,255,255,0.02);
-          transition: all 0.3s;
-          cursor: default;
-          animation: sbFadeUp 0.6s ease both;
-        }
-        @media (min-width: 768px) {
-          .kb-card { flex-direction: row; padding: 20px; gap: 16px; }
-        }
-        .kb-card:hover { transform: translateY(-4px); border-color: rgba(0,201,167,0.3); background: rgba(0,201,167,0.04); }
-        .kb-card__num {
-          font-size: 42px;
-          font-weight: 900;
-          line-height: 1;
-          background: linear-gradient(135deg, rgba(0,201,167,0.15) 0%, rgba(0,201,167,0.05) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          flex-shrink: 0;
-          text-align: center;
-        }
-        @media (min-width: 768px) {
-          .kb-card__num { font-size: 52px; width: 72px; }
         }
 
         .wcu-point {
@@ -721,17 +534,6 @@ export default function CRMHero() {
           .wcu-stat { padding: 20px 12px; }
         }
         .wcu-stat:hover { transform: translateY(-4px); background: rgba(0,201,167,0.1); }
-        .wcu-stat__val {
-          font-size: 20px;
-          font-weight: 900;
-          margin-bottom: 4px;
-          background: linear-gradient(135deg, #fff 30%, var(--teal) 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-        @media (min-width: 768px) {
-          .wcu-stat__val { font-size: 26px; margin-bottom: 8px; }
-        }
 
         .gp-card {
           padding: 20px 16px;
@@ -825,51 +627,23 @@ export default function CRMHero() {
           .faq-item__a p { padding: 0 22px 22px 76px; font-size: 14px; }
         }
 
-        .gp-ind {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 12px 14px;
-          border-radius: 12px;
+        .gp-tab {
+          padding: 8px 16px;
+          border-radius: 10px;
+          border: 1px solid rgba(255,255,255,0.1);
           background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.07);
-          transition: all 0.2s;
-          cursor: default;
+          color: rgba(255,255,255,0.55);
+          font-size: 12px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all 0.22s;
         }
         @media (min-width: 768px) {
-          .gp-ind { gap: 14px; padding: 16px 18px; }
+          .gp-tab { padding: 11px 24px; font-size: 14px; }
         }
-        .gp-ind:hover { background: rgba(0,201,167,0.06); border-color: rgba(0,201,167,0.2); }
+        .gp-tab.act { border-color: rgba(0,201,167,0.5); background: rgba(0,201,167,0.12); color: var(--teal); box-shadow: 0 4px 20px rgba(0,201,167,0.12); }
+        .gp-tab:hover { border-color: rgba(0,201,167,0.3); color: var(--teal); }
 
-        .step-circle {
-          width: 28px;
-          height: 28px;
-          border-radius: 50%;
-          flex-shrink: 0;
-          background: linear-gradient(135deg, var(--teal), var(--teal-dark));
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 10px;
-          font-weight: 900;
-          color: #000;
-        }
-        @media (min-width: 768px) {
-          .step-circle { width: 32px; height: 32px; font-size: 11px; }
-        }
-
-        .live-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: #22c55e;
-          box-shadow: 0 0 8px #22c55e;
-        }
-        @media (min-width: 768px) {
-          .live-dot { width: 10px; height: 10px; }
-        }
-
-        /* Layout grids */
         .hero-layout {
           display: grid;
           grid-template-columns: 1fr;
@@ -884,20 +658,6 @@ export default function CRMHero() {
         }
         @media (min-width: 768px) {
           .hero-layout { grid-template-columns: 1fr 460px; gap: 40px; padding: 0 24px; }
-        }
-        @media (min-width: 1024px) {
-          .hero-layout { gap: 60px; }
-        }
-
-        .stats-row {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-        @media (min-width: 768px) {
-          .stats-row { grid-template-columns: repeat(4, 1fr); gap: 20px; }
         }
 
         .svc-grid {
@@ -924,18 +684,6 @@ export default function CRMHero() {
           .pt-grid { grid-template-columns: repeat(4, 1fr); }
         }
 
-        .kb-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-        @media (min-width: 768px) {
-          .kb-grid { grid-template-columns: 1fr; }
-        }
-        @media (min-width: 1024px) {
-          .kb-grid { grid-template-columns: 1fr 1fr; }
-        }
-
         .two-col {
           display: grid;
           grid-template-columns: 1fr;
@@ -943,9 +691,6 @@ export default function CRMHero() {
         }
         @media (min-width: 768px) {
           .two-col { grid-template-columns: 1fr 1fr; gap: 20px; }
-        }
-        @media (min-width: 1024px) {
-          .two-col { gap: 32px; }
         }
 
         .two-col-wide {
@@ -956,9 +701,6 @@ export default function CRMHero() {
         }
         @media (min-width: 768px) {
           .two-col-wide { grid-template-columns: 1fr 1fr; gap: 40px; }
-        }
-        @media (min-width: 1024px) {
-          .two-col-wide { gap: 64px; }
         }
 
         .wcu-stats {
@@ -980,24 +722,6 @@ export default function CRMHero() {
         }
         @media (min-width: 1024px) {
           .gp-offices { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        }
-
-        .gp-ind-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 12px;
-        }
-        @media (min-width: 768px) {
-          .gp-ind-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-
-        .gp-india-stats {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-        }
-        @media (min-width: 768px) {
-          .gp-india-stats { grid-template-columns: repeat(4, 1fr); }
         }
 
         .cf-grid {
@@ -1030,260 +754,33 @@ export default function CRMHero() {
           .phone-row { flex-direction: row; gap: 8px; }
         }
 
-        .btn-row {
-          display: flex;
-          gap: 12px;
-          flex-direction: column;
-          flex-wrap: wrap;
-        }
-        @media (min-width: 768px) {
-          .btn-row { flex-direction: row; gap: 16px; }
-        }
-
         .badge-row {
           display: flex;
           flex-wrap: wrap;
           gap: 8px;
         }
-
-        .sec { padding: 50px 20px; position: relative; overflow: hidden; }
-        @media (min-width: 768px) { .sec { padding: 70px 32px; } }
-        @media (min-width: 1024px) { .sec { padding: 100px 48px; } }
-
-        .sec-hero { min-height: auto; }
-        @media (min-width: 768px) { .sec-hero { min-height: 90vh; } }
-
-        .sec-dark { background: var(--n1); }
-        .sec-mid { background: var(--n2); }
-        .sec-grad-n1n2-n1 { background: linear-gradient(180deg, var(--n1) 0%, var(--n2) 50%, var(--n1) 100%); }
-        .sec-grad-up { background: linear-gradient(180deg, var(--n2) 0%, var(--n1) 100%); }
-        .sec-grad-down { background: linear-gradient(180deg, var(--n1) 0%, var(--n2) 100%); }
-        .sec-grad-n0n1 { background: linear-gradient(135deg, var(--n0) 0%, var(--n1) 100%); }
-
-        .sec-content { max-width: 1280px; margin: 0 auto; position: relative; z-index: 2; }
-        .sec-content-sm { max-width: 860px; margin: 0 auto; }
-        .sec-content-1180 { max-width: 1180px; margin: 0 auto; }
-
-        .bg-grid {
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          background-image: linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px);
-          background-size: 56px 56px;
-        }
-
-        .hero-form {
-          background: rgba(8,20,40,0.85);
-          border: 1px solid rgba(0,201,167,0.22);
-          border-radius: 20px;
-          padding: 24px 16px;
-          backdrop-filter: blur(16px);
-          box-shadow: 0 32px 80px rgba(0,0,0,0.5);
-          position: relative;
-          overflow: hidden;
-        }
-        @media (min-width: 768px) {
-          .hero-form { padding: 32px 28px; }
-        }
-        .hero-form__top {
-          position: absolute;
-          top: 0;
-          left: 20%;
-          right: 20%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, var(--teal), transparent);
-        }
-
-        .fade-up { animation: heroFadeUp 0.7s ease both; }
-
-        .card-teal {
-          background: rgba(0,201,167,0.05);
-          border: 1px solid rgba(0,201,167,0.18);
-          border-radius: 18px;
-        }
-
-        .fi {
-          width: 100%;
-          padding: 10px 12px;
-          border-radius: 9px;
-          background: rgba(255,255,255,0.07);
-          border: 1px solid rgba(255,255,255,0.14);
-          color: #fff;
-          font-size: 13px;
-          font-family: 'Poppins', sans-serif;
-          outline: none;
-          transition: all 0.3s;
-        }
-        @media (min-width: 768px) {
-          .fi { padding: 11px 14px; font-size: 13.5px; }
-        }
-        .fi-lg {
-          padding: 12px 14px;
-          font-size: 14px;
-        }
-        @media (min-width: 768px) {
-          .fi-lg { padding: 13px 16px; font-size: 14.5px; }
-        }
-        .fi-dial { width: 100%; }
-        @media (min-width: 768px) {
-          .fi-dial { width: 82px; }
-        }
-        .fi-dial-lg { width: 100%; }
-        @media (min-width: 768px) {
-          .fi-dial-lg { width: 90px; }
-        }
-        .fi-select { cursor: pointer; }
-        .fi-textarea { min-height: 70px; resize: vertical; }
-        @media (min-width: 768px) {
-          .fi-textarea { min-height: 76px; }
-        }
-        .fi-textarea-lg { min-height: 80px; resize: vertical; }
-        @media (min-width: 768px) {
-          .fi-textarea-lg { min-height: 110px; }
-        }
-
-        .ai-card {
-          display: flex;
-          gap: 16px;
-          align-items: flex-start;
-          padding: 20px 16px;
-          border-radius: 16px;
-          transition: all 0.25s;
-        }
-        @media (min-width: 768px) {
-          .ai-card { padding: 24px 22px; gap: 18px; }
-        }
-        .ai-card:hover { transform: translateX(4px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-        .ai-card__icon {
-          width: 44px;
-          height: 44px;
-          border-radius: 14px;
-          flex-shrink: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 22px;
-          transition: transform 0.25s;
-        }
-        @media (min-width: 768px) {
-          .ai-card__icon { width: 52px; height: 52px; font-size: 24px; }
-        }
-        .ai-card:hover .ai-card__icon { transform: scale(1.1) rotate(-4deg); }
-
-        .gp-tab {
-          padding: 8px 16px;
-          border-radius: 10px;
-          border: 1px solid rgba(255,255,255,0.1);
-          background: rgba(255,255,255,0.03);
-          color: rgba(255,255,255,0.55);
-          font-size: 12px;
-          font-weight: 700;
-          cursor: pointer;
-          transition: all 0.22s;
-        }
-        @media (min-width: 768px) {
-          .gp-tab { padding: 11px 24px; font-size: 14px; }
-        }
-        .gp-tab.act { border-color: rgba(0,201,167,0.5); background: rgba(0,201,167,0.12); color: var(--teal); box-shadow: 0 4px 20px rgba(0,201,167,0.12); }
-        .gp-tab:hover { border-color: rgba(0,201,167,0.3); color: var(--teal); }
-
-        .acc-item {
-          border-radius: 14px;
-          border: 1px solid rgba(255,255,255,0.08);
-          background: rgba(255,255,255,0.02);
-          overflow: hidden;
-          cursor: pointer;
-          transition: all 0.25s;
-        }
-        .acc-item.open { border-color: rgba(0,201,167,0.4); background: rgba(0,201,167,0.06); }
-        .acc-item__header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 14px 16px;
-        }
-        @media (min-width: 768px) {
-          .acc-item__header { padding: 16px 18px; }
-        }
-        .acc-item__icon-wrap {
-          width: 36px;
-          height: 36px;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(0,201,167,0.1);
-          border: 1px solid rgba(0,201,167,0.2);
-          font-size: 16px;
-          transition: background 0.25s;
-        }
-        @media (min-width: 768px) {
-          .acc-item__icon-wrap { width: 40px; height: 40px; font-size: 18px; }
-        }
-        .acc-item.open .acc-item__icon-wrap { background: rgba(0,201,167,0.2); border-color: rgba(0,201,167,0.3); }
-        .acc-item__title {
-          font-size: 13px;
-          font-weight: 700;
-          color: rgba(255,255,255,0.72);
-          transition: color 0.2s;
-        }
-        @media (min-width: 768px) {
-          .acc-item__title { font-size: 14px; }
-        }
-        .acc-item.open .acc-item__title { color: #fff; }
-        .acc-item__toggle {
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 16px;
-          font-weight: 700;
-          transition: all 0.25s;
-          flex-shrink: 0;
-        }
-        @media (min-width: 768px) {
-          .acc-item__toggle { width: 28px; height: 28px; font-size: 18px; }
-        }
-        .acc-item__body {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.35s ease;
-        }
-        .acc-item.open .acc-item__body { max-height: 220px; }
-        .acc-item__body p {
-          padding: 0 16px 14px 64px;
-          color: rgba(255,255,255,0.5);
-          font-size: 12px;
-          line-height: 1.75;
-          margin: 0;
-        }
-        @media (min-width: 768px) {
-          .acc-item__body p { padding: 0 18px 16px 76px; font-size: 13px; }
-        }
+          
       `}</style>
 
       <div style={{ fontFamily: "'Poppins',sans-serif" }}>
 
         {/* M1 — HERO */}
-        <section className="sec sec-hero" style={{ padding: getHeroPadding(), background: `linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)` }}>
+        <section style={{ padding: getHeroPadding(), background: `linear-gradient(135deg,${N0} 0%,#041628 45%,${N0} 100%)`, position: "relative", overflow: "hidden", minHeight: isMobile ? "auto" : "90vh", display: "flex", alignItems: "center" }}>
           <Particles />
           {!isMobile && (
             <>
               <div style={{ position: "absolute", width: isTablet ? 500 : 650, height: isTablet ? 500 : 650, borderRadius: "50%", background: `radial-gradient(circle,rgba(0,201,167,.14) 0%,transparent 65%)`, top: "40%", left: "-10%", transform: "translateY(-50%)", animation: "heroPulse 8s ease-in-out infinite", pointerEvents: "none", zIndex: 1 }} />
               <div style={{ position: "absolute", width: isTablet ? 300 : 400, height: isTablet ? 300 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(99,102,241,.1) 0%,transparent 65%)", top: "10%", right: "5%", animation: "heroPulse 10s ease-in-out infinite .5s", pointerEvents: "none", zIndex: 1 }} />
               <div style={{ position: "absolute", width: isTablet ? 400 : 520, height: isTablet ? 400 : 520, borderRadius: "50%", border: "1px dashed rgba(0,201,167,.08)", top: "50%", left: "-12%", transform: "translateY(-50%)", animation: "heroSpin 55s linear infinite", pointerEvents: "none", zIndex: 1 }} />
-              {/* <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.28),transparent)", animation: "heroScan 7s linear infinite", pointerEvents: "none", zIndex: 2 }} /> */}
             </>
           )}
 
           <div className="hero-layout">
             {/* Left */}
-            <div className="fade-up">
+            <div style={{ animation: "heroFadeUp .7s ease both" }}>
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(0,201,167,.08)", border: "1px solid rgba(0,201,167,.25)", borderRadius: 100, padding: isMobile ? "6px 14px" : "7px 18px", marginBottom: isMobile ? 16 : 28, animation: "heroGlow 3s ease-in-out infinite" }}>
-                <span style={{ width: isMobile ? 6 : 7, height: isMobile ? 6 : 7, borderRadius: "50%", background: "var(--teal)", boxShadow: "0 0 10px var(--teal)", animation: "heroBlink 1.4s ease-in-out infinite" }} />
-                <span style={{ color: "var(--teal)", fontSize: isMobile ? 10 : 11.5, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>CRM Development — Canada, USA &amp; UK</span>
+                <span style={{ width: isMobile ? 6 : 7, height: isMobile ? 6 : 7, borderRadius: "50%", background: T, boxShadow: `0 0 10px ${T}`, animation: "heroBlink 1.4s ease-in-out infinite" }} />
+                <span style={{ color: T, fontSize: isMobile ? 10 : 11.5, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" as const }}>CRM Development — Canada, USA &amp; UK</span>
               </div>
               <h1 style={{ fontSize: isMobile ? "28px" : isTablet ? "36px" : "48px", fontWeight: 900, lineHeight: 1.12, marginBottom: isMobile ? 14 : 22, letterSpacing: "-0.025em", color: "#fff" }}>
                 Best and Most Reliable{" "}<GradText>CRM Development Services</GradText>{" "}for Canada, USA &amp; UK
@@ -1293,7 +790,7 @@ export default function CRMHero() {
               </p>
               <div className="badge-row" style={{ marginBottom: isMobile ? 20 : 36 }}>
                 {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
-                  <span key={b.l} className="badge badge-soft" style={{ padding: isMobile ? "5px 10px" : "6px 13px", fontSize: isMobile ? 11 : 12.5 }}>{b.i} {b.l}</span>
+                  <span key={b.l} className="badge" style={{ padding: isMobile ? "5px 10px" : "6px 13px", fontSize: isMobile ? 11 : 12.5 }}>{b.i} {b.l}</span>
                 ))}
               </div>
               <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
@@ -1306,47 +803,47 @@ export default function CRMHero() {
             </div>
 
             {/* Right — Form */}
-            <div className="hero-form">
-              <div className="hero-form__top" />
+            <div style={{ background: "rgba(8,20,40,0.85)", border: "1px solid rgba(0,201,167,0.22)", borderRadius: 20, padding: isMobile ? "24px 20px" : "32px 28px", backdropFilter: "blur(16px)", boxShadow: "0 32px 80px rgba(0,0,0,0.5),0 0 40px rgba(0,201,167,0.06)", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 2, background: `linear-gradient(90deg,transparent,${T},transparent)` }} />
               {submitted ? (
                 <div style={{ textAlign: "center", padding: isMobile ? "20px 0" : "40px 0" }}>
                   <div style={{ fontSize: isMobile ? 44 : 52, marginBottom: 16 }}>✅</div>
                   <h3 style={{ color: "#fff", fontSize: isMobile ? 18 : 20, fontWeight: 800, marginBottom: 10 }}>Request Received!</h3>
                   <p style={{ color: "rgba(255,255,255,.5)", fontSize: isMobile ? 13 : 14, lineHeight: 1.7, marginBottom: 24 }}>We&apos;ll contact you within 24 hours with a free consultation.</p>
                   <Link href="/crm-development">
-                    <button onClick={() => { setSubmitted(false); setForm({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "", }); }} className="btn-teal" style={{ padding: isMobile ? "10px 22px" : "11px 26px", fontSize: isMobile ? 13 : 14 }}>Send Another →</button>
+                    <button onClick={() => { setSubmitted(false); setForm({ firstName: "", lastName: "", phone: "", dialCode: "+1", email: "", service: "", message: "", }); }} style={{ padding: isMobile ? "10px 22px" : "11px 26px", borderRadius: 9, border: "none", background: `linear-gradient(135deg,${T},${TD})`, color: "#000", fontWeight: 700, fontSize: isMobile ? 13 : 14, fontFamily: "'Poppins',sans-serif", cursor: "pointer" }}>Send Another →</button>
                   </Link>
                 </div>
               ) : (
                 <>
                   <div style={{ marginBottom: isMobile ? 14 : 22 }}>
-                    <p className="teal" style={{ fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 }}>Free Consultation</p>
+                    <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 4 }}>Free Consultation</p>
                     <h2 style={{ color: "#fff", fontSize: isMobile ? 16 : 18, fontWeight: 800, margin: 0, lineHeight: 1.3 }}>Get a Free CRM Strategy Call</h2>
                   </div>
                   <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
                     <div className="cf-name">
-                      <div><label className="label-upper">First Name *</label><input className="fi" required placeholder="Jane" value={form.firstName} onChange={e => setF("firstName", e.target.value)} /></div>
-                      <div><label className="label-upper">Last Name</label><input className="fi" placeholder="Smith" value={form.lastName} onChange={e => setF("lastName", e.target.value)} /></div>
+                      <div><p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>First Name *</p><input className="fi" required placeholder="Jane" value={form.firstName} onChange={e => setF("firstName", e.target.value)} /></div>
+                      <div><p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Last Name</p><input className="fi" placeholder="Smith" value={form.lastName} onChange={e => setF("lastName", e.target.value)} /></div>
                     </div>
                     <div>
-                      <label className="label-upper">Phone</label>
+                      <p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Phone</p>
                       <div className="phone-row">
-                        <select className="fi fi-dial fi-select" style={{ width: isMobile ? "100%" : "82px" }} value={form.dialCode} onChange={e => setF("dialCode", e.target.value)}>
+                        <select className="fi" style={{ width: isMobile ? "100%" : "82px" }} value={form.dialCode} onChange={e => setF("dialCode", e.target.value)}>
                           {DIAL_CODES.map((d, i) => <option key={i} value={d.code}>{d.flag} {d.code}</option>)}
                         </select>
                         <input className="fi" type="tel" placeholder="647 XXX XXXX" value={form.phone} onChange={e => setF("phone", e.target.value)} />
                       </div>
                     </div>
-                    <div><label className="label-upper">Business Email *</label><input className="fi" required type="email" placeholder="jane@company.com" value={form.email} onChange={e => setF("email", e.target.value)} /></div>
+                    <div><p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Business Email *</p><input className="fi" required type="email" placeholder="jane@company.com" value={form.email} onChange={e => setF("email", e.target.value)} /></div>
                     <div>
-                      <label className="label-upper">Service</label>
-                      <select className="fi fi-select" value={form.service} onChange={e => setF("service", e.target.value)}>
+                      <p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Service</p>
+                      <select className="fi" style={{ cursor: "pointer" }} value={form.service} onChange={e => setF("service", e.target.value)}>
                         <option value="">Select service...</option>
                         {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
                       </select>
                     </div>
-                    <div><label className="label-upper">Message</label><textarea className="fi fi-textarea" placeholder="Tell us about your project..." value={form.message} onChange={e => setF("message", e.target.value)} /></div>
-                    <button className="btn-teal" type="submit" disabled={loading} style={{ marginTop: 4, width: "100%", opacity: loading ? .6 : 1, cursor: loading ? "wait" : "pointer" }}>
+                    <div><p style={{ fontSize: isMobile ? 10 : 11, fontWeight: 600, color: "rgba(255,255,255,0.45)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Message</p><textarea className="fi" style={{ minHeight: isMobile ? 70 : 76, resize: "vertical" }} placeholder="Tell us about your project..." value={form.message} onChange={e => setF("message", e.target.value)} /></div>
+                    <button style={{ ...btnT, width: "100%", marginTop: 4, opacity: loading ? .6 : 1, cursor: loading ? "wait" : "pointer" }}>
                       {loading ? "Sending..." : "📅 Get Free Consultation →"}
                     </button>
                     <p style={{ color: "rgba(255,255,255,.28)", fontSize: isMobile ? 10 : 11, textAlign: "center", margin: 0 }}>🔒 Secure &amp; confidential. No spam, ever.</p>
@@ -1358,79 +855,89 @@ export default function CRMHero() {
         </section>
 
         {/* M2 — CLIENTS */}
-        <section className="sec-dark" style={{ padding: isMobile ? "40px 0" : "60px 0", overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
+        {/* MODULE 2 — OUR HAPPY CLIENTS — 3 Rows of 6 Logos */}
+        <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
             <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
             <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
               Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
             </h2>
           </div>
+
+          {/* Row 1 - Sliding Left to Right */}
+          <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+            <div className="cl-track" style={{ animation: "marquee 30s linear infinite" }}>
+              {LOGOS.slice(0, 6).map((logo, i) => (
+                <div key={`row1-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(0, 6).map((logo, i) => (
+                <div key={`row1-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2 - Sliding Right to Left (reverse direction) */}
+          <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+            <div className="cl-track" style={{ animation: "marqueeReverse 35s linear infinite" }}>
+              {LOGOS.slice(6, 12).map((logo, i) => (
+                <div key={`row2-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(6, 12).map((logo, i) => (
+                <div key={`row2-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 3 - Sliding Left to Right (different speed) */}
           <div style={{ overflow: "hidden" }}>
-            <div className="cl-track">
-              {[...LOGOS, ...LOGOS].map((f, i) => (
-                <div
-                  key={i}
-                  style={{
-                    flexShrink: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: isMobile ? 60 : 70,
-                    padding: isMobile ? "8px 14px" : "10px 18px",
-                    background: "#fff",
-                    borderRadius: 10,
-                    margin: "0 8px",
-                    boxShadow: "0 6px 20px rgba(0,0,0,0.15)",
-                    opacity: .9,
-                    transition: "transform .3s, box-shadow .3s"
-                  }}
-                  onMouseEnter={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.transform = "scale(1.08)"
-                    el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"
-                  }}
-                  onMouseLeave={e => {
-                    const el = e.currentTarget as HTMLElement
-                    el.style.transform = ""
-                    el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"
-                  }}
-                >
-                  <img
-                    src={`/${f}`}
-                    alt={`Client ${i + 1}`}
-                    style={{
-                      height: isMobile ? 30 : 40,
-                      width: "auto",
-                      maxWidth: isMobile ? 90 : 120,
-                      objectFit: "contain"
-                    }}
-                  />
+            <div className="cl-track" style={{ animation: "marquee 40s linear infinite" }}>
+              {LOGOS.slice(12, 18).map((logo, i) => (
+                <div key={`row3-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {LOGOS.slice(12, 18).map((logo, i) => (
+                <div key={`row3-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                  onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                  onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                  <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* M3 — STATS */}
-        <section className="sec sec-grad-n1n2-n1" style={{ borderTop: "1px solid rgba(0,201,167,.12)", borderBottom: "1px solid rgba(0,201,167,.12)" }}>
-          <div style={{  animation: "heroScan 4s linear infinite", pointerEvents: "none" }} />
-          <div className="stats-row">
-            {STATS.map((s, i) => (
-              <div key={i} className="stat-card" style={{ animationDelay: `${i * .12}s` }}>
-                <div className="stat-card__icon">{s.icon}</div>
-                <div className="stat-card__val"><Counter to={s.val} sfx={s.sfx} /></div>
-                <div style={{ fontSize: isMobile ? 13 : 15, fontWeight: 700, color: "#fff", marginBottom: 4 }}>{s.label}</div>
-                <div style={{ fontSize: isMobile ? 11 : 12.5, color: "rgba(255,255,255,.38)", fontWeight: 500 }}>{s.sub}</div>
-              </div>
-            ))}
-          </div>
-        </section>
 
-        {/* M4 — SUCCESS STORIES */}
-        <section className="sec sec-grad-up" style={{ padding: getSectionPadding() }}>
-          <div className="bg-grid" />
-          <div className="sec-content">
-            <SectionHeader badge="Proven Results" title={<>Success <GradText>Stories</GradText></>} sub="Real results for real businesses across Canada, USA & UK." maxW={500} />
+        {/* M3 — SUCCESS STORIES */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.02) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+          <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 48 }}>
+              <SectionBadge label="Proven Results" />
+              <SectionH2>Success <GradText>Stories</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 14, lineHeight: 1.7, maxWidth: 500, margin: "0 auto" }}>Real results for real businesses across Canada, USA & UK.</p>
+            </div>
             <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
               {CASES.map((c, i) => (
                 <button key={i} className={`ss-tab${story === i ? " act" : ""}`} onClick={() => setStory(i)}><span>{c.icon}</span>{c.industry}</button>
@@ -1441,23 +948,23 @@ export default function CRMHero() {
               <div style={{ padding: isMobile ? "20px" : "36px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20, flexWrap: "wrap" }}>
                   <div style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, fontSize: isMobile ? 24 : 26, display: "flex", alignItems: "center", justifyContent: "center", background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}` }}>{CASES[story].icon}</div>
-                  <span className="badge-sm" style={{ background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}`, color: CASES[story].tagClr, fontSize: isMobile ? 9 : 10 }}>{CASES[story].tag}</span>
+                  <span style={{ padding: isMobile ? "3px 12px" : "4px 14px", borderRadius: 100, fontSize: isMobile ? 10 : 12, fontWeight: 700, background: CASES[story].tagBg, border: `1px solid ${CASES[story].tagBd}`, color: CASES[story].tagClr, textTransform: "uppercase", letterSpacing: "0.08em" }}>{CASES[story].tag}</span>
                 </div>
                 <h3 style={{ color: "#fff", fontSize: isMobile ? "18px" : "22px", fontWeight: 800, marginBottom: isMobile ? 16 : 28, lineHeight: 1.3 }}>{CASES[story].title}</h3>
                 <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 20, marginBottom: isMobile ? 24 : 32 }}>
                   {[{ label: "Challenge", text: CASES[story].challenge, icon: "⚠️" }, { label: "Solution", text: CASES[story].solution, icon: "💡" }].map(col => (
                     <div key={col.label} style={{ padding: isMobile ? "14px" : "20px", borderRadius: 14, background: "rgba(255,255,255,.03)", border: "1px solid rgba(255,255,255,.07)" }}>
-                      <p className="teal" style={{ fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>{col.icon} {col.label}</p>
+                      <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>{col.icon} {col.label}</p>
                       <p style={{ color: "rgba(255,255,255,.6)", fontSize: isMobile ? 12 : 14, lineHeight: 1.7, margin: 0 }}>{col.text}</p>
                     </div>
                   ))}
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: isMobile ? 10 : 14 }}>
                   {CASES[story].metrics.map((m, i) => (
-                    <div key={i} className="metric-card" style={{ textAlign: "center", padding: isMobile ? "12px 8px" : "18px 14px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)" }}>
+                    <div key={i} style={{ textAlign: "center", padding: isMobile ? "12px 8px" : "18px 14px", borderRadius: 14, border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)" }}>
                       <div style={{ fontSize: isMobile ? 18 : 22, marginBottom: 6 }}>{m.i}</div>
-                      <div className="metric-card__val" style={{ fontSize: isMobile ? "20px" : "26px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,var(--teal))`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{m.v}</div>
-                      <div className="metric-card__label" style={{ fontSize: isMobile ? 10 : 11, color: "rgba(255,255,255,0.45)" }}>{m.l}</div>
+                      <div style={{ fontSize: isMobile ? "20px" : "26px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{m.v}</div>
+                      <div style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 10 : 11 }}>{m.l}</div>
                     </div>
                   ))}
                 </div>
@@ -1465,92 +972,87 @@ export default function CRMHero() {
             </div>
             <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 24 }}>
               {CASES.map((_, i) => (
-                <button key={i} onClick={() => setStory(i)} style={{ width: story === i ? 24 : 8, height: 8, borderRadius: 100, background: story === i ? "var(--teal)" : "rgba(255,255,255,.2)", border: "none", cursor: "pointer", transition: "all .3s ease" }} />
+                <button key={i} onClick={() => setStory(i)} style={{ width: story === i ? 24 : 8, height: 8, borderRadius: 100, background: story === i ? T : "rgba(255,255,255,.2)", border: "none", cursor: "pointer", transition: "all .3s ease" }} />
               ))}
             </div>
-            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 44 }}>
-              <Link href="/case-studies" className="btn-teal">View All Case Studies →</Link>
-            </div>
+            {/* <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 44 }}>
+              <Link href="/case-studies" style={btnT}>View All Case Studies →</Link>
+            </div> */}
           </div>
         </section>
 
-        {/* M5 — SERVICES */}
-        <section className="sec sec-grad-n1n2-n1" style={{ padding: getSectionPadding() }}>
-          <div className="bg-grid" />
-          <div className="sec-content">
-            <SectionHeader badge="What We Build" title={<>CRM Services <GradText>We Offer</GradText></>} sub="A comprehensive lineup of CRM and digital solutions for clients across Canada, USA & UK." maxW={580} />
+        {/* M4 — SERVICES */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 60%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 36 : 48 }}>
+              <SectionBadge label="What We Build" />
+              <SectionH2>CRM DEVELOPMENT Services <GradText>We Offer</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 14, lineHeight: 1.75, maxWidth: 580, margin: "0 auto" }}>A comprehensive lineup of CRM solutions for clients across Canada, USA & UK.</p>
+            </div>
             <div className="svc-grid">
               {SERVICES.map((s, i) => (
-                <Link key={s.title} href={`/services/${s.slug}`} style={{ textDecoration: "none" }}>
+                <Link key={s.title} href={``} style={{ textDecoration: "none" }}>
                   <div className="svc-card">
                     <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
-                      <div className="svc-card__icon">{s.icon}</div>
-                      <span className="svc-card__tag">{s.tag}</span>
+                      <div style={{ width: isMobile ? 48 : 52, height: isMobile ? 48 : 52, borderRadius: 14, background: "rgba(0,201,167,0.1)", border: "1px solid rgba(0,201,167,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 22 : 24, flexShrink: 0 }}>{s.icon}</div>
+                      <span style={{ padding: "3px 10px", borderRadius: 100, fontSize: isMobile ? 9 : 10.5, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: T, background: "rgba(0,201,167,0.08)", border: "1px solid rgba(0,201,167,0.18)" }}>{s.tag}</span>
                     </div>
-                    <h3 className="svc-card__title">{s.title}</h3>
-                    <p className="svc-card__desc">{s.desc}</p>
-                    <span className="svc-card__link">Learn More <span>→</span></span>
+                    <h3 style={{ fontSize: isMobile ? "15px" : "17px", fontWeight: 700, color: "#fff", lineHeight: 1.3, margin: 0 }}>{s.title}</h3>
+                    <p style={{ fontSize: isMobile ? "12px" : "13.5px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, margin: 0 }}>{s.desc}</p>
+                    {/* <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: T, fontSize: isMobile ? "12px" : "13px", fontWeight: 600, marginTop: "auto" }}>Learn More →</span> */}
                   </div>
                 </Link>
               ))}
             </div>
-            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
-              <Link href="/services" className="btn-teal">View All Services →</Link>
-            </div>
+            {/* <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
+              <Link href="/services" style={btnT}>View All Services →</Link>
+            </div> */}
           </div>
         </section>
 
-        {/* M6 — ACCORDION */}
-        <section className="sec sec-mid" style={{ padding: getSectionPadding() }}>
-          <div className="sec-content">
-            <SectionHeader badge="CRM Capabilities" title={<>A Good CRM Always <GradText>Allows You to Do More</GradText></>} sub="Explore the key capabilities that make our CRM solutions stand out for businesses in Canada, USA & UK." maxW={520} />
-            <div className="two-col">
-              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-                {ACCORDION_L.map((item, i) => <AccItem key={item.title} item={item} open={accL === i} toggle={() => setAccL(accL === i ? null : i)} isMobile={isMobile} />)}
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
-                {ACCORDION_R.map((item, i) => <AccItem key={item.title} item={item} open={accR === i} toggle={() => setAccR(accR === i ? null : i)} isMobile={isMobile} />)}
-              </div>
+        {/* M5 — KEY BENEFITS */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0, backgroundImage: "linear-gradient(rgba(0,201,167,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.025) 1px,transparent 1px)", backgroundSize: "56px 56px" }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 36 : 48 }}>
+              <SectionBadge label="Why It Matters" />
+              <SectionH2>Key Benefits of <GradText>CRM DEVELOPMENT</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 14, lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Here's what you gain with advanced, next-gen CRM development services.</p>
             </div>
-          </div>
-        </section>
-
-        {/* M7 — KEY BENEFITS */}
-        <section className="sec sec-grad-down" style={{ padding: getSectionPadding() }}>
-          <div className="bg-grid" />
-          <div className="sec-content">
-            <SectionHeader badge="Why It Matters" title={<>Key Benefits of <GradText>CRM Development</GradText></>} sub="Here's what you gain with advanced, next-gen CRM development services." />
-            <div className="kb-grid">
+            <div className="kb-grid" style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? 16 : 20 }}>
               {BENEFITS.map((b, i) => (
-                <div key={i} className="kb-card">
-                  <div className="kb-card__num">{b.num}</div>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}><span style={{ fontSize: isMobile ? 20 : 22 }}>{b.icon}</span><h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>{b.title}</h3></div>
-                    <p style={{ color: "rgba(255,255,255,.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: "0 0 12px" }}>{b.desc}</p>
-                    <div className="badge-row">
-                      {b.tags.map(tag => <span key={tag} className="badge" style={{ fontSize: isMobile ? 9 : 10.5 }}>{tag}</span>)}
-                    </div>
+                <div key={i} className="wcu-stat" style={{ padding: isMobile ? "20px" : "28px 20px" }}>
+                  <div style={{ fontSize: isMobile ? "32px" : "40px", marginBottom: 10 }}>{b.icon}</div>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, marginBottom: 8 }}>{b.title}</h3>
+                  <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: "0 0 12px" }}>{b.desc}</p>
+                  <div className="badge-row" style={{ justifyContent: "center" }}>
+                    {b.tags.map(tag => <span key={tag} className="badge" style={{ fontSize: isMobile ? 9 : 10.5 }}>{tag}</span>)}
                   </div>
                 </div>
               ))}
             </div>
-            <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
-              <Link href="/contact" className="btn-teal">Start Your CRM Journey →</Link>
-            </div>
+            {/* <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 48 }}>
+              <Link href="/contact" style={btnT}>Start Your CRM Journey →</Link>
+            </div> */}
           </div>
         </section>
 
-        {/* M8 — PLATFORMS */}
-        <section className="sec sec-mid" style={{ padding: getSectionPadding() }}>
-          <div className="bg-grid" />
-          <div className="sec-content">
-            <SectionHeader badge="Our Tech Stack" title={<>Leading CRM Platform Tools <GradText>That We Use</GradText></>} sub="Here is a closer look at some of the tools we leverage for the best possible business outcomes." maxW={560} />
+        {/* M6 — PLATFORM TOOLS */}
+        <section style={{ padding: getSectionPadding(), background: N1, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", width: isMobile ? 400 : 600, height: isMobile ? 300 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 36 : 48 }}>
+              <SectionBadge label="Our Tech Stack" />
+              <SectionH2>Leading Platform Tools <GradText>That We Use</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 14, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>Here is a closer look at some of the tools we leverage for the best possible business outcomes.</p>
+            </div>
             <div className="pt-grid">
               {TOOLS.map((tool, i) => (
                 <div key={i} className="pt-card" style={{ background: tool.bg, border: `1px solid ${tool.bd}` }}>
                   <div className="pt-card__icon" style={{ border: `1px solid ${tool.bd}` }}>{tool.icon}</div>
-                  <h3 className="pt-card__name">{tool.name}</h3>
-                  <p className="pt-card__desc">{tool.desc}</p>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 700, marginBottom: 6 }}>{tool.name}</h3>
+                  <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "11px" : "12.5px", lineHeight: 1.6, margin: 0 }}>{tool.purpose}</p>
                   {tool.bespoke && <div className="badge" style={{ marginTop: 10, fontSize: isMobile ? 9 : 10.5 }}>⚡ Fully Bespoke</div>}
                 </div>
               ))}
@@ -1558,13 +1060,17 @@ export default function CRMHero() {
           </div>
         </section>
 
-        {/* M9 — HIRE */}
-        <section className="sec sec-grad-n0n1" style={{ padding: getSectionPadding() }}>
-          <div className="sec-content">
-            <SectionHeader badge="Hire Developers" title={<>Hire CRM Developers <GradText>Tailored to Your Needs</GradText></>} sub="Whether you're an enterprise, agency, or start-up — we have the right CRM developer for your exact challenge." maxW={560} />
+        {/* M7 — HIRE DEVELOPERS */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 36 : 48 }}>
+              <SectionBadge label="Hire Developers" />
+              <SectionH2>Hire Developers <GradText>Tailored to Your Needs</GradText></SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? 13 : 14, lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>Whether you're an enterprise, start-up, or agency — we have the right CRM developer for your exact challenge.</p>
+            </div>
             <div className="two-col" style={{ marginBottom: isMobile ? 12 : 16 }}>
-              <p className="teal" style={{ fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>By Business Type</p>
-              <p className="teal" style={{ fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>By CRM Type</p>
+              <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Left</p>
+              <p style={{ color: T, fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Right</p>
             </div>
             <div className="two-col">
               <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
@@ -1574,115 +1080,75 @@ export default function CRMHero() {
                 {HIRE_RIGHT.map((item, i) => <AccItem key={item.title} item={item} open={hireR === i} toggle={() => setHireR(hireR === i ? null : i)} isMobile={isMobile} />)}
               </div>
             </div>
-            <div className="btn-row" style={{ marginTop: isMobile ? 32 : 48, justifyContent: "center" }}>
-              <Link href="/hire-developers" className="btn-teal">📅 Hire a CRM Developer</Link>
-              <Link href="/pricing" className="btn-outline">View Pricing →</Link>
+            <div style={{ display: "flex", gap: isMobile ? 12 : 16, marginTop: isMobile ? 32 : 48, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link href="/hire-developers" style={btnT}>📅 Hire a CRM Developer</Link>
+              <Link href="/pricing" style={{ ...btnT, background: "transparent", border: "1.5px solid rgba(0,201,167,0.35)", color: T }}>View Pricing →</Link>
             </div>
           </div>
         </section>
 
-        {/* M10 — AI CRM (Video Removed) */}
-        <section className="sec sec-grad-up" style={{ padding: getSectionPadding() }}>
-          <div className="sec-content">
+        {/* M8 — AI-POWERED SOLUTIONS */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "0%", left: "50%", transform: "translateX(-50%)", width: isMobile ? 600 : 700, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
             <div style={{ marginBottom: isMobile ? 32 : 40, maxWidth: 620, marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
-              <div className="section-badge"><span className="section-badge__dot" /><span className="section-badge__text">AI-Powered</span></div>
-              <h2 className="section-h2">Leverage <GradText>AI-Powered CRM</GradText> Solutions</h2>
-              <p style={{ color: "rgba(255,255,255,.5)", fontSize: isMobile ? 14 : 15, lineHeight: 1.8 }}>Our AI-backed CRM solutions aim at simplification and higher efficiency for your workflows.</p>
+              <SectionBadge label="AI-Powered" />
+              <SectionH2>Leverage <GradText>AI-Powered CRM DEVELOPMENT</GradText> Solutions</SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 14, lineHeight: 1.8 }}>Our AI-backed CRM solutions aim at simplification and higher efficiency for your workflows.</p>
             </div>
-            <div className="two-col-wide">
-              <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 12 : 16 }}>
-                {AI_FEATS.map((f, i) => (
-                  <div key={i} className="ai-card" style={{ background: f.bg, border: `1px solid ${f.bd}` }}>
-                    <div className="ai-card__icon" style={{ background: f.bg, border: `1px solid ${f.bd}` }}>{f.icon}</div>
-                    <div>
-                      <h3 style={{ color: "#fff", fontSize: isMobile ? "15px" : "17px", fontWeight: 700, marginBottom: 6, lineHeight: 1.3 }}>{f.title}</h3>
-                      <p style={{ color: "rgba(255,255,255,.52)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.7, margin: 0 }}>{f.desc}</p>
-                    </div>
-                  </div>
-                ))}
-                <Link href="/ai-solutions" className="btn-teal" style={{ marginTop: 8, alignSelf: "flex-start" }}>🤖 Explore AI Solutions →</Link>
-              </div>
-
-              {/* AI Visual Panel */}
-              <div style={{ position: "relative", borderRadius: 24, overflow: "hidden", background: "linear-gradient(135deg,#0a1f38,#061425)", border: "1px solid rgba(0,201,167,.15)", minHeight: isMobile ? "auto" : 460, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: isMobile ? "20px" : "36px 32px" }}>
-                <div style={{ position: "absolute", left: 0, right: 0, height: 1, background: "linear-gradient(90deg,transparent,rgba(0,201,167,.5),transparent)", animation: "aiScan 3s linear infinite" }} />
-                <div style={{ position: "absolute", top: "5%", right: "5%", width: isMobile ? 120 : 180, height: isMobile ? 120 : 180, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,.12) 0%,transparent 70%)", animation: "aiPulse 4s ease-in-out infinite", pointerEvents: "none" }} />
-                <div style={{ position: "relative", zIndex: 2 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: isMobile ? 16 : 24 }}>
-                    <div className="live-dot" />
-                    <span style={{ color: "rgba(255,255,255,.5)", fontSize: isMobile ? 11 : 12, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>AI Engine — Live</span>
-                  </div>
-                  {[{ label: "Analysing customer data", val: "100%", color: "var(--teal)" }, { label: "Lead scoring model", val: "94%", color: "#818cf8" }, { label: "Chatbot automation", val: "87%", color: "var(--teal)" }, { label: "Pipeline prediction", val: "91%", color: "#f59e0b" }].map((row, i) => (
-                    <div key={i} style={{ marginBottom: isMobile ? 10 : 16 }}>
-                      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
-                        <span style={{ color: "rgba(255,255,255,.6)", fontSize: isMobile ? 11 : 12.5, fontWeight: 500 }}>{row.label}</span>
-                        <span style={{ color: row.color, fontSize: isMobile ? 11 : 12.5, fontWeight: 700 }}>{row.val}</span>
-                      </div>
-                      <div style={{ height: 4, borderRadius: 4, background: "rgba(255,255,255,.06)", overflow: "hidden" }}>
-                        <div style={{ height: "100%", borderRadius: 4, background: `linear-gradient(90deg,${row.color},${row.color}88)`, width: row.val }} />
-                      </div>
-                    </div>
-                  ))}
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)", gap: isMobile ? 16 : 20 }}>
+              {AI_FEATS.map((f, i) => (
+                <div key={i} style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 16, padding: isMobile ? "20px 16px" : "28px 20px", textAlign: "center" }}>
+                  <div style={{ fontSize: isMobile ? 30 : 36, marginBottom: isMobile ? 12 : 16 }}>{f.icon}</div>
+                  <h3 style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 700, marginBottom: 8 }}>{f.title}</h3>
+                  <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "11px" : "13px", lineHeight: 1.6, margin: 0 }}>{f.desc}</p>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: isMobile ? 8 : 12, position: "relative", zIndex: 2, marginTop: isMobile ? 16 : 0 }}>
-                  {[{ label: "Leads Scored", val: "2,847", icon: "🎯" }, { label: "Chats Automated", val: "1,203", icon: "💬" }, { label: "Accuracy", val: "96.4%", icon: "✅" }].map((m, i) => (
-                    <div key={i} style={{ background: "rgba(255,255,255,.04)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 12, padding: isMobile ? "10px 6px" : "14px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: isMobile ? 18 : 20, marginBottom: 4 }}>{m.icon}</div>
-                      <div style={{ color: "#fff", fontSize: isMobile ? "14px" : "16px", fontWeight: 800, marginBottom: 2 }}>{m.val}</div>
-                      <div style={{ color: "rgba(255,255,255,.4)", fontSize: isMobile ? 10 : 11, fontWeight: 500 }}>{m.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* M11 — CTA BANNER */}
+        {/* M9 — FULL-WIDTH CTA BANNER (Corrected: Single button, exact text) */}
         <section style={{ position: "relative", overflow: "hidden" }}>
-          <div style={{ background: "linear-gradient(135deg,#0055b3 0%,#0077cc 35%,#00a07a 65%,#00C9A7 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "50px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
-            <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 65%)", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 65%)", pointerEvents: "none" }} />
-            <div style={{ position: "absolute", inset: 0, pointerEvents: "none", backgroundImage: "linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px)", backgroundSize: "48px 48px" }} />
-            <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 760, margin: "0 auto" }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,.15)", border: "1px solid rgba(255,255,255,.3)", borderRadius: 100, padding: isMobile ? "5px 14px" : "6px 18px", marginBottom: 20 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "block" }} />
-                <span style={{ color: "#fff", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" }}>Get Started Today</span>
-              </div>
-              <h2 style={{ fontSize: isMobile ? "24px" : isTablet ? "36px" : "42px", fontWeight: 900, color: "#fff", lineHeight: 1.15, letterSpacing: "-0.02em", marginBottom: 16 }}>
-                Want CRM Solutions That Take Your<br />Business to the <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,.4)" }}>Next Level?</span>
+          <div style={{ background: "linear-gradient(135deg, #0055b3 0%, #0077cc 35%, #0055b3 100%)", backgroundSize: "300% 300%", animation: "ctaBgShift 8s ease infinite", padding: isMobile ? "60px 20px" : "80px 48px", textAlign: "center", position: "relative" }}>
+            <div style={{ position: "absolute", top: "-20%", left: "-5%", width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "absolute", bottom: "-20%", right: "-5%", width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 65%)", pointerEvents: "none" }} />
+            <div style={{ position: "relative", zIndex: 2, maxWidth: isMobile ? "100%" : 800, margin: "0 auto" }}>
+              <h2 style={{ fontSize: isMobile ? "clamp(22px, 6vw, 28px)" : isTablet ? "32px" : "clamp(36px, 4vw, 48px)", fontWeight: 800, color: "#fff", lineHeight: 1.2, letterSpacing: "-0.02em", marginBottom: 16 }}>
+                Want <span style={{ textDecoration: "underline", textDecorationColor: "rgba(255,255,255,0.4)" }}>CRM DEVELOPMENT solutions</span> that take your business to the next level?
               </h2>
-              <p style={{ color: "rgba(255,255,255,.82)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "17px", lineHeight: 1.75, marginBottom: isMobile ? 28 : 32 }}>Connect with NNC Digital today and let&apos;s build something extraordinary together.</p>
-              <div className="btn-row" style={{ justifyContent: "center" }}>
-                <Link href="/contact" className="btn-white">✦ Connect Now</Link>
-                <Link href="/book-consultation" className="btn-cta-outline">📅 Book a Free Call →</Link>
+              <p style={{ color: "rgba(255,255,255,0.9)", fontSize: isMobile ? "16px" : "18px", lineHeight: 1.6, marginBottom: isMobile ? 28 : 36, fontWeight: 500 }}>
+                Connect with NNC Digital today.
+              </p>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Link href="/contact" className="btn-white">Connect Now</Link>
               </div>
-              <p style={{ color: "rgba(255,255,255,.5)", fontSize: isMobile ? 11 : 13, marginTop: 20 }}>🇨🇦 Canada &nbsp;·&nbsp; 🇺🇸 USA &nbsp;·&nbsp; 🇬🇧 UK &nbsp;·&nbsp; 🇮🇳 India &nbsp;&nbsp;|&nbsp;&nbsp; hello@nncdigital.com</p>
             </div>
           </div>
         </section>
 
-        {/* M12 — WHY CHOOSE US (Video Removed) */}
-        <section className="sec sec-grad-down" style={{ padding: getSectionPadding() }}>
-          <div className="sec-content">
+        {/* M10 — WHY CHOOSE US (Video Removed) */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", top: "20%", right: "-5%", width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, borderRadius: "50%", background: "radial-gradient(circle,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
             <div className="two-col-wide">
               <div>
-                <div className="section-badge"><span className="section-badge__dot" /><span className="section-badge__text">Our Story</span></div>
-                <h2 className="section-h2">Why Choose Us as Your <GradText>CRM Development</GradText> Agency?</h2>
-                <p style={{ color: "rgba(255,255,255,.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: 16 }}>NNC Digital Solutions is backed by <strong style={{ color: "#fff" }}>Nakshatra Namaha Creations Pvt. Ltd.</strong> — one of Bangalore&apos;s most respected digital studios with <span className="teal" style={{ fontWeight: 600 }}>8+ years of experience</span> and <span className="teal" style={{ fontWeight: 600 }}>565+ projects delivered</span>.</p>
-                <p style={{ color: "rgba(255,255,255,.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: isMobile ? 24 : 32 }}>We launched NNC Digital as our international arm — bringing the same proven technical expertise to the Canadian, US, and UK markets with transparent pricing and long-term partnership.</p>
+                <SectionBadge label="Our Story" />
+                <SectionH2>Why Choose Us as Your <GradText>Partner?</GradText></SectionH2>
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: 16 }}>Backed by <span style={{ color: "#fff", fontWeight: 600 }}>Nakshatra Namaha Creations Pvt. Ltd.</span> — one of Bangalore&apos;s most respected digital studios with <span style={{ color: T, fontWeight: 600 }}>8+ years of experience</span> and <span style={{ color: T, fontWeight: 600 }}>565+ projects delivered</span>.</p>
+                <p style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8, marginBottom: isMobile ? 24 : 32 }}>We launched NNC Digital as our international arm — bringing the same proven technical expertise to the Canadian, US, and UK markets with dedicated client-facing teams, transparent pricing, and long-term partnership.</p>
                 <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 8 : 10, marginBottom: isMobile ? 24 : 36 }}>
                   {WCU_POINTS.map((p, i) => (
                     <div key={i} className="wcu-point">
                       <span style={{ fontSize: isMobile ? 16 : 18, flexShrink: 0 }}>{p.icon}</span>
-                      <span style={{ color: "rgba(255,255,255,.72)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{p.text}</span>
+                      <span style={{ color: "rgba(255,255,255,0.72)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{p.text}</span>
                     </div>
                   ))}
                 </div>
                 <div className="wcu-stats">
                   {WCU_STATS.map(st => (
                     <div key={st.l} className="wcu-stat">
-                      <div className="wcu-stat__val"><Counter to={st.n} sfx={st.s} /></div>
+                      <div style={{ fontSize: isMobile ? "18px" : "24px", fontWeight: 900, marginBottom: 4, background: `linear-gradient(135deg,#fff 30%,${T})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}><Counter to={st.n} sfx={st.s} /></div>
                       <div style={{ fontSize: isMobile ? 10 : 11, color: "rgba(255,255,255,.4)" }}>{st.l}</div>
                     </div>
                   ))}
@@ -1690,101 +1156,296 @@ export default function CRMHero() {
               </div>
               <div>
                 {/* Video removed - replaced with CTA card */}
-                <div className="card-teal" style={{ padding: isMobile ? "30px 20px" : "40px 30px", textAlign: "center" }}>
+                <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.15)", borderRadius: 24, padding: isMobile ? "30px 20px" : "40px 30px", textAlign: "center" }}>
                   <div style={{ fontSize: isMobile ? 48 : 64, marginBottom: 16 }}>💼</div>
                   <h3 style={{ color: "#fff", fontSize: isMobile ? "20px" : "24px", fontWeight: 800, marginBottom: 12 }}>Ready to Transform Your CRM?</h3>
                   <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? "14px" : "16px", lineHeight: 1.7, marginBottom: 24 }}>
                     Join 1500+ businesses that have streamlined their operations with our custom CRM solutions.
                   </p>
-                  <Link href="/contact" className="btn-teal" style={{ width: isMobile ? "100%" : "auto" }}>Get Started Today →</Link>
+                  <Link href="/contact" style={{ ...btnT, width: isMobile ? "100%" : "auto" }}>Get Started Today →</Link>
                 </div>
                 <div className="badge-row" style={{ marginTop: 20 }}>
                   {["🇨🇦 Canada", "🇺🇸 USA", "🇬🇧 UK", "🇮🇳 India"].map(b => (
-                    <span key={b} className="badge badge-soft" style={{ fontSize: isMobile ? 11 : 12.5, padding: isMobile ? "5px 10px" : "6px 14px" }}>{b}</span>
+                    <span key={b} className="badge" style={{ fontSize: isMobile ? 11 : 12.5, padding: isMobile ? "5px 10px" : "6px 14px" }}>{b}</span>
                   ))}
                 </div>
-                <div className="btn-row" style={{ marginTop: 20 }}>
-                  <Link href="/book-consultation" className="btn-teal" style={{ flex: 1 }}>📅 Book a Free Strategy Call</Link>
-                  <Link href="/portfolio" className="btn-outline" style={{ flex: 1 }}>Our Portfolio →</Link>
+                <div style={{
+                  display: "flex",
+                  gap: isMobile ? 10 : 12,
+                  marginTop: 20,
+                  justifyContent: "center",
+                  flexWrap: "wrap"
+                }}>
+                  <Link
+                    href="/book-consultation"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: isMobile ? "6px 16px" : "8px 20px",
+                      borderRadius: 30,
+                      border: "none",
+                      background: `linear-gradient(135deg,${T},${TD})`,
+                      color: "#000",
+                      fontWeight: 500,
+                      fontSize: isMobile ? "12px" : "13px",
+                      fontFamily: "'Poppins',sans-serif",
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                      width: "auto",
+                      minWidth: "100px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                      letterSpacing: "0.3px"
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                      e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,201,167,0.25)";
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateY(0)";
+                      e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+                    }}
+                  >
+                    📅 Book a Strategy Call
+                  </Link>
+                  {/* <Link href="/portfolio" style={{ ...btnT, background: "transparent", border: "1.5px solid rgba(0,201,167,0.35)", color: T, flex: 1 }}>Our Portfolio →</Link> */}
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* M13 — GLOBAL PRESENCE */}
-        <section className="sec sec-grad-n0n1" style={{ padding: getSectionPadding() }}>
-          <div className="sec-content-1180">
-            <SectionHeader badge="Our Reach" title={<>Global <GradText>Presence</GradText></>} sub="Client-facing offices in North America & the UK. Engineering headquarters in Bangalore, India." maxW={500} />
+        {/* MODULE 11 — GLOBAL PRESENCE — Dark blue tabs (Enhanced Design) */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(145deg, ${N0} 0%, #041628 50%, ${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+
+          {/* Background decorative elements */}
+          <div style={{ position: "absolute", top: "-10%", right: "-5%", width: "300px", height: "300px", borderRadius: "50%", background: `radial-gradient(circle, ${T}15 0%, transparent 70%)`, pointerEvents: "none", zIndex: 0 }} />
+          <div style={{ position: "absolute", bottom: "-10%", left: "-5%", width: "250px", height: "250px", borderRadius: "50%", background: `radial-gradient(circle, ${T}10 0%, transparent 70%)`, pointerEvents: "none", zIndex: 0 }} />
+
+          {/* Grid overlay */}
+          <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
+
+          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+
+
+            {/* Heading with gradient and underline */}
+            <h2 style={{
+              fontSize: "clamp(32px, 5vw, 48px)",
+              fontWeight: 800,
+              color: "#fff",
+              textAlign: "center",
+              margin: "0 0 20px 0",
+              letterSpacing: "-0.02em"
+            }}>
+              Global <span style={{ background: `linear-gradient(135deg, ${T}, #fff)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Presence</span>
+            </h2>
+            <div style={{ width: "120px", height: "4px", background: `linear-gradient(90deg, transparent, ${T}, transparent)`, margin: "0 auto 40px", borderRadius: "2px" }} />
+
+            {/* Tabs with enhanced styling */}
             <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
-              {[{ key: "int", label: "🌍 North America & UK" }, { key: "india", label: "🇮🇳 India (Engineering HQ)" }].map(t => (
-                <button key={t.key} className={`gp-tab${gTab === t.key ? " act" : ""}`} onClick={() => setGTab(t.key as "int" | "india")}>{t.label}</button>
+              {[
+                { key: "int", label: "North America & UK", icon: "🌎" },
+                { key: "india", label: "India (HQ)", icon: "🇮🇳" }
+              ].map(t => (
+                <button
+                  key={t.key}
+                  className={`gp-tab${gTab === t.key ? " act" : ""}`}
+                  onClick={() => setGTab(t.key as "int" | "india")}
+                  style={{
+                    padding: isMobile ? "12px 24px" : "14px 32px",
+                    borderRadius: "50px",
+                    border: "none",
+                    background: gTab === t.key ? `linear-gradient(135deg, ${T}, ${TD})` : "rgba(255,255,255,0.05)",
+                    color: gTab === t.key ? "#000" : "#fff",
+                    fontSize: isMobile ? 14 : 16,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                    boxShadow: gTab === t.key ? `0 8px 20px ${T}40` : "none",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    backdropFilter: "blur(10px)"
+                  }}
+                  onMouseEnter={e => {
+                    if (gTab !== t.key) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+                      e.currentTarget.style.transform = "translateY(-2px)";
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (gTab !== t.key) {
+                      e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+                      e.currentTarget.style.transform = "translateY(0)";
+                    }
+                  }}
+                >
+                  <span>{t.icon}</span> {t.label}
+                </button>
               ))}
             </div>
+
+            {/* Content Cards */}
             {gTab === "int" && (
-              <div>
-                <div className="gp-offices" style={{ marginBottom: 24 }}>
-                  {INT_OFFICES.map((o, i) => (
-                    <div key={i} className="gp-card">
-                      <div style={{ fontSize: isMobile ? 32 : 36, marginBottom: isMobile ? 10 : 14 }}>{o.flag}</div>
-                      <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, marginBottom: 4 }}>{o.city}</h3>
-                      <p className="teal" style={{ fontSize: isMobile ? 10 : 12, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: isMobile ? 12 : 16 }}>{o.tz}</p>
-                      <Link href={`tel:${o.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,.7)", fontSize: isMobile ? 12 : 14, fontWeight: 600, textDecoration: "none", marginBottom: 8 }}>📞 {o.phone}</Link>
-                      <Link href={`mailto:${o.email}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,.5)", fontSize: isMobile ? 11 : 13, textDecoration: "none" }}>✉️ {o.email}</Link>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ borderRadius: 14, padding: isMobile ? "16px 20px" : "20px 28px", background: "rgba(0,201,167,.05)", border: "1px solid rgba(0,201,167,.15)", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}><div className="live-dot" /><span style={{ color: "rgba(255,255,255,.6)", fontSize: isMobile ? 12 : 14, fontWeight: 500 }}>Available Mon–Fri, 9am–6pm in your time zone</span></div>
-                  <Link href="mailto:hello@nncdigital.com" className="h-teal teal" style={{ fontSize: isMobile ? 12 : 14, fontWeight: 700, textDecoration: "none" }}>hello@nncdigital.com →</Link>
-                </div>
-              </div>
-            )}
-            {gTab === "india" && (
-              <div>
-                <div style={{ borderRadius: 20, padding: isMobile ? "24px 20px" : "36px", background: "rgba(255,255,255,.02)", border: "1px solid rgba(255,255,255,.08)", marginBottom: 24 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 10 : 14, marginBottom: isMobile ? 20 : 24, flexWrap: "wrap" }}>
-                    <span style={{ fontSize: isMobile ? 28 : 32 }}>🇮🇳</span>
-                    <div>
-                      <h3 style={{ color: "#fff", fontSize: isMobile ? "16px" : "18px", fontWeight: 800, margin: 0 }}>Nakshatra Namaha Creations Pvt. Ltd.</h3>
-                      <p style={{ color: "rgba(255,255,255,.4)", fontSize: isMobile ? 12 : 13, margin: "4px 0 0" }}>Engineering &amp; Delivery HQ — Bangalore, India</p>
-                    </div>
-                  </div>
-                  <div className="gp-ind-grid">
-                    {INDIA_OFFICES.map((o, i) => (
-                      <div key={i} className="gp-ind">
-                        <span style={{ fontSize: isMobile ? 20 : 22 }}>🇮🇳</span>
-                        <div>
-                          <p style={{ color: "#fff", fontSize: isMobile ? "13px" : "14px", fontWeight: 700, margin: 0 }}>{o.city}</p>
-                          <p style={{ color: "rgba(255,255,255,.38)", fontSize: isMobile ? 10 : 12, margin: "2px 0 0" }}>{o.note}</p>
-                          {o.phone && <p className="teal" style={{ fontSize: isMobile ? 11 : 12.5, fontWeight: 600, margin: "4px 0 0" }}>{o.phone}</p>}
-                        </div>
+              <div style={{
+                background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
+                borderRadius: 24,
+                padding: isMobile ? 24 : 36,
+                border: `1px solid ${T}20`,
+                backdropFilter: "blur(10px)",
+                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.5)"
+              }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  {[
+                    { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
+                    { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
+                    { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
+                  ].map((item, i) => (
+                    <div key={i} style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 16,
+                      padding: "16px",
+                      background: "rgba(255,255,255,0.02)",
+                      borderRadius: 16,
+                      border: "1px solid rgba(255,255,255,0.05)",
+                      transition: "all 0.3s ease",
+                      cursor: "default"
+                    }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.transform = "translateX(8px)";
+                        e.currentTarget.style.background = `${T}08`;
+                        e.currentTarget.style.borderColor = `${T}40`;
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.transform = "translateX(0)";
+                        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+                      }}>
+                      <div style={{
+                        width: 48,
+                        height: 48,
+                        borderRadius: "14px",
+                        background: `${T}15`,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: 24
+                      }}>
+                        {item.flag}
                       </div>
-                    ))}
-                  </div>
-                  <div style={{ marginTop: isMobile ? 16 : 24, paddingTop: isMobile ? 16 : 20, borderTop: "1px solid rgba(255,255,255,.07)" }}>
-                    <p style={{ color: "rgba(255,255,255,.35)", fontSize: isMobile ? 12 : 13, margin: 0 }}>✉️ info@nakshatranamahacreations.com</p>
-                  </div>
-                </div>
-                <div className="gp-india-stats">
-                  {[{ n: "8+", l: "Years Active" }, { n: "565+", l: "Projects" }, { n: "100+", l: "Team Members" }, { n: "4", l: "India Offices" }].map((s, i) => (
-                    <div key={i} style={{ textAlign: "center", padding: isMobile ? "14px 8px" : "20px 12px", borderRadius: 14, background: "rgba(0,201,167,.06)", border: "1px solid rgba(0,201,167,.15)", transition: "transform .25s,background .25s", cursor: "default" }}
-                      onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "translateY(-4px)"; el.style.background = "rgba(0,201,167,.12)"; }}
-                      onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.background = "rgba(0,201,167,.06)"; }}>
-                      <p className="teal" style={{ fontSize: isMobile ? "22px" : "26px", fontWeight: 900, margin: 0 }}>{s.n}</p>
-                      <p style={{ fontSize: isMobile ? 9 : 11, color: "rgba(255,255,255,.4)", margin: "4px 0 0", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.l}</p>
+                      <div style={{ flex: 1 }}>
+                        <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>
+                          {item.city}
+                        </p>
+                        <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
+                          {item.phone}
+                        </p>
+                      </div>
+                      <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
+
+            {gTab === "india" && (
+              <div style={{
+                background: `linear-gradient(145deg, ${T}05, ${T}02)`,
+                borderRadius: 24,
+                padding: isMobile ? 24 : 36,
+                border: `1px solid ${T}30`,
+                backdropFilter: "blur(10px)",
+                boxShadow: `0 20px 40px -15px ${T}20`
+              }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                  </div>
+
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                  </div>
+
+                  <div style={{
+                    marginTop: 20,
+                    padding: "20px",
+                    background: `${T}08`,
+                    borderRadius: 16,
+                    border: `1px dashed ${T}40`,
+                    textAlign: "center"
+                  }}>
+                    <span style={{ color: T, fontSize: isMobile ? 14 : 16, fontWeight: 600, letterSpacing: "0.5px" }}>
+                      ✉ info@nakshatranamahacreations.com
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Decorative bottom dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
+              {[1, 2, 3, 4, 5].map(i => (
+                <div key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: T, opacity: 0.2 + (i * 0.1) }} />
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* M14 — FAQ */}
-        <section className="sec sec-grad-down" style={{ padding: getSectionPadding() }}>
-          <div className="sec-content-sm">
-            <SectionHeader badge="FAQs" title={<>Frequently Asked <GradText>Questions</GradText></>} sub="Everything you need to know about custom CRM development for businesses in Canada, USA & UK." />
+
+
+        {/* M12 — FAQ (Corrected: 5 questions as per document) */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
+              <SectionBadge label="FAQs" />
+              <SectionH2>FAQs</SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 520, margin: "0 auto" }}>Everything you need to know about custom CRM development for businesses in Canada, USA & UK.</p>
+            </div>
             <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 10 : 12 }}>
               {FAQS.map((f, i) => (
                 <div key={i} className={`faq-item${faq === i ? " fopen" : ""}`} onClick={() => setFaq(faq === i ? null : i)}>
@@ -1802,81 +1463,89 @@ export default function CRMHero() {
               ))}
             </div>
             <div style={{ textAlign: "center", marginTop: isMobile ? 32 : 40 }}>
-              <p style={{ color: "rgba(255,255,255,.4)", fontSize: isMobile ? 12 : 14, marginBottom: 16 }}>Still have questions? We respond within 24 hours.</p>
-              <Link href="/contact" className="btn-teal">Ask Us Anything →</Link>
+              <p style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 12 : 14, marginBottom: 16 }}>Still have questions? We respond within 24 hours.</p>
+              <Link href="/contact" style={btnT}>Ask Us Anything →</Link>
             </div>
           </div>
         </section>
 
-        {/* M15 — CONTACT FORM */}
-        <section className="sec sec-grad-up" style={{ padding: getSectionPadding(), background: "linear-gradient(180deg,var(--n2) 0%,var(--n0) 100%)" }}>
-          <div className="sec-content-1180">
-            <SectionHeader badge="Get In Touch" title={<>Ready to Build <GradText>Next-Level</GradText> Custom Digital Solutions?</>} sub="Tell us about your project. We respond within 24 hours with a free consultation and honest advice." maxW={540} />
+        {/* M13 — CONTACT FORM (Corrected: "Name" field, exact heading) */}
+        <section style={{ padding: getSectionPadding(), background: `linear-gradient(180deg,${N2} 0%,${N0} 100%)`, position: "relative", overflow: "hidden" }}>
+          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 32 : 40 }}>
+              <SectionBadge label="Get In Touch" />
+              <SectionH2>Ready to Build <GradText>Next-Level</GradText> Custom Digital Solutions?</SectionH2>
+              <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 540, margin: "0 auto" }}>Tell us about your project. We respond within 24 hours with a free consultation and honest advice.</p>
+            </div>
             <div className="cf-grid">
-              <div style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 20, padding: isMobile ? "20px" : "36px" }}>
+              <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: isMobile ? "20px" : "36px" }}>
                 {cSubmitted ? (
                   <div style={{ textAlign: "center", padding: isMobile ? "20px 0" : "40px 0" }}>
                     <div style={{ fontSize: isMobile ? 48 : 56, marginBottom: 16 }}>✅</div>
                     <h3 style={{ color: "#fff", fontSize: isMobile ? 18 : 22, fontWeight: 800, marginBottom: 8 }}>Message Sent!</h3>
-                    <p style={{ color: "rgba(255,255,255,.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, marginBottom: 20 }}>Thank you — we&apos;ll respond within 24 hours with practical advice.</p>
+                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 13 : 15, lineHeight: 1.7, marginBottom: 20 }}>Thank you — we&apos;ll respond within 24 hours with practical advice.</p>
                     <Link href="/crm-development">
-                      <button onClick={() => { setCSubmitted(false); setCForm({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "", }); }} className="btn-teal" style={{ minWidth: "auto", padding: isMobile ? "10px 22px" : "12px 28px", fontSize: isMobile ? "13px" : "14px" }}>Send Another →</button>
+                      <button onClick={() => { setCSubmitted(false); setCForm({ name: "", phone: "", dialCode: "+1", email: "", service: "", project: "", }); }} style={{ ...btnT, minWidth: "auto", padding: isMobile ? "10px 22px" : "12px 28px", fontSize: isMobile ? "13px" : "14px" }}>Send Another →</button>
                     </Link>
                   </div>
                 ) : (
                   <form onSubmit={handleCSubmit}>
                     <div className="cf-name" style={{ marginBottom: isMobile ? 12 : 16 }}>
-                      <div><label className="label-upper-lg">Full Name *</label><input className="fi fi-lg" required placeholder="Jane Smith" value={cForm.name} onChange={e => setCF("name", e.target.value)} /></div>
+                      <div><p style={{ fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Name *</p><input className="fi" style={iSLg} required placeholder="Jane Smith" value={cForm.name} onChange={e => setCF("name", e.target.value)} /></div>
                       <div>
-                        <label className="label-upper-lg">Phone</label>
+                        <p style={{ fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Phone</p>
                         <div className="phone-row">
-                          <select className="fi fi-lg fi-dial-lg fi-select" style={{ width: isMobile ? "100%" : "90px" }} value={cForm.dialCode} onChange={e => setCF("dialCode", e.target.value)}>
+                          <select className="fi" style={{ width: isMobile ? "100%" : "90px", padding: isMobile ? "12px 14px" : "13px 8px" }} value={cForm.dialCode} onChange={e => setCF("dialCode", e.target.value)}>
                             {DIAL_CODES.map((d, i) => <option key={i} value={d.code}>{d.flag} {d.code}</option>)}
                           </select>
-                          <input className="fi fi-lg" type="tel" placeholder="647 XXX XXXX" value={cForm.phone} onChange={e => setCF("phone", e.target.value)} />
+                          <input className="fi" style={iSLg} type="tel" placeholder="647 XXX XXXX" value={cForm.phone} onChange={e => setCF("phone", e.target.value)} />
                         </div>
                       </div>
                     </div>
-                    <div style={{ marginBottom: isMobile ? 12 : 16 }}><label className="label-upper-lg">Business Email *</label><input className="fi fi-lg" required type="email" placeholder="jane@yourcompany.com" value={cForm.email} onChange={e => setCF("email", e.target.value)} /></div>
+                    <div style={{ marginBottom: isMobile ? 12 : 16 }}><p style={{ fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Business Email *</p><input className="fi" style={iSLg} required type="email" placeholder="jane@yourcompany.com" value={cForm.email} onChange={e => setCF("email", e.target.value)} /></div>
                     <div style={{ marginBottom: isMobile ? 12 : 16 }}>
-                      <label className="label-upper-lg">Service of Interest</label>
-                      <select className="fi fi-lg fi-select" value={cForm.service} onChange={e => setCF("service", e.target.value)}>
+                      <p style={{ fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Service of Interest</p>
+                      <select className="fi" style={{ ...iSLg, cursor: "pointer" }} value={cForm.service} onChange={e => setCF("service", e.target.value)}>
                         <option value="">Select a service...</option>
                         {SERVICES_LIST.map(s => <option key={s} value={s}>{s}</option>)}
                       </select>
                     </div>
-                    <div style={{ marginBottom: 20 }}><label className="label-upper-lg">Project Description</label><textarea className="fi fi-lg fi-textarea-lg" placeholder="Briefly describe your project, goals, and timeline..." value={cForm.project} onChange={e => setCF("project", e.target.value)} /></div>
-                    <button className="btn-teal" type="submit" disabled={cLoading} style={{ width: "100%", opacity: cLoading ? .6 : 1, cursor: cLoading ? "wait" : "pointer" }}>{cLoading ? "Sending..." : "Submit — Get Free Consultation →"}</button>
-                    <p style={{ color: "rgba(255,255,255,.3)", fontSize: isMobile ? 10 : 11.5, textAlign: "center", marginTop: 12 }}>🔒 Your information is 100% secure and never shared.</p>
+                    <div style={{ marginBottom: 20 }}><p style={{ fontSize: isMobile ? 11 : 12.5, fontWeight: 600, color: "rgba(255,255,255,0.5)", marginBottom: 5, textTransform: "uppercase", letterSpacing: "0.04em" }}>Project Description</p><textarea className="fi" style={{ ...iSLg, minHeight: isMobile ? 80 : 110, resize: "vertical" }} placeholder="Briefly describe your project, goals, and timeline..." value={cForm.project} onChange={e => setCF("project", e.target.value)} /></div>
+                    <button className="btn-teal" type="submit" disabled={cLoading} style={{ width: "100%", padding: "15px", opacity: cLoading ? .6 : 1, cursor: cLoading ? "wait" : "pointer" }}>{cLoading ? "Sending..." : "Submit — Get Free Consultation →"}</button>
+                    <p style={{ color: "rgba(255,255,255,0.3)", fontSize: isMobile ? 10 : 11.5, textAlign: "center", marginTop: 12 }}>🔒 Your information is 100% secure and never shared.</p>
                   </form>
                 )}
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 16 : 20 }}>
-                <div className="card-teal" style={{ padding: isMobile ? "20px" : "28px" }}>
+                <div style={{ background: "rgba(0,201,167,0.05)", border: "1px solid rgba(0,201,167,0.18)", borderRadius: 18, padding: isMobile ? "20px" : "28px" }}>
                   <h3 style={{ color: "#fff", fontSize: isMobile ? "15px" : "16px", fontWeight: 800, marginBottom: isMobile ? 14 : 18 }}>What Happens After You Submit?</h3>
                   {[{ s: "1", text: "We review your project within a few hours — no bots." }, { s: "2", text: "A senior consultant calls you within 24 hours." }, { s: "3", text: "We send a free scoping document with timeline & cost." }, { s: "4", text: "You decide — no pressure, no obligation." }].map((step, i) => (
-                    <div key={i} style={{ display: "flex", gap: isMobile ? 10 : 14, alignItems: "flex-start", marginBottom: i < 3 ? (isMobile ? 12 : 16) : 0, padding: isMobile ? "8px 12px" : "12px 14px", borderRadius: 10, background: "rgba(255,255,255,.03)" }}>
-                      <div className="step-circle">{step.s}</div>
-                      <p style={{ color: "rgba(255,255,255,.65)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.6, margin: 0 }}>{step.text}</p>
+                    <div key={i} style={{ display: "flex", gap: isMobile ? 10 : 14, alignItems: "flex-start", marginBottom: i < 3 ? (isMobile ? 12 : 16) : 0, padding: isMobile ? "8px 12px" : "12px 14px", borderRadius: 10, background: "rgba(255,255,255,0.03)" }}>
+                      <div style={{ width: isMobile ? 28 : 32, height: isMobile ? 28 : 32, borderRadius: "50%", flexShrink: 0, background: `linear-gradient(135deg,${T},${TD})`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: isMobile ? 10 : 11, fontWeight: 900, color: "#000" }}>{step.s}</div>
+                      <p style={{ color: "rgba(255,255,255,0.65)", fontSize: isMobile ? "12px" : "14px", lineHeight: 1.6, margin: 0 }}>{step.text}</p>
                     </div>
                   ))}
                 </div>
-                <div style={{ background: "rgba(255,255,255,.02)", border: "1px solid rgba(255,255,255,.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
-                  <h3 style={{ color: "rgba(255,255,255,.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
-                  {[{ flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" }, { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" }, { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }].map((c, i) => (
-                    <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,.06)" : "none", flexWrap: "wrap", gap: 8 }}>
-                      <span style={{ color: "rgba(255,255,255,.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>
-                      <Link href={`tel:${c.phone.replace(/\s|-/g, "")}`} className="h-teal teal" style={{ fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>{c.phone}</Link>
+                <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
+                  <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
+                  {[
+                    { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" },
+                    { flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" },
+                    { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }
+                  ].map((c, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}>
+                      <span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>
+                      <Link href={`tel:${c.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ color: T, fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>{c.phone}</Link>
                     </div>
                   ))}
-                  <div style={{ marginTop: isMobile ? 12 : 16, paddingTop: isMobile ? 12 : 16, borderTop: "1px solid rgba(255,255,255,.06)" }}>
-                    <Link href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: "rgba(255,255,255,.5)", fontSize: isMobile ? "12px" : "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>✉️ hello@nncdigital.com</Link>
+                  <div style={{ marginTop: isMobile ? 12 : 16, paddingTop: isMobile ? 12 : 16, borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+                    <Link href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "12px" : "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>✉️ hello@nncdigital.com</Link>
                   </div>
                 </div>
                 <div className="badge-row">
                   {["🔵 Google Partner", "🏆 ISO Certified", "🔒 GDPR Compliant", "🍁 PIPEDA Ready", "⭐ Clutch Top Agency"].map(b => (
-                    <span key={b} className="badge badge-soft" style={{ fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 10px" : "6px 12px" }}>{b}</span>
+                    <span key={b} className="badge" style={{ fontSize: isMobile ? 10 : 12, padding: isMobile ? "4px 10px" : "6px 12px" }}>{b}</span>
                   ))}
                 </div>
               </div>
