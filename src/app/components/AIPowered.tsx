@@ -214,7 +214,7 @@ export default function AIPowered() {
               </div>
             ))}
 
-            <button
+            {/* <button
               style={{
                 marginTop: 10,
                 alignSelf: "center",
@@ -228,7 +228,7 @@ export default function AIPowered() {
               }}
             >
               🤖 Explore AI Solutions →
-            </button>
+            </button> */}
           </div>
 
           {/* RIGHT */}

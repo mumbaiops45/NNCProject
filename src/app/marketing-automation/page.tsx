@@ -271,9 +271,9 @@
 //     <div style={{ fontFamily: "'Poppins',sans-serif" }}>
 //       <style>{`
 //   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
-  
+
 //   * { box-sizing: border-box; margin: 0; padding: 0; }
-  
+
 //   @keyframes heroFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 //   @keyframes heroBlink{0%,100%{opacity:1}50%{opacity:0}}
 //   @keyframes heroGlow{0%,100%{box-shadow:0 0 16px rgba(0,201,167,.18)}50%{box-shadow:0 0 40px rgba(0,201,167,.45)}}
@@ -290,7 +290,7 @@
 //   @keyframes kbFadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 //   @keyframes flowPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
 //   @keyframes flowLine{0%{width:0}100%{width:100%}}
-  
+
 //   /* Responsive button styles */
 //   .btn-teal, .btn-outline {
 //     display: inline-flex;
@@ -306,7 +306,7 @@
 //     transition: all 0.2s;
 //     min-width: 140px;
 //   }
-  
+
 //   @media (min-width: 768px) {
 //     .btn-teal, .btn-outline {
 //       padding: 14px 32px;
@@ -314,14 +314,14 @@
 //       min-width: 160px;
 //     }
 //   }
-  
+
 //   @media (max-width: 640px) {
 //     .btn-teal, .btn-outline {
 //       width: 100%;
 //       min-width: 0;
 //     }
 //   }
-  
+
 //   .btn-teal {
 //     background: linear-gradient(135deg, ${T}, ${TD});
 //     color: #000;
@@ -334,7 +334,7 @@
 //     border:1.5px solid rgba(0,201,167,0.35);
 //   }
 //   .btn-outline:hover { border-color:${T}; background:rgba(0,201,167,0.07); }
-  
+
 //   .h-teal:hover{color:${T}!important;}
 //   .fi:focus{border-color:rgba(0,201,167,0.5)!important;background:rgba(0,201,167,0.06)!important;}
 //   .fi::placeholder{color:rgba(255,255,255,0.28);}
@@ -345,24 +345,24 @@
 //   .ss-tab{padding:10px 20px;border-radius:100px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:rgba(255,255,255,0.5);font-size:13.5px;font-weight:600;font-family:'Poppins',sans-serif;cursor:pointer;transition:all .22s ease;display:flex;align-items:center;gap:8px;}
 //   .ss-tab.act{border-color:rgba(0,201,167,0.45);background:rgba(0,201,167,0.1);color:${T};}
 //   .ss-tab:hover:not(.act){border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);}
-  
+
 //   .svc-card{position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:24px 20px;display:flex;flex-direction:column;gap:12px;transition:transform .3s,box-shadow .3s,border-color .3s,background .3s;cursor:default;overflow:hidden;}
 //   .svc-card:hover{transform:translateY(-6px);border-color:rgba(0,201,167,0.35);background:rgba(0,201,167,0.04);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
 //   .svc-card::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${T},transparent);border-radius:18px 18px 0 0;opacity:0;transition:opacity .3s;}
 //   .svc-card:hover::after{opacity:1;}
 //   .svc-card:hover .svc-icon{background:rgba(0,201,167,0.18)!important;transform:scale(1.08);}
-  
+
 //   .pt-card{border-radius:18px;padding:20px 16px;position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s;cursor:default;}
 //   .pt-card:hover{transform:translateY(-7px);box-shadow:0 20px 50px rgba(0,0,0,0.4);}
 //   .pt-card::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,${T},transparent);opacity:0;transition:opacity .28s;}
 //   .pt-card:hover::after{opacity:1;}
 //   .pt-card:hover .pt-icon{transform:scale(1.1) rotate(-5deg)!important;}
-  
+
 //   .kb-card{position:relative;display:flex;gap:20px;align-items:flex-start;padding:24px 20px;border-radius:20px;border:1px solid rgba(255,255,255,0.07);background:rgba(255,255,255,0.02);transition:transform .3s,border-color .3s,background .3s,box-shadow .3s;cursor:default;animation:kbFadeUp .6s ease both;}
 //   .kb-card:hover{transform:translateY(-6px);border-color:rgba(0,201,167,0.3);background:rgba(0,201,167,0.04);box-shadow:0 20px 56px rgba(0,0,0,0.35);}
 //   .kb-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;border-radius:20px 20px 0 0;background:linear-gradient(90deg,transparent,${T},transparent);opacity:0;transition:opacity .3s;}
 //   .kb-card:hover::before{opacity:1;}
-  
+
 //   .ai-feat-card:hover{transform:translateX(6px)!important;box-shadow:0 8px 32px rgba(0,0,0,0.3)!important;}
 //   .ai-feat-card:hover .ai-icon-w{transform:scale(1.1) rotate(-4deg)!important;}
 //   .wcu-point:hover{border-color:rgba(0,201,167,0.25)!important;background:rgba(0,201,167,0.04)!important;transform:translateX(6px)!important;}
@@ -389,7 +389,7 @@
 //   .gp-india-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
 //   .cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
 //   .cf-name{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  
+
 //   /* Responsive breakpoints */
 //   @media(max-width:1200px){
 //     .hero-layout{grid-template-columns:1fr 400px;gap:40px;}
@@ -1147,7 +1147,7 @@ export default function MarketingAutomationPage() {
   const getSectionPadding = () => {
     if (isMobile) return "40px 16px";
     if (isTablet) return "60px 32px";
-    return "80px 48px";
+    return "40px 48px";
   };
 
   return (<>
@@ -1339,21 +1339,21 @@ export default function MarketingAutomationPage() {
             <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "16.5px", lineHeight: 1.85, marginBottom: isMobile ? 18 : 28, maxWidth: 600 }}>
               Marketing automation is an always-on system that captures, qualifies, nurtures, and converts leads — while your team focuses on closing deals.
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 16 : 28 }}>
+            {/* <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 16 : 28 }}>
               {[{ i: "📧", l: "Email Sequences" }, { i: "💬", l: "WhatsApp API" }, { i: "📣", l: "Google Ads" }, { i: "🎯", l: "Meta Ads" }, { i: "🔗", l: "CRM Integration" }, { i: "📊", l: "Live Dashboards" }].map(b => (
                 <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, transition: "all .2s", cursor: "default" }}>{b.i} {b.l}</span>
               ))}
-            </div>
+            </div> */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 36 }}>
               {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
                 <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600, transition: "all .2s", cursor: "default" }}>{b.i} {b.l}</span>
               ))}
             </div>
-            <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+            {/* <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
               {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
                 <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}><span>{p.flag}</span><span style={{ color: "rgba(255,255,255,0.3)" }}>{p.label}</span><span style={{ color: T }}>{p.phone}</span></a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Hero Form */}
@@ -1392,7 +1392,7 @@ export default function MarketingAutomationPage() {
       </section>
 
       {/* ══ M2 — LOGOS ══════════════════════════════════════════════════════════════ */}
-          <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
+      <section style={{ padding: isMobile ? "40px 0" : "60px 0", background: N0, overflow: "hidden", borderTop: "1px solid rgba(0,201,167,.1)", borderBottom: "1px solid rgba(0,201,167,.1)" }}>
         <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
           <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
           <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
@@ -1695,7 +1695,6 @@ export default function MarketingAutomationPage() {
 
         <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
 
-
           {/* Heading with gradient and underline */}
           <h2 style={{
             fontSize: "clamp(32px, 5vw, 48px)",
@@ -1765,9 +1764,9 @@ export default function MarketingAutomationPage() {
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 {[
-                  { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
-                  { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
-                  { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
+                  { city: "Toronto, Canada", phone: "+91 9900566466", flag: "🇨🇦" },
+                  { city: "New York, USA", phone: "+91 9900566466", flag: "🇺🇸" },
+                  { city: "London, UK", phone: "+91 9900566466", flag: "🇬🇧" }
                 ].map((item, i) => (
                   <div key={i} style={{
                     display: "flex",
@@ -1807,7 +1806,7 @@ export default function MarketingAutomationPage() {
                         {item.city}
                       </p>
                       <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
-                        {item.phone}
+                        📞 {item.phone}
                       </p>
                     </div>
                     <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
@@ -1827,6 +1826,7 @@ export default function MarketingAutomationPage() {
               boxShadow: `0 20px 40px -15px ${T}20`
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                {/* Bangalore HQ */}
                 <div style={{
                   display: "flex",
                   alignItems: "center",
@@ -1848,11 +1848,12 @@ export default function MarketingAutomationPage() {
                   <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
-                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
                   </div>
                   <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                 </div>
 
+                {/* Mysore */}
                 <div style={{
                   display: "flex",
                   alignItems: "center",
@@ -1873,11 +1874,67 @@ export default function MarketingAutomationPage() {
                   }}>
                   <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
                   <div style={{ flex: 1 }}>
-                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mysore</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
                   </div>
                   <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                 </div>
 
+                {/* Mumbai */}
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease"
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateX(8px)";
+                    e.currentTarget.style.background = `${T}10`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mumbai</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+                  </div>
+                  <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                </div>
+
+                {/* Hyderabad */}
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease"
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateX(8px)";
+                    e.currentTarget.style.background = `${T}10`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Hyderabad</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+                  </div>
+                  <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                </div>
+
+                {/* Email Section */}
                 <div style={{
                   marginTop: 20,
                   padding: "20px",
@@ -1952,9 +2009,9 @@ export default function MarketingAutomationPage() {
               <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
                 <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
                 {[
-                  { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" },
-                  { flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" },
-                  { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }
+                  { flag: "🇺🇸", label: "USA", phone: "+91 9900566466" },
+                  { flag: "🇨🇦", label: "Canada", phone: "+91 9900566466" },
+                  { flag: "🇬🇧", label: "UK", phone: "+91 9900566466" }
                 ].map((c, i) => (<div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}><span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span><a href={`tel:${c.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ color: T, fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>{c.phone}</a></div>))}
                 <div style={{ marginTop: isMobile ? 12 : 16, paddingTop: isMobile ? 12 : 16, borderTop: "1px solid rgba(255,255,255,0.06)" }}><a href="mailto:hello@nncdigital.com" className="h-teal" style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "12px" : "14px", textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>✉️ hello@nncdigital.com</a></div>
               </div>

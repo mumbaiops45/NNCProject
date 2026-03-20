@@ -793,13 +793,13 @@ export default function CRMDevelopmentPage() {
                   <span key={b.l} className="badge" style={{ padding: isMobile ? "5px 10px" : "6px 13px", fontSize: isMobile ? 11 : 12.5 }}>{b.i} {b.l}</span>
                 ))}
               </div>
-              <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+              {/* <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
                 {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
                   <Link key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,.5)", fontSize: isMobile ? 12 : 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}>
                     <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,.3)" }}>{p.label}</span><span className="teal">{p.phone}</span>
                   </Link>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* Right — Form */}
@@ -1228,7 +1228,6 @@ export default function CRMDevelopmentPage() {
 
           <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
 
-
             {/* Heading with gradient and underline */}
             <h2 style={{
               fontSize: "clamp(32px, 5vw, 48px)",
@@ -1298,9 +1297,9 @@ export default function CRMDevelopmentPage() {
               }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                   {[
-                    { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
-                    { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
-                    { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
+                    { city: "Toronto, Canada", phone: "+91 9900566466", flag: "🇨🇦" },
+                    { city: "New York, USA", phone: "+91 9900566466", flag: "🇺🇸" },
+                    { city: "London, UK", phone: "+91 9900566466", flag: "🇬🇧" }
                   ].map((item, i) => (
                     <div key={i} style={{
                       display: "flex",
@@ -1340,7 +1339,7 @@ export default function CRMDevelopmentPage() {
                           {item.city}
                         </p>
                         <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
-                          {item.phone}
+                          📞 {item.phone}
                         </p>
                       </div>
                       <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
@@ -1360,6 +1359,7 @@ export default function CRMDevelopmentPage() {
                 boxShadow: `0 20px 40px -15px ${T}20`
               }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  {/* Bangalore HQ */}
                   <div style={{
                     display: "flex",
                     alignItems: "center",
@@ -1381,11 +1381,12 @@ export default function CRMDevelopmentPage() {
                     <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
                     <div style={{ flex: 1 }}>
                       <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
-                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
                     </div>
                     <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                   </div>
 
+                  {/* Mysore */}
                   <div style={{
                     display: "flex",
                     alignItems: "center",
@@ -1406,11 +1407,67 @@ export default function CRMDevelopmentPage() {
                     }}>
                     <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
                     <div style={{ flex: 1 }}>
-                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mysore</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
                     </div>
                     <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                   </div>
 
+                  {/* Mumbai */}
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mumbai</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                  </div>
+
+                  {/* Hyderabad */}
+                  <div style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 16,
+                    padding: "16px",
+                    background: "rgba(255,255,255,0.02)",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.05)",
+                    transition: "all 0.3s ease"
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.transform = "translateX(8px)";
+                      e.currentTarget.style.background = `${T}10`;
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.transform = "translateX(0)";
+                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                    }}>
+                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                    <div style={{ flex: 1 }}>
+                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Hyderabad</p>
+                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+                    </div>
+                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                  </div>
+
+                  {/* Email Section */}
                   <div style={{
                     marginTop: 20,
                     padding: "20px",
@@ -1530,9 +1587,9 @@ export default function CRMDevelopmentPage() {
                 <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
                   <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
                   {[
-                    { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" },
-                    { flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" },
-                    { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }
+                    { flag: "🇺🇸", label: "USA", phone: "+91 9900566466" },
+                    { flag: "🇨🇦", label: "Canada", phone: "+91 9900566466" },
+                    { flag: "🇬🇧", label: "UK", phone: "+91 9900566466" }
                   ].map((c, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}>
                       <span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>

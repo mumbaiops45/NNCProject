@@ -53,15 +53,15 @@ const SERVICES = [
   { icon: "🍎", title: "iOS App Development", desc: "Native Swift/SwiftUI apps built for iPhone and iPad — performance-optimised and App Store ready.", tag: "iOS", slug: "ios-development" },
   { icon: "🤖", title: "Android App Development", desc: "Native Kotlin apps built for Android phones, tablets, and enterprise devices across all screen sizes.", tag: "Android", slug: "android-development" },
   { icon: "⚡", title: "Cross-Platform (React Native)", desc: "One codebase, two platforms. Full-featured iOS & Android apps at lower cost and faster delivery time.", tag: "React Native", slug: "react-native" },
-  { icon: "🦋", title: "Flutter App Development", desc: "Google's Flutter framework for beautiful, high-performance cross-platform apps with native feel.", tag: "Flutter", slug: "flutter-development" },
+  // { icon: "🦋", title: "Flutter App Development", desc: "Google's Flutter framework for beautiful, high-performance cross-platform apps with native feel.", tag: "Flutter", slug: "flutter-development" },
   { icon: "🔗", title: "CRM-Integrated Mobile Apps", desc: "Mobile apps that sync live with Salesforce, HubSpot, or your custom CRM — keeping field teams connected.", tag: "CRM", slug: "crm-mobile-apps" },
   { icon: "🎨", title: "Mobile UI/UX Design", desc: "User research, wireframes, prototypes, and polished UI — all before a line of code is written.", tag: "Design", slug: "mobile-ui-ux" },
-  { icon: "🛒", title: "E-Commerce Mobile Apps", desc: "Shopify-integrated or custom mobile storefronts with one-tap checkout, push campaigns, and loyalty features.", tag: "E-Commerce", slug: "ecommerce-mobile" },
-  { icon: "🏥", title: "Healthcare Mobile Apps", desc: "GDPR-compliant patient apps with secure messaging, online booking, and EHR integrations.", tag: "Healthcare", slug: "healthcare-mobile" },
-  { icon: "📦", title: "Field Service Apps", desc: "Mobile apps for field teams — job scheduling, digital forms, GPS tracking, and offline-first capabilities.", tag: "Field", slug: "field-service-apps" },
-  { icon: "🔔", title: "Push Notification Systems", desc: "Targeted push campaigns, in-app messaging, and automated lifecycle notifications to re-engage users.", tag: "Engagement", slug: "push-notifications" },
+  // { icon: "🛒", title: "E-Commerce Mobile Apps", desc: "Shopify-integrated or custom mobile storefronts with one-tap checkout, push campaigns, and loyalty features.", tag: "E-Commerce", slug: "ecommerce-mobile" },
+  // { icon: "🏥", title: "Healthcare Mobile Apps", desc: "GDPR-compliant patient apps with secure messaging, online booking, and EHR integrations.", tag: "Healthcare", slug: "healthcare-mobile" },
+  // { icon: "📦", title: "Field Service Apps", desc: "Mobile apps for field teams — job scheduling, digital forms, GPS tracking, and offline-first capabilities.", tag: "Field", slug: "field-service-apps" },
+  // { icon: "🔔", title: "Push Notification Systems", desc: "Targeted push campaigns, in-app messaging, and automated lifecycle notifications to re-engage users.", tag: "Engagement", slug: "push-notifications" },
   { icon: "🔧", title: "App Maintenance & Support", desc: "Post-launch monitoring, OS update compatibility, crash fixing, and performance optimisation.", tag: "Support", slug: "app-maintenance" },
-  { icon: "📊", title: "App Analytics & Optimisation", desc: "Firebase analytics, A/B testing, funnel tracking, and ASO to continuously improve app performance.", tag: "Analytics", slug: "app-analytics" },
+  // { icon: "📊", title: "App Analytics & Optimisation", desc: "Firebase analytics, A/B testing, funnel tracking, and ASO to continuously improve app performance.", tag: "Analytics", slug: "app-analytics" },
 ];
 
 const BENEFITS = [
@@ -526,28 +526,28 @@ export default function MobileAppDevelopmentPage() {
               Custom <GradText>Mobile App Development</GradText> for Businesses in Canada, USA &amp; UK
             </h1>
             <p style={{ color: "rgba(255,255,255,0.52)", fontSize: isMobile ? "14px" : isTablet ? "15px" : "16.5px", lineHeight: 1.85, marginBottom: isMobile ? 18 : 28, maxWidth: 600 }}>
-              Your customers and your team live on mobile. We build iOS and Android applications that are fast, reliable, and designed around real user behaviour — from MVP to enterprise scale.
+              Your customers and your team live on mobile. We build iOS and Android applications that are fast, reliable, and designed around real user behaviour.
             </p>
 
             {/* Platform pills */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 16 : 28 }}>
+            {/* <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 16 : 28 }}>
               {[{ i: "🍎", l: "iOS (Swift)" }, { i: "🤖", l: "Android (Kotlin)" }, { i: "⚡", l: "React Native" }, { i: "🦋", l: "Flutter" }, { i: "📦", l: "Offline-First" }].map(b => (
                 <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
               ))}
-            </div>
+            </div> */}
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 36 }}>
               {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
                 <span key={b.l} className="ma-badge" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
               ))}
             </div>
-            <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+            {/* <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
               {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
                 <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} className="h-teal" style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}>
                   <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,0.3)" }}>{p.label}</span><span style={{ color: T }}>{p.phone}</span>
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Hero Form */}
@@ -1020,35 +1020,38 @@ export default function MobileAppDevelopmentPage() {
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    padding: isMobile ? "6px 14px" : "8px 18px",
-                    borderRadius: 30,
+                    gap: "8px",
+                    padding: isMobile ? "12px 20px" : "8px 24px",
+                    borderRadius: "100px",
                     border: "none",
-                    background: `linear-gradient(135deg,${T},${TD})`,
+                    background: `linear-gradient(135deg, ${T}, ${TD})`,
                     color: "#000",
-                    fontWeight: 500,
-                    fontSize: isMobile ? "12px" : "13px",
-                    fontFamily: "'Poppins',sans-serif",
+                    fontWeight: 600,
+                    fontSize: isMobile ? "14px" : "13px",
+                    fontFamily: "'Poppins', sans-serif",
                     cursor: "pointer",
                     textDecoration: "none",
-                    transition: "all 0.2s ease",
+                    transition: "all 0.3s ease",
                     width: isMobile ? "100%" : "auto",
-                    minWidth: isMobile ? "auto" : "120px",
-                    maxWidth: isMobile ? "240px" : "auto",
+                    maxWidth: isMobile ? "280px" : "auto",
                     boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
                     letterSpacing: "0.3px",
-                    margin: isMobile ? "0 auto" : 0,
-                    flex: isMobile ? "0 1 auto" : "0 1 auto"
+                    margin: isMobile ? "0 auto" : "0",
+                    textAlign: "center",
+                    whiteSpace: isMobile ? "normal" : "nowrap",
+                    lineHeight: "1.4"
                   }}
                   onMouseEnter={e => {
                     e.currentTarget.style.transform = "translateY(-2px)";
-                    e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,201,167,0.25)";
+                    e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,201,167,0.35)";
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.transform = "translateY(0)";
                     e.currentTarget.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
                   }}
                 >
-                  📅 Book a Free App Strategy Call
+                  <span style={{ fontSize: isMobile ? "16px" : "14px" }}>📅</span>
+                  Book a Free App Strategy Call
                 </Link>
                 {/* <Link href="/portfolio" className="btn-outline" style={{ flex: 1, padding:  isMobile ? "11px 16px" : "13px 20px" }}>Our Portfolio →</Link> */}
               </div>
@@ -1070,7 +1073,6 @@ export default function MobileAppDevelopmentPage() {
         <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
 
         <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
-
 
           {/* Heading with gradient and underline */}
           <h2 style={{
@@ -1141,9 +1143,9 @@ export default function MobileAppDevelopmentPage() {
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                 {[
-                  { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
-                  { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
-                  { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
+                  { city: "Toronto, Canada", phone: "+91 9900566466", flag: "🇨🇦" },
+                  { city: "New York, USA", phone: "+91 9900566466", flag: "🇺🇸" },
+                  { city: "London, UK", phone: "+91 9900566466", flag: "🇬🇧" }
                 ].map((item, i) => (
                   <div key={i} style={{
                     display: "flex",
@@ -1183,7 +1185,7 @@ export default function MobileAppDevelopmentPage() {
                         {item.city}
                       </p>
                       <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
-                        {item.phone}
+                        📞 {item.phone}
                       </p>
                     </div>
                     <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
@@ -1203,6 +1205,7 @@ export default function MobileAppDevelopmentPage() {
               boxShadow: `0 20px 40px -15px ${T}20`
             }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                {/* Bangalore HQ */}
                 <div style={{
                   display: "flex",
                   alignItems: "center",
@@ -1224,11 +1227,12 @@ export default function MobileAppDevelopmentPage() {
                   <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
-                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
                   </div>
                   <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                 </div>
 
+                {/* Mysore */}
                 <div style={{
                   display: "flex",
                   alignItems: "center",
@@ -1249,11 +1253,67 @@ export default function MobileAppDevelopmentPage() {
                   }}>
                   <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
                   <div style={{ flex: 1 }}>
-                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mysore</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
                   </div>
                   <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
                 </div>
 
+                {/* Mumbai */}
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease"
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateX(8px)";
+                    e.currentTarget.style.background = `${T}10`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mumbai</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+                  </div>
+                  <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                </div>
+
+                {/* Hyderabad */}
+                <div style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 16,
+                  padding: "16px",
+                  background: "rgba(255,255,255,0.02)",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease"
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = "translateX(8px)";
+                    e.currentTarget.style.background = `${T}10`;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = "translateX(0)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                  }}>
+                  <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Hyderabad</p>
+                    <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+                  </div>
+                  <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+                </div>
+
+                {/* Email Section */}
                 <div style={{
                   marginTop: 20,
                   padding: "20px",
@@ -1443,9 +1503,9 @@ export default function MobileAppDevelopmentPage() {
               <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px" }}>
                 <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
                 {[
-                  { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" },
-                  { flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" },
-                  { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }
+                  { flag: "🇺🇸", label: "USA", phone: "+91 9900566466" },
+                  { flag: "🇨🇦", label: "Canada", phone: "+91 9900566466" },
+                  { flag: "🇬🇧", label: "UK", phone: "+91 9900566466" }
                 ].map((c, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}>
                     <span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>

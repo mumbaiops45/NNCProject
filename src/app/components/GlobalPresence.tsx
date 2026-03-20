@@ -7,19 +7,19 @@ const NAVY = "#030B18";
 const NAVY_LIGHT = "#0A1A2F";
 
 const NORTH_AMERICA = [
-  { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", bullet: "■■" },
-  { city: "New York, USA", phone: "+1 631-XXX-XXXX", bullet: "■■" },
+  { city: "Toronto, Canada", phone: "+91 9900566466", bullet: "■■" },
+  { city: "New York, USA", phone: "+91 9900566466", bullet: "■■" },
 ];
 
 const EMEA = [
-  { city: "London, UK", phone: "+44 20-XXXX-XXXX", bullet: "■■" },
+  { city: "London, UK", phone: "+91 9900566466", bullet: "■■" },
 ];
 
 const INDIA_HQ = [
-  { city: "Bangalore", phone: "+91 9900566466", bullet: "■■", hasPhone: true },
-  { city: "Mysore, Karnataka", phone: null, bullet: "■■", hasPhone: false },
-  { city: "Mumbai, Maharashtra", phone: null, bullet: "■■", hasPhone: false },
-  { city: "Hyderabad, Telangana", phone: null, bullet: "■■", hasPhone: false },
+  { city: "Bangalore (HQ)", phone: "+91 9900566466", bullet: "■■", hasPhone: true },
+  { city: "Mysore, Karnataka", phone: "+91 9900566466", bullet: "■■", hasPhone: true },
+  { city: "Mumbai, Maharashtra", phone: "+91 9900566466", bullet: "■■", hasPhone: true },
+  { city: "Hyderabad, Telangana", phone: "+91 9900566466", bullet: "■■", hasPhone: true },
 ];
 
 export default function GlobalPresence() {
@@ -56,7 +56,7 @@ export default function GlobalPresence() {
       }} />
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
         
         .tab-button {
           border: none;
@@ -102,15 +102,6 @@ export default function GlobalPresence() {
           border-color: ${TEAL}40;
           box-shadow: 0 20px 30px -10px rgba(0,201,167,0.2);
         }
-        .no-phone-message {
-          color: rgba(255,255,255,0.4);
-          font-size: 13px;
-          font-style: italic;
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          margin-top: 4px;
-        }
         @media (max-width: 768px) {
           section { padding: 70px 24px !important; }
           .tab-button { padding: 14px 30px !important; font-size: 15px !important; }
@@ -119,6 +110,7 @@ export default function GlobalPresence() {
         @media (max-width: 640px) {
           section { padding: 50px 16px !important; }
           .tab-button { padding: 12px 20px !important; font-size: 14px !important; }
+          .location-item { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -132,7 +124,7 @@ export default function GlobalPresence() {
             margin: "0 0 15px 0",
             letterSpacing: "-0.02em",
           }}>
-            Global <span style={{ 
+            Global <span style={{
               background: `linear-gradient(135deg, ${TEAL}, #fff)`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -156,7 +148,7 @@ export default function GlobalPresence() {
             className="tab-button"
             onClick={() => setTab("northAmerica")}
             style={{
-              background: tab === "northAmerica" 
+              background: tab === "northAmerica"
                 ? `linear-gradient(135deg, ${TEAL}, ${TEAL_DARK})`
                 : "rgba(255,255,255,0.05)",
               color: tab === "northAmerica" ? "#000" : "#fff",
@@ -170,7 +162,7 @@ export default function GlobalPresence() {
             className="tab-button"
             onClick={() => setTab("india")}
             style={{
-              background: tab === "india" 
+              background: tab === "india"
                 ? `linear-gradient(135deg, ${TEAL}, ${TEAL_DARK})`
                 : "rgba(255,255,255,0.05)",
               color: tab === "india" ? "#000" : "#fff",
@@ -252,13 +244,8 @@ export default function GlobalPresence() {
                         }}>
                           {location.city}
                         </p>
-                        <p style={{
-                          color: TEAL,
-                          fontSize: 14,
-                          fontWeight: 500,
-                          margin: 0,
-                        }}>
-                          {location.phone}
+                        <p style={{ color: TEAL, fontSize: 14, fontWeight: 500, margin: 0 }}>
+                          📞 {location.phone}
                         </p>
                       </div>
                     </div>
@@ -340,7 +327,7 @@ export default function GlobalPresence() {
                           fontWeight: 500,
                           margin: 0,
                         }}>
-                          {location.phone}
+                          📞 {location.phone}
                         </p>
                       </div>
                     </div>
@@ -350,7 +337,7 @@ export default function GlobalPresence() {
             </div>
           </div>
         ) : (
-          /* India HQ Tab */
+          /* India HQ Tab - FIXED: Phone numbers now showing */
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(2, 1fr)",
@@ -358,24 +345,20 @@ export default function GlobalPresence() {
           }}>
             {INDIA_HQ.map((location, index) => (
               <div key={index} className="location-item" style={{
-                background: location.hasPhone 
-                  ? `linear-gradient(145deg, ${TEAL}08, ${TEAL}02)`
-                  : "rgba(255,255,255,0.02)",
-                border: location.hasPhone 
-                  ? `1px solid ${TEAL}30`
-                  : "1px dashed rgba(255,255,255,0.15)",
+                background: `linear-gradient(145deg, ${TEAL}08, ${TEAL}02)`,
+                border: `1px solid ${TEAL}30`,
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 15 }}>
                   <div style={{
                     width: 40,
                     height: 40,
                     borderRadius: "12px",
-                    background: location.hasPhone ? `${TEAL}20` : "rgba(255,255,255,0.05)",
+                    background: `${TEAL}20`,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: 20,
-                    color: location.hasPhone ? TEAL : "rgba(255,255,255,0.3)",
+                    color: TEAL,
                   }}>
                     {location.bullet}
                   </div>
@@ -384,25 +367,18 @@ export default function GlobalPresence() {
                       fontWeight: 600,
                       fontSize: 16,
                       color: "#fff",
-                      margin: location.hasPhone ? "0 0 4px 0" : 0,
+                      margin: "0 0 4px 0",
                     }}>
                       {location.city}
                     </p>
-                    {location.hasPhone ? (
-                      <p style={{
-                        color: TEAL,
-                        fontSize: 14,
-                        fontWeight: 500,
-                        margin: 0,
-                      }}>
-                        {location.phone}
-                      </p>
-                    ) : (
-                      <div className="no-phone-message">
-                        <span style={{ fontSize: 12 }}>📞</span>
-                        <span>Contact office directly</span>
-                      </div>
-                    )}
+                    <p style={{
+                      color: TEAL,
+                      fontSize: 14,
+                      fontWeight: 500,
+                      margin: 0,
+                    }}>
+                      📞 {location.phone}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -417,7 +393,7 @@ export default function GlobalPresence() {
           gap: 8,
           marginTop: 40,
         }}>
-          {[1,2,3,4,5].map(i => (
+          {[1, 2, 3, 4, 5].map(i => (
             <div key={i} style={{
               width: 6,
               height: 6,
