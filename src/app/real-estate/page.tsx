@@ -14,11 +14,9 @@ const N1 = "#030B18";
 const N2 = "#061425";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const LOGOS = [
-  "clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
-  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png",
-  "clients11.png", "clients12.png"
-];
+const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png",
+  "clients12.png", "clients13.png", "clients14.png", "clients15.png", "clients16.png", "clients17.png", "clients18.png"];
 
 const SUCCESS_STORIES = [
   {
@@ -81,8 +79,8 @@ const COMPLIANCE = [
   {
     region: "Canada",
     flag: "🇨🇦",
-    title: "CREA Compliance",
-    desc: "Systems built to work with Canadian MLS® systems and comply with CREA rules for property data display."
+    title: "PIPEDA & GDPR Compliance",
+    desc: "All client data handled in accordance with Canadian and UK data protection law. Systems built to work with Canadian MLS® systems and comply with CREA rules for property data display."
   },
   {
     region: "UK",
@@ -134,17 +132,19 @@ const REAL_ESTATE_STATS = [
   { value: "99%", label: "Data Accuracy", icon: "✅" }
 ];
 
+// FIXED: All international offices now have the same phone number
 const INT_OFFICES = [
-  { flag: "🇨🇦", city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", email: "realestate@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇺🇸", city: "New York, USA", phone: "+1 631-XXX-XXXX", email: "realestate@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇬🇧", city: "London, UK", phone: "+44 20-XXXX-XXXX", email: "realestate@nncdigital.com", tz: "GMT / BST" }
+  { flag: "🇨🇦", city: "Toronto, Canada", phone: "+91 9900566466", email: "realestate@nncdigital.com", tz: "EST / EDT" },
+  { flag: "🇺🇸", city: "New York, USA", phone: "+91 9900566466", email: "realestate@nncdigital.com", tz: "EST / EDT" },
+  { flag: "🇬🇧", city: "London, UK", phone: "+91 9900566466", email: "realestate@nncdigital.com", tz: "GMT / BST" }
 ];
 
+// FIXED: All India offices now have phone numbers
 const INDIA_OFFICES = [
   { city: "Bangalore (HQ)", phone: "+91 9900566466", note: "Primary engineering hub" },
-  { city: "Mysore", phone: null, note: "Design & QA" },
-  { city: "Mumbai", phone: null, note: "Sales & partnerships" },
-  { city: "Hyderabad", phone: null, note: "Mobile & cloud" }
+  { city: "Mysore", phone: "+91 9900566466", note: "Design & QA" },
+  { city: "Mumbai", phone: "+91 9900566466", note: "Sales & partnerships" },
+  { city: "Hyderabad", phone: "+91 9900566466", note: "Mobile & cloud" }
 ];
 
 const SERVICES_LIST = [
@@ -417,6 +417,22 @@ export default function RealEstateIndustryPage() {
     <>
       <Navbar />
 
+      {/* Global Poppins Font Style */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+        
+        body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, div {
+          font-family: 'Poppins', sans-serif !important;
+        }
+        
+        @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
+        @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+        @keyframes marqueeReverse { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        
+        .cl-track { display:flex; width:max-content; animation:marquee 30s linear infinite; }
+        .cl-track:hover { animation-play-state:paused; }
+      `}</style>
+
       {/* MODULE 1 — HERO + INLINE FORM */}
       <section style={{
         padding: isMobile ? "40px 16px 40px" : isTablet ? "80px 32px 60px" : "90px 48px 80px",
@@ -425,11 +441,6 @@ export default function RealEstateIndustryPage() {
         display: "flex", alignItems: "center"
       }}>
         <Particles />
-        {/* <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
-          backgroundImage: `linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`,
-          backgroundSize: "60px 60px"
-        }} /> */}
         {!isMobile && (
           <>
             <div style={{
@@ -472,23 +483,7 @@ export default function RealEstateIndustryPage() {
             }}>
               The real estate market moves fast. Leads go cold quickly, follow-up consistency makes or breaks deals, and managing buyers, sellers, tenants, and landlords across multiple properties is complex.
             </p>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: isMobile ? 20 : 32 }}>
-              {[
-                { icon: "🔗", label: "MLS Integration" },
-                { icon: "🏠", label: "IDX Websites" },
-                { icon: "🇬🇧", label: "Rightmove" },
-                { icon: "🇬🇧", label: "Zoopla" }
-              ].map((b, i) => (
-                <span key={i} style={{
-                  padding: isMobile ? "4px 8px" : "6px 12px", borderRadius: 100,
-                  background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.8)", fontSize: isMobile ? 11 : 12, fontWeight: 500,
-                  display: "flex", alignItems: "center", gap: 4
-                }}>
-                  <span>{b.icon}</span> {b.label}
-                </span>
-              ))}
-            </div>
+           
           </div>
 
           {/* Right - Lead Form */}
@@ -542,100 +537,124 @@ export default function RealEstateIndustryPage() {
         </div>
       </section>
 
-      {/* MODULE 2 — OUR HAPPY CLIENTS + SUCCESS STORIES */}
+      {/* MODULE 2 — OUR HAPPY CLIENTS */}
       <section style={{ padding: getSectionPadding(), background: N1 }}>
-        {/* Client Logos */}
-        <div style={{ marginBottom: isMobile ? 40 : 60 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
-            <SectionBadge label="Our Happy Clients" />
-            <SectionH2>Trusted by <GradText>Real Estate Agencies</GradText> Across North America & UK</SectionH2>
-          </div>
-          <div style={{ overflow: "hidden" }}>
-            <div style={{
-              display: "flex", gap: isMobile ? 20 : 40, animation: "marquee 30s linear infinite",
-              width: "fit-content"
-            }}>
-              {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div
-                  key={i}
-                  style={{
-                    flexShrink: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: isMobile ? 60 : 70,
-                    padding: "10px 18px",
-                    background: "#ffffff",
-                    borderRadius: 10,
-                    margin: "0 6px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.12)"
-                  }}
-                >
-                  <img
-                    src={`/${logo}`}
-                    alt="Client"
-                    style={{
-                      height: isMobile ? 32 : 40,
-                      width: "auto",
-                      maxWidth: isMobile ? 90 : 120,
-                      objectFit: "contain"
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+        <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
+          <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
+          <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
+            Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
+          </h2>
         </div>
 
-        {/* Success Stories */}
-        <div>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
-            <SectionBadge label="Success Stories" />
-            <SectionH2>Real Estate <GradText>Success Stories</GradText></SectionH2>
-          </div>
-
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: getGridColumns(1, 2, 3),
-            gap: isMobile ? 16 : isTablet ? 20 : 24
-          }}>
-            {SUCCESS_STORIES.map((s, i) => (
-              <div key={i} onMouseEnter={() => setHoveredCard(i)} onMouseLeave={() => setHoveredCard(null)} style={{
-                background: "rgba(255,255,255,0.02)", border: `1px solid ${hoveredCard === i ? T : "rgba(255,255,255,0.05)"}`,
-                borderRadius: 24, padding: isMobile ? 16 : 20, transition: "all 0.3s ease",
-                transform: hoveredCard === i && !isMobile ? "translateY(-4px)" : "none"
-              }}>
-                <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>{s.icon}</div>
-                <h3 style={{ fontSize: isMobile ? 14 : 16, fontWeight: 700, color: T, marginBottom: isMobile ? 8 : 12 }}>{s.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, lineHeight: 1.6, marginBottom: isMobile ? 16 : 20 }}>{s.description}</p>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: isMobile ? 12 : 16 }}>
-                  {s.metrics.map((m, j) => (
-                    <div key={j} style={{ textAlign: "center" }}>
-                      <div style={{ color: T, fontSize: isMobile ? 14 : 18, fontWeight: 700 }}>{m.value}</div>
-                      <div style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 9 : 11 }}>{m.label}</div>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
-                  {s.tags.map((tag, j) => (
-                    <span key={j} style={{
-                      padding: "4px 8px", borderRadius: 100, background: "rgba(0,201,167,0.1)",
-                      border: `1px solid ${T}30`, color: T, fontSize: isMobile ? 9 : 11, fontWeight: 600
-                    }}>{tag}</span>
-                  ))}
-                </div>
+        {/* Row 1 - Sliding Left to Right */}
+        <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+          <div className="cl-track" style={{ animation: "marquee 30s linear infinite" }}>
+            {LOGOS.slice(0, 6).map((logo, i) => (
+              <div key={`row1-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {LOGOS.slice(0, 6).map((logo, i) => (
+              <div key={`row1-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
               </div>
             ))}
           </div>
+        </div>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: isMobile ? 16 : 20 }}>
-            {SUCCESS_STORIES.map((_, i) => (
-              <button key={i} onClick={() => setStory(i)} style={{
-                width: story === i ? 24 : 8, height: 8, borderRadius: 100,
-                background: story === i ? T : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer"
-              }} />
+        {/* Row 2 - Sliding Right to Left */}
+        <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+          <div className="cl-track" style={{ animation: "marqueeReverse 35s linear infinite" }}>
+            {LOGOS.slice(6, 12).map((logo, i) => (
+              <div key={`row2-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {LOGOS.slice(6, 12).map((logo, i) => (
+              <div key={`row2-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
             ))}
           </div>
+        </div>
+
+        {/* Row 3 - Sliding Left to Right */}
+        <div style={{ overflow: "hidden" }}>
+          <div className="cl-track" style={{ animation: "marquee 40s linear infinite" }}>
+            {LOGOS.slice(12, 18).map((logo, i) => (
+              <div key={`row3-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {LOGOS.slice(12, 18).map((logo, i) => (
+              <div key={`row3-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MODULE 2 (continued) — SUCCESS STORIES */}
+      <section style={{ padding: getSectionPadding(), background: N2 }}>
+        <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
+          <SectionBadge label="Success Stories" />
+          <SectionH2>Real Estate <GradText>Success Stories</GradText></SectionH2>
+        </div>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: getGridColumns(1, 2, 3),
+          gap: isMobile ? 16 : isTablet ? 20 : 34
+        }}>
+          {SUCCESS_STORIES.map((s, i) => (
+            <div key={i} onMouseEnter={() => setHoveredCard(i)} onMouseLeave={() => setHoveredCard(null)} style={{
+              background: "rgba(255,255,255,0.02)", border: `1px solid ${hoveredCard === i ? T : "rgba(255,255,255,0.05)"}`,
+              borderRadius: 24, padding: isMobile ? 16 : 20, transition: "all 0.3s ease",
+              transform: hoveredCard === i && !isMobile ? "translateY(-4px)" : "none"
+            }}>
+              <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>{s.icon}</div>
+              <h3 style={{ fontSize: isMobile ? 14 : 16, fontWeight: 700, color: T, marginBottom: isMobile ? 8 : 12 }}>{s.title}</h3>
+              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 14, lineHeight: 1.6, marginBottom: isMobile ? 16 : 20 }}>{s.description}</p>
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: isMobile ? 12 : 16 }}>
+                {s.metrics.map((m, j) => (
+                  <div key={j} style={{ textAlign: "center" }}>
+                    <div style={{ color: T, fontSize: isMobile ? 14 : 18, fontWeight: 700 }}>{m.value}</div>
+                    <div style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 9 : 11 }}>{m.label}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                {s.tags.map((tag, j) => (
+                  <span key={j} style={{
+                    padding: "4px 8px", borderRadius: 100, background: "rgba(0,201,167,0.1)",
+                    border: `1px solid ${T}30`, color: T, fontSize: isMobile ? 9 : 11, fontWeight: 600
+                  }}>{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: isMobile ? 16 : 20 }}>
+          {SUCCESS_STORIES.map((_, i) => (
+            <button key={i} onClick={() => setStory(i)} style={{
+              width: story === i ? 24 : 8, height: 8, borderRadius: 100,
+              background: story === i ? T : "rgba(255,255,255,0.2)", border: "none", cursor: "pointer"
+            }} />
+          ))}
         </div>
       </section>
 
@@ -668,11 +687,12 @@ export default function RealEstateIndustryPage() {
       </section>
 
       {/* MODULE 4 — COMPLIANCE & DATA SECURITY */}
+           {/* MODULE 4 — COMPLIANCE & DATA SECURITY */}
       <section style={{ padding: getSectionPadding(), background: `linear-gradient(135deg, ${N1} 0%, ${N0} 100%)` }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
-            <SectionBadge label="Integration First" />
-            <SectionH2>Built for <GradText>Real Estate Platforms</GradText> in Canada, USA & UK</SectionH2>
+            <SectionBadge label="Compliance First" />
+            <SectionH2>Built for <GradText>Compliance</GradText> in Canada, USA & UK</SectionH2>
           </div>
 
           <div style={{
@@ -680,17 +700,44 @@ export default function RealEstateIndustryPage() {
             gridTemplateColumns: getGridColumns(1, 2, 3),
             gap: isMobile ? 16 : isTablet ? 20 : 24
           }}>
-            {COMPLIANCE.map((c, i) => (
-              <div key={i} style={{
-                background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)",
-                borderRadius: 20, padding: isMobile ? 16 : 20, textAlign: "center"
-              }}>
-                <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>{c.flag}</div>
-                <h3 style={{ color: T, fontSize: isMobile ? 16 : 20, fontWeight: 700, marginBottom: 4 }}>{c.title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.8)", fontSize: isMobile ? 13 : 14, marginBottom: 8 }}>{c.region}</p>
-                <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13, lineHeight: 1.6 }}>{c.desc}</p>
-              </div>
-            ))}
+            {/* MLS Integration - Canada/USA */}
+            <div style={{
+              background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)",
+              borderRadius: 20, padding: isMobile ? 16 : 20, textAlign: "center"
+            }}>
+              <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>🇺🇸🇨🇦</div>
+              <h3 style={{ color: T, fontSize: isMobile ? 18 : 22, fontWeight: 700, marginBottom: 8 }}>MLS Integration</h3>
+              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 13, marginBottom: 12 }}>Canada / USA</p>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13, lineHeight: 1.6 }}>
+                Connect CRM to MLS listings for automatic property matching and lead routing.
+              </p>
+            </div>
+
+            {/* Rightmove & Zoopla - UK */}
+            <div style={{
+              background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)",
+              borderRadius: 20, padding: isMobile ? 16 : 20, textAlign: "center"
+            }}>
+              <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>🇬🇧</div>
+              <h3 style={{ color: T, fontSize: isMobile ? 18 : 22, fontWeight: 700, marginBottom: 8 }}>Rightmove & Zoopla</h3>
+              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 13, marginBottom: 12 }}>UK</p>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13, lineHeight: 1.6 }}>
+                Auto-sync UK property listings for real-time lead assignment.
+              </p>
+            </div>
+
+            {/* PIPEDA & GDPR Compliance */}
+            <div style={{
+              background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.05)",
+              borderRadius: 20, padding: isMobile ? 16 : 20, textAlign: "center"
+            }}>
+              <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>🔒</div>
+              <h3 style={{ color: T, fontSize: isMobile ? 18 : 22, fontWeight: 700, marginBottom: 8 }}>PIPEDA & GDPR Compliance</h3>
+              <p style={{ color: "rgba(255,255,255,0.6)", fontSize: isMobile ? 12 : 13, marginBottom: 12 }}>Canada / UK</p>
+              <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13, lineHeight: 1.6 }}>
+                All client data handled in accordance with Canadian and UK data protection law.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -904,12 +951,6 @@ export default function RealEstateIndustryPage() {
           </div>
         </div>
       </section>
-
-      <style>{`
-        @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
-        @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-      `}</style>
-
     </>
   );
 }

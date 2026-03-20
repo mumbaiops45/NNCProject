@@ -537,18 +537,18 @@ export default function DigitalTransformationPage() {
               Digital transformation is about redesigning how your business creates and delivers value through technology — from first strategy session to full operational rollout.
             </p>
 
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 28 }}>
+            {/* <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 28 }}>
               {[{ i: "🔍", l: "Readiness" }, { i: "🗺️", l: "Roadmap" }, { i: "⚙️", l: "Automation" }, { i: "🔗", l: "Integration" }, { i: "👥", l: "Change" }].map(b => (
                 <span key={b.l} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 14px", borderRadius: 100, border: "1px solid rgba(0,201,167,0.25)", background: "rgba(0,201,167,0.06)", color: "rgba(255,255,255,0.8)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
               ))}
-            </div>
+            </div> */}
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: isMobile ? 20 : 36 }}>
               {[{ i: "🔵", l: "Google Partner" }, { i: "🏆", l: "ISO Certified" }, { i: "🔒", l: "GDPR Compliant" }, { i: "🍁", l: "PIPEDA Ready" }, { i: "⭐", l: "Clutch Top Agency" }].map(b => (
                 <span key={b.l} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: isMobile ? "5px 11px" : "6px 13px", borderRadius: 100, border: "1px solid rgba(255,255,255,0.12)", background: "rgba(255,255,255,0.04)", color: "rgba(255,255,255,0.65)", fontSize: isMobile ? 11 : 12.5, fontWeight: 600 }}>{b.i} {b.l}</span>
               ))}
             </div>
-            <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+            {/* <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
               {[{ flag: "🇨🇦", label: "CA:", phone: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", phone: "+44 20-XXXX-XXXX" }].map(p => (
                 <a key={p.phone} href={`tel:${p.phone.replace(/\s|-/g, "")}`} style={{ display: "flex", alignItems: "center", gap: 7, color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13.5, fontWeight: 600, textDecoration: "none", transition: "color .2s" }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = T; }}
@@ -556,7 +556,7 @@ export default function DigitalTransformationPage() {
                   <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,0.3)" }}>{p.label}</span><span style={{ color: T }}>{p.phone}</span>
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Hero Form */}
@@ -813,7 +813,7 @@ export default function DigitalTransformationPage() {
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 36 : 48 }}>
             <SectionBadge label="Tailored Approach" />
-            <SectionH2>Transformation <GradText>Tailored to Your Needs</GradText></SectionH2>
+            <SectionH2> Hire Developers <GradText>Tailored to Your Needs</GradText></SectionH2>
             <p style={{ color: "rgba(255,255,255,0.45)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.75, maxWidth: 560, margin: "0 auto" }}>We adapt our transformation framework to your business type and strategic goals.</p>
           </div>
           <div className="two-col" style={{ marginBottom: 16 }}>
@@ -841,7 +841,7 @@ export default function DigitalTransformationPage() {
         <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 2 }}>
           <div style={{ marginBottom: isMobile ? 32 : 40, maxWidth: 620, marginLeft: "auto", marginRight: "auto", textAlign: "center" }}>
             <SectionBadge label="AI-Powered" />
-            <SectionH2>Leverage <GradText>AI-Powered Transformation</GradText> Solutions</SectionH2>
+            <SectionH2>Leverage <GradText>AI-Powered Digital Transformation</GradText> Solutions</SectionH2>
             <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? "13px" : "15px", lineHeight: 1.8 }}>We embed AI into your transformation roadmap to deliver predictive insights, intelligent automation, and a true competitive advantage.</p>
           </div>
           <div className="ai-feat-grid">
@@ -913,219 +913,276 @@ export default function DigitalTransformationPage() {
       </section>
 
       {/* M11 — GLOBAL PRESENCE */}
-      <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "80px 48px", background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
-        <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
+     <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "80px 48px", background: `linear-gradient(180deg,${N0} 0%,${N1} 100%)`, position: "relative", overflow: "hidden" }}>
+  <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", width: isMobile ? 400 : 600, height: isMobile ? 200 : 300, borderRadius: "50%", background: "radial-gradient(ellipse,rgba(0,201,167,0.05) 0%,transparent 65%)", pointerEvents: "none", zIndex: 0 }} />
+  <div style={{ position: "absolute", inset: 0, backgroundImage: `linear-gradient(rgba(0,201,167,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,201,167,0.02) 1px, transparent 1px)`, backgroundSize: "60px 60px", pointerEvents: "none", zIndex: 0 }} />
 
-          <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
+  <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative", zIndex: 2 }}>
 
+    {/* Heading with gradient and underline */}
+    <h2 style={{
+      fontSize: "clamp(32px, 5vw, 48px)",
+      fontWeight: 800,
+      color: "#fff",
+      textAlign: "center",
+      margin: "0 0 20px 0",
+      letterSpacing: "-0.02em"
+    }}>
+      Global <span style={{ background: `linear-gradient(135deg, ${T}, #fff)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Presence</span>
+    </h2>
+    <div style={{ width: "120px", height: "4px", background: `linear-gradient(90deg, transparent, ${T}, transparent)`, margin: "0 auto 40px", borderRadius: "2px" }} />
 
-            {/* Heading with gradient and underline */}
-            <h2 style={{
-              fontSize: "clamp(32px, 5vw, 48px)",
-              fontWeight: 800,
-              color: "#fff",
-              textAlign: "center",
-              margin: "0 0 20px 0",
-              letterSpacing: "-0.02em"
+    {/* Tabs with enhanced styling */}
+    <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
+      {[
+        { key: "int", label: "North America & UK", icon: "🌎" },
+        { key: "india", label: "India (HQ)", icon: "🇮🇳" }
+      ].map(t => (
+        <button
+          key={t.key}
+          className={`gp-tab${gTab === t.key ? " act" : ""}`}
+          onClick={() => setGTab(t.key as "int" | "india")}
+          style={{
+            padding: isMobile ? "12px 24px" : "14px 32px",
+            borderRadius: "50px",
+            border: "none",
+            background: gTab === t.key ? `linear-gradient(135deg, ${T}, ${TD})` : "rgba(255,255,255,0.05)",
+            color: gTab === t.key ? "#000" : "#fff",
+            fontSize: isMobile ? 14 : 16,
+            fontWeight: 600,
+            cursor: "pointer",
+            transition: "all 0.3s ease",
+            boxShadow: gTab === t.key ? `0 8px 20px ${T}40` : "none",
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            backdropFilter: "blur(10px)"
+          }}
+          onMouseEnter={e => {
+            if (gTab !== t.key) {
+              e.currentTarget.style.background = "rgba(255,255,255,0.1)";
+              e.currentTarget.style.transform = "translateY(-2px)";
+            }
+          }}
+          onMouseLeave={e => {
+            if (gTab !== t.key) {
+              e.currentTarget.style.background = "rgba(255,255,255,0.05)";
+              e.currentTarget.style.transform = "translateY(0)";
+            }
+          }}
+        >
+          <span>{t.icon}</span> {t.label}
+        </button>
+      ))}
+    </div>
+
+    {/* Content Cards */}
+    {gTab === "int" && (
+      <div style={{
+        background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
+        borderRadius: 24,
+        padding: isMobile ? 24 : 36,
+        border: `1px solid ${T}20`,
+        backdropFilter: "blur(10px)",
+        boxShadow: "0 20px 40px -15px rgba(0,0,0,0.5)"
+      }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {[
+            { city: "Toronto, Canada", phone: "+91 9900566466", flag: "🇨🇦" },
+            { city: "New York, USA", phone: "+91 9900566466", flag: "🇺🇸" },
+            { city: "London, UK", phone: "+91 9900566466", flag: "🇬🇧" }
+          ].map((item, i) => (
+            <div key={i} style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              padding: "16px",
+              background: "rgba(255,255,255,0.02)",
+              borderRadius: 16,
+              border: "1px solid rgba(255,255,255,0.05)",
+              transition: "all 0.3s ease",
+              cursor: "default"
+            }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = "translateX(8px)";
+                e.currentTarget.style.background = `${T}08`;
+                e.currentTarget.style.borderColor = `${T}40`;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = "translateX(0)";
+                e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
+              }}>
+              <div style={{
+                width: 48,
+                height: 48,
+                borderRadius: "14px",
+                background: `${T}15`,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 24
+              }}>
+                {item.flag}
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>
+                  {item.city}
+                </p>
+                <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
+                  📞 {item.phone}
+                </p>
+              </div>
+              <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {gTab === "india" && (
+      <div style={{
+        background: `linear-gradient(145deg, ${T}05, ${T}02)`,
+        borderRadius: 24,
+        padding: isMobile ? 24 : 36,
+        border: `1px solid ${T}30`,
+        backdropFilter: "blur(10px)",
+        boxShadow: `0 20px 40px -15px ${T}20`
+      }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+          {/* Bangalore HQ */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "16px",
+            background: "rgba(255,255,255,0.02)",
+            borderRadius: 16,
+            border: "1px solid rgba(255,255,255,0.05)",
+            transition: "all 0.3s ease"
+          }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = "translateX(8px)";
+              e.currentTarget.style.background = `${T}10`;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = "translateX(0)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
             }}>
-              Global <span style={{ background: `linear-gradient(135deg, ${T}, #fff)`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Presence</span>
-            </h2>
-            <div style={{ width: "120px", height: "4px", background: `linear-gradient(90deg, transparent, ${T}, transparent)`, margin: "0 auto 40px", borderRadius: "2px" }} />
-
-            {/* Tabs with enhanced styling */}
-            <div style={{ display: "flex", gap: isMobile ? 8 : 12, justifyContent: "center", marginBottom: isMobile ? 30 : 40, flexWrap: "wrap" }}>
-              {[
-                { key: "int", label: "North America & UK", icon: "🌎" },
-                { key: "india", label: "India (HQ)", icon: "🇮🇳" }
-              ].map(t => (
-                <button
-                  key={t.key}
-                  className={`gp-tab${gTab === t.key ? " act" : ""}`}
-                  onClick={() => setGTab(t.key as "int" | "india")}
-                  style={{
-                    padding: isMobile ? "12px 24px" : "14px 32px",
-                    borderRadius: "50px",
-                    border: "none",
-                    background: gTab === t.key ? `linear-gradient(135deg, ${T}, ${TD})` : "rgba(255,255,255,0.05)",
-                    color: gTab === t.key ? "#000" : "#fff",
-                    fontSize: isMobile ? 14 : 16,
-                    fontWeight: 600,
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    boxShadow: gTab === t.key ? `0 8px 20px ${T}40` : "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    backdropFilter: "blur(10px)"
-                  }}
-                  onMouseEnter={e => {
-                    if (gTab !== t.key) {
-                      e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (gTab !== t.key) {
-                      e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-                      e.currentTarget.style.transform = "translateY(0)";
-                    }
-                  }}
-                >
-                  <span>{t.icon}</span> {t.label}
-                </button>
-              ))}
+            <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+            <div style={{ flex: 1 }}>
+              <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
+              <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
             </div>
-
-            {/* Content Cards */}
-            {gTab === "int" && (
-              <div style={{
-                background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
-                borderRadius: 24,
-                padding: isMobile ? 24 : 36,
-                border: `1px solid ${T}20`,
-                backdropFilter: "blur(10px)",
-                boxShadow: "0 20px 40px -15px rgba(0,0,0,0.5)"
-              }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                  {[
-                    { city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", flag: "🇨🇦" },
-                    { city: "New York, USA", phone: "+1 631-XXX-XXXX", flag: "🇺🇸" },
-                    { city: "London, UK", phone: "+44 20-XXXX-XXXX", flag: "🇬🇧" }
-                  ].map((item, i) => (
-                    <div key={i} style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 16,
-                      padding: "16px",
-                      background: "rgba(255,255,255,0.02)",
-                      borderRadius: 16,
-                      border: "1px solid rgba(255,255,255,0.05)",
-                      transition: "all 0.3s ease",
-                      cursor: "default"
-                    }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.transform = "translateX(8px)";
-                        e.currentTarget.style.background = `${T}08`;
-                        e.currentTarget.style.borderColor = `${T}40`;
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.transform = "translateX(0)";
-                        e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.05)";
-                      }}>
-                      <div style={{
-                        width: 48,
-                        height: 48,
-                        borderRadius: "14px",
-                        background: `${T}15`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 24
-                      }}>
-                        {item.flag}
-                      </div>
-                      <div style={{ flex: 1 }}>
-                        <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>
-                          {item.city}
-                        </p>
-                        <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>
-                          {item.phone}
-                        </p>
-                      </div>
-                      <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {gTab === "india" && (
-              <div style={{
-                background: `linear-gradient(145deg, ${T}05, ${T}02)`,
-                borderRadius: 24,
-                padding: isMobile ? 24 : 36,
-                border: `1px solid ${T}30`,
-                backdropFilter: "blur(10px)",
-                boxShadow: `0 20px 40px -15px ${T}20`
-              }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 16,
-                    padding: "16px",
-                    background: "rgba(255,255,255,0.02)",
-                    borderRadius: 16,
-                    border: "1px solid rgba(255,255,255,0.05)",
-                    transition: "all 0.3s ease"
-                  }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = "translateX(8px)";
-                      e.currentTarget.style.background = `${T}10`;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = "translateX(0)";
-                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-                    }}>
-                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
-                    <div style={{ flex: 1 }}>
-                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Bangalore HQ</p>
-                      <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>+91 9900566466</p>
-                    </div>
-                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
-                  </div>
-
-                  <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 16,
-                    padding: "16px",
-                    background: "rgba(255,255,255,0.02)",
-                    borderRadius: 16,
-                    border: "1px solid rgba(255,255,255,0.05)",
-                    transition: "all 0.3s ease"
-                  }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.transform = "translateX(8px)";
-                      e.currentTarget.style.background = `${T}10`;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.transform = "translateX(0)";
-                      e.currentTarget.style.background = "rgba(255,255,255,0.02)";
-                    }}>
-                    <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
-                    <div style={{ flex: 1 }}>
-                      <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0 }}>Mysore | Mumbai | Hyderabad</p>
-                    </div>
-                    <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
-                  </div>
-
-                  <div style={{
-                    marginTop: 20,
-                    padding: "20px",
-                    background: `${T}08`,
-                    borderRadius: 16,
-                    border: `1px dashed ${T}40`,
-                    textAlign: "center"
-                  }}>
-                    <span style={{ color: T, fontSize: isMobile ? 14 : 16, fontWeight: 600, letterSpacing: "0.5px" }}>
-                      ✉ info@nakshatranamahacreations.com
-                    </span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Decorative bottom dots */}
-            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
-              {[1, 2, 3, 4, 5].map(i => (
-                <div key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: T, opacity: 0.2 + (i * 0.1) }} />
-              ))}
-            </div>
+            <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
           </div>
-      </section>
+
+          {/* Mysore */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "16px",
+            background: "rgba(255,255,255,0.02)",
+            borderRadius: 16,
+            border: "1px solid rgba(255,255,255,0.05)",
+            transition: "all 0.3s ease"
+          }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = "translateX(8px)";
+              e.currentTarget.style.background = `${T}10`;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = "translateX(0)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+            }}>
+            <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+            <div style={{ flex: 1 }}>
+              <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mysore</p>
+              <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+            </div>
+            <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+          </div>
+
+          {/* Mumbai */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "16px",
+            background: "rgba(255,255,255,0.02)",
+            borderRadius: 16,
+            border: "1px solid rgba(255,255,255,0.05)",
+            transition: "all 0.3s ease"
+          }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = "translateX(8px)";
+              e.currentTarget.style.background = `${T}10`;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = "translateX(0)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+            }}>
+            <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+            <div style={{ flex: 1 }}>
+              <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Mumbai</p>
+              <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+            </div>
+            <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+          </div>
+
+          {/* Hyderabad */}
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            padding: "16px",
+            background: "rgba(255,255,255,0.02)",
+            borderRadius: 16,
+            border: "1px solid rgba(255,255,255,0.05)",
+            transition: "all 0.3s ease"
+          }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = "translateX(8px)";
+              e.currentTarget.style.background = `${T}10`;
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = "translateX(0)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.02)";
+            }}>
+            <div style={{ width: 48, height: 48, borderRadius: "14px", background: `${T}20`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24 }}>🇮🇳</div>
+            <div style={{ flex: 1 }}>
+              <p style={{ fontWeight: 600, fontSize: isMobile ? 15 : 16, color: "#fff", margin: 0, marginBottom: 4 }}>Hyderabad</p>
+              <p style={{ color: T, fontSize: isMobile ? 14 : 15, fontWeight: 500, margin: 0 }}>📞 +91 9900566466</p>
+            </div>
+            <span style={{ color: T, fontSize: 20, opacity: 0.5 }}>■■</span>
+          </div>
+
+          {/* Email Section */}
+          <div style={{
+            marginTop: 20,
+            padding: "20px",
+            background: `${T}08`,
+            borderRadius: 16,
+            border: `1px dashed ${T}40`,
+            textAlign: "center"
+          }}>
+            <span style={{ color: T, fontSize: isMobile ? 14 : 16, fontWeight: 600, letterSpacing: "0.5px" }}>
+              ✉ info@nakshatranamahacreations.com
+            </span>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Decorative bottom dots */}
+    <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 40 }}>
+      {[1, 2, 3, 4, 5].map(i => (
+        <div key={i} style={{ width: 6, height: 6, borderRadius: "50%", background: T, opacity: 0.2 + (i * 0.1) }} />
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* M12 — FAQS */}
       <section style={{ padding: isMobile ? "40px 16px" : isTablet ? "60px 32px" : "20px 48px", background: `linear-gradient(180deg,${N1} 0%,${N2} 100%)`, position: "relative", overflow: "hidden" }}>
@@ -1222,7 +1279,7 @@ export default function DigitalTransformationPage() {
               </div>
               <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 18, padding: isMobile ? "20px" : "26px 26px" }}>
                 <h3 style={{ color: "rgba(255,255,255,0.4)", fontSize: isMobile ? 10 : 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase" as const, marginBottom: isMobile ? 14 : 18 }}>Direct Contacts</h3>
-                {[{ flag: "🇨🇦", label: "Canada", phone: "+1 647-XXX-XXXX" }, { flag: "🇺🇸", label: "USA", phone: "+1 631-XXX-XXXX" }, { flag: "🇬🇧", label: "UK", phone: "+44 20-XXXX-XXXX" }].map((c, i) => (
+                {[{ flag: "🇨🇦", label: "Canada", phone: "+91 9900566466" }, { flag: "🇺🇸", label: "USA", phone: "+91 9900566466" }, { flag: "🇬🇧", label: "UK", phone: "+91 9900566466" }].map((c, i) => (
                   <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: isMobile ? "8px 0" : "12px 0", borderBottom: i < 2 ? "1px solid rgba(255,255,255,0.06)" : "none", flexWrap: "wrap", gap: 8 }}>
                     <span style={{ color: "rgba(255,255,255,0.55)", fontSize: isMobile ? "12px" : "14px", fontWeight: 500 }}>{c.flag} {c.label}</span>
                     <a href={`tel:${c.phone.replace(/\s|-/g, "")}`} style={{ color: T, fontSize: isMobile ? "12px" : "14px", fontWeight: 700, textDecoration: "none" }}>{c.phone}</a>

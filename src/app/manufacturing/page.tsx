@@ -14,11 +14,10 @@ const N1 = "#030B18";
 const N2 = "#061425";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
-const LOGOS = [
-  "clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
-  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png",
-  "clients11.png", "clients12.png"
-];
+const LOGOS = ["clients1.png", "clients2.png", "clients3.png", "clients4.png", "clients5.png",
+  "clients6.png", "clients7.png", "clients8.png", "clients9.png", "clients10.png", "clients11.png",
+  "clients12.png", "clients13.png", "clients14.png", "clients15.png", "clients16.png", "clients17.png", "clients18.png"];
+
 
 const SUCCESS_STORIES = [
   {
@@ -71,23 +70,24 @@ const SOLUTIONS = [
   { icon: "📈", title: "Manufacturing Analytics", desc: "Real-time dashboards for OEE, scrap rates, cycle times, and overall equipment effectiveness." }
 ];
 
+// FIXED: Corrected Compliance array with proper H3 titles
 const COMPLIANCE = [
   {
     region: "Dealer Network",
     flag: "🤝",
-    title: "Dealer CRM",
-    desc: "Track dealer performance, territory assignments, automate order workflows, and manage commission structures in real-time."
+    title: "Dealer Network CRM",
+    desc: "Track dealer performance, territory assignments, and automate order workflows."
   },
   {
     region: "ERP Integration",
     flag: "🔗",
     title: "ERP–CRM Integration",
-    desc: "Unified data across sales, production, inventory, and finance with bi-directional sync and real-time visibility."
+    desc: "Unified data across sales, production, inventory, and finance in real time."
   },
   {
     region: "Compliance",
     flag: "✅",
-    title: "Regulatory Ready",
+    title: "Compliance",
     desc: "Systems built to meet Canadian, US, and UK manufacturing regulatory requirements including ISO standards and traceability."
   }
 ];
@@ -134,17 +134,19 @@ const MANUFACTURING_STATS = [
   { value: "52%", label: "Faster Onboarding", icon: "⚙️" }
 ];
 
+// FIXED: All international offices now have the same phone number
 const INT_OFFICES = [
-  { flag: "🇨🇦", city: "Toronto, Canada", phone: "+1 647-XXX-XXXX", email: "manufacturing@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇺🇸", city: "New York, USA", phone: "+1 631-XXX-XXXX", email: "manufacturing@nncdigital.com", tz: "EST / EDT" },
-  { flag: "🇬🇧", city: "London, UK", phone: "+44 20-XXXX-XXXX", email: "manufacturing@nncdigital.com", tz: "GMT / BST" }
+  { flag: "🇨🇦", city: "Toronto, Canada", phone: "+91 9900566466", email: "manufacturing@nncdigital.com", tz: "EST / EDT" },
+  { flag: "🇺🇸", city: "New York, USA", phone: "+91 9900566466", email: "manufacturing@nncdigital.com", tz: "EST / EDT" },
+  { flag: "🇬🇧", city: "London, UK", phone: "+91 9900566466", email: "manufacturing@nncdigital.com", tz: "GMT / BST" }
 ];
 
+// FIXED: All India offices now have phone numbers
 const INDIA_OFFICES = [
   { city: "Bangalore (HQ)", phone: "+91 9900566466", note: "Primary engineering hub" },
-  { city: "Mysore", phone: null, note: "Design & QA" },
-  { city: "Mumbai", phone: null, note: "Sales & partnerships" },
-  { city: "Hyderabad", phone: null, note: "Mobile & cloud" }
+  { city: "Mysore", phone: "+91 9900566466", note: "Design & QA" },
+  { city: "Mumbai", phone: "+91 9900566466", note: "Sales & partnerships" },
+  { city: "Hyderabad", phone: "+91 9900566466", note: "Mobile & cloud" }
 ];
 
 const SERVICES_LIST = [
@@ -387,9 +389,9 @@ export default function ManufacturingIndustryPage() {
   const isDesktop = windowWidth > 1024;
 
   const getSectionPadding = () => {
-    if (isMobile) return "20px 16px";
+    if (isMobile) return "40px 16px";
     if (isTablet) return "60px 32px";
-    return "50px 48px";
+    return "60px 48px";
   };
 
   const getGridColumns = (mobile: number, tablet: number, desktop: number) => {
@@ -417,6 +419,18 @@ export default function ManufacturingIndustryPage() {
     <>
       <Navbar />
 
+      {/* Global Poppins Font Style */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+        
+        body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, p, span, div {
+          font-family: 'Poppins', sans-serif !important;
+        }
+        
+        @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
+        @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+      `}</style>
+
       {/* MODULE 1 — HERO + INLINE FORM */}
       <section style={{
         padding: isMobile ? "40px 16px 40px" : isTablet ? "80px 32px 60px" : "90px 48px 80px",
@@ -425,11 +439,6 @@ export default function ManufacturingIndustryPage() {
         display: "flex", alignItems: "center"
       }}>
         <Particles />
-        {/* <div style={{
-          position: "absolute", inset: 0, pointerEvents: "none", zIndex: 1,
-          backgroundImage: `linear-gradient(rgba(0,201,167,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,201,167,.035) 1px,transparent 1px)`,
-          backgroundSize: "60px 60px"
-        }} /> */}
         {!isMobile && (
           <>
             <div style={{
@@ -472,23 +481,7 @@ export default function ManufacturingIndustryPage() {
             }}>
               Manufacturing businesses operate with complex sales cycles, multi-tier distribution channels, and demanding operational requirements. We build the digital infrastructure that unifies your dealer network, production, and pipeline.
             </p>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: isMobile ? 20 : 32 }}>
-              {[
-                { icon: "🤝", label: "Dealer CRM" },
-                { icon: "⚙️", label: "Production Planning" },
-                { icon: "🔗", label: "ERP Integration" },
-                { icon: "📦", label: "Inventory" }
-              ].map((b, i) => (
-                <span key={i} style={{
-                  padding: isMobile ? "4px 8px" : "6px 12px", borderRadius: 100,
-                  background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)",
-                  color: "rgba(255,255,255,0.8)", fontSize: isMobile ? 11 : 12, fontWeight: 500,
-                  display: "flex", alignItems: "center", gap: 4
-                }}>
-                  <span>{b.icon}</span> {b.label}
-                </span>
-              ))}
-            </div>
+         
           </div>
 
           {/* Right - Lead Form */}
@@ -545,49 +538,78 @@ export default function ManufacturingIndustryPage() {
       {/* MODULE 2 — OUR HAPPY CLIENTS + SUCCESS STORIES */}
       <section style={{ padding: getSectionPadding(), background: N1 }}>
         {/* Client Logos */}
-        <div style={{ marginBottom: isMobile ? 40 : 60 }}>
-          <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
-            <SectionBadge label="Our Happy Clients" />
-            <SectionH2>Trusted by <GradText>Manufacturing Companies</GradText> Across North America & UK</SectionH2>
-          </div>
-          <div style={{ overflow: "hidden" }}>
-            <div style={{
-              display: "flex", gap: isMobile ? 20 : 40, animation: "marquee 30s linear infinite",
-              width: "fit-content"
-            }}>
-              {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div
-                  key={i}
-                  style={{
-                    flexShrink: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: isMobile ? 60 : 70,
-                    padding: "10px 18px",
-                    background: "#ffffff",
-                    borderRadius: 10,
-                    margin: "0 6px",
-                    boxShadow: "0 4px 12px rgba(0,0,0,0.12)"
-                  }}
-                >
-                  <img
-                    src={`/${logo}`}
-                    alt="Client"
-                    style={{
-                      height: isMobile ? 32 : 40,
-                      width: "auto",
-                      maxWidth: isMobile ? 90 : 120,
-                      objectFit: "contain"
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
+            <div style={{ textAlign: "center", marginBottom: isMobile ? 30 : 40, padding: "0 24px" }}>
+          <p style={{ fontWeight: 600, fontSize: isMobile ? 10 : 11.5, color: "rgba(255,255,255,.28)", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: 12 }}>Our Happy Clients</p>
+          <h2 style={{ fontSize: isMobile ? "22px" : "28px", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em", lineHeight: 1.25, margin: 0 }}>
+            Trusted by Businesses Across <GradText>North America &amp; the UK</GradText>
+          </h2>
+        </div>
+
+        {/* Row 1 - Sliding Left to Right */}
+        <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+          <div className="cl-track" style={{ animation: "marquee 30s linear infinite" }}>
+            {LOGOS.slice(0, 6).map((logo, i) => (
+              <div key={`row1-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {LOGOS.slice(0, 6).map((logo, i) => (
+              <div key={`row1-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 1}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Success Stories */}
+        {/* Row 2 - Sliding Right to Left */}
+        <div style={{ overflow: "hidden", marginBottom: isMobile ? 16 : 20 }}>
+          <div className="cl-track" style={{ animation: "marqueeReverse 35s linear infinite" }}>
+            {LOGOS.slice(6, 12).map((logo, i) => (
+              <div key={`row2-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {LOGOS.slice(6, 12).map((logo, i) => (
+              <div key={`row2-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 7}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Row 3 - Sliding Left to Right */}
+        <div style={{ overflow: "hidden" }}>
+          <div className="cl-track" style={{ animation: "marquee 40s linear infinite" }}>
+            {LOGOS.slice(12, 18).map((logo, i) => (
+              <div key={`row3-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+            {LOGOS.slice(12, 18).map((logo, i) => (
+              <div key={`row3-duplicate-${i}`} style={{ flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", height: isMobile ? 60 : 70, padding: isMobile ? "8px 14px" : "10px 18px", background: "#fff", borderRadius: 10, margin: "0 8px", boxShadow: "0 6px 20px rgba(0,0,0,0.15)", opacity: .9, transition: "transform .3s, box-shadow .3s" }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.transform = "scale(1.08)"; el.style.boxShadow = "0 10px 28px rgba(0,0,0,0.25)"; }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.transform = ""; el.style.boxShadow = "0 6px 20px rgba(0,0,0,0.15)"; }}>
+                <img src={`/${logo}`} alt={`Client ${i + 13}`} style={{ height: isMobile ? 30 : 40, width: "auto", maxWidth: isMobile ? 90 : 120, objectFit: "contain" }} />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        
+      </section>
+{/* Success Stories */}
+
+      <section style={{ padding: getSectionPadding(), background: N2 }}>
         <div>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
             <SectionBadge label="Success Stories" />
@@ -637,7 +659,7 @@ export default function ManufacturingIndustryPage() {
             ))}
           </div>
         </div>
-      </section>
+        </section>
 
       {/* MODULE 3 — DIGITAL SOLUTIONS WE BUILD */}
       <section style={{ padding: getSectionPadding(), background: N2 }}>
@@ -667,12 +689,12 @@ export default function ManufacturingIndustryPage() {
         </div>
       </section>
 
-      {/* MODULE 4 — COMPLIANCE & DATA SECURITY */}
+      {/* MODULE 4 — COMPLIANCE & DATA SECURITY - FIXED with proper H3 titles */}
       <section style={{ padding: getSectionPadding(), background: `linear-gradient(135deg, ${N1} 0%, ${N0} 100%)` }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: isMobile ? 20 : 24 }}>
             <SectionBadge label="Integration & Compliance" />
-            <SectionH2>Built for <GradText>Manufacturing Operations</GradText> in Canada, USA & UK</SectionH2>
+            <SectionH2>Built for <GradText>Compliance</GradText> in Canada, USA & UK</SectionH2>
           </div>
 
           <div style={{
@@ -686,7 +708,7 @@ export default function ManufacturingIndustryPage() {
                 borderRadius: 20, padding: isMobile ? 16 : 20, textAlign: "center"
               }}>
                 <div style={{ fontSize: isMobile ? 40 : 48, marginBottom: isMobile ? 12 : 16 }}>{c.flag}</div>
-                <h3 style={{ color: T, fontSize: isMobile ? 16 : 20, fontWeight: 700, marginBottom: 4 }}>{c.title}</h3>
+                <h3 style={{ color: T, fontSize: isMobile ? 18 : 22, fontWeight: 700, marginBottom: 4 }}>{c.title}</h3>
                 <p style={{ color: "rgba(255,255,255,0.8)", fontSize: isMobile ? 13 : 14, marginBottom: 8 }}>{c.region}</p>
                 <p style={{ color: "rgba(255,255,255,0.5)", fontSize: isMobile ? 12 : 13, lineHeight: 1.6 }}>{c.desc}</p>
               </div>
@@ -904,12 +926,6 @@ export default function ManufacturingIndustryPage() {
           </div>
         </div>
       </section>
-
-      <style>{`
-        @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
-        @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-      `}</style>
-
     </>
   );
 }
