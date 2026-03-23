@@ -305,9 +305,9 @@ export default function ServicesSection() {
                 {svc.desc}
               </p>
 
-              <span className="svc-arrow">
+              {/* <span className="svc-arrow">
                 Learn More <span>→</span>
-              </span>
+              </span> */}
             </div>
           ))}
         </div>

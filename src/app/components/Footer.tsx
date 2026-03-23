@@ -17,7 +17,7 @@ const SERVICES = [
   { label: "CRM Development", href: "/crm-development" },
   { label: "ERP Development", href: "/erp-development" },
   { label: "Web Development", href: "/web-development" },
-  { label: "Mobile App Development", href: "/mobile-app-development" },
+  { label: "Mobile App Development", href: "/mobileapp-development" },
   { label: "Salesforce CRM", href: "/salesforce-crm" },
   { label: "Marketing Automation", href: "/marketing-automation" },
   { label: "SEO & Digital Marketing", href: "/seo-digital-marketing" },
@@ -26,11 +26,11 @@ const SERVICES = [
 ];
 
 const INDUSTRIES = [
-  { label: "Healthcare", href: "/industries/healthcare" },
-  { label: "Real Estate", href: "/industries/real-estate" },
-  { label: "E-Commerce", href: "/industries/ecommerce" },
-  { label: "Manufacturing", href: "/industries/manufacturing" },
-  { label: "Professional Services", href: "/industries/professional-services" },
+  { label: "Healthcare", href: "/healthcare" },
+  { label: "Real Estate", href: "/real-estate" },
+  { label: "E-Commerce", href: "/ecommerce" },
+  { label: "Manufacturing", href: "/manufacturing" },
+  { label: "Professional Services", href: "/professional-services" },
 ];
 
 const COMPANY = [
@@ -39,7 +39,7 @@ const COMPANY = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Blog", href: "/blog" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Careers", href: "/careers" },
+  { label: "Careers", href: "/hire-crm-developers" },
 ];
 
 // Social Media Icons with PNG images from public folder - NO CIRCLES
