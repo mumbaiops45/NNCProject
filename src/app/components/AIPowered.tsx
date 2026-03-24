@@ -32,6 +32,7 @@ const AI_FEATURES = [
 export default function AIPowered() {
   return (
     <section
+    id="aiPowered"
       className="ai-section"
       style={{
         padding: "50px 40px",

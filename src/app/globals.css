@@ -541,3 +541,15 @@ body {
   .gp-india-stats { grid-template-columns:1fr 1fr !important; }
   .sec { padding: 60px 20px; }
 }
+
+@keyframes shimmer {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 120%;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}

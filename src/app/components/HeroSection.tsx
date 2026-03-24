@@ -4692,9 +4692,9 @@ export default function HeroSection() {
                 onMouseEnter={() => !isAnyMobile && !isTablet && setCursorBig(true)}
                 onMouseLeave={() => !isAnyMobile && !isTablet && setCursorBig(false)}>
                 <button className="hero-btn-primary" onClick={handleBookCall} style={{ width: isAnyMobile ? "100%" : "auto" }}><span>📅</span> Book a Free Strategy Call</button>
-                <Link href="/solutions" style={{ textDecoration: "none", width: isAnyMobile ? "100%" : "auto" }}>
-                  <button className="hero-btn-outline" style={{ width: isAnyMobile ? "100%" : "auto" }}>Explore Our Solutions →</button>
-                </Link>
+                  <Link href="/#aiPowered" style={{ textDecoration: "none", width: isAnyMobile ? "100%" : "auto" }}>
+                    <button className="hero-btn-outline" style={{ width: isAnyMobile ? "100%" : "auto" }}>Explore Our Solutions →</button>
+                  </Link>
               </div>
               <div className="hero-fade hero-fade-5" style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? 4 : 6, justifyContent: isAnyMobile ? "center" : "flex-start", marginBottom: isMobile ? 10 : 0 }}>
                 {TRUST_BADGES.map((b, i) => <span key={b.label} className="trust-badge" style={{ animationDelay: `${.62 + i * .07}s` }}>{b.icon} {b.label}</span>)}
