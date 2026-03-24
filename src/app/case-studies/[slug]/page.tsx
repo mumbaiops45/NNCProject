@@ -518,7 +518,7 @@ export default function CaseStudyDetailPage() {
               Let's discuss how NNC Digital can help your business achieve {caseStudy.result} and beyond.
             </p>
             <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-              <Link href="/case-studies#contact-form" style={{
+              <Link href="/contact" style={{
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "12px",
