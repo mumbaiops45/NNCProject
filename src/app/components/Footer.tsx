@@ -75,9 +75,9 @@ const SOCIALS = [
 ];
 
 const CONTACTS = [
-  { flag: "🇨🇦", country: "Canada", phone: "+1 647-XXX-XXXX" },
-  { flag: "🇺🇸", country: "USA", phone: "+1 631-XXX-XXXX" },
-  { flag: "🇬🇧", country: "UK", phone: "+44 20-XXXX-XXXX" },
+  { flag: "🇨🇦", country: "Canada", phone: "+91 9900566466" },
+  { flag: "🇺🇸", country: "USA", phone: "+91 9900566466" },
+  { flag: "🇬🇧", country: "UK", phone: "+91 9900566466" },
   { flag: "🇮🇳", country: "India", phone: "+91 9900566466" },
 ];
 

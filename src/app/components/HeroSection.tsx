@@ -4699,7 +4699,7 @@ export default function HeroSection() {
               <div className="hero-fade hero-fade-5" style={{ display: "flex", flexWrap: "wrap", gap: isMobile ? 4 : 6, justifyContent: isAnyMobile ? "center" : "flex-start", marginBottom: isMobile ? 10 : 0 }}>
                 {TRUST_BADGES.map((b, i) => <span key={b.label} className="trust-badge" style={{ animationDelay: `${.62 + i * .07}s` }}>{b.icon} {b.label}</span>)}
               </div>
-              <div className="phone-row hero-fade hero-fade-5" style={{ display: "flex", gap: isMobile ? 5 : isSmall ? 7 : 20, marginTop: isMobile ? 10 : 20, flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center" }}>
+              {/* <div className="phone-row hero-fade hero-fade-5" style={{ display: "flex", gap: isMobile ? 5 : isSmall ? 7 : 20, marginTop: isMobile ? 10 : 20, flexDirection: isMobile ? "column" : "row", alignItems: isMobile ? "flex-start" : "center" }}>
                 {[{ flag: "🇨🇦", label: "CA:", num: "+1 647-XXX-XXXX" }, { flag: "🇬🇧", label: "UK:", num: "+44 20-XXXX-XXXX" }].map(p => (
                   <a key={p.num} href={`tel:${p.num}`} style={{ display: "inline-flex", alignItems: "center", gap: isMobile ? 4 : 6, color: "rgba(255,255,255,.5)", fontSize: isMobile ? 11 : isSmall ? 12 : 13, textDecoration: "none", fontWeight: 500, transition: "color .2s" }}
                     onMouseEnter={e => !isAnyMobile && !isTablet && (e.currentTarget.style.color = TEAL)}
@@ -4707,7 +4707,7 @@ export default function HeroSection() {
                     <span>{p.flag}</span><span style={{ color: "rgba(255,255,255,.3)" }}>{p.label}</span><span>{p.num}</span>
                   </a>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* ── RIGHT — FORM ── */}

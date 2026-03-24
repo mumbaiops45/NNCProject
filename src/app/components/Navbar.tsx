@@ -504,12 +504,12 @@ export default function Navbar() {
           {/* ── Top Phone Bar ── */}
           <div className="nnc-topbar">
             <div className="nnc-topbar-inner">
-              <a href="tel:+16470000000" className="nnc-topbar-phone">
-                🇨🇦 CA: +1 647-XXX-XXXX
+              <a href="tel:+91 9900566466" className="nnc-topbar-phone">
+                🇨🇦 CA: +91 9900566466
               </a>
               <span className="nnc-topbar-sep">|</span>
-              <a href="tel:+442000000000" className="nnc-topbar-phone">
-                🇬🇧 UK: +44 20-XXXX-XXXX
+              <a href="tel:+91 9900566466" className="nnc-topbar-phone">
+                🇬🇧 UK: +91 9900566466
               </a>
             </div>
           </div>
