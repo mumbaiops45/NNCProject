@@ -600,7 +600,7 @@ export default function Navbar() {
                         <div className="nnc-mega-col">
                           <div className="nnc-col-head">Featured</div>
                           <Link
-                            href="/case-studies/manufacturing-crm"
+                            href="/manufacturing"
                             className="nnc-feat"
                             onClick={() => setSolutionsOpen(false)}
                           >
@@ -770,8 +770,8 @@ export default function Navbar() {
                 </Link>
 
                 <div className="nnc-mob-phones">
-                  <a href="tel:+16470000000" className="nnc-mob-phone">🇨🇦 CA: +1 647-XXX-XXXX</a>
-                  <a href="tel:+442000000000" className="nnc-mob-phone">🇬🇧 UK: +44 20-XXXX-XXXX</a>
+                  <a href="tel:+16470000000" className="nnc-mob-phone">🇨🇦 CA: +91 9900566466</a>
+                  <a href="tel:+442000000000" className="nnc-mob-phone">🇬🇧 UK: +91 9900566466</a>
                 </div>
 
               </div>
